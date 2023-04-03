@@ -1,13 +1,82 @@
 ---
-title: "Quickstart"
-description: "Upgrades you can expect from the platform"
+title: "Get started with Quill Components"
+description: " "
 ---
 
-## Dashboard
+Hello! 👋 This short tutorial gets you up and running with Quill Components.
 
-Everything is heavily optimized for SEO and conversion
+## Step 1: Install dependencies
 
-![Conversion](/images/conversion.png)
+Install Quill Components npm package:
+
+```bash
+yarn add @quillsql/components
+```
+
+or
+
+```bash
+npm install @quillsql/components
+```
+
+## Step 2: Connect Quill to React
+
+You connect Quill to React with the `QuillProvider` component. Similar to React's `Context.Provider`, `QuillProvider` wraps your React app and places Quill Client on the context, enabling you to access it from anywhere in your component tree.
+
+In App.js, let's wrap our React app with an `QuillProvider`. We suggest putting the `QuillProvider` somewhere high in your app, above any component that might need to access Quill data.
+
+```js App.js
+import { QuillProvider } from "@quillsql/components";
+import Routes from "./Routes";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      theme={THEME}
+    >
+      <Routes />
+    </QuillProvider>
+  );
+}
+```
+
+## Step 3: Add your first component
+
+After your QuillProvider is hooked up, you can add Quill Components to your app. Let's start with the dashboard we created in the portal (link it) tutorial.
+
+<Card>
+
+<iframe
+  src="https://qimp6y.csb.app/"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+  style={{ height: 245, width: "100%" }}
+/>
+
+```js App.js
+import { QuillProvider } from "@quillsql/components";
+import Routes from "./Routes";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <Dashboard
+        name="spend_dashboard"
+        containerStyle={{ width: "100%", height: 400 }}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
 
 ## Chart
 
