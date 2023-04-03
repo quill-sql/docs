@@ -1,0 +1,155 @@
+---
+title: "React API Documentation"
+sidebarTitle: "Full React API Documentation"
+description: " "
+---
+
+## useQuill
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/components";
+
+function CustomComponent() {
+  // pass in any report or chart created in the Quill Portal
+  const report = useQuill(QUILL_QUERY_ID);
+  // do anything with report object
+  return <div>Custom component</div>;
+}
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <CustomComponent />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
+
+## Dashboard
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/components";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <Dashboard
+        name="spend_dashboard"
+        containerStyle={{ width: "100%", height: 400 }}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
+
+## Chart
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, Chart } from "@quillsql/components";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <Chart
+        id="2348yfge987fq348fg"
+        containerStyle={{ width: "100%", height: 400 }}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
+
+## Table
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/components";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <Table
+        name="spend_table"
+        containerStyle={{ width: "100%", height: 400 }}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
+
+## Query Builder
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/components";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <QueryBuilder containerStyle={{ width: "100%", height: 400 }} />
+    </QuillProvider>
+  );
+}
+```
+
+</Card>
+
+## Saved Queries
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/components";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <QueryBuilder containerStyle={{ width: "100%", height: 400 }} />
+    </QuillProvider>
+  );
+}
+```
