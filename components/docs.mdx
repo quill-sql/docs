@@ -1,6 +1,6 @@
 ---
-title: "React API Documentation"
-sidebarTitle: "Full React API Documentation"
+title: "React SDK Documentation"
+sidebarTitle: "Full React SDK Documentation"
 description: " "
 ---
 
@@ -9,7 +9,7 @@ description: " "
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/components";
+import { QuillProvider, useQuill } from "@quillsql/components";
 
 function CustomComponent() {
   // pass in any report or chart created in the Quill Portal
@@ -79,6 +79,7 @@ function App() {
         id="2348yfge987fq348fg"
         containerStyle={{ width: "100%", height: 400 }}
       />
+      <Chart className="h-72 mt-4" colors={["indigo", "cyan"]} />
     </QuillProvider>
   );
 }
