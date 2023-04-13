@@ -43,9 +43,7 @@
       "pages": [
         "datasources/postgres",
         "datasources/snowflake",
-        "datasources/redshift",
-        "datasources/bigquery",
-        "datasources/mysql"
+        "datasources/bigquery"
       ]
     },
     {

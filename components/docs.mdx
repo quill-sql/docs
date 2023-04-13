@@ -1,36 +1,77 @@
 ---
-title: "React SDK Documentation"
-sidebarTitle: "Full React SDK Documentation"
+title: "React API Reference"
+sidebarTitle: "React API Reference"
 description: " "
 ---
 
-## useQuill
+## QuillProvider
 
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, useQuill } from "@quillsql/components";
-
-function CustomComponent() {
-  // pass in any report or chart created in the Quill Portal
-  const report = useQuill(QUILL_QUERY_ID);
-  // do anything with report object
-  return <div>Custom component</div>;
-}
+import { QuillProvider } from "@quillsql/components";
 
 function App() {
   return (
     <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
+      publicKey={process.env.QUILL_API_KEY}
+      organizationId={user.organizationId}
       authToken={user.jwt}
       theme={THEME}
     >
-      <CustomComponent />
+      / * the rest of your app * /
     </QuillProvider>
   );
 }
 ```
+
+<ParamField path="publicKey" type="string" required>
+  The public Quill API key. This can be found in the Quill portal in the
+  "Settings" tab.
+</ParamField>
+
+<ParamField path="organizationId" type="string" required>
+  The organization id of the user
+</ParamField>
+
+<ParamField path="authToken" type="string?">
+  The jwt token of the user. This is only needed if you are authenticating
+  requests with Quill (this means you are using the Quill nodejs, go, or python
+  server SDK).
+</ParamField>
+
+<ParamField path="theme" type="Theme">
+  The theme
+  <Expandable defaultOpen={false} title="properties">
+    <ResponseField name="fontFamily" type="string">
+      The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
+    </ResponseField>
+
+    <ResponseField name="primaryTextColor" type="string">
+      The font family you want Quill to use. This is usually the same primary font color your app uses. ex: "#000000"
+    </ResponseField>
+
+    <ResponseField name="secondaryTextColor" type="string">
+      The font family you want Quill to use. This is usually the same secondary font color your app uses. ex: "#6C727F"
+    </ResponseField>
+
+    <ResponseField name="chartLabelColor" type="string">
+      The font family you want Quill to use. This is usually the same as or similar to the secondary font your app uses. ex: "#666666"
+    </ResponseField>
+
+    <ResponseField name="chartTickColor" type="string">
+      The font family you want Quill to use. This is usually the same as or similar to the secondary font your app uses. ex: "#CCCCCC"
+    </ResponseField>
+
+    <ResponseField name="chartColors" type="array">
+      The chart colors you want Quill to use. This is usually the same as the primary and secondary colors your app uses. You can pass in as many colors as you want, and you can also override these by passing in an array for the colors prop in the Chart component. ex: ['#6269E9',
+
+'#E14F62']
+
+</ResponseField>
+
+  </Expandable>
+</ParamField>
 
 </Card>
 
@@ -52,11 +93,130 @@ function App() {
       <Dashboard
         name="spend_dashboard"
         containerStyle={{ width: "100%", height: 400 }}
+        onClickDashboardItem={(dashboardItem) => console.log(dashboardItem)}
       />
     </QuillProvider>
   );
 }
 ```
+
+<ParamField path="name" type="string" required>
+  The name of the dashboard you created in the Quill Portal. To learn more about
+  creating dashboards, learn how to (link) create dashboards in portal.
+</ParamField>
+
+<ParamField path="containerStyle" type="React.CSSProperties" required>
+  The CSS styles that wrap the dashboard.
+</ParamField>
+
+<ParamField
+  path="onClickDashboardItem"
+  type="(dashboardItem: DashboardItem) => void"
+>
+  Callback function that fires when a dashboard item is clicked. A common use case is navigating to a new page based on the dashboardItemId. Dashboard items
+  are the list of charts that are in a Dashboard. Note the properties of a
+  DashboardItem below:
+
+<Expandable defaultOpen={true} title=" ">
+  <ParamField
+  path="DashboardItem"
+  type="object"
+>
+  <Expandable title="properties">
+
+<ResponseField name="id" type="string" defaultOpen={true}>
+  The dashboard item's id. You can pass this into the Chart component as the
+  chartId. You can also pass this into the useQuill hook to get the dashboard
+  item.
+</ResponseField>
+
+    <ResponseField name="data" type="object[]">
+      The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
+    </ResponseField>
+
+    <ResponseField name="chartType" type="'bar' | 'pie' | 'line' | 'metric'">
+      The chart type associated with the dashboard item.
+    </ResponseField>
+
+    <ResponseField name="dateField" type="string?">
+      The chart type associated with the dashboard item.
+    </ResponseField>
+
+  </Expandable>
+</ParamField>
+</Expandable>
+
+</ParamField>
+
+</Card>
+
+## useQuill
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, useQuill } from "@quillsql/components";
+
+function CustomComponent() {
+  // pass in any report or chart created in the Quill Portal
+  const report = useQuill(QUILL_ID);
+  // do anything with report object
+  return <div>Custom component</div>;
+}
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <CustomComponent />
+    </QuillProvider>
+  );
+}
+```
+
+# Params
+
+<ParamField path="name" type="string" required>
+  The name of the dashboard you created in the Quill Portal. To learn more about
+  creating dashboards, learn how to (link) create dashboards in portal.
+</ParamField>
+
+### Result
+
+  <ParamField
+  path="QuillQuery"
+  type="object"
+>
+<Expandable defaultOpen={true} title="properties">
+<ResponseField name="id" type="string" defaultOpen={true}>
+  The dashboard item's id. You can pass this into the Chart component as the
+  chartId. You can also pass this into the useQuill hook to get the dashboard
+  item.
+</ResponseField>
+
+    <ResponseField name="data" type="object[]">
+      The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
+    </ResponseField>
+
+    <ResponseField name="queryType" type="'DashboardItem' | 'Table' | 'SavedReport'">
+      The type associated with the query. A Quill query can either be a dashboard item (think chart, metric tile, etc), a table (a query that is formatted into a table in the quill portal), or a saved query (just a query and the corresponding data - not located on a dashboard)
+    </ResponseField>
+
+    <ResponseField name="chartType" type="'bar' | 'pie' | 'line' | 'metric'">
+      The chart type associated with the report.
+    </ResponseField>
+
+    <ResponseField name="dateField" type="string?">
+      The chart type associated with the report.
+    </ResponseField>
+
+    </Expandable>
+
+</ParamField>
 
 </Card>
 
@@ -76,81 +236,27 @@ function App() {
       theme={THEME}
     >
       <Chart
-        id="2348yfge987fq348fg"
+        chartId="2348yfge987fq348fg"
         containerStyle={{ width: "100%", height: 400 }}
-      />
-      <Chart className="h-72 mt-4" colors={["indigo", "cyan"]} />
-    </QuillProvider>
-  );
-}
-```
-
-</Card>
-
-## Table
-
-<Card>
-
-```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/components";
-
-function App() {
-  return (
-    <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
-      authToken={user.jwt}
-      theme={THEME}
-    >
-      <Table
-        name="spend_table"
-        containerStyle={{ width: "100%", height: 400 }}
+        colors={["#6269E9", "#E14F62"]}
       />
     </QuillProvider>
   );
 }
 ```
 
-</Card>
+<ParamField path="chartId" type="string">
+  The chart id. The most usage is through a detail page built to navigate from the dashboard - using onClickDashboardItem to get the dashboardItemId, and navigating to a route (say, reports/:id) where the url param is passed in as the chartId. For a standalone chart, you can find the chartId in the Quill Portal and pass it in directly.
 
-## Query Builder
+</ParamField>
 
-<Card>
+<ParamField path="containerStyle" type="React.CSSProperties" required>
+  The CSS styles that wrap the chart.
+</ParamField>
 
-```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/components";
+<ParamField path="colors" type="string[]">
+  The chart colors you want Quill to use. Optional because Quill will use your theme colors by default, but this will override the theme colors.
 
-function App() {
-  return (
-    <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
-      authToken={user.jwt}
-      theme={THEME}
-    >
-      <QueryBuilder containerStyle={{ width: "100%", height: 400 }} />
-    </QuillProvider>
-  );
-}
-```
+</ParamField>
 
 </Card>
-
-## Saved Queries
-
-```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/components";
-
-function App() {
-  return (
-    <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
-      authToken={user.jwt}
-      theme={THEME}
-    >
-      <SavedReports containerStyle={{ width: "100%", height: 400 }} />
-    </QuillProvider>
-  );
-}
-```
