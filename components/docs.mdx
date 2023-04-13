@@ -105,7 +105,7 @@ function App() {
   creating dashboards, learn how to (link) create dashboards in portal.
 </ParamField>
 
-<ParamField path="containerStyle" type="React.CSSProperties" required>
+<ParamField path="containerStyle" type="React.CSSProperties">
   The CSS styles that wrap the dashboard.
 </ParamField>
 
@@ -245,12 +245,12 @@ function App() {
 }
 ```
 
-<ParamField path="chartId" type="string">
+<ParamField path="chartId" type="string" required>
   The chart id. The most usage is through a detail page built to navigate from the dashboard - using onClickDashboardItem to get the dashboardItemId, and navigating to a route (say, reports/:id) where the url param is passed in as the chartId. For a standalone chart, you can find the chartId in the Quill Portal and pass it in directly.
 
 </ParamField>
 
-<ParamField path="containerStyle" type="React.CSSProperties" required>
+<ParamField path="containerStyle" type="React.CSSProperties">
   The CSS styles that wrap the chart.
 </ParamField>
 
