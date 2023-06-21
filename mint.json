@@ -31,12 +31,17 @@
       "name": "Add components to your app",
       "icon": "grid-2",
       "url": "components"
+    },
+    {
+      "name": "Self host on your own server",
+      "icon": "grid-2",
+      "url": "selfhost"
     }
   ],
   "navigation": [
     {
-      "group": " ",
-      "pages": ["overview"]
+      "group": "Overview",
+      "pages": ["overview/overview"]
     },
     {
       "group": "Connect a data source",
@@ -53,6 +58,10 @@
     {
       "group": "Add components to your app",
       "pages": ["components/start", "components/docs"]
+    },
+    {
+      "group": "Self host on your own server",
+      "pages": ["selfhost/start"]
     }
   ]
 }
