@@ -29,7 +29,7 @@ function App() {
   const [user] = useContext(UserContext);
   return (
     <QuillProvider
-      // endpoint on your server for quill queries
+      // POST endpoint on your server for quill requests
       endpoint="https://api.yourserver.com/quill"
       // we pass this to the endpoint url as a header on every request
       authHeader={{ Authorization: `Bearer ${user.jwt}` }}
@@ -54,16 +54,20 @@ const quill = require("@quillsql/quill-sdk-node")({
   publicKey: process.env.QULL_PUBLIC_KEY,
   privateKey: process.env.QUILL_PRIVATE_KEY,
   databaseConnectionString: process.env.POSTGRES_STAGING_READ,
+  stagingDatabaseConnectionString: process.env.POSTGRES_STAGING_READ,
 });
 
 // "authenticateJWT" is your own pre-existing auth middleware
 app.post("/quill", authenticateJWT, async (req, res) => {
   // assuming user fetched via auth middleware has an organizationId
   const { organizationId } = req.user;
-  const { query } = req.body;
+  const { query, filters, environment, quillId } = req.body;
   const result = await quill.query({
     organizationId,
     query,
+    filters,
+    environment,
+    quillId,
   });
   res.send(result);
 });
