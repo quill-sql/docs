@@ -34,7 +34,7 @@
     },
     {
       "name": "Self host on your own server",
-      "icon": "grid-2",
+      "icon": "sparkles",
       "url": "selfhost"
     }
   ],

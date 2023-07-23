@@ -5,13 +5,38 @@ description: " "
 
 Hello! 👋 This short tutorial gets you up and running with Quill self hosting. Instead of hosting a Docker container, all you need to do is create an endpoint using our sdk and a few lines of code.
 
-## Step 1: Install dependencies
-
-Install Quill React npm package in your React repo:
+## Step 1: Create endpoint on your Node.js server
 
 ```bash
-yarn add @quillsql/react
+npm i @quillsql/node --save
 ```
+
+Instantiate `quill` with your credentials and add the below `POST` endpoint.
+
+Note that we assume you have an organization id on the user returned by your auth middleware. Queries will not work properly without the organization id.
+
+<Card>
+
+```js server.js
+const quill = require("@quillsql/node")({
+  privateKey: process.env.QULL_PRIVATE_KEY,
+  databaseConnectionString: process.env.POSTGRES_READ,
+});
+
+// "authenticateJWT" is your own pre-existing auth middleware
+app.post("/quill", authenticateJWT, async (req, res) => {
+  // assuming user fetched via auth middleware has an organizationId
+  const { organizationId } = req.user;
+  const { metadata } = req.body;
+  const result = await quill.query({
+    orgId: organizationId,
+    metadata,
+  });
+  res.send(result);
+});
+```
+
+</Card>
 
 ## Step 2: Connect Quill to React
 
@@ -30,9 +55,10 @@ function App() {
   return (
     <QuillProvider
       // POST endpoint on your server for quill requests
-      endpoint="https://api.yourserver.com/quill"
+      queryEndpoint="https://api.yourserver.com/quill"
       // we pass this to the endpoint url as a header on every request
-      authHeader={{ Authorization: `Bearer ${user.jwt}` }}
+      queryHeaders={{ Authorization: `Bearer ${user.jwt}` }}
+      publicKey="YOUR_PUBLIC_KEY"
       theme={THEME}
     >
       <Routes />
@@ -40,37 +66,3 @@ function App() {
   );
 }
 ```
-
-## Step 3: Create endpoint on your Node.js server
-
-Now it's time to create the endpoint we referenced in the provider. Simply instantiate our sdk and call the query function in your endpoint.
-
-Note that we assume you have an organization id on the user returned by your auth middleware. Queries will not work properly without the user's organization id.
-
-<Card>
-
-```js server.js
-const quill = require("@quillsql/quill-sdk-node")({
-  publicKey: process.env.QULL_PUBLIC_KEY,
-  privateKey: process.env.QUILL_PRIVATE_KEY,
-  databaseConnectionString: process.env.POSTGRES_STAGING_READ,
-  stagingDatabaseConnectionString: process.env.POSTGRES_STAGING_READ,
-});
-
-// "authenticateJWT" is your own pre-existing auth middleware
-app.post("/quill", authenticateJWT, async (req, res) => {
-  // assuming user fetched via auth middleware has an organizationId
-  const { organizationId } = req.user;
-  const { query, filters, environment, quillId } = req.body;
-  const result = await quill.query({
-    organizationId,
-    query,
-    filters,
-    environment,
-    quillId,
-  });
-  res.send(result);
-});
-```
-
-</Card>
