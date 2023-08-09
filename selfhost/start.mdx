@@ -69,8 +69,8 @@ http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
 
     result, err := client.Query(organizationID, body.Metadata)
     if err != nil {
-       fmt.Fprint(w, err)
-        return
+       http.Error(w, err.Error(), http.StatusBadRequest)
+       return
     }
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(result)
