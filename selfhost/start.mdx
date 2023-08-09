@@ -5,19 +5,30 @@ description: " "
 
 Hello! 👋 This short tutorial gets you up and running with Quill self hosting. Instead of hosting a Docker container, all you need to do is create an endpoint using our sdk and a few lines of code.
 
-## Step 1: Create endpoint on your Node.js server
+## Step 1: Create endpoint on your server
 
-```bash
+<br />
+
+<CodeGroup>
+
+```bash Node
 npm i @quillsql/node --save
 ```
+
+```bash Go
+go get https://github.com/quill-sql/quill-go
+```
+
+</CodeGroup>
 
 Instantiate `quill` with your credentials and add the below `POST` endpoint.
 
 Note that we assume you have an organization id on the user returned by your auth middleware. Queries will not work properly without the organization id.
 
-<Card>
 
-```js server.js
+<CodeGroup>
+
+```js Node
 const quill = require("@quillsql/node")({
   privateKey: process.env.QULL_PRIVATE_KEY,
   databaseConnectionString: process.env.POSTGRES_READ,
@@ -36,9 +47,40 @@ app.post("/quill", authenticateJWT, async (req, res) => {
 });
 ```
 
-</Card>
+```go Go
+import (
+    "github.com/quill-sql/quill-go"
+)
 
-## Step 2: Connect Quill to React
+client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"), DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
+
+    // Add an endpoint
+http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
+    // fetch organizationID from your existing auth middleware
+    organizationID, _ := r.Context().Value(OrganizationIDContextKey).(string)
+
+    // Convert json body.metadata to RequestMetadata
+    body := &quill.RequestBody{}
+    err := json.NewDecoder(r.Body).Decode(body)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    result, err := client.Query(organizationID, body.Metadata)
+    if err != nil {
+       fmt.Fprint(w, err)
+        return
+    }
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(result)
+ })
+```
+
+</CodeGroup>
+
+
+## Step 2: Connect Endpoint in React QuillProvider
 
 You connect Quill to React with the `QuillProvider` component. Similar to React's `Context.Provider`, `QuillProvider` wraps your React app and places Quill Client on the context, enabling you to access it from anywhere in your component tree.
 
