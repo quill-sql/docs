@@ -54,7 +54,7 @@ import (
 
 client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"), DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
 
-    // Add an endpoint
+// Add an endpoint
 http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
     // fetch organizationID from your existing auth middleware
     organizationID, _ := r.Context().Value(OrganizationIDContextKey).(string)
