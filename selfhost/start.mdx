@@ -15,6 +15,10 @@ Hello! 👋 This short tutorial gets you up and running with Quill self hosting.
 npm i @quillsql/node --save
 ```
 
+```bash Python
+pip3 install --upgrade quill-python
+```
+
 ```bash Go
 go get https://github.com/quill-sql/quill-go
 ```
@@ -24,7 +28,6 @@ go get https://github.com/quill-sql/quill-go
 Instantiate `quill` with your credentials and add the below `POST` endpoint.
 
 Note that we assume you have an organization id on the user returned by your auth middleware. Queries will not work properly without the organization id.
-
 
 <CodeGroup>
 
@@ -45,6 +48,25 @@ app.post("/quill", authenticateJWT, async (req, res) => {
   });
   res.send(result);
 });
+```
+
+```python Python
+from quill_python import Quill
+
+quill = Quill(
+  private_key=os.environ.get("QUILL_PRIVATE_KEY"),
+  database_connection_string=os.environ.get("POSTGRES_READ")
+)
+
+# POST endpoint you create for quill
+@app.route('/quill', methods=['POST'])
+# "token_required" is your own pre-existing auth middleware
+@token_required
+def quill_endpoint():
+  data = request.json
+  # assuming current user comes from existing auth
+  # org_id is the id on the organizations table that you use with quill (ex: organizations, businesses, companies, stores etc)
+  return quill.query(current_user.org_id, data)
 ```
 
 ```go Go
@@ -78,7 +100,6 @@ http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
 ```
 
 </CodeGroup>
-
 
 ## Step 2: Connect Endpoint in React QuillProvider
 
