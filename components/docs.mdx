@@ -9,15 +9,16 @@ description: " "
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider } from "@quillsql/components";
+import { QuillProvider } from "@quillsql/react";
 
 function App() {
   return (
     <QuillProvider
       publicKey={process.env.QUILL_API_KEY}
       organizationId={user.organizationId}
-      authToken={user.jwt}
       theme={THEME}
+      queryEndpoint={queryEndpoint}
+      queryHeaders={queryHeaders}
     >
       / * the rest of your app * /
     </QuillProvider>
@@ -30,14 +31,8 @@ function App() {
   "Settings" tab.
 </ParamField>
 
-<ParamField path="organizationId" type="string" required>
+<ParamField path="organizationId" type="string">
   The organization id of the user
-</ParamField>
-
-<ParamField path="authToken" type="string?">
-  The jwt token of the user. This is only needed if you are authenticating
-  requests with Quill (this means you are using the Quill nodejs, go, or python
-  server SDK).
 </ParamField>
 
 <ParamField path="theme" type="Theme">
@@ -73,6 +68,19 @@ function App() {
   </Expandable>
 </ParamField>
 
+<ParamField path="queryEndpoint" type="string">
+  the endpoint which uses `quill.query` in your backend server. QuillProvider
+  and the components it wraps uses this endpiont to access and communicate with
+  your database.
+</ParamField>
+
+<ParamField path="queryHeaders" type="object">
+  The headers needed to allow the requests made by Quill components in your
+  application to properly authenticate.
+</ParamField>
+
+<ParamField path="withCredentials" type="boolean"></ParamField>
+
 </Card>
 
 ## Dashboard
@@ -80,7 +88,7 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/components";
+import { QuillProvider, Dashboard } from "@quillsql/react";
 
 function App() {
   return (
@@ -155,7 +163,7 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, useQuill } from "@quillsql/components";
+import { QuillProvider, useQuill } from "@quillsql/react";
 
 function CustomComponent() {
   // pass in any report or chart created in the Quill Portal
@@ -225,7 +233,7 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, Chart } from "@quillsql/components";
+import { QuillProvider, Chart } from "@quillsql/react";
 
 function App() {
   return (

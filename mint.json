@@ -17,6 +17,7 @@
   },
   "topAnchor": { "name": "Overview" },
   "anchors": [
+    { "name": "Quickstart", "icon": "bolt", "url": "quickstart" },
     {
       "name": "Connect a data source",
       "icon": "database",
@@ -42,6 +43,13 @@
     {
       "group": "Overview",
       "pages": ["overview/overview"]
+    },
+    {
+      "group": "Quickstart",
+      "pages": [
+        "quickstart/Self_Hosted_Quickstart",
+        "quickstart/Cloud_Quickstart"
+      ]
     },
     {
       "group": "Connect a data source",

@@ -1,0 +1,202 @@
+---
+title: "Self-Hosted Quickstart"
+description: "Set up your first Quill Dashboard on your own server"
+---
+
+Self-hosting the backend logic required to create and use Quill components allows you to avoid exposing your database connection string and handling sensitive data off-premise.
+
+### Step 1: Set up the database/server connection
+
+The SDK holds the core of our backend logic. By adding it to your server, you're ensuring that all backend processing for Quill dashboards happens in your server.
+
+**Install the Quill SDK on your self-hosted server**
+
+<CodeGroup>
+
+```bash Node
+npm i @quillsql/node --save
+```
+
+```bash Python
+pip install quillsql
+```
+
+```bash Go
+go get https://github.com/quill-sql/quill-go
+```
+
+</CodeGroup>
+
+**Instantiate Quill with your credentials and use within a `POST` endpoint**
+
+Create a new `POST` endpoint where `quill.query` will be used. This endpoint will later be called by our frontend component library, and allows the components to query the database through your server:
+
+<CodeGroup>
+
+```jsx Node.js
+const quill = require("@quillsql/node")({
+  privateKey: process.env.QULL_PRIVATE_KEY,
+  databaseConnectionString: process.env.POSTGRES_READ,
+});
+
+// POST endpoint you create for quill
+// "authenticateJWT" is your own pre-existing auth middleware
+app.post("/quill", authenticateJWT, async (req, res) => {
+  // assuming user fetched via auth middleware has an organizationId
+  const { organizationId } = req.user;
+  const { metadata } = req.body;
+  const result = await quill.query({
+    orgId: organizationId,
+    metadata,
+  });
+  res.send(result);
+});
+```
+
+```python Python
+from quillsql import Quill
+
+quill = Quill(
+  private_key=os.environ.get("QUILL_PRIVATE_KEY"),
+  database_connection_string=os.environ.get("POSTGRES_READ")
+)
+
+# POST endpoint you create for quill
+@app.route('/quill', methods=['POST'])
+# "token_required" is your own pre-existing auth middleware
+@token_required
+def quill_endpoint():
+  data = request.json
+  # assuming current user comes from existing auth
+  # org_id is the id on the organizations table that you use with quill (ex: organizations, businesses, companies, stores etc)
+  return quill.query(current_user.org_id, data)
+```
+
+```go Go
+import (
+    "github.com/quill-sql/quill-go"
+)
+
+
+client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"), DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
+
+// Add an endpoint
+http.HandleFunc("/quill", func(w http.ResponseWriter, r \*http.Request) {
+// fetch organizationID from your existing auth middleware
+organizationID, \_ := r.Context().Value(OrganizationIDContextKey).(string)
+
+    // Convert json body.metadata to RequestMetadata
+    body := &quill.RequestBody{}
+    err := json.NewDecoder(r.Body).Decode(body)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+
+    result, err := client.Query(organizationID, body.Metadata)
+    if err != nil {
+       http.Error(w, err.Error(), http.StatusBadRequest)
+       return
+    }
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(result)
+
+})
+```
+
+</CodeGroup>
+
+Our SDK requires no additional authentication or configuration beyond instantiating as demonstrated above!
+
+### Step 2: Set up the self-hosted portal
+
+Our frontend admin library acts as a self-hosted portal, where you can access, manage, and manipulate your client's dashboards. Under the hood, it's using the `@quillsql/react` npm package.
+
+**Install the Quill Admin package**
+
+<CodeGroup>
+```bash npm
+npm install @quillsql/admin
+````
+
+</CodeGroup>
+
+**Import and use the Admin component in your codebase**
+
+By providing your server endpoint through `queryEndpoint` and the necessary authentication through `queryHeaders`, the `Admin` component is able to authenticate with your server and access your database through the SDK. This keeps all sensitive data-handling and querying on your server:
+
+<CodeGroup>
+
+```jsx App.js
+import { Admin } from "@quillsql/admin";
+
+function App() {
+
+  return (
+  <Admin
+    // POST endpoint on your server for quill requests
+    queryEndpoint="https://api.yourserver.com/quill"
+    // we pass this to the endpoint url as a header on every request
+    queryHeaders={{ Authorization: `Bearer ${user.jwt}` }}
+    publicKey="YOUR_PUBLIC_KEY"
+  />;
+  )
+}
+```
+
+</CodeGroup>
+
+Note: The admin dashboard assumes that organization management for customers is handled outside of the `Admin` component.
+
+### Step 3: Create your first Dashboard on your self-hosted portal
+
+Use your newly created portal to create your first dashboard.
+
+SCREENSHOT
+
+The Dashboard name entered into the portal will correspond to the name prop passed into the `Dashboard` component:
+
+```jsx
+<Dashboard name="exampleDashboard" />
+```
+
+### Step 4: Set up the Quill React Library
+
+**Install the npm library**
+
+```bash
+npm install @quillsql/react
+```
+
+**Import and use the relevant components in your codebase, including QuillProvider**
+
+QuillProvider wraps all Quill components, and provides credentials and routing information. Similar to the Admin props, this gives our components access to your database through the SDK. Once again, use `queryEndpoint` to specify the `POST` endpoint the Quill SDK is used in. Please reference the [API Reference](https://docs.quillsql.com/components/docs#quillprovider) for more details:
+
+<CodeGroup>
+
+```jsx App.js
+import { QuillProvider } from "@quillsql/react";
+import Routes from "./Routes";
+import UserContext from "./UserContext";
+
+function App() {
+  // your existing auth user
+  const [user] = useContext(UserContext);
+  return (
+    <QuillProvider
+      // POST endpoint on your server for quill requests
+      queryEndpoint="https://api.yourserver.com/quill"
+      // we pass this to the endpoint url as a header on every request
+      queryHeaders={{ Authorization: `Bearer ${user.jwt}` }}
+      publicKey="YOUR_PUBLIC_KEY"
+      theme={THEME}
+    >
+      <Routes />
+    </QuillProvider>
+  );
+}
+```
+
+</CodeGroup>
+
+Implicitly from the props provided (`queryEndpoint`, `queryHeaders`), React components will now retrieve relevant information from the database/server connection established through the SDK on your self-hosted server.
