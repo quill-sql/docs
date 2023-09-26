@@ -1,0 +1,76 @@
+---
+title: "Cloud Quickstart"
+description: "Set up your first Quill Dashboard on a hosted server"
+---
+
+Setting up with a hosted server uses Quill's existing services to manage your dashboards, including our hosted portal and server.
+
+### Step 1: Set up the database/server connection
+
+**Create a read-only database user for Quill**
+
+`CREATE USER quill_read_only WITH PASSWORD 'password';`
+
+Note: This allows our hosted server to access your database when creating dashboards. For self-hosted options, please see the [Self-Hosted Quickstart](https://docs.quillsql.com/quickstart/Self_Hosted_Quickstart).
+
+**Navigate to our hosted portal [(withquill.com)](https://withquill.com) and enter your database credentials. Contact Quill to create an account.**
+
+<img
+  src="https://mintlify.s3-us-west-1.amazonaws.com/quill/images/postgres.svg"
+  style={{
+    boxShadow: "0px 1px 4px 0px rgb(63,82,149, 0.09)",
+    marginLeft: 4,
+    marginTop: 25,
+    borderRadius: 12,
+    borderWidth: 0.5,
+    borderColor: "#E7E7E7",
+  }}
+/>
+
+**[](https://docs.quillsql.com/datasources/postgres#3-add-a-organization-id-field-and-set-an-admin-organization)**
+
+### Step 2: Create your first Dashboard on the portal
+
+Again on our hosted portal, create your first dashboard:
+
+SCREENSHOT
+
+The Dashboard name entered into the portal will correspond to the name prop passed into the `Dashboard` component:
+
+```jsx
+<Dashboard name="exampleDashboard" />
+```
+
+### Step 3: Set up the Quill React library
+
+**Install the npm library**
+
+```bash
+npm install @quillsql/react
+```
+
+**Import and use the relevant components in your codebase**
+
+QuillProvider wraps all Quill components, and provides relevant credentials through `publicKey` and information about which customer's data should be displayed through `organizationId`. Please reference the [API Reference](https://docs.quillsql.com/components/docs#quillprovider) for more details:
+
+<CodeGroup>
+
+```jsx App.js
+import { QuillProvider } from "@quillsql/react";
+import Routes from "./Routes";
+import UserContext from "./UserContext";
+
+function App() {
+  // your existing auth user
+  const [user] = useContext(UserContext);
+  return (
+    <QuillProvider publicKey="YOUR_PUBLIC_KEY" organizationId={organizationId}>
+      <Routes />
+    </QuillProvider>
+  );
+}
+```
+
+</CodeGroup>
+
+Implicitly from the props provided (`publicKey`, `organizationId`), React components will now retrieve relevant information from the database/server connection established with our hosted server.
