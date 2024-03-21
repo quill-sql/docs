@@ -16,7 +16,6 @@ function App() {
     <QuillProvider
       publicKey={process.env.QUILL_API_KEY}
       organizationId={user.organizationId}
-      authToken={user.jwt}
       theme={THEME}
     >
       / * the rest of your app * /
@@ -80,13 +79,14 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, Dashboard } from "@quillsql/react";
+import { QuillProvider, Dashboard } from "@quillsql/components";
 
 function App() {
   return (
     <QuillProvider
       organizationId={organizationId}
       publicKey={API_KEY}
+      authToken={user.jwt}
       theme={THEME}
     >
       <Dashboard
@@ -154,7 +154,7 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, useQuill } from "@quillsql/react";
+import { QuillProvider, useQuill } from "@quillsql/components";
 
 function CustomComponent() {
   // pass in any report or chart created in the Quill Portal
@@ -224,13 +224,14 @@ function App() {
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider, Chart } from "@quillsql/react";
+import { QuillProvider, Chart } from "@quillsql/components";
 
 function App() {
   return (
     <QuillProvider
       organizationId={organizationId}
       publicKey={API_KEY}
+      authToken={user.jwt}
       theme={THEME}
     >
       <Chart
