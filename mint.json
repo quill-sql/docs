@@ -7,38 +7,29 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#567BFC",
-    "light": "#567BFC",
-    "dark": "#567BFC"
+    "primary": "#212121",
+    "light": "#FFFFFF",
+    "dark": "#212121"
   },
   "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "https://withquill.com"
+    "name": "Learn more",
+    "url": "https://quill.co"
   },
-  "topAnchor": { "name": "Overview" },
   "tabs": [
     {
-      "name": "Connect a data source",
-      "url": "datasources"
-    },
-    {
-      "name": "Create dashboards in portal",
-      "url": "portal"
-    },
-    {
-      "name": "Add components to your app",
+      "name": "React SDK",
       "url": "components"
     },
     {
-      "name": "Self host on your own server",
+      "name": "Server SDK",
       "url": "selfhost"
+    },
+    {
+      "name": "Admin Portal",
+      "url": "portal"
     }
   ],
   "navigation": [
-    {
-      "group": "Overview",
-      "pages": ["overview/overview"]
-    },
     {
       "group": "Connect a data source",
       "pages": [

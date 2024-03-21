@@ -1,5 +1,5 @@
 ---
-title: "Get started with Quill Components"
+title: "Get started with Quill React SDK"
 description: " "
 ---
 
@@ -10,13 +10,13 @@ Hello! 👋 This short tutorial gets you up and running with Quill Components.
 Install Quill Components npm package:
 
 ```bash
-yarn add @quillsql/components
+yarn add @quillsql/react
 ```
 
 or
 
 ```bash
-npm install @quillsql/components
+npm install @quillsql/react
 ```
 
 ## Step 2: Connect Quill to React
@@ -26,7 +26,7 @@ You connect Quill to React with the `QuillProvider` component. Similar to React'
 In App.js, let's wrap our React app with an `QuillProvider`. We suggest putting the `QuillProvider` somewhere high in your app, above any component that might need to access Quill data.
 
 ```js App.js
-import { QuillProvider } from "@quillsql/components";
+import { QuillProvider } from "@quillsql/react";
 import Routes from "./Routes";
 
 function App() {
@@ -51,14 +51,13 @@ Note that the underlying queries and charts are updated via the Quill Portal, an
 <Card>
 
 ```js App.js
-import { QuillProvider, Dashboard } from "@quillsql/components";
+import { QuillProvider, Dashboard } from "@quillsql/react";
 
 function App() {
   return (
     <QuillProvider
       organizationId={organizationId}
       publicKey={API_KEY}
-      authToken={user.jwt}
       theme={THEME}
     >
       <Dashboard
