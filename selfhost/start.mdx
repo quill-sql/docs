@@ -32,9 +32,13 @@ Note that we assume you have an organization id on the user returned by your aut
 <CodeGroup>
 
 ```js Node
-const quill = require("@quillsql/node")({
+import { Quill } from "@quillsql/node"
+
+
+const quill = new Quill({
   privateKey: process.env.QULL_PRIVATE_KEY,
   databaseConnectionString: process.env.POSTGRES_READ,
+  databaseType: "postgresql"
 });
 
 // "authenticateJWT" is your own pre-existing auth middleware
