@@ -9,14 +9,13 @@ description: " "
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider } from "@quillsql/components";
+import { QuillProvider } from "@quillsql/react";
 
 function App() {
   return (
     <QuillProvider
       publicKey={process.env.QUILL_API_KEY}
       organizationId={user.organizationId}
-      authToken={user.jwt}
       theme={THEME}
     >
       / * the rest of your app * /

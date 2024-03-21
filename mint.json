@@ -16,25 +16,21 @@
     "url": "https://withquill.com"
   },
   "topAnchor": { "name": "Overview" },
-  "anchors": [
+  "tabs": [
     {
       "name": "Connect a data source",
-      "icon": "database",
       "url": "datasources"
     },
     {
       "name": "Create dashboards in portal",
-      "icon": "chart-simple",
       "url": "portal"
     },
     {
       "name": "Add components to your app",
-      "icon": "grid-2",
       "url": "components"
     },
     {
       "name": "Self host on your own server",
-      "icon": "sparkles",
       "url": "selfhost"
     }
   ],
