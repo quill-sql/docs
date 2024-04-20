@@ -259,3 +259,597 @@ function App() {
 </ParamField>
 
 </Card>
+
+## ReportBuilder
+
+<Card>
+
+```tsx App.tsx
+import { QuillProvider, ReportBuilder } from "@quillsql/react";
+
+function App() {
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={API_KEY}
+      authToken={user.jwt}
+      theme={THEME}
+    >
+      <ReportBuilder
+        initialTableName="transactions"
+        onAddToDashboardComplete={() => console.log("Added to dashboard")}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+<ParamField path="initialTableName" type="string">
+  The default table name to show when first loading the ReportBuilder.
+</ParamField>
+
+<ParamField path="onAddToDashboardComplete" type="() => void" required>
+  A callback fired when the add to dashboard flow has completed.
+</ParamField>
+
+<ParamField path="destinationDashboard" type="string">
+  The dashboard to add items to once they have been created.
+</ParamField>
+
+<ParamField path="organizationName" type="string">
+  The current organization.
+</ParamField>
+
+<ParamField
+  path="Button"
+  type="(props: ButtonComponentProps) => JSX.Element"
+>
+  A primary button component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="ButtonComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="onClick" type="() => void" required>
+          A callback fired when the button is clicked.
+        </ResponseField>
+        <ResponseField name="label" type="string" required>
+          The text content of the button.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="SecondaryButton"
+  type="(props: ButtonComponentProps) => JSX.Element"
+>
+  A secondary button component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="ButtonComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="onClick" type="() => void" required>
+          A callback fired when the button is clicked.
+        </ResponseField>
+        <ResponseField name="label" type="string" required>
+          The text content of the button.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="DeleteButton"
+  type="(props: DeleteButtonComponentProps) => JSX.Element"
+>
+  A small delete button used to click out of things. Usually an "X" icon.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="DeleteButtonComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="onClick" type="() => void" required>
+          A callback fired when the button is clicked.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="TextInput"
+  type="(props: TextInputComponentProps) => JSX.Element"
+>
+  A input element for getting text from the user.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="TextInputComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="id" type="string" required>
+          The id of the input element.
+        </ResponseField>
+        <ResponseField name="width" type="number" required>
+          The width of the input element in pixels.
+        </ResponseField>
+        <ResponseField name="value" type="string | number | undefined | null">
+          The width of the input element in pixels.
+        </ResponseField>
+        <ResponseField name="placeholder" type="string">
+          The placeholder for the input element.
+        </ResponseField>
+        <ResponseField name="onChange" type="(event: ChangeEvent<HTMLInputElement>) => void">
+          An event callback that is fired when the input value changes.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Select"
+  type="(props: SelectComponentProps) => JSX.Element"
+>
+  A select component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="SelectComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="value" type="string" required>
+          The value of the select element.
+        </ResponseField>
+        <ResponseField name="onChange" type="(value: string) => void" required>
+          An event callback that is fired when the select value changes.
+        </ResponseField>
+        <ResponseField name="options" type="{ value: string; label: string; }[]" required>
+          An array of value, label pairs which represent the select options.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Table"
+  type="(props: TableComponentProps) => JSX.Element"
+>
+  A table component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="TableComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="rows" type="{ [key: string]: any }[]" required>
+          The rows of the table are an array of objects.
+        </ResponseField>
+        <ResponseField name="columns" type="{ label: string; field: string; }[]" required>
+          The columns of the table are an array of label, field pairs.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Popover"
+  type="(props: PopoverComponentProps) => JSX.Element"
+>
+  A popover component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="PopoverComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="isOpen" type="boolean" required>
+          Whether the popover is open.
+        </ResponseField>
+        <ResponseField name="setIsOpen" type="(isOpen: boolean) => void" required>
+          A callback to set whether the popover is open.
+        </ResponseField>
+        <ResponseField name="triggerLabel" type="string">
+          The label of the popover trigger, if any.
+        </ResponseField>
+        <ResponseField name="popoverTitle" type="string">
+          The title of the popover, if any.
+        </ResponseField>
+        <ResponseField name="popoverChildren" type="ReactNode" required>
+          The body of the popover.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="FilterPopover"
+  type="(props: FilterPopoverComponentProps) => JSX.Element"
+>
+  A popover component for filters created in the report builder.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="FilterPopoverComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="isOpen" type="boolean" required>
+          Whether the popover is open.
+        </ResponseField>
+        <ResponseField name="setIsOpen" type="(isOpen: boolean) => void" required>
+          A callback to set whether the popover is open.
+        </ResponseField>
+        <ResponseField name="triggerLabel" type="string">
+          The label of the popover trigger, if any.
+        </ResponseField>
+        <ResponseField name="popoverTitle" type="string">
+          The title of the popover, if any.
+        </ResponseField>
+        <ResponseField name="popoverChildren" type="ReactNode" required>
+          The body of the popover.
+        </ResponseField>
+        <ResponseField name="filterLabel" type="string" required>
+          The text contents of the filter item.
+        </ResponseField>
+        <ResponseField name="onClickDeleteFilter" type="(event: ChangeEvent<HTMLElement>) => void" required>
+          An event callback fired when the user clicks the delete button on the filter.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="SortPopover"
+  type="(props: SortPopoverComponentProps) => JSX.Element"
+>
+  A popover component for sort items created in the report builder.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="SortPopoverComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="isOpen" type="boolean" required>
+          Whether the popover is open.
+        </ResponseField>
+        <ResponseField name="setIsOpen" type="(isOpen: boolean) => void" required>
+          A callback to set whether the popover is open.
+        </ResponseField>
+        <ResponseField name="triggerLabel" type="string">
+          The label of the popover trigger, if any.
+        </ResponseField>
+        <ResponseField name="popoverTitle" type="string">
+          The title of the popover, if any.
+        </ResponseField>
+        <ResponseField name="popoverChildren" type="ReactNode" required>
+          The body of the popover.
+        </ResponseField>
+        <ResponseField name="sortLabel" type="string" required>
+          The text contents of the sort item.
+        </ResponseField>
+        <ResponseField name="onClickDelete" type="(event: ChangeEvent<HTMLElement>) => void" required>
+          An event callback fired when the user clicks the delete button on the sort item.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Tabs"
+  type="(props: TabsComponentProps) => JSX.Element"
+>
+  A small navigation menu used to switch between two or more states.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="TabsComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="defaultValue" type="string" required>
+          The value of the currently selected tab.
+        </ResponseField>
+        <ResponseField name="onValueChange" type="(value: string) => void" required>
+          An event callback fired when the selected tab changes.
+        </ResponseField>
+        <ResponseField name="options" type="{ label: string; value: string; }[]" required>
+          An array of value, label pairs which represent the tabs to display.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Checkbox"
+  type="(props: CheckboxComponentProps) => JSX.Element"
+>
+  A checkbox component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="CheckboxComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="checked" type="boolean" required>
+          Whether the checkbox is checked.
+        </ResponseField>
+        <ResponseField name="onChange" type="(checked: boolean) => void" required>
+          An event callback fired when the checkbox's value changes.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Sidebar"
+  type="(props: SidebarComponentProps) => JSX.Element"
+>
+  A container for the left sidebar.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="SidebarComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the sidebar container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Container"
+  type="(props: ContainerComponentProps) => JSX.Element"
+>
+  A container for the main content (everything right of the sidebar).
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="ContainerComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the main container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="SelectColumn"
+  type="(props: SelectColumnComponentProps) => JSX.Element"
+>
+  A component to show selected columns.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="SelectColumnComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The label of the selected column.
+        </ResponseField>
+        <ResponseField name="selected" type="boolean" required>
+          Whether this column has been selected.
+        </ResponseField>
+        <ResponseField name="setSelected" type="() => void" required>
+          A callback that is fired when the user checks this columns' checkbox.
+        </ResponseField>
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the select component. Typically, this is a HandleButton.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="DraggableColumn"
+  type="(props: DraggableColumnComponentProps) => JSX.Element"
+>
+  A draggable component used to reorder columns.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="DraggableColumnComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The label of the draggable column.
+        </ResponseField>
+        <ResponseField name="onDelete" type="() => void" required>
+          A callback that is fired when this column is removed from the query.
+        </ResponseField>
+        <ResponseField name="children" type="ReactNode" required>
+          This component's children. Typically, this is a HandleButton.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="SidebarHeading"
+  type="(props: SidebarHeadingComponentProps) => JSX.Element"
+>
+  A heading element for the sidebar.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="SidebarHeadingComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The text content of the sidebar heading.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Label"
+  type="(props: LabelComponentProps) => JSX.Element"
+>
+  A label component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="LabelComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The text content of the element.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Header"
+  type="(props: HeaderComponentProps) => JSX.Element"
+>
+  A header component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="HeaderComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The text content of the element.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="Text"
+  type="(props: TextComponentProps) => JSX.Element"
+>
+  A simple text component.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="TextComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="label" type="string" required>
+          The text content of the element.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="HandleButton"
+  type="() => JSX.Element"
+>
+  A small button used to grab draggable elements by. Defaults to six dots.
+</ParamField>
+
+<ParamField
+  path="TableLoadingState"
+  type="() => JSX.Element"
+>
+  Loading state to show when the table is loading.
+</ParamField>
+
+<ParamField
+  path="admin"
+  type="boolean"
+>
+  Whether the ReportBuilder is in admin mode.
+</ParamField>
+
+<ParamField
+  path="hideAI"
+  type="boolean"
+>
+  Whether to hide the ReportBuilder's AI features.
+</ParamField>
+
+<ParamField
+  path="containerStyle"
+  type="CSSProperties"
+>
+  Custom styling properties for the ReportBuilder's top-level container.
+</ParamField>
+
+</Card>
+
+/** The default table name to show when first loading the ReportBuilder. */
+initialTableName?: string;
+/** A callback fired when the add to dashboard flow has completed. */
+onAddToDashboardComplete: () => void;
+/** The dashboard to add items to once they have been created. */
+destinationDashboard?: string;
+/** The current organization. */
+organizationName?: string;
+/** A primary button component. */
+Button
+/** A secondary button component. */
+SecondaryButton
+/** A small delete button used to click out of things. Usually an "X" icon. */
+DeleteButton
+/** A input element for getting text from the user. */
+TextInput
+/** A select component. */
+Select
+/** A table component. */
+Table
+/** A popover component. */
+Popover
+/** A popover component for filters created in the report builder. */
+FilterPopover
+/** A popover component for sort items created in the report builder. */
+SortPopover
+/** A small navigation menu used to switch between two or more states. */
+Tabs
+/** A checkbox component. */
+Checkbox
+/** A container for the left sidebar. */
+Sidebar
+/** A container for the main content (everything right of the sidebar). */
+Container
+/** A component to show selected columns. */
+SelectColumn
+/** A draggable component used to reorder columns. */
+DraggableColumn
+/** A small button used to grab draggable elements by. Defaults to six dots. */
+HandleButton
+/** Loading state to show when the table is loading. */
+TableLoadingState
+/** A heading element for the sidebar. */
+SidebarHeading
+/** A label component. */
+Label
+/** A header component. */
+Header
+/** A simple text component. */
+Text
+/** Whether the ReportBuilder is in admin mode. */
+admin
+/** Whether to hide the ReportBuilder's AI features. */
+hideAi
+/** Custom styling properties for the ReportBuilder's top-level container. */
+containerStyle
