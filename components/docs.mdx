@@ -502,10 +502,10 @@ function App() {
         <ResponseField name="popoverChildren" type="ReactNode" required>
           The body of the popover.
         </ResponseField>
-        <ResponseField name="filterLabel" type="string" required>
+        <ResponseField name="label" type="string" required>
           The text contents of the filter item.
         </ResponseField>
-        <ResponseField name="onClickDeleteFilter" type="(event: ChangeEvent<HTMLElement>) => void" required>
+        <ResponseField name="onClickDelete" type="(event: ChangeEvent<HTMLElement>) => void" required>
           An event callback fired when the user clicks the delete button on the filter.
         </ResponseField>
       </Expandable>
@@ -539,11 +539,48 @@ function App() {
         <ResponseField name="popoverChildren" type="ReactNode" required>
           The body of the popover.
         </ResponseField>
-        <ResponseField name="sortLabel" type="string" required>
+        <ResponseField name="label" type="string" required>
           The text contents of the sort item.
         </ResponseField>
         <ResponseField name="onClickDelete" type="(event: ChangeEvent<HTMLElement>) => void" required>
           An event callback fired when the user clicks the delete button on the sort item.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
+</ParamField>
+
+<ParamField
+  path="LimitPopover"
+  type="(props: LimitPopoverComponentProps) => JSX.Element"
+>
+  A popover component for limits created in the report builder.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="LimitPopoverComponentProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="isOpen" type="boolean" required>
+          Whether the popover is open.
+        </ResponseField>
+        <ResponseField name="setIsOpen" type="(isOpen: boolean) => void" required>
+          A callback to set whether the popover is open.
+        </ResponseField>
+        <ResponseField name="triggerLabel" type="string">
+          The label of the popover trigger, if any.
+        </ResponseField>
+        <ResponseField name="popoverTitle" type="string">
+          The title of the popover, if any.
+        </ResponseField>
+        <ResponseField name="popoverChildren" type="ReactNode" required>
+          The body of the popover.
+        </ResponseField>
+        <ResponseField name="label" type="string" required>
+          The text contents of the limit.
+        </ResponseField>
+        <ResponseField name="onClickDelete" type="(event: ChangeEvent<HTMLElement>) => void" required>
+          An event callback fired when the user clicks the delete button on the limit.
         </ResponseField>
       </Expandable>
     </ParamField>
