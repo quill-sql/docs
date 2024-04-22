@@ -262,6 +262,11 @@ function App() {
 
 ## ReportBuilder
 
+Allows non-technical users to build SQL queries using either UI or AI and
+then edit them on the fly. Once users have constructed a query they like,
+they can click a button and add that report to their dashboard or export it
+as a CSV.
+
 <Card>
 
 ```tsx App.tsx
@@ -277,7 +282,6 @@ function App() {
     >
       <ReportBuilder
         initialTableName="transactions"
-        onAddToDashboardComplete={() => console.log("Added to dashboard")}
       />
     </QuillProvider>
   );
@@ -288,8 +292,8 @@ function App() {
   The default table name to show when first loading the ReportBuilder.
 </ParamField>
 
-<ParamField path="onAddToDashboardComplete" type="() => void" required>
-  A callback fired when the add to dashboard flow has completed.
+<ParamField path="onSubmitChartBuilder" type="() => void" required>
+  A callback fired when the chart builder flow has been completed.
 </ParamField>
 
 <ParamField path="destinationDashboard" type="string">
@@ -796,60 +800,3 @@ function App() {
 </ParamField>
 
 </Card>
-
-/** The default table name to show when first loading the ReportBuilder. */
-initialTableName?: string;
-/** A callback fired when the add to dashboard flow has completed. */
-onAddToDashboardComplete: () => void;
-/** The dashboard to add items to once they have been created. */
-destinationDashboard?: string;
-/** The current organization. */
-organizationName?: string;
-/** A primary button component. */
-Button
-/** A secondary button component. */
-SecondaryButton
-/** A small delete button used to click out of things. Usually an "X" icon. */
-DeleteButton
-/** A input element for getting text from the user. */
-TextInput
-/** A select component. */
-Select
-/** A table component. */
-Table
-/** A popover component. */
-Popover
-/** A popover component for filters created in the report builder. */
-FilterPopover
-/** A popover component for sort items created in the report builder. */
-SortPopover
-/** A small navigation menu used to switch between two or more states. */
-Tabs
-/** A checkbox component. */
-Checkbox
-/** A container for the left sidebar. */
-Sidebar
-/** A container for the main content (everything right of the sidebar). */
-Container
-/** A component to show selected columns. */
-SelectColumn
-/** A draggable component used to reorder columns. */
-DraggableColumn
-/** A small button used to grab draggable elements by. Defaults to six dots. */
-HandleButton
-/** Loading state to show when the table is loading. */
-TableLoadingState
-/** A heading element for the sidebar. */
-SidebarHeading
-/** A label component. */
-Label
-/** A header component. */
-Header
-/** A simple text component. */
-Text
-/** Whether the ReportBuilder is in admin mode. */
-admin
-/** Whether to hide the ReportBuilder's AI features. */
-hideAi
-/** Custom styling properties for the ReportBuilder's top-level container. */
-containerStyle
