@@ -412,7 +412,7 @@ function App() {
         <ResponseField name="value" type="string" required>
           The value of the select element.
         </ResponseField>
-        <ResponseField name="onChange" type="(value: string) => void" required>
+        <ResponseField name="onChange" type="(event: ChangeEvent<HTMLSelectElement>) => void" required>
           An event callback that is fired when the select value changes.
         </ResponseField>
         <ResponseField name="options" type="{ value: string; label: string; }[]" required>
@@ -439,6 +439,9 @@ function App() {
         </ResponseField>
         <ResponseField name="columns" type="{ label: string; field: string; }[]" required>
           The columns of the table are an array of label, field pairs.
+        </ResponseField>
+        <ResponseField name="loading" type="boolean">
+          Whether the table is loading.
         </ResponseField>
       </Expandable>
     </ParamField>
@@ -598,10 +601,10 @@ function App() {
     type="object"
     >
       <Expandable title="properties">
-        <ResponseField name="defaultValue" type="string" required>
+        <ResponseField name="value" type="string" required>
           The value of the currently selected tab.
         </ResponseField>
-        <ResponseField name="onValueChange" type="(value: string) => void" required>
+        <ResponseField name="onChange" type="(value: string) => void" required>
           An event callback fired when the selected tab changes.
         </ResponseField>
         <ResponseField name="options" type="{ label: string; value: string; }[]" required>
@@ -809,24 +812,17 @@ function App() {
 </ParamField>
 
 <ParamField
-  path="TableLoadingState"
-  type="() => JSX.Element"
+  path="adminEnabled"
+  type="boolean"
 >
-  Loading state to show when the table is loading.
+  Whether the ReportBuilder is in admin mode (default: `false`).
 </ParamField>
 
 <ParamField
-  path="admin"
+  path="aiEnabled"
   type="boolean"
 >
-  Whether the ReportBuilder is in admin mode.
-</ParamField>
-
-<ParamField
-  path="hideAI"
-  type="boolean"
->
-  Whether to hide the ReportBuilder's AI features.
+  Whether the ReportBuilder's AI features are enabled (default: `true`).
 </ParamField>
 
 <ParamField
