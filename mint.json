@@ -43,7 +43,7 @@
       "pages": ["portal/quickstart"]
     },
     {
-      "group": "Add components to your app",
+      "group": "React SDK",
       "pages": ["components/start", "components/docs"]
     },
     {

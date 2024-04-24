@@ -1,15 +1,24 @@
 ---
-title: "React API Reference"
-sidebarTitle: "React API Reference"
+title: "API Reference"
+sidebarTitle: "API Reference"
 description: " "
 ---
 
 ## QuillProvider
 
+The quill provider allows all the quill components in your app to share
+information which lets your dashboards render fast and update dynamically.
+
+Similar to React's `Context.Provider`, `QuillProvider` wraps your React app
+and places Quill Client on the context, enabling you to access it from
+anywhere in your component tree. We suggest putting the QuillProvider
+somewhere high in your app, above any component that might need to access
+your quill data.
+
 <Card>
 
 ```tsx App.tsx
-import { QuillProvider } from "@quillsql/components";
+import { QuillProvider } from "@quillsql/react";
 
 function App() {
 	return (
@@ -27,46 +36,58 @@ function App() {
 	The public Quill API key. This can be found in the Quill portal in the
 	"Settings" tab.
 </ParamField>
-
-<ParamField path='organizationId' type='string' required>
-	The organization id of the user
+<ParamField path='environment' type='string'>
+	The environment this app is running in (eg. "production")
 </ParamField>
-
-<ParamField path='authToken' type='string?'>
-	The jwt token of the user. This is only needed if you are authenticating
-	requests with Quill (this means you are using the Quill nodejs, go, or python
-	server SDK).
+<ParamField path='organizationId' type='string'>
+	The organization id of the user. Required if not passing a queryEndpoint. If
+	this value is not passed in on the frontend, it should be passed in on the
+	backend if you are using a self-hosted server.
 </ParamField>
-
-<ParamField path="theme" type="Theme">
-  The theme
-  <Expandable defaultOpen={false} title="properties">
-    <ResponseField name="fontFamily" type="string">
-      The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
-    </ResponseField>
-
-    <ResponseField name="primaryTextColor" type="string">
-      The font family you want Quill to use. This is usually the same primary font color your app uses. ex: "#000000"
-    </ResponseField>
-
-    <ResponseField name="secondaryTextColor" type="string">
-      The font family you want Quill to use. This is usually the same secondary font color your app uses. ex: "#6C727F"
-    </ResponseField>
-
-    <ResponseField name="chartLabelColor" type="string">
-      The font family you want Quill to use. This is usually the same as or similar to the secondary font your app uses. ex: "#666666"
-    </ResponseField>
-
-    <ResponseField name="chartTickColor" type="string">
-      The font family you want Quill to use. This is usually the same as or similar to the secondary font your app uses. ex: "#CCCCCC"
-    </ResponseField>
-
-    <ResponseField name="chartColors" type="array">
-      The chart colors you want Quill to use. This is usually the same as the primary and secondary colors your app uses. You can pass in as many colors as you want, and you can also override these by passing in an array for the colors prop in the Chart component. ex: ['#6269E9', '#E14F62']
-
-</ResponseField>
-
-  </Expandable>
+<ParamField path='queryEndpoint' type='string'>
+	The url of your self-hosted server running the quill server SDK, if any.
+</ParamField>
+<ParamField path='queryHeaders' type='object'>
+	Additional query headers passed along with all requests to the custom query
+	endpoint, if any.
+</ParamField>
+<ParamField path='withCredentials' type='boolean'>
+	Whether to include credentials with requests to the query endpoint.
+</ParamField>
+<ParamField path='theme' type='Theme'>
+	A custom theme used throughout your dashboard.
+	<Expandable defaultOpen={false} title='properties'>
+		<ResponseField name='fontFamily' type='string'>
+			The font family you want Quill to use. This is usually the same font your
+			app uses. ex: "Inter"
+		</ResponseField>
+		<ResponseField name='primaryTextColor' type='string'>
+			The font family you want Quill to use. This is usually the same primary
+			font color your app uses. ex: "#000000"
+		</ResponseField>
+		<ResponseField name='secondaryTextColor' type='string'>
+			The font family you want Quill to use. This is usually the same secondary
+			font color your app uses. ex: "#000000"
+		</ResponseField>
+		<ResponseField name='chartLabelColor' type='string'>
+			The font family you want Quill to use. This is usually the same as or
+			similar to the secondary font your app uses. ex: "#666666"
+		</ResponseField>
+		<ResponseField name='chartTickColor' type='string'>
+			The font family you want Quill to use. This is usually the same as or
+			similar to the secondary font your app uses. ex: "#CCCCCC"
+		</ResponseField>
+		<ResponseField name='chartColors' type='array'>
+			The chart colors you want Quill to use. This is usually the same as the
+			primary and secondary colors your app uses. You can pass in as many
+			colors as you want, and you can also override these by passing in an
+			array for the colors prop in the Chart component. ex: ['#6269E9',
+			'#E14F62']
+		</ResponseField>
+	</Expandable>
+</ParamField>
+<ParamField path='children' type='ReactNode'>
+	The children of the provider. This is usually the rest of your app.
 </ParamField>
 
 </Card>

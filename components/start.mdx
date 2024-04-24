@@ -1,6 +1,6 @@
 ---
-title: "Get started with Quill React SDK"
-description: " "
+title: "Quickstart"
+description: "Get up and running in minutes"
 ---
 
 Hello! 👋 This short tutorial gets you up and running with Quill Components.
@@ -30,15 +30,14 @@ import { QuillProvider } from "@quillsql/react";
 import Routes from "./Routes";
 
 function App() {
-  return (
-    <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
-      theme={THEME}
-    >
-      <Routes />
-    </QuillProvider>
-  );
+	return (
+		<QuillProvider
+			organizationId={organizationId}
+			publicKey={API_KEY}
+			theme={THEME}>
+			<Routes />
+		</QuillProvider>
+	);
 }
 ```
 
@@ -54,18 +53,17 @@ Note that the underlying queries and charts are updated via the Quill Portal, an
 import { QuillProvider, Dashboard } from "@quillsql/react";
 
 function App() {
-  return (
-    <QuillProvider
-      organizationId={organizationId}
-      publicKey={API_KEY}
-      theme={THEME}
-    >
-      <Dashboard
-        name="spend_dashboard"
-        containerStyle={{ width: "100%", height: 400 }}
-      />
-    </QuillProvider>
-  );
+	return (
+		<QuillProvider
+			organizationId={organizationId}
+			publicKey={API_KEY}
+			theme={THEME}>
+			<Dashboard
+				name='spend_dashboard'
+				containerStyle={{ width: "100%", height: 400 }}
+			/>
+		</QuillProvider>
+	);
 }
 ```
 
