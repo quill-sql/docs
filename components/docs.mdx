@@ -73,6 +73,10 @@ function App() {
 
 ## Dashboard
 
+Dynamically displays a filterable grid of charts, metrics, and tables with live
+data from your database. Once implemented, Quill lets you perform zero-downtime,
+zero-code updates to your dashboard on an org-level as well as company-wide.
+
 <Card>
 
 ```tsx App.tsx
@@ -97,7 +101,374 @@ function App() {
 
 <ParamField path='name' type='string' required>
 	The name of the dashboard you created in the Quill Portal. To learn more
-	about creating dashboards, learn how to (link) create dashboards in portal.
+	about creating dashboards, learn how to [create
+	dashboards](https://docs.quillsql.com/portal/quickstart) in portal.
+</ParamField>
+
+<ParamField
+	path='MetricComponent'
+	type='(props: DashboardItemProps) => JSX.Element'>
+	A component that wraps a dashboard item for 'metric' chart types.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DashboardItemProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='dashboardItem' type='DashboardItem' required>
+					The current dashboard item.
+					<Expandable title='properties'>
+						<ResponseField name='id' type='string' required>
+							The dashboard item's unique id.
+						</ResponseField>
+						<ResponseField name='name' type='string' required>
+							The name of the dashboard item.
+						</ResponseField>
+						<ResponseField name='dashboardName' type='string' required>
+							The name of the dashboard this item belongs to.
+						</ResponseField>
+						<ResponseField name='rows' type='{ [key: string]: string }[]'>
+							The rows of data returned from this item's query.
+						</ResponseField>
+						<ResponseField name='columns' type='any[]'>
+							The columns data returned from this item's query.
+						</ResponseField>
+						<ResponseField
+							name='chartType'
+							type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
+							The type of this chart.
+						</ResponseField>
+						<ResponseField
+							name='dateField'
+							type='{ table: string; field: string } | null'>
+							The table and field this chart uses for date filtering.
+						</ResponseField>
+						<ResponseField name='pivot' type='Pivot | null'>
+							The pivot used in this query, if any.
+							<Expandable title='Pivot'>
+								<ResponseField name='title' type='string' required>
+									The pivot title.
+								</ResponseField>
+								<ResponseField
+									name='aggregationType'
+									type="'sum' | 'average' | 'count' | 'min' | 'max'"
+									required>
+									The aggregation type for the values in this pivot.
+								</ResponseField>
+								<ResponseField name='rowField' type='string' required>
+									The row field.
+								</ResponseField>
+								<ResponseField name='rowFieldType' type='string' required>
+									The type of the row field.
+								</ResponseField>
+								<ResponseField name='columnField' type='string'>
+									The column field, if any.
+								</ResponseField>
+								<ResponseField name='columnFieldType' type='string'>
+									The type of the column field, if any.
+								</ResponseField>
+								<ResponseField name='valueField' type='string' required>
+									The type of the column field, if any.
+								</ResponseField>
+							</Expandable>
+						</ResponseField>
+						<ResponseField name='primaryAggregation' type='string'>
+							The formatted primary range aggregation value, if any.
+						</ResponseField>
+						<ResponseField name='comparisonAggregation' type='string'>
+							The formatted comparison range aggregation value, if any.
+						</ResponseField>
+						<ResponseField name='xAxisLabel' type='string' required>
+							The label of the xAxis.
+						</ResponseField>
+						<ResponseField name='xAxisField' type='string' required>
+							The field to use for the item's xAxis.
+						</ResponseField>
+						<ResponseField name='xAxisFormat' type='string' required>
+							The format for the item's xAxis.
+						</ResponseField>
+						<ResponseField
+							name='yAxisFields'
+							type='{ field: string; label: string; format: string; }[]'
+							required>
+							A list of metadata bout the yAxes of this item.
+						</ResponseField>
+						<ResponseField name='order' type='number' required>
+							The relative ordering of this dashboard item in relation to its
+							sibling dashboard items. Ordering starts at 1 and counts up. Also
+							note that dashboard items in the same section are first grouped
+							by `chartType` and then each group is sorted by `order`.
+							Currently, the first group is the `metric` items and the last
+							group is the `table` items with the rest of the items in between.
+						</ResponseField>
+						<ResponseField
+							name='compareRows'
+							type='{ [key: string]: string }[]'>
+							The rows of data returned from this item's query over the
+							comparison date range as opposed to the primary date range.
+						</ResponseField>
+						<ResponseField
+							name='filtersApplied'
+							type='{ [key: string]: any }[]'>
+							A map of filters that have been applied to this query.
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+				<ResponseField
+					name='onClickDashboardItem'
+					type='(item: DashboardItem) => void'>
+					A callback that should be fired when the user clicks on this
+					dashboardItem.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether this dashboard item is loading.
+				</ResponseField>
+				<ResponseField name='error' type='string'>
+					An error message that resulted from the loading of this dashboard
+					item, if any.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+  path="ChartComponent"
+  type="(props: DashboardItemProps) => JSX.Element"
+>
+  A component that wraps a dashboard item for non-metric, non-table chart types.
+  <Expandable defaultOpen={false} title="props">
+    <ParamField
+    path="DashboardItemProps"
+    type="object"
+    >
+      <Expandable title="properties">
+        <ResponseField name="dashboardItem" type="DashboardItem" required>
+          The current dashboard item.
+          <Expandable title="properties">
+            <ResponseField name="id" type="string" required>
+              The dashboard item's unique id.
+            </ResponseField>
+            <ResponseField name="name" type="string" required>
+              The name of the dashboard item.
+            </ResponseField>
+            <ResponseField name="dashboardName" type="string" required>
+              The name of the dashboard this item belongs to.
+            </ResponseField>
+            <ResponseField name="rows" type="{ [key: string]: string }[]">
+              The rows of data returned from this item's query.
+            </ResponseField>
+            <ResponseField name="columns" type="any[]">
+              The columns data returned from this item's query.
+            </ResponseField>
+            <ResponseField name="chartType" type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
+              The type of this chart.
+            </ResponseField>
+            <ResponseField name="dateField" type="{ table: string; field: string } | null">
+              The table and field this chart uses for date filtering.
+            </ResponseField>
+            <ResponseField name="pivot" type="Pivot | null">
+              The pivot used in this query, if any.
+              <Expandable title="Pivot">
+                <ResponseField name="title" type="string" required>
+                  The pivot title.
+                </ResponseField>
+                <ResponseField name="aggregationType" type="'sum' | 'average' | 'count' | 'min' | 'max'" required>
+                  The aggregation type for the values in this pivot.
+                </ResponseField>
+                <ResponseField name="rowField" type="string" required>
+                  The row field.
+                </ResponseField>
+                <ResponseField name="rowFieldType" type="string" required>
+                  The type of the row field.
+                </ResponseField>
+                <ResponseField name="columnField" type="string">
+                  The column field, if any.
+                </ResponseField>
+                <ResponseField name="columnFieldType" type="string">
+                  The type of the column field, if any.
+                </ResponseField>
+                <ResponseField name="valueField" type="string" required>
+                  The type of the column field, if any.
+                </ResponseField>
+              </Expandable>
+            </ResponseField>
+            <ResponseField name="primaryAggregation" type="string">
+              The formatted primary range aggregation value, if any.
+            </ResponseField>
+            <ResponseField name="comparisonAggregation" type="string">
+              The formatted comparison range aggregation value, if any.
+            </ResponseField>
+            <ResponseField name="xAxisLabel" type="string" required>
+              The label of the xAxis.
+            </ResponseField>
+            <ResponseField name="xAxisField" type="string" required>
+              The field to use for the item's xAxis.
+            </ResponseField>
+            <ResponseField name="xAxisFormat" type="string" required>
+              The format for the item's xAxis.
+            </ResponseField>
+            <ResponseField name="yAxisFields" type="{ field: string; label: string; format: string; }[]" required>
+              A list of metadata bout the yAxes of this item.
+            </ResponseField>
+            <ResponseField name="order" type="number" required>
+              The relative ordering of this dashboard item in relation to its
+              sibling dashboard items. Ordering starts at 1 and counts up.
+              
+              Also note that dashboard items in the same section are first grouped
+              by `chartType` and then each group is sorted by `order`. Currently,
+              the first group is the `metric` items and the last group is the
+              `table` items with the rest of the items in between.
+            </ResponseField>
+            <ResponseField name="compareRows" type="{ [key: string]: string }[]">
+              The rows of data returned from this item's query over the comparison
+              date range as opposed to the primary date range.
+            </ResponseField>
+            <ResponseField name="filtersApplied" type="{ [key: string]: any }[]">
+              A map of filters that have been applied to this query.
+            </ResponseField>
+          </Expandable>
+        </ResponseField>
+        <ResponseField name="onClickDashboardItem" type="(item: DashboardItem) => void">
+          A callback that should be fired when the user clicks on this dashboardItem.
+        </ResponseField>
+        <ResponseField name="isLoading" type="boolean">
+          Whether this dashboard item is loading.
+        </ResponseField>
+        <ResponseField name="error" type="string">
+          An error message that resulted from the loading of this dashboard item, if any.
+        </ResponseField>
+        <ResponseField name="children" type="ReactNode">
+          The child of a chart component is a chart graph by default.
+
+          You can override this behavior by not passing children in your implemented
+          version and instead rendering your own Chart.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+
+  </Expandable>
+</ParamField>
+
+<ParamField
+	path='TableComponent'
+	type='(props: DashboardItemProps) => JSX.Element'>
+	A component that wraps a dashboard item for 'table' chart types.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DashboardItemProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='dashboardItem' type='DashboardItem' required>
+					The current dashboard item.
+					<Expandable title='properties'>
+						<ResponseField name='id' type='string' required>
+							The dashboard item's unique id.
+						</ResponseField>
+						<ResponseField name='name' type='string' required>
+							The name of the dashboard item.
+						</ResponseField>
+						<ResponseField name='dashboardName' type='string' required>
+							The name of the dashboard this item belongs to.
+						</ResponseField>
+						<ResponseField name='rows' type='{ [key: string]: string }[]'>
+							The rows of data returned from this item's query.
+						</ResponseField>
+						<ResponseField name='columns' type='any[]'>
+							The columns data returned from this item's query.
+						</ResponseField>
+						<ResponseField
+							name='chartType'
+							type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
+							The type of this chart.
+						</ResponseField>
+						<ResponseField
+							name='dateField'
+							type='{ table: string; field: string } | null'>
+							The table and field this chart uses for date filtering.
+						</ResponseField>
+						<ResponseField name='pivot' type='Pivot | null'>
+							The pivot used in this query, if any.
+							<Expandable title='Pivot'>
+								<ResponseField name='title' type='string' required>
+									The pivot title.
+								</ResponseField>
+								<ResponseField
+									name='aggregationType'
+									type="'sum' | 'average' | 'count' | 'min' | 'max'"
+									required>
+									The aggregation type for the values in this pivot.
+								</ResponseField>
+								<ResponseField name='rowField' type='string' required>
+									The row field.
+								</ResponseField>
+								<ResponseField name='rowFieldType' type='string' required>
+									The type of the row field.
+								</ResponseField>
+								<ResponseField name='columnField' type='string'>
+									The column field, if any.
+								</ResponseField>
+								<ResponseField name='columnFieldType' type='string'>
+									The type of the column field, if any.
+								</ResponseField>
+								<ResponseField name='valueField' type='string' required>
+									The type of the column field, if any.
+								</ResponseField>
+							</Expandable>
+						</ResponseField>
+						<ResponseField name='primaryAggregation' type='string'>
+							The formatted primary range aggregation value, if any.
+						</ResponseField>
+						<ResponseField name='comparisonAggregation' type='string'>
+							The formatted comparison range aggregation value, if any.
+						</ResponseField>
+						<ResponseField name='xAxisLabel' type='string' required>
+							The label of the xAxis.
+						</ResponseField>
+						<ResponseField name='xAxisField' type='string' required>
+							The field to use for the item's xAxis.
+						</ResponseField>
+						<ResponseField name='xAxisFormat' type='string' required>
+							The format for the item's xAxis.
+						</ResponseField>
+						<ResponseField
+							name='yAxisFields'
+							type='{ field: string; label: string; format: string; }[]'
+							required>
+							A list of metadata bout the yAxes of this item.
+						</ResponseField>
+						<ResponseField name='order' type='number' required>
+							The relative ordering of this dashboard item in relation to its
+							sibling dashboard items. Ordering starts at 1 and counts up. Also
+							note that dashboard items in the same section are first grouped
+							by `chartType` and then each group is sorted by `order`.
+							Currently, the first group is the `metric` items and the last
+							group is the `table` items with the rest of the items in between.
+						</ResponseField>
+						<ResponseField
+							name='compareRows'
+							type='{ [key: string]: string }[]'>
+							The rows of data returned from this item's query over the
+							comparison date range as opposed to the primary date range.
+						</ResponseField>
+						<ResponseField
+							name='filtersApplied'
+							type='{ [key: string]: any }[]'>
+							A map of filters that have been applied to this query.
+						</ResponseField>
+					</Expandable>
+				</ResponseField>
+				<ResponseField
+					name='onClickDashboardItem'
+					type='(item: DashboardItem) => void'>
+					A callback that should be fired when the user clicks on this
+					dashboardItem.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether this dashboard item is loading.
+				</ResponseField>
+				<ResponseField name='error' type='string'>
+					An error message that resulted from the loading of this dashboard
+					item, if any.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>
@@ -448,6 +819,7 @@ function App() {
 			</Expandable>
 		</ParamField>
 	</Expandable>
+<<<<<<< HEAD
 </ParamField>
 <ParamField
 	path='FilterPopover'
@@ -493,6 +865,16 @@ function App() {
 	A popover component for sort items created in the report builder.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='SortPopoverComponentProps' type='object'>
+=======
+</ParamField>
+
+<ParamField
+	path='FilterPopover'
+	type='(props: FilterPopoverComponentProps) => JSX.Element'>
+	A popover component for filters created in the report builder.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='FilterPopoverComponentProps' type='object'>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 			<Expandable title='properties'>
 				<ResponseField name='isOpen' type='boolean' required>
 					Whether the popover is open.
@@ -503,12 +885,19 @@ function App() {
 					required>
 					A callback to set whether the popover is open.
 				</ResponseField>
+<<<<<<< HEAD
+=======
+				<ResponseField name='triggerLabel' type='string'>
+					The label of the popover trigger, if any.
+				</ResponseField>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				<ResponseField name='popoverTitle' type='string'>
 					The title of the popover, if any.
 				</ResponseField>
 				<ResponseField name='popoverChildren' type='ReactNode' required>
 					The body of the popover.
 				</ResponseField>
+<<<<<<< HEAD
 				<ResponseField name='sortLabel' type='string' required>
 					The text contents of the sort item.
 				</ResponseField>
@@ -518,6 +907,17 @@ function App() {
 					required>
 					An event callback fired when the user clicks the delete button on the
 					sort item.
+=======
+				<ResponseField name='label' type='string' required>
+					The text contents of the filter item.
+				</ResponseField>
+				<ResponseField
+					name='onClickDelete'
+					type='(event: ChangeEvent<HTMLElement>) => void'
+					required>
+					An event callback fired when the user clicks the delete button on the
+					filter.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -525,11 +925,19 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='LimitPopover'
 	type='(props: LimitPopoverComponentProps) => JSX.Element'>
 	A popover component for limits created in the report builder.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='LimitPopoverComponentProps' type='object'>
+=======
+	path='SortPopover'
+	type='(props: SortPopoverComponentProps) => JSX.Element'>
+	A popover component for sort items created in the report builder.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SortPopoverComponentProps' type='object'>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 			<Expandable title='properties'>
 				<ResponseField name='isOpen' type='boolean' required>
 					Whether the popover is open.
@@ -540,12 +948,19 @@ function App() {
 					required>
 					A callback to set whether the popover is open.
 				</ResponseField>
+<<<<<<< HEAD
+=======
+				<ResponseField name='triggerLabel' type='string'>
+					The label of the popover trigger, if any.
+				</ResponseField>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				<ResponseField name='popoverTitle' type='string'>
 					The title of the popover, if any.
 				</ResponseField>
 				<ResponseField name='popoverChildren' type='ReactNode' required>
 					The body of the popover.
 				</ResponseField>
+<<<<<<< HEAD
 				<ResponseField name='limitLabel' type='string' required>
 					The text contents of the limit.
 				</ResponseField>
@@ -577,6 +992,17 @@ function App() {
 					type='{ label: string; value: string; }[]'
 					required>
 					An array of value, label pairs which represent the tabs to display.
+=======
+				<ResponseField name='label' type='string' required>
+					The text contents of the sort item.
+				</ResponseField>
+				<ResponseField
+					name='onClickDelete'
+					type='(event: ChangeEvent<HTMLElement>) => void'
+					required>
+					An event callback fired when the user clicks the delete button on the
+					sort item.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -584,6 +1010,7 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='Checkbox'
 	type='(props: CheckboxComponentProps) => JSX.Element'>
 	A checkbox component.
@@ -598,6 +1025,63 @@ function App() {
 					type='(checked: boolean) => void'
 					required>
 					An event callback fired when the checkbox's value changes.
+=======
+	path='LimitPopover'
+	type='(props: LimitPopoverComponentProps) => JSX.Element'>
+	A popover component for limits created in the report builder.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='LimitPopoverComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='isOpen' type='boolean' required>
+					Whether the popover is open.
+				</ResponseField>
+				<ResponseField
+					name='setIsOpen'
+					type='(isOpen: boolean) => void'
+					required>
+					A callback to set whether the popover is open.
+				</ResponseField>
+				<ResponseField name='triggerLabel' type='string'>
+					The label of the popover trigger, if any.
+				</ResponseField>
+				<ResponseField name='popoverTitle' type='string'>
+					The title of the popover, if any.
+				</ResponseField>
+				<ResponseField name='popoverChildren' type='ReactNode' required>
+					The body of the popover.
+				</ResponseField>
+				<ResponseField name='label' type='string' required>
+					The text contents of the limit.
+				</ResponseField>
+				<ResponseField
+					name='onClickDelete'
+					type='(event: ChangeEvent<HTMLElement>) => void'
+					required>
+					An event callback fired when the user clicks the delete button on the
+					limit.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField path='Tabs' type='(props: TabsComponentProps) => JSX.Element'>
+	A small navigation menu used to switch between two or more states.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TabsComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='value' type='string' required>
+					The value of the currently selected tab.
+				</ResponseField>
+				<ResponseField name='onChange' type='(value: string) => void' required>
+					An event callback fired when the selected tab changes.
+				</ResponseField>
+				<ResponseField
+					name='options'
+					type='{ label: string; value: string; }[]'
+					required>
+					An array of value, label pairs which represent the tabs to display.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -605,6 +1089,7 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='Sidebar'
 	type='(props: SidebarComponentProps) => JSX.Element'>
 	A container for the left sidebar.
@@ -613,6 +1098,22 @@ function App() {
 			<Expandable title='properties'>
 				<ResponseField name='children' type='ReactNode' required>
 					The children of the sidebar container.
+=======
+	path='Checkbox'
+	type='(props: CheckboxComponentProps) => JSX.Element'>
+	A checkbox component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='CheckboxComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='checked' type='boolean' required>
+					Whether the checkbox is checked.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(checked: boolean) => void'
+					required>
+					An event callback fired when the checkbox's value changes.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -620,6 +1121,7 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='Container'
 	type='(props: ContainerComponentProps) => JSX.Element'>
 	A container for the main content (everything right of the sidebar).
@@ -628,6 +1130,16 @@ function App() {
 			<Expandable title='properties'>
 				<ResponseField name='children' type='ReactNode' required>
 					The children of the main container.
+=======
+	path='Sidebar'
+	type='(props: SidebarComponentProps) => JSX.Element'>
+	A container for the left sidebar.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SidebarComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the sidebar container.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -635,6 +1147,7 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='SelectColumn'
 	type='(props: SelectColumnComponentProps) =>
 	JSX.Element'>
@@ -655,6 +1168,16 @@ function App() {
 					name='DragHandle'
 					type='({ dragIcon }: { dragIcon: () => JSX.Element }) => JSX.Element'>
 					The handle the user drags this column by.
+=======
+	path='Container'
+	type='(props: ContainerComponentProps) => JSX.Element'>
+	A container for the main content (everything right of the sidebar).
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ContainerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the main container.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -662,6 +1185,7 @@ function App() {
 </ParamField>
 
 <ParamField
+<<<<<<< HEAD
 	path='DraggableColumn'
 	type='(props: DraggableColumnComponentProps) => JSX.Element'>
 	A draggable component used to reorder columns.
@@ -678,12 +1202,73 @@ function App() {
 					name='DragHandle'
 					type='({ dragIcon }: { dragIcon: () => JSX.Element }) => JSX.Element'>
 					The handle the user drags this column by.
+=======
+	path='SelectColumn'
+	type='(props: SelectColumnComponentProps) => JSX.Element'>
+	A component to show selected columns.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SelectColumnComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='string' required>
+					The label of the selected column.
+				</ResponseField>
+				<ResponseField name='selected' type='boolean' required>
+					Whether this column has been selected.
+				</ResponseField>
+				<ResponseField name='setSelected' type='() => void' required>
+					A callback that is fired when the user checks this columns' checkbox.
+				</ResponseField>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the select component. Typically, this is a
+					HandleButton.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
 	</Expandable>
 </ParamField>
 
+<ParamField
+<<<<<<< HEAD
+	path='SidebarHeading'
+	type='(props: SidebarHeadingComponentProps) => JSX.Element'>
+	A heading element for the sidebar.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SidebarHeadingComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='string' required>
+					The text content of the sidebar heading.
+=======
+	path='DraggableColumn'
+	type='(props: DraggableColumnComponentProps) => JSX.Element'>
+	A draggable component used to reorder columns.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DraggableColumnComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='string' required>
+					The label of the draggable column.
+				</ResponseField>
+				<ResponseField name='onDelete' type='() => void' required>
+					A callback that is fired when this column is removed from the query.
+				</ResponseField>
+				<ResponseField name='children' type='ReactNode' required>
+					This component's children. Typically, this is a HandleButton.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<<<<<<< HEAD
+<ParamField path='Label' type='(props: LabelComponentProps) => JSX.Element'>
+	A label component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='LabelComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='string' required>
+					The text content of the element.
+=======
 <ParamField
 	path='SidebarHeading'
 	type='(props: SidebarHeadingComponentProps) => JSX.Element'>
@@ -693,29 +1278,24 @@ function App() {
 			<Expandable title='properties'>
 				<ResponseField name='label' type='string' required>
 					The text content of the sidebar heading.
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 				</ResponseField>
 			</Expandable>
 		</ParamField>
 	</Expandable>
 </ParamField>
 
-<ParamField path='Label' type='(props: LabelComponentProps) => JSX.Element'>
-	A label component.
-	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='LabelComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
-</ParamField>
-
+<<<<<<< HEAD
 <ParamField path='Header' type='(props: HeaderComponentProps) => JSX.Element'>
 	A header component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='HeaderComponentProps' type='object'>
+=======
+<ParamField path='Label' type='(props: LabelComponentProps) => JSX.Element'>
+	A label component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='LabelComponentProps' type='object'>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 			<Expandable title='properties'>
 				<ResponseField name='label' type='string' required>
 					The text content of the element.
@@ -725,6 +1305,36 @@ function App() {
 	</Expandable>
 </ParamField>
 
+<<<<<<< HEAD
+<ParamField path='Text' type='(props: TextComponentProps) => JSX.Element'>
+	A simple text component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TextComponentProps' type='object'>
+=======
+<ParamField path='Header' type='(props: HeaderComponentProps) => JSX.Element'>
+	A header component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='HeaderComponentProps' type='object'>
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
+			<Expandable title='properties'>
+				<ResponseField name='label' type='string' required>
+					The text content of the element.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<<<<<<< HEAD
+<ParamField path='adminEnabled' type='boolean'>
+	Whether the ReportBuilder is in admin mode (default: `false`).
+</ParamField>
+
+<ParamField path='aiEnabled' type='boolean'>
+	Whether the ReportBuilder's AI features are enabled (default: `true`).
+</ParamField>
+
+=======
 <ParamField path='Text' type='(props: TextComponentProps) => JSX.Element'>
 	A simple text component.
 	<Expandable defaultOpen={false} title='props'>
@@ -738,6 +1348,10 @@ function App() {
 	</Expandable>
 </ParamField>
 
+<ParamField path='HandleButton' type='() => JSX.Element'>
+	A small button used to grab draggable elements by. Defaults to six dots.
+</ParamField>
+
 <ParamField path='adminEnabled' type='boolean'>
 	Whether the ReportBuilder is in admin mode (default: `false`).
 </ParamField>
@@ -746,6 +1360,7 @@ function App() {
 	Whether the ReportBuilder's AI features are enabled (default: `true`).
 </ParamField>
 
+>>>>>>> 6a844bf (docs: implemented docs for the three components)
 <ParamField path='containerStyle' type='CSSProperties'>
 	Custom styling properties for the ReportBuilder's top-level container.
 </ParamField>
