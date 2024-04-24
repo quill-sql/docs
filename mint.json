@@ -1,54 +1,64 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Quill",
-  "logo": {
-    "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
-  },
-  "favicon": "/favicon.png",
-  "colors": {
-    "primary": "#212121",
-    "light": "#FFFFFF",
-    "dark": "#212121"
-  },
-  "topbarCtaButton": {
-    "name": "Learn more",
-    "url": "https://quill.co"
-  },
-  "tabs": [
-    {
-      "name": "React SDK",
-      "url": "components"
-    },
-    {
-      "name": "Server SDK",
-      "url": "selfhost"
-    },
-    {
-      "name": "Admin Portal",
-      "url": "portal"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Connect a data source",
-      "pages": [
-        "datasources/postgres",
-        "datasources/snowflake",
-        "datasources/bigquery"
-      ]
-    },
-    {
-      "group": "Create dashboards in portal",
-      "pages": ["portal/quickstart"]
-    },
-    {
-      "group": "React SDK",
-      "pages": ["components/start", "components/docs"]
-    },
-    {
-      "group": "Self host on your own server",
-      "pages": ["selfhost/start"]
-    }
-  ]
+	"$schema": "https://mintlify.com/schema.json",
+	"name": "Quill",
+	"logo": {
+		"dark": "/logo/dark.png",
+		"light": "/logo/light.png"
+	},
+	"favicon": "/favicon.png",
+	"colors": {
+		"primary": "#212121",
+		"light": "#FFFFFF",
+		"dark": "#212121"
+	},
+	"topbarCtaButton": {
+		"name": "Learn more",
+		"url": "https://quill.co"
+	},
+	"tabs": [
+		{
+			"name": "React SDK",
+			"url": "components"
+		},
+		{
+			"name": "Server SDK",
+			"url": "selfhost"
+		},
+		{
+			"name": "Admin Portal",
+			"url": "portal"
+		}
+	],
+	"navigation": [
+		{
+			"group": "Connect a data source",
+			"pages": [
+				"datasources/postgres",
+				"datasources/snowflake",
+				"datasources/bigquery"
+			]
+		},
+		{
+			"group": "Create dashboards in portal",
+			"pages": ["portal/quickstart"]
+		},
+		{
+			"group": "Getting Started",
+			"pages": ["components/start", "components/themes", "components/auth"]
+		},
+		{
+			"group": "API Reference",
+			"pages": [
+				"components/quill-provider",
+				"components/dashboard",
+				"components/chart",
+				"components/report-builder",
+				"components/use-quill"
+			]
+		},
+		{
+			"group": "Self host on your own server",
+			"pages": ["selfhost/start"]
+		}
+	]
 }

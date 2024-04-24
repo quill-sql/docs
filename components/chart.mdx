@@ -1,0 +1,41 @@
+---
+title: "Chart"
+description: "A simple component that displays useful information"
+---
+
+```tsx App.tsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider
+			organizationId={organizationId}
+			publicKey={API_KEY}
+			authToken={user.jwt}
+			theme={THEME}>
+			<Chart
+				chartId='2348yfge987fq348fg'
+				containerStyle={{ width: "100%", height: 400 }}
+				colors={["#6269E9", "#E14F62"]}
+			/>
+		</QuillProvider>
+	);
+}
+```
+
+<Card title="Chart Props">
+	<ParamField path='chartId' type='string' required>
+		The chart id. The most usage is through a detail page built to navigate
+		from the dashboard - using onClickDashboardItem to get the dashboardItemId,
+		and navigating to a route (say, reports/:id) where the url param is passed
+		in as the chartId. For a standalone chart, you can find the chartId in the
+		Quill Portal and pass it in directly.
+	</ParamField>
+	<ParamField path='containerStyle' type='React.CSSProperties'>
+		The CSS styles that wrap the chart.
+	</ParamField>
+	<ParamField path='colors' type='string[]'>
+		The chart colors you want Quill to use. Optional because Quill will use
+		your theme colors by default, but this will override the theme colors.
+	</ParamField>
+</Card>
