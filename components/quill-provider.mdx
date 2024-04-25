@@ -18,6 +18,26 @@ function App() {
 }
 ```
 
+<RequestExample>
+	```jsx With OrgId
+	<QuillProvider
+		publicKey={process.env.QUILL_API_KEY}
+		organizationId={user.organizationId}>
+		{children}
+	</QuillProvider>
+	```
+
+    ```jsx With QueryEndpoint
+    <QuillProvider
+    	publicKey={process.env.QUILL_API_KEY}
+    	queryEndpoint='https://yourdomain.com/quill'
+    	queryHeaders={{}}>
+    	{children}
+    </QuillProvider>
+    ```
+
+</RequestExample>
+
 The quill provider allows all the quill components in your app to share
 information which lets your dashboards render fast and update dynamically.
 
@@ -27,7 +47,7 @@ anywhere in your component tree. We suggest putting the QuillProvider
 somewhere high in your app, above any component that might need to access
 your quill data.
 
-<Card title="QuillProvider Props">
+## Props
 <ParamField path='publicKey' type='string' required>
 	The public Quill API key. This can be found in the Quill portal in the
 	"Settings" tab.
@@ -137,4 +157,3 @@ your quill data.
 <ParamField path='children' type='ReactNode'>
 	The children of the provider. This is usually the rest of your app.
 </ParamField>
-</Card>

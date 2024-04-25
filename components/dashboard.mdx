@@ -23,16 +23,43 @@ function App() {
 }
 ```
 
+<RequestExample>
+	```jsx Basic
+	<Dashboard name="saved_reports" />
+	```
+
+    ```jsx With custom components
+    <Dashboard
+    	name="saved_reports"
+    	SelectComponent={MySelect}
+    	MetricComponent={MyMetric}
+    	ChartComponent={MyChart}
+    	TableComponent={MyTable}
+    	onClickDashboardItem={(item) => router.push(`/detail/${item.id}`)}
+    	containerStyle={{ backgroundColor: 'white', padding: '10px' }}
+    />
+    ```
+
+</RequestExample>
+
 Dynamically displays a filterable grid of charts, metrics, and tables with live
 data from your database. Once implemented, Quill lets you perform zero-downtime,
 zero-code updates to your dashboard on an org-level as well as company-wide.
 
+<Note>
+	Make sure `QuillProvider` is a parent of the `Dashboard` component.
+</Note>
 
-<Card title="Dashboard Props">
+<Tip>
+	Don't have a dashboard name yet? Learn how to [create a
+	dashboard](https://docs.quillsql.com/portal/quickstart) in the Quill portal
+	to get started.
+</Tip>
+
+## Props
+
 <ParamField path='name' type='string' required>
-	The name of the dashboard you created in the Quill Portal. To learn more
-	about creating dashboards, learn how to [create
-	dashboards](https://docs.quillsql.com/portal/quickstart) in portal.
+	The name of the dashboard you created in the Quill Portal.
 </ParamField>
 
 <ParamField
@@ -241,7 +268,7 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
             <ResponseField name="order" type="number" required>
               The relative ordering of this dashboard item in relation to its
               sibling dashboard items. Ordering starts at 1 and counts up.
-              
+
               Also note that dashboard items in the same section are first grouped
               by `chartType` and then each group is sorted by `order`. Currently,
               the first group is the `metric` items and the last group is the
@@ -413,35 +440,28 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
   are the list of charts that are in a Dashboard. Note the properties of a
   DashboardItem below:
 
-<Expandable defaultOpen={true} title=" ">
-  <ParamField
-  path="DashboardItem"
-  type="object"
->
-  <Expandable title="properties">
-
-<ResponseField name='id' type='string' defaultOpen={true}>
-	The dashboard item's id. You can pass this into the Chart component as the
-	chartId. You can also pass this into the useQuill hook to get the dashboard
-	item.
-</ResponseField>
-
-    <ResponseField name="data" type="object[]">
-      The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
-    </ResponseField>
-
-    <ResponseField name="chartType" type="'bar' | 'pie' | 'line' | 'metric'">
-      The chart type associated with the dashboard item.
-    </ResponseField>
-
-    <ResponseField name="dateField" type="string?">
-      The chart type associated with the dashboard item.
-    </ResponseField>
-
-  </Expandable>
-</ParamField>
-</Expandable>
+    <Expandable defaultOpen={true} title="properties">
+    	<ParamField
+    		path="DashboardItem"
+    		type="object"
+    	>
+    		<Expandable title="properties">
+    			<ResponseField name='id' type='string' defaultOpen={true}>
+    				The dashboard item's id. You can pass this into the Chart component as the
+    				chartId. You can also pass this into the useQuill hook to get the dashboard
+    				item.
+    			</ResponseField>
+    			<ResponseField name="data" type="object[]">
+    				The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
+    			</ResponseField>
+    			<ResponseField name="chartType" type="'bar' | 'pie' | 'line' | 'metric'">
+    				The chart type associated with the dashboard item.
+    			</ResponseField>
+    			<ResponseField name="dateField" type="string?">
+    				The chart type associated with the dashboard item.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
 
 </ParamField>
-
-</Card>

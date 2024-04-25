@@ -26,36 +26,39 @@ function App() {
 }
 ```
 
-<Card title='useQuill Props'>
-	<ParamField path='name' type='string' required>
-		The name of the dashboard you created in the Quill Portal. To learn more
-		about creating dashboards, learn how to (link) create dashboards in portal.
-	</ParamField>
-	<ParamField path='QuillQuery' type='object'>
-		<Expandable defaultOpen={true} title='properties'>
-			<ResponseField name='id' type='string' defaultOpen={true}>
-				The dashboard item's id. You can pass this into the Chart component as
-				the chartId. You can also pass this into the useQuill hook to get the
-				dashboard item.
-			</ResponseField>
-			<ResponseField name='data' type='object[]'>
-				The font family you want Quill to use. This is usually the same font
-				your app uses. ex: "Inter"
-			</ResponseField>
-			<ResponseField
-				name='queryType'
-				type="'DashboardItem' | 'Table' | 'SavedReport'">
-				The type associated with the query. A Quill query can either be a
-				dashboard item (think chart, metric tile, etc), a table (a query that
-				is formatted into a table in the quill portal), or a saved query (just
-				a query and the corresponding data - not located on a dashboard)
-			</ResponseField>
-			<ResponseField name='chartType' type="'bar' | 'pie' | 'line' | 'metric'">
-				The chart type associated with the report.
-			</ResponseField>
-			<ResponseField name='dateField' type='string?'>
-				The chart type associated with the report.
-			</ResponseField>
-		</Expandable>
-	</ParamField>
-</Card>
+<Note>
+	Make sure `QuillProvider` is a parent wherever you're using `useQuill`.
+</Note>
+
+## Props
+<ParamField path='name' type='string' required>
+	The name of the dashboard you created in the Quill Portal. To learn more
+	about creating dashboards, learn how to (link) create dashboards in portal.
+</ParamField>
+<ParamField path='QuillQuery' type='object'>
+	<Expandable defaultOpen={true} title='properties'>
+		<ResponseField name='id' type='string' defaultOpen={true}>
+			The dashboard item's id. You can pass this into the Chart component as
+			the chartId. You can also pass this into the useQuill hook to get the
+			dashboard item.
+		</ResponseField>
+		<ResponseField name='data' type='object[]'>
+			The font family you want Quill to use. This is usually the same font your
+			app uses. ex: "Inter"
+		</ResponseField>
+		<ResponseField
+			name='queryType'
+			type="'DashboardItem' | 'Table' | 'SavedReport'">
+			The type associated with the query. A Quill query can either be a
+			dashboard item (think chart, metric tile, etc), a table (a query that is
+			formatted into a table in the quill portal), or a saved query (just a
+			query and the corresponding data - not located on a dashboard)
+		</ResponseField>
+		<ResponseField name='chartType' type="'bar' | 'pie' | 'line' | 'metric'">
+			The chart type associated with the report.
+		</ResponseField>
+		<ResponseField name='dateField' type='string?'>
+			The chart type associated with the report.
+		</ResponseField>
+	</Expandable>
+</ParamField>
