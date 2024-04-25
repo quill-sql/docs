@@ -103,7 +103,7 @@ as a CSV.
     				<ResponseField name='width' type='number' required>
     					The width of the input element in pixels.
     				</ResponseField>
-    				<ResponseField name='value' type='string | number | undefined | null'>
+    				<ResponseField name='value' type='string' required>
     					The width of the input element in pixels.
     				</ResponseField>
     				<ResponseField name='placeholder' type='string'>
@@ -111,7 +111,7 @@ as a CSV.
     				</ResponseField>
     				<ResponseField
     					name='onChange'
-    					type='(event: ChangeEvent<HTMLInputElement>) => void'>
+    					type='(event: ChangeEvent<HTMLInputElement>) => void' required>
     					An event callback that is fired when the input value changes.
     				</ResponseField>
     			</Expandable>
@@ -158,7 +158,7 @@ as a CSV.
     					required>
     					The columns of the table are an array of label, field pairs.
     				</ResponseField>
-    				<ResponseField name='loading' type='boolean'>
+    				<ResponseField name='isLoading' type='boolean'>
     					Whether the table is loading.
     				</ResponseField>
     			</Expandable>
@@ -315,7 +315,7 @@ as a CSV.
     				<ResponseField name='value' type='string' required>
     					The value of the currently selected tab.
     				</ResponseField>
-    				<ResponseField name='onChange' type='(value: string) => void' required>
+    				<ResponseField name='onChange' type='(event: ChangeEvent<HTMLSelectElement>) => void' required>
     					An event callback fired when the selected tab changes.
     				</ResponseField>
     				<ResponseField
@@ -336,12 +336,12 @@ as a CSV.
     	<Expandable defaultOpen={false} title='props'>
     		<ParamField path='CheckboxComponentProps' type='object'>
     			<Expandable title='properties'>
-    				<ResponseField name='checked' type='boolean' required>
+    				<ResponseField name='isChecked' type='boolean' required>
     					Whether the checkbox is checked.
     				</ResponseField>
     				<ResponseField
     					name='onChange'
-    					type='(checked: boolean) => void'
+    					type='(event: React.ChangeEvent<HTMLInputElement>) => void'
     					required>
     					An event callback fired when the checkbox's value changes.
     				</ResponseField>
@@ -391,7 +391,7 @@ as a CSV.
     				<ResponseField name='label' type='string' required>
     					The label of the selected column.
     				</ResponseField>
-    				<ResponseField name='selected' type='boolean' required>
+    				<ResponseField name='isSelected' type='boolean' required>
     					Whether this column has been selected.
     				</ResponseField>
     				<ResponseField name='setSelected' type='() => void' required>
@@ -484,11 +484,11 @@ as a CSV.
     	</Expandable>
     </ParamField>
 
-    <ParamField path='adminEnabled' type='boolean'>
+    <ParamField path='isAdminEnabled' type='boolean'>
     	Whether the ReportBuilder is in admin mode (default: `false`).
     </ParamField>
 
-    <ParamField path='aiEnabled' type='boolean'>
+    <ParamField path='isAIEnabled' type='boolean'>
     	Whether the ReportBuilder's AI features are enabled (default: `true`).
     </ParamField>
 
