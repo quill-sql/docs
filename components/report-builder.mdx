@@ -8,27 +8,39 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
 	return (
-		<QuillProvider
-			organizationId={organizationId}
-			publicKey={API_KEY}
-			authToken={user.jwt}
-			theme={THEME}>
+		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
 			<ReportBuilder initialTableName='transactions' />
 		</QuillProvider>
 	);
 }
 ```
 
+<RequestExample>
+	```jsx Simple Example
+	<ReportBuilder initialTableName='transactions' />
+	```
+
+    ```jsx With custom components
+    <ReportBuilder
+        initialTableName='transactions'
+    	ButtonComponen={MyButton}
+    	SecondaryButtonComponen={MySecondaryButton}
+    />
+    ```
+
+</RequestExample>
+
 Allows non-technical users to build SQL queries using either UI or AI and
 then edit them on the fly. Once users have constructed a query they like,
 they can click a button and add that report to their dashboard or export it
 as a CSV.
 
-<Note>
+<Info>
 	Make sure `QuillProvider` is a parent of the `ReportBuilder` component.
-</Note>
+</Info>
 
 ## Props
+
 <ParamField path='initialTableName' type='string'>
 	The default table name to show when first loading the ReportBuilder.
 </ParamField>
@@ -45,7 +57,9 @@ as a CSV.
 	The current organization.
 </ParamField>
 
-<ParamField path='Button' type='(props: ButtonComponentProps) => JSX.Element'>
+<ParamField
+	path='ButtonComponent'
+	type='(props: ButtonComponentProps) => JSX.Element'>
 	A primary button component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='ButtonComponentProps' type='object'>
@@ -62,7 +76,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='SecondaryButton'
+	path='SecondaryButtonComponent'
 	type='(props: ButtonComponentProps) => JSX.Element'>
 	A secondary button component.
 	<Expandable defaultOpen={false} title='props'>
@@ -80,7 +94,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='DeleteButton'
+	path='DeleteButtonComponent'
 	type='(props: DeleteButtonComponentProps) => JSX.Element'>
 	A small delete button used to click out of things. Usually an "X" icon.
 	<Expandable defaultOpen={false} title='props'>
@@ -95,7 +109,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='TextInput'
+	path='TextInputComponent'
 	type='(props: TextInputComponentProps) => JSX.Element'>
 	A input element for getting text from the user.
 	<Expandable defaultOpen={false} title='props'>
@@ -115,7 +129,8 @@ as a CSV.
 				</ResponseField>
 				<ResponseField
 					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void' required>
+					type='(event: ChangeEvent<HTMLInputElement>) => void'
+					required>
 					An event callback that is fired when the input value changes.
 				</ResponseField>
 			</Expandable>
@@ -123,13 +138,18 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Select' type='(props: SelectComponentProps) => JSX.Element'>
+<ParamField
+	path='SelectComponent'
+	type='(props: SelectComponentProps) => JSX.Element'>
 	A select component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='SelectComponentProps' type='object'>
 			<Expandable title='properties'>
 				<ResponseField name='value' type='string' required>
 					The value of the select element.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					The label above the select element.
 				</ResponseField>
 				<ResponseField
 					name='onChange'
@@ -148,7 +168,9 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Table' type='(props: TableComponentProps) => JSX.Element'>
+<ParamField
+	path='TableComponent'
+	type='(props: TableComponentProps) => JSX.Element'>
 	A table component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='TableComponentProps' type='object'>
@@ -171,7 +193,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='Popover'
+	path='PopoverComponent'
 	type='(props: PopoverComponentProps) => JSX.Element'>
 	A popover component.
 	<Expandable defaultOpen={false} title='props'>
@@ -199,8 +221,42 @@ as a CSV.
 		</ParamField>
 	</Expandable>
 </ParamField>
+
 <ParamField
-	path='FilterPopover'
+	path='ModalComponent'
+	type='(props: ModalComponentProps) => JSX.Element'>
+	A modal component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ModalComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='isOpen' type='boolean' required>
+					Whether the modal is open.
+				</ResponseField>
+				<ResponseField
+					name='setIsOpen'
+					type='(isOpen: boolean) => void'
+					required>
+					A callback to set whether the modal is open.
+				</ResponseField>
+				<ResponseField name='title' type='string'>
+					The title of the modal, if any.
+				</ResponseField>
+				<ResponseField name='children' type='ReactNode' required>
+					The body of the modal.
+				</ResponseField>
+				<ResponseField name='width' type='number'>
+					The width of the modal, in pixels.
+				</ResponseField>
+				<ResponseField name='height' type='number'>
+					The height of the modal, in pixels.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='FilterPopoverComponent'
 	type='(props: FilterPopoverComponentProps) =>
 	JSX.Element'>
 	A popover component for filters created in the report builder.
@@ -238,7 +294,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='SortPopover'
+	path='SortPopoverComponent'
 	type='(props: SortPopoverComponentProps) => JSX.Element'>
 	A popover component for sort items created in the report builder.
 	<Expandable defaultOpen={false} title='props'>
@@ -275,7 +331,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='LimitPopover'
+	path='LimitPopoverComponent'
 	type='(props: LimitPopoverComponentProps) => JSX.Element'>
 	A popover component for limits created in the report builder.
 	<Expandable defaultOpen={false} title='props'>
@@ -311,7 +367,9 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Tabs' type='(props: TabsComponentProps) => JSX.Element'>
+<ParamField
+	path='TabsComponent'
+	type='(props: TabsComponentProps) => JSX.Element'>
 	A small navigation menu used to switch between two or more states.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='TabsComponentProps' type='object'>
@@ -319,7 +377,10 @@ as a CSV.
 				<ResponseField name='value' type='string' required>
 					The value of the currently selected tab.
 				</ResponseField>
-				<ResponseField name='onChange' type='(event: ChangeEvent<HTMLSelectElement>) => void' required>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLSelectElement>) => void'
+					required>
 					An event callback fired when the selected tab changes.
 				</ResponseField>
 				<ResponseField
@@ -334,7 +395,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='Checkbox'
+	path='CheckboxComponent'
 	type='(props: CheckboxComponentProps) => JSX.Element'>
 	A checkbox component.
 	<Expandable defaultOpen={false} title='props'>
@@ -355,7 +416,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='Sidebar'
+	path='SidebarComponent'
 	type='(props: SidebarComponentProps) => JSX.Element'>
 	A container for the left sidebar.
 	<Expandable defaultOpen={false} title='props'>
@@ -370,7 +431,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='Container'
+	path='ContainerComponent'
 	type='(props: ContainerComponentProps) => JSX.Element'>
 	A container for the main content (everything right of the sidebar).
 	<Expandable defaultOpen={false} title='props'>
@@ -385,7 +446,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='SelectColumn'
+	path='SelectColumnComponent'
 	type='(props: SelectColumnComponentProps) =>
 	JSX.Element'>
 	A component to show selected columns.
@@ -412,7 +473,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='DraggableColumn'
+	path='DraggableColumnComponent'
 	type='(props: DraggableColumnComponentProps) => JSX.Element'>
 	A draggable component used to reorder columns.
 	<Expandable defaultOpen={false} title='props'>
@@ -435,7 +496,7 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='SidebarHeading'
+	path='SidebarHeadingComponent'
 	type='(props: SidebarHeadingComponentProps) => JSX.Element'>
 	A heading element for the sidebar.
 	<Expandable defaultOpen={false} title='props'>
@@ -449,7 +510,9 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Label' type='(props: LabelComponentProps) => JSX.Element'>
+<ParamField
+	path='LabelComponent'
+	type='(props: LabelComponentProps) => JSX.Element'>
 	A label component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='LabelComponentProps' type='object'>
@@ -462,7 +525,9 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Header' type='(props: HeaderComponentProps) => JSX.Element'>
+<ParamField
+	path='HeaderComponent'
+	type='(props: HeaderComponentProps) => JSX.Element'>
 	A header component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='HeaderComponentProps' type='object'>
@@ -475,7 +540,9 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='Text' type='(props: TextComponentProps) => JSX.Element'>
+<ParamField
+	path='TextComponent'
+	type='(props: TextComponentProps) => JSX.Element'>
 	A simple text component.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='TextComponentProps' type='object'>
@@ -488,11 +555,11 @@ as a CSV.
 	</Expandable>
 </ParamField>
 
-<ParamField path='isAdminEnabled' type='boolean'>
+<ParamField path='isAdminEnabled' type='boolean' default={false}>
 	Whether the ReportBuilder is in admin mode (default: `false`).
 </ParamField>
 
-<ParamField path='isAIEnabled' type='boolean'>
+<ParamField path='isAIEnabled' type='boolean' default={true}>
 	Whether the ReportBuilder's AI features are enabled (default: `true`).
 </ParamField>
 

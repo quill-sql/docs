@@ -23,21 +23,136 @@ function App() {
 }
 ```
 
-<Note>Make sure `QuillProvider` is a parent of the `Chart` component.</Note>
+<RequestExample>
+	```jsx With chartId
+	<Chart chartId="964504993938" />
+	```
 
+    ```jsx With dashboardItem
+    <Chart config={dashboardItem} />
+    ```
+
+</RequestExample>
+
+A simple component that displays the given data in one of many chart types.
+
+<Info>Make sure `QuillProvider` is a parent of the `Chart` component.</Info>
 
 ## Props
-<ParamField path='chartId' type='string' required>
-	The chart id. The most usage is through a detail page built to navigate
-	from the dashboard - using onClickDashboardItem to get the dashboardItemId,
-	and navigating to a route (say, reports/:id) where the url param is passed
-	in as the chartId. For a standalone chart, you can find the chartId in the
-	Quill Portal and pass it in directly.
+
+<ParamField path='chartId' type='string'>
+	The chart id. The most usage is through a detail page built to navigate from
+	the dashboard - using the onClick callback to get the dashboardItemId, and
+	navigating to a route (say, reports/:id) where the url param is passed in as
+	the chartId. For a standalone table, you can find the chartId in the Quill
+	Portal and pass it in directly.
+
+    When config is passed, the chart will not refetch the given dashboard item
+    and will instead simply render the item it was given.
+
+    <Info>A `config` must be passed if `chartId` is not present.</Info>
+
 </ParamField>
+
+<ParamField path='config' type='DashboardItem'>
+	A dashboard item to render, if any.
+
+    When a chartId is passed, the chart will first fetch the data necessary to
+    render this chart, and then it will render the dashboard item that it
+    receives from the server.
+
+	See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).
+
+    <Info>A `chartId` must be passed if `config` is not present.</Info>
+
+</ParamField>
+
+<ParamField path='colors' type='string[]'>
+	A list of color strings used to color the chart.
+
+    For example, a pie chart would use the colors for each section and a bar
+    chart would use the colors for each bar.
+
+</ParamField>
+
+<ParamField path='dateFilter' type='any'>
+	Applies the given date filter to this chart, if any.
+</ParamField>
+
+<ParamField path='isDateFilter' type='boolean'>
+	Whether this chart has a date filter.
+</ParamField>
+
+<ParamField path='isAnimationActive' type='boolean'>
+	Whether to show animations on render complete.
+</ParamField>
+
+<ParamField path='hideXAxis' type='boolean'>
+	Whether to hide the x axis.
+</ParamField>
+
+<ParamField path='hideYAxis' type='boolean'>
+	Whether to hide the y axis.
+</ParamField>
+
+<ParamField path='hideCartesianGrid' type='boolean'>
+	Whether to hide the cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideDateRangeFilter' type='boolean'>
+	Whether the date range filter should be hidden.
+</ParamField>
+
+<ParamField path='comparisonLineStyle' type="'solid' | 'dashed'">
+	Whether the comparison range shows as dashed for date comparison line charts
+	(as opposed to the default solid line).
+</ParamField>
+
+<ParamField path='mapColorsToFields' type='(dashboardItem: DashboardItem, theme: QuillTheme) => ColorMapType'>
+    An optional function that takes a dashboard item and theme and returns a
+    map of keys used in that dashboard item to the colors they should use.
+	
+	The color values support RGB hexcodes and CSS color literals.
+
+    ```js
+    function mapColorsToFields(item, theme): ColorMapType {
+    	return {
+    		amount: {
+    			primary: 'red',
+    			comparison: 'gray',
+    			primaryGradientStart: 'red',
+    			primaryGradientStop: 'lightred',
+    			comparisonGradientStart: '#EFEFEF',
+    			comparisonGradientStop: '#EFEFEF00',
+    		},
+    		total: {
+    			primary: 'red'
+    		},
+    	};
+    }
+    ```
+
+    ### ColorMapType
+
+    <Expandable title='ColorMapType'>
+
+    	```ts
+    	export type ColorMapType = {
+    		[field: string]: {
+    			primary: string;
+    			comparison?: string;
+    			primaryGradientStart?: string;
+    			primaryGradientStop?: string;
+    			comparisonGradientStart?: string;
+    			comparisonGradientStop?: string;
+    		};
+    	}
+    	```
+
+    </Expandable>
+
+</ParamField>
+
 <ParamField path='containerStyle' type='React.CSSProperties'>
 	The CSS styles that wrap the chart.
-</ParamField>
-<ParamField path='colors' type='string[]'>
-	The chart colors you want Quill to use. Optional because Quill will use
-	your theme colors by default, but this will override the theme colors.
 </ParamField>

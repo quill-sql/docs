@@ -1,0 +1,250 @@
+---
+title: "SQL Editor"
+description: "Let your users create their own charts with the power of SQL."
+---
+
+```tsx App.tsx
+import { QuillProvider, SQLEditor } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
+			<SQLEditor />
+		</QuillProvider>
+	);
+}
+```
+
+<RequestExample>
+	```jsx Simple Example
+	<SQLEditor />
+	```
+
+    ```jsx With custom components
+    <SQLEditor
+    	defaultQuery="SELECT SUM(amount) FROM TRANSACTIONS"
+    	ButtonComponen={MyButton}
+    	SecondaryButtonComponen={MySecondaryButton}
+    />
+    ```
+
+</RequestExample>
+
+Allows your users to build and write custom SQL queries and then add those
+queries into their dashboard as a metric, chart, or table.
+
+<Info>
+	Make sure `QuillProvider` is a parent of the `SQLEditor` component.
+</Info>
+
+## Props
+
+<ParamField
+	path='ButtonComponent'
+	type='(props: ButtonComponentProps) => JSX.Element'>
+	A primary button component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ButtonComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='onClick' type='() => void' required>
+					A callback fired when the button is clicked.
+				</ResponseField>
+				<ResponseField name='label' type='string' required>
+					The text content of the button.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='SecondaryButtonComponent'
+	type='(props: ButtonComponentProps) => JSX.Element'>
+	A secondary button component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ButtonComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='onClick' type='() => void' required>
+					A callback fired when the button is clicked.
+				</ResponseField>
+				<ResponseField name='label' type='string' required>
+					The text content of the button.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='TextInputComponent'
+	type='(props: TextInputComponentProps) => JSX.Element'>
+	A input element for getting text from the user.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TextInputComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='id' type='string' required>
+					The id of the input element.
+				</ResponseField>
+				<ResponseField name='width' type='number' required>
+					The width of the input element in pixels.
+				</ResponseField>
+				<ResponseField name='value' type='string' required>
+					The width of the input element in pixels.
+				</ResponseField>
+				<ResponseField name='placeholder' type='string'>
+					The placeholder for the input element.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLInputElement>) => void'
+					required>
+					An event callback that is fired when the input value changes.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='TableComponent'
+	type='(props: TableComponentProps) => JSX.Element'>
+	A table component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TableComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+					The rows of the table are an array of objects.
+				</ResponseField>
+				<ResponseField
+					name='columns'
+					type='{ label: string; field: string; }[]'
+					required>
+					The columns of the table are an array of label, field pairs.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether the table is loading.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField path='LoadingComponent' type='() => JSX.Element'>
+	A component to show while the query results are loading.
+</ParamField>
+
+<ParamField
+	path='ModalComponent'
+	type='(props: ModalComponentProps) => JSX.Element'>
+	A modal component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ModalComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='isOpen' type='boolean' required>
+					Whether the modal is open.
+				</ResponseField>
+				<ResponseField
+					name='setIsOpen'
+					type='(isOpen: boolean) => void'
+					required>
+					A callback to set whether the modal is open.
+				</ResponseField>
+				<ResponseField name='title' type='string'>
+					The title of the modal, if any.
+				</ResponseField>
+				<ResponseField name='children' type='ReactNode' required>
+					The body of the modal.
+				</ResponseField>
+				<ResponseField name='width' type='number'>
+					The width of the modal, in pixels.
+				</ResponseField>
+				<ResponseField name='height' type='number'>
+					The height of the modal, in pixels.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField path='onChangeQuery' type='(query: string) => void'>
+	A callback that is fired when the query changes.
+</ParamField>
+
+<ParamField path='onChangeData' type='(query: string) => void'>
+	A callback that is fired when the data changes.
+</ParamField>
+
+<ParamField path='onChangeFields' type='(query: string) => void'>
+	A callback that is fired when the data fields change.
+</ParamField>
+
+<ParamField path='onChangeColumns' type='(query: string) => void'>
+	A callback that is fired when the data columns change.
+</ParamField>
+
+<ParamField path='onAddToDashboardComplete' type='() => void'>
+	A callback that is fired when a dashboard item has been added to a dashboard.
+</ParamField>
+
+<ParamField path='isChartBuilderHorizontalView' type='boolean' default={true}>
+	Whether the ReportBuilder is in admin mode (default: `true`).
+</ParamField>
+
+<ParamField path='isChartBuilderEnabled' type='boolean' default={true}>
+	A callback that is fired when the data columns change.
+</ParamField>
+
+<ParamField path='isNewQueryEnabled' type='boolean' default={true}>
+	Whether the "new query" button is enabled.
+</ParamField>
+
+<ParamField path='isEditMode' type='boolean' default={false}>
+	Whether the SQLEditor is in edit mode.
+</ParamField>
+
+<ParamField path='showTableFormatOptions' type='boolean' default={true}>
+	Whether to show table format options.
+</ParamField>
+
+<ParamField path='showDateFieldOptions' type='boolean' default={true}>
+	Whether to show date field options.
+</ParamField>
+
+<ParamField path='showAccessControlOptions' type='boolean' default={true}>
+	Whether to show access control options.
+</ParamField>
+
+<ParamField path='dashboardItem' type='DashboardItem'>
+	A dashboard item
+</ParamField>
+
+<ParamField path='defaultQuery' type='string'>
+	The default query to use as a placeholder.
+</ParamField>
+
+<ParamField path='destinationDashboard' type='string'>
+	The default dashboard to dashboard items to.
+</ParamField>
+
+<ParamField path='chartBuilderTitle' type='string'>
+	The title of the ChartBuilder dialog.
+</ParamField>
+
+<ParamField
+	path='addToDashboardButtonLabel'
+	type='string'
+	default='Add to dashboard'>
+	The label of the button to open the ChartBuilder dialog.
+</ParamField>
+
+<ParamField path='chartBuilderButtonLabel' type='string'>
+	The label of the button to add the current query to a dashboard.
+</ParamField>
+
+<ParamField path='organizationName' type='string'>
+	The name of the current organization.
+</ParamField>
+
+<ParamField path='containerStyle' type='CSSProperties'>
+	Custom styling properties for the ReportBuilder's top-level container.
+</ParamField>

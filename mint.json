@@ -39,12 +39,12 @@
 			]
 		},
 		{
-			"group": "Create dashboards in portal",
+			"group": "Admin Portal",
 			"pages": ["portal/quickstart"]
 		},
 		{
 			"group": "Getting Started",
-			"pages": ["components/start", "components/themes", "components/auth"]
+			"pages": ["components/start", "components/themes", "components/examples"]
 		},
 		{
 			"group": "API Reference",
@@ -52,13 +52,17 @@
 				"components/quill-provider",
 				"components/dashboard",
 				"components/chart",
+				"components/table",
+				"components/sql-editor",
+				"components/chart-editor",
+				"components/chart-builder",
 				"components/report-builder",
 				"components/use-quill"
 			]
 		},
 		{
-			"group": "Self host on your own server",
-			"pages": ["selfhost/start"]
+			"group": "Self-Hosting",
+			"pages": ["selfhost/start", "selfhost/cache"]
 		}
 	]
 }

@@ -9,14 +9,12 @@ import { QuillProvider, Dashboard } from "@quillsql/react";
 function App() {
 	return (
 		<QuillProvider
-			organizationId={organizationId}
-			publicKey={API_KEY}
-			authToken={user.jwt}
-			theme={THEME}>
+			publicKey={process.env.QUILL_API_KEY}
+			organizationId={user.organizationId}>
 			<Dashboard
 				name='spend_dashboard'
 				containerStyle={{ width: "100%", height: 400 }}
-				onClickDashboardItem={(dashboardItem) => console.log(dashboardItem)}
+				onClickDashboardItem={(item) => console.log(item)}
 			/>
 		</QuillProvider>
 	);
@@ -24,7 +22,7 @@ function App() {
 ```
 
 <RequestExample>
-	```jsx Basic
+	```jsx Simple Example
 	<Dashboard name="saved_reports" />
 	```
 
@@ -46,9 +44,9 @@ Dynamically displays a filterable grid of charts, metrics, and tables with live
 data from your database. Once implemented, Quill lets you perform zero-downtime,
 zero-code updates to your dashboard on an org-level as well as company-wide.
 
-<Note>
+<Info>
 	Make sure `QuillProvider` is a parent of the `Dashboard` component.
-</Note>
+</Info>
 
 <Tip>
 	Don't have a dashboard name yet? Learn how to [create a
@@ -71,108 +69,16 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<Expandable title='properties'>
 				<ResponseField name='dashboardItem' type='DashboardItem' required>
 					The current dashboard item.
-					<Expandable title='properties'>
-						<ResponseField name='id' type='string' required>
-							The dashboard item's unique id.
-						</ResponseField>
-						<ResponseField name='name' type='string' required>
-							The name of the dashboard item.
-						</ResponseField>
-						<ResponseField name='dashboardName' type='string' required>
-							The name of the dashboard this item belongs to.
-						</ResponseField>
-						<ResponseField name='rows' type='{ [key: string]: string }[]'>
-							The rows of data returned from this item's query.
-						</ResponseField>
-						<ResponseField name='columns' type='any[]'>
-							The columns data returned from this item's query.
-						</ResponseField>
-						<ResponseField
-							name='chartType'
-							type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
-							The type of this chart.
-						</ResponseField>
-						<ResponseField
-							name='dateField'
-							type='{ table: string; field: string } | null'>
-							The table and field this chart uses for date filtering.
-						</ResponseField>
-						<ResponseField name='pivot' type='Pivot | null'>
-							The pivot used in this query, if any.
-							<Expandable title='Pivot'>
-								<ResponseField name='title' type='string' required>
-									The pivot title.
-								</ResponseField>
-								<ResponseField
-									name='aggregationType'
-									type="'sum' | 'average' | 'count' | 'min' | 'max'"
-									required>
-									The aggregation type for the values in this pivot.
-								</ResponseField>
-								<ResponseField name='rowField' type='string' required>
-									The row field.
-								</ResponseField>
-								<ResponseField name='rowFieldType' type='string' required>
-									The type of the row field.
-								</ResponseField>
-								<ResponseField name='columnField' type='string'>
-									The column field, if any.
-								</ResponseField>
-								<ResponseField name='columnFieldType' type='string'>
-									The type of the column field, if any.
-								</ResponseField>
-								<ResponseField name='valueField' type='string' required>
-									The type of the column field, if any.
-								</ResponseField>
-							</Expandable>
-						</ResponseField>
-						<ResponseField name='primaryAggregation' type='string'>
-							The formatted primary range aggregation value, if any.
-						</ResponseField>
-						<ResponseField name='comparisonAggregation' type='string'>
-							The formatted comparison range aggregation value, if any.
-						</ResponseField>
-						<ResponseField name='xAxisLabel' type='string' required>
-							The label of the xAxis.
-						</ResponseField>
-						<ResponseField name='xAxisField' type='string' required>
-							The field to use for the item's xAxis.
-						</ResponseField>
-						<ResponseField name='xAxisFormat' type='string' required>
-							The format for the item's xAxis.
-						</ResponseField>
-						<ResponseField
-							name='yAxisFields'
-							type='{ field: string; label: string; format: string; }[]'
-							required>
-							A list of metadata bout the yAxes of this item.
-						</ResponseField>
-						<ResponseField name='order' type='number' required>
-							The relative ordering of this dashboard item in relation to its
-							sibling dashboard items. Ordering starts at 1 and counts up. Also
-							note that dashboard items in the same section are first grouped
-							by `chartType` and then each group is sorted by `order`.
-							Currently, the first group is the `metric` items and the last
-							group is the `table` items with the rest of the items in between.
-						</ResponseField>
-						<ResponseField
-							name='compareRows'
-							type='{ [key: string]: string }[]'>
-							The rows of data returned from this item's query over the
-							comparison date range as opposed to the primary date range.
-						</ResponseField>
-						<ResponseField
-							name='filtersApplied'
-							type='{ [key: string]: any }[]'>
-							A map of filters that have been applied to this query.
-						</ResponseField>
-					</Expandable>
 				</ResponseField>
 				<ResponseField
 					name='onClickDashboardItem'
 					type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
+					<Info>
+						See the API Reference for a `DashboardItem`
+						[here](/components/dashboard#dashboarditem).
+					</Info>
 				</ResponseField>
 				<ResponseField name='isLoading' type='boolean'>
 					Whether this dashboard item is loading.
@@ -191,117 +97,36 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
   type="(props: DashboardItemProps) => JSX.Element"
 >
   A component that wraps a dashboard item for non-metric, non-table chart types.
-  <Expandable defaultOpen={false} title="props">
-    <ParamField
-    path="DashboardItemProps"
-    type="object"
-    >
-      <Expandable title="properties">
-        <ResponseField name="dashboardItem" type="DashboardItem" required>
-          The current dashboard item.
-          <Expandable title="properties">
-            <ResponseField name="id" type="string" required>
-              The dashboard item's unique id.
-            </ResponseField>
-            <ResponseField name="name" type="string" required>
-              The name of the dashboard item.
-            </ResponseField>
-            <ResponseField name="dashboardName" type="string" required>
-              The name of the dashboard this item belongs to.
-            </ResponseField>
-            <ResponseField name="rows" type="{ [key: string]: string }[]">
-              The rows of data returned from this item's query.
-            </ResponseField>
-            <ResponseField name="columns" type="any[]">
-              The columns data returned from this item's query.
-            </ResponseField>
-            <ResponseField name="chartType" type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
-              The type of this chart.
-            </ResponseField>
-            <ResponseField name="dateField" type="{ table: string; field: string } | null">
-              The table and field this chart uses for date filtering.
-            </ResponseField>
-            <ResponseField name="pivot" type="Pivot | null">
-              The pivot used in this query, if any.
-              <Expandable title="Pivot">
-                <ResponseField name="title" type="string" required>
-                  The pivot title.
-                </ResponseField>
-                <ResponseField name="aggregationType" type="'sum' | 'average' | 'count' | 'min' | 'max'" required>
-                  The aggregation type for the values in this pivot.
-                </ResponseField>
-                <ResponseField name="rowField" type="string" required>
-                  The row field.
-                </ResponseField>
-                <ResponseField name="rowFieldType" type="string" required>
-                  The type of the row field.
-                </ResponseField>
-                <ResponseField name="columnField" type="string">
-                  The column field, if any.
-                </ResponseField>
-                <ResponseField name="columnFieldType" type="string">
-                  The type of the column field, if any.
-                </ResponseField>
-                <ResponseField name="valueField" type="string" required>
-                  The type of the column field, if any.
-                </ResponseField>
-              </Expandable>
-            </ResponseField>
-            <ResponseField name="primaryAggregation" type="string">
-              The formatted primary range aggregation value, if any.
-            </ResponseField>
-            <ResponseField name="comparisonAggregation" type="string">
-              The formatted comparison range aggregation value, if any.
-            </ResponseField>
-            <ResponseField name="xAxisLabel" type="string" required>
-              The label of the xAxis.
-            </ResponseField>
-            <ResponseField name="xAxisField" type="string" required>
-              The field to use for the item's xAxis.
-            </ResponseField>
-            <ResponseField name="xAxisFormat" type="string" required>
-              The format for the item's xAxis.
-            </ResponseField>
-            <ResponseField name="yAxisFields" type="{ field: string; label: string; format: string; }[]" required>
-              A list of metadata bout the yAxes of this item.
-            </ResponseField>
-            <ResponseField name="order" type="number" required>
-              The relative ordering of this dashboard item in relation to its
-              sibling dashboard items. Ordering starts at 1 and counts up.
+	<Expandable defaultOpen={false} title="props">
+		<ParamField
+		path="DashboardItemProps"
+		type="object"
+		>
+		<Expandable title="properties">
+			<ResponseField name="dashboardItem" type="DashboardItem" required>
+				The current dashboard item.
+			</ResponseField>
+			<ResponseField name="onClickDashboardItem" type="(item: DashboardItem) => void">
+				A callback that should be fired when the user clicks on this dashboardItem.
 
-              Also note that dashboard items in the same section are first grouped
-              by `chartType` and then each group is sorted by `order`. Currently,
-              the first group is the `metric` items and the last group is the
-              `table` items with the rest of the items in between.
-            </ResponseField>
-            <ResponseField name="compareRows" type="{ [key: string]: string }[]">
-              The rows of data returned from this item's query over the comparison
-              date range as opposed to the primary date range.
-            </ResponseField>
-            <ResponseField name="filtersApplied" type="{ [key: string]: any }[]">
-              A map of filters that have been applied to this query.
-            </ResponseField>
-          </Expandable>
-        </ResponseField>
-        <ResponseField name="onClickDashboardItem" type="(item: DashboardItem) => void">
-          A callback that should be fired when the user clicks on this dashboardItem.
-        </ResponseField>
-        <ResponseField name="isLoading" type="boolean">
-          Whether this dashboard item is loading.
-        </ResponseField>
-        <ResponseField name="error" type="string">
-          An error message that resulted from the loading of this dashboard item, if any.
-        </ResponseField>
-        <ResponseField name="children" type="ReactNode">
-          The child of a chart component is a chart graph by default.
+    			<Info>See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
+    		</ResponseField>
+    		<ResponseField name="isLoading" type="boolean">
+    			Whether this dashboard item is loading.
+    		</ResponseField>
+    		<ResponseField name="error" type="string">
+    			An error message that resulted from the loading of this dashboard item, if any.
+    		</ResponseField>
+    		<ResponseField name="children" type="ReactNode">
+    			The child of a chart component is a chart graph by default.
 
-          You can override this behavior by not passing children in your implemented
-          version and instead rendering your own Chart.
-        </ResponseField>
-      </Expandable>
-    </ParamField>
+    			You can override this behavior by not passing children in your implemented
+    			version and instead rendering your own Chart.
+    		</ResponseField>
+    	</Expandable>
+    	</ParamField>
+    </Expandable>
 
-  </Expandable>
 </ParamField>
 
 <ParamField
@@ -313,155 +138,290 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<Expandable title='properties'>
 				<ResponseField name='dashboardItem' type='DashboardItem' required>
 					The current dashboard item.
-					<Expandable title='properties'>
-						<ResponseField name='id' type='string' required>
-							The dashboard item's unique id.
-						</ResponseField>
-						<ResponseField name='name' type='string' required>
-							The name of the dashboard item.
-						</ResponseField>
-						<ResponseField name='dashboardName' type='string' required>
-							The name of the dashboard this item belongs to.
-						</ResponseField>
-						<ResponseField name='rows' type='{ [key: string]: string }[]'>
-							The rows of data returned from this item's query.
-						</ResponseField>
-						<ResponseField name='columns' type='any[]'>
-							The columns data returned from this item's query.
-						</ResponseField>
-						<ResponseField
-							name='chartType'
-							type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
-							The type of this chart.
-						</ResponseField>
-						<ResponseField
-							name='dateField'
-							type='{ table: string; field: string } | null'>
-							The table and field this chart uses for date filtering.
-						</ResponseField>
-						<ResponseField name='pivot' type='Pivot | null'>
-							The pivot used in this query, if any.
-							<Expandable title='Pivot'>
-								<ResponseField name='title' type='string' required>
-									The pivot title.
-								</ResponseField>
-								<ResponseField
-									name='aggregationType'
-									type="'sum' | 'average' | 'count' | 'min' | 'max'"
-									required>
-									The aggregation type for the values in this pivot.
-								</ResponseField>
-								<ResponseField name='rowField' type='string' required>
-									The row field.
-								</ResponseField>
-								<ResponseField name='rowFieldType' type='string' required>
-									The type of the row field.
-								</ResponseField>
-								<ResponseField name='columnField' type='string'>
-									The column field, if any.
-								</ResponseField>
-								<ResponseField name='columnFieldType' type='string'>
-									The type of the column field, if any.
-								</ResponseField>
-								<ResponseField name='valueField' type='string' required>
-									The type of the column field, if any.
-								</ResponseField>
-							</Expandable>
-						</ResponseField>
-						<ResponseField name='primaryAggregation' type='string'>
-							The formatted primary range aggregation value, if any.
-						</ResponseField>
-						<ResponseField name='comparisonAggregation' type='string'>
-							The formatted comparison range aggregation value, if any.
-						</ResponseField>
-						<ResponseField name='xAxisLabel' type='string' required>
-							The label of the xAxis.
-						</ResponseField>
-						<ResponseField name='xAxisField' type='string' required>
-							The field to use for the item's xAxis.
-						</ResponseField>
-						<ResponseField name='xAxisFormat' type='string' required>
-							The format for the item's xAxis.
-						</ResponseField>
-						<ResponseField
-							name='yAxisFields'
-							type='{ field: string; label: string; format: string; }[]'
-							required>
-							A list of metadata bout the yAxes of this item.
-						</ResponseField>
-						<ResponseField name='order' type='number' required>
-							The relative ordering of this dashboard item in relation to its
-							sibling dashboard items. Ordering starts at 1 and counts up. Also
-							note that dashboard items in the same section are first grouped
-							by `chartType` and then each group is sorted by `order`.
-							Currently, the first group is the `metric` items and the last
-							group is the `table` items with the rest of the items in between.
-						</ResponseField>
-						<ResponseField
-							name='compareRows'
-							type='{ [key: string]: string }[]'>
-							The rows of data returned from this item's query over the
-							comparison date range as opposed to the primary date range.
-						</ResponseField>
-						<ResponseField
-							name='filtersApplied'
-							type='{ [key: string]: any }[]'>
-							A map of filters that have been applied to this query.
-						</ResponseField>
-					</Expandable>
 				</ResponseField>
 				<ResponseField
 					name='onClickDashboardItem'
 					type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
-				</ResponseField>
-				<ResponseField name='isLoading' type='boolean'>
-					Whether this dashboard item is loading.
-				</ResponseField>
-				<ResponseField name='error' type='string'>
-					An error message that resulted from the loading of this dashboard
-					item, if any.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
-</ParamField>
 
-<ParamField path='containerStyle' type='React.CSSProperties'>
-	The CSS styles that wrap the dashboard.
-</ParamField>
-
-<ParamField
-  path="onClickDashboardItem"
-  type="(dashboardItem: DashboardItem) => void"
->
-  Callback function that fires when a dashboard item is clicked. A common use case is navigating to a new page based on the dashboardItemId. Dashboard items
-  are the list of charts that are in a Dashboard. Note the properties of a
-  DashboardItem below:
-
-    <Expandable defaultOpen={true} title="properties">
-    	<ParamField
-    		path="DashboardItem"
-    		type="object"
-    	>
-    		<Expandable title="properties">
-    			<ResponseField name='id' type='string' defaultOpen={true}>
-    				The dashboard item's id. You can pass this into the Chart component as the
-    				chartId. You can also pass this into the useQuill hook to get the dashboard
-    				item.
+    				<Info> See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
     			</ResponseField>
-    			<ResponseField name="data" type="object[]">
-    				The font family you want Quill to use. This is usually the same font your app uses. ex: "Inter"
+    			<ResponseField name='isLoading' type='boolean'>
+    				Whether this dashboard item is loading.
     			</ResponseField>
-    			<ResponseField name="chartType" type="'bar' | 'pie' | 'line' | 'metric'">
-    				The chart type associated with the dashboard item.
-    			</ResponseField>
-    			<ResponseField name="dateField" type="string?">
-    				The chart type associated with the dashboard item.
+    			<ResponseField name='error' type='string'>
+    				An error message that resulted from the loading of this dashboard
+    				item, if any.
     			</ResponseField>
     		</Expandable>
     	</ParamField>
     </Expandable>
 
 </ParamField>
+
+<ParamField
+	path='SelectComponent'
+	type='(props: SelectComponentProps) => JSX.Element'>
+	A select component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SelectComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='value' type='string' required>
+					The value of the select element.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					The label above the select element.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLSelectElement>) => void'
+					required>
+					An event callback that is fired when the select value changes.
+				</ResponseField>
+				<ResponseField
+					name='options'
+					type='{ value: string; label: string; }[]'
+					required>
+					An array of value, label pairs which represent the select options.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='DateRangePickerComponent'
+	type='(props: DateRangePickerComponentProps) => JSX.Element'>
+	A date range picker component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DateRangePickerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='preset' type='string' required>
+					The date preset.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					The label above the date range picker.
+				</ResponseField>
+				<ResponseField
+					name='dateRange'
+					type='{ startDate: Date; endDate: Date }'
+					required>
+					The current date range.
+				</ResponseField>
+				<ResponseField
+					name='presetOptions'
+					type='{ label: string; value: string }[]'
+					required>
+					A set of options to select presets from.
+				</ResponseField>
+				<ResponseField
+					name='onChangeDateRange'
+					type='({ startDate, endDate }: { startDate: Date; endDate: Date; }) => void'
+					required>
+					A callback that is fired when the selected date range changes.
+				</ResponseField>
+				<ResponseField
+					name='onChangePreset'
+					type='(event: ChangeEvent<HTMLSelectElement>) => void'
+					required>
+					An event callback that is fired when the preset value changes.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='DashboardSectionComponent'
+	type='(props: DashboardSectionComponentProps) => JSX.Element'>
+	A component that wraps each dashboard section.
+
+    Each dashboard is grouped into three sections: metrics, charts, and tables
+    (in that order). Some sections may be empty, in which case they are omitted.
+    <Expandable defaultOpen={false} title='props'>
+    	<ParamField path='DashboardSectionComponentProps' type='object'>
+    		<Expandable title='properties'>
+    			<ResponseField name='section' type="'metrics' | 'charts' | 'tables'" required>
+    				The name of the section.
+    			</ResponseField>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the dashboard section.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='DashboardSectionContainerComponent'
+	type='(props: DashboardSectionContainerComponentProps) => JSX.Element'>
+	A component that wraps all dashboard sections.
+    <Expandable defaultOpen={false} title='props'>
+    	<ParamField path='DashboardSectionContainerComponentProps' type='object'>
+    		<Expandable title='properties'>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the dashboard section.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField path='EmptyDashboardComponent' type='() => JSX.Element'>
+	A fallback component displayed when an active dashboard has no items.
+</ParamField>
+
+<ParamField path='onClickDashboardItem' type='(item: DashboardItem) => void'>
+	Callback function that fires when a dashboard item is clicked. A common use
+	case is navigating to a new page based on the dashboardItemId. Dashboard
+	items are the list of charts that are in a Dashboard.
+
+    <Info>See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
+
+</ParamField>
+
+<ParamField path='onChangeLoading' type='(isLoading: boolean) => void'>
+	A callback that is fired when the loading status of the dashboard changes.
+</ParamField>
+
+<ParamField path='hideFilters' type='boolean' default={false}>
+	Whether to hide dashboard filters.
+</ParamField>
+
+<ParamField path='hideDateRangeFilter' type='boolean' default={false}>
+	Whether the date range filters on the dashboard are hidden.
+</ParamField>
+
+<ParamField path='hideXAxis' type='boolean' default={false}>
+	Whether to hide the xAxis.
+</ParamField>
+
+<ParamField path='hideYAxis' type='boolean' default={false}>
+	Whether to hide the yAxis.
+</ParamField>
+
+<ParamField path='hideCartesianGrid' type='boolean' default={false}>
+	Whether to hide the cartesian grid.
+</ParamField>
+
+<ParamField
+	path='comparisonLineStyle'
+	type="'solid' | 'dashed'"
+	default='solid'>
+	The line style for comparison ranges on line chart
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Applies the following classes to the ReportBuilder.
+
+    This container is the parent of all the filtering buttons as well as any
+    dashboard sections. This can be useful for TailwindCSS-style classname
+    strings.
+
+</ParamField>
+
+<ParamField path='containerStyle' type='React.CSSProperties'>
+	The CSS styles that wrap the dashboard.
+</ParamField>
+
+<ParamField path='chartContainerStyle' type='React.CSSProperties'>
+	The styles for the chart container.
+</ParamField>
+
+## DashboardItem
+
+<ResponseField name='id' type='string' required>
+	The dashboard item's unique id.
+</ResponseField>
+<ResponseField name='name' type='string' required>
+	The name of the dashboard item.
+</ResponseField>
+<ResponseField name='dashboardName' type='string' required>
+	The name of the dashboard this item belongs to.
+</ResponseField>
+<ResponseField name='rows' type='{ [key: string]: string }[]'>
+	The rows of data returned from this item's query.
+</ResponseField>
+<ResponseField name='columns' type='any[]'>
+	The columns data returned from this item's query.
+</ResponseField>
+<ResponseField
+	name='chartType'
+	type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
+	The type of this chart.
+</ResponseField>
+<ResponseField name='dateField' type='{ table: string; field: string } | null'>
+	The table and field this chart uses for date filtering.
+</ResponseField>
+<ResponseField name='pivot' type='Pivot | null'>
+	The pivot used in this query, if any.
+	<Expandable title='Pivot'>
+		<ResponseField name='title' type='string' required>
+			The pivot title.
+		</ResponseField>
+		<ResponseField
+			name='aggregationType'
+			type="'sum' | 'average' | 'count' | 'min' | 'max'"
+			required>
+			The aggregation type for the values in this pivot.
+		</ResponseField>
+		<ResponseField name='rowField' type='string' required>
+			The row field.
+		</ResponseField>
+		<ResponseField name='rowFieldType' type='string' required>
+			The type of the row field.
+		</ResponseField>
+		<ResponseField name='columnField' type='string'>
+			The column field, if any.
+		</ResponseField>
+		<ResponseField name='columnFieldType' type='string'>
+			The type of the column field, if any.
+		</ResponseField>
+		<ResponseField name='valueField' type='string' required>
+			The type of the column field, if any.
+		</ResponseField>
+	</Expandable>
+</ResponseField>
+<ResponseField name='primaryAggregation' type='string'>
+	The formatted primary range aggregation value, if any.
+</ResponseField>
+<ResponseField name='comparisonAggregation' type='string'>
+	The formatted comparison range aggregation value, if any.
+</ResponseField>
+<ResponseField name='xAxisLabel' type='string' required>
+	The label of the xAxis.
+</ResponseField>
+<ResponseField name='xAxisField' type='string' required>
+	The field to use for the item's xAxis.
+</ResponseField>
+<ResponseField name='xAxisFormat' type='string' required>
+	The format for the item's xAxis.
+</ResponseField>
+<ResponseField
+	name='yAxisFields'
+	type='{ field: string; label: string; format: string; }[]'
+	required>
+	A list of metadata bout the yAxes of this item.
+</ResponseField>
+<ResponseField name='order' type='number' required>
+	The relative ordering of this dashboard item in relation to its sibling
+	dashboard items. Ordering starts at 1 and counts up.
+
+    <Info>Dashboard items in the same section are first grouped by `chartType`
+    and then each group is sorted by `order`.</Info>
+
+    Currently, the first group is the
+    `metric` items and the last group is the `table` items with the rest of the
+    items in between.
+
+</ResponseField>
+<ResponseField name='compareRows' type='{ [key: string]: string }[]'>
+	The rows of data returned from this item's query over the comparison date
+	range as opposed to the primary date range.
+</ResponseField>
+<ResponseField name='filtersApplied' type='{ [key: string]: any }[]'>
+	A map of filters that have been applied to this query.
+</ResponseField>

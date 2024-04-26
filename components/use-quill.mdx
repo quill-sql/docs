@@ -9,56 +9,56 @@ import { QuillProvider, useQuill } from "@quillsql/react";
 function CustomComponent() {
 	// pass in any report or chart created in the Quill Portal
 	const report = useQuill(QUILL_ID);
-	// do anything with report object
-	return <div>Custom component</div>;
+	return <pre>{JSON.stringify(report, null, 2)}</pre>;
 }
 
 function App() {
 	return (
-		<QuillProvider
-			organizationId={organizationId}
-			publicKey={API_KEY}
-			authToken={user.jwt}
-			theme={THEME}>
+		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
 			<CustomComponent />
 		</QuillProvider>
 	);
 }
 ```
 
-<Note>
-	Make sure `QuillProvider` is a parent wherever you're using `useQuill`.
-</Note>
+<RequestExample>
+```jsx
+const report = useQuill("299286dd2d85");
+```
+</RequestExample>
+<ResponseExample>
+```json
+{
+	data: {
+		name: "My Report",
+		rows: [...],
+		columns: [...],
+		chartType: "table",
+		fields: [...],
+		xAxisField: "created_at",
+		yAxisField: "amount",
+		xAxisLabel: "Created"
+		yAxisLabel: "Total Amount",
+		queryString: "SELECT * FROM transactions;",
+	},
+	loading: false,
+	error: null
+}
+```
+</ResponseExample>
+
+<Info>
+	Make sure `QuillProvider` is a parent of the component using the `useQuill`
+	hook.
+</Info>
 
 ## Props
-<ParamField path='name' type='string' required>
-	The name of the dashboard you created in the Quill Portal. To learn more
-	about creating dashboards, learn how to (link) create dashboards in portal.
-</ParamField>
-<ParamField path='QuillQuery' type='object'>
-	<Expandable defaultOpen={true} title='properties'>
-		<ResponseField name='id' type='string' defaultOpen={true}>
-			The dashboard item's id. You can pass this into the Chart component as
-			the chartId. You can also pass this into the useQuill hook to get the
-			dashboard item.
-		</ResponseField>
-		<ResponseField name='data' type='object[]'>
-			The font family you want Quill to use. This is usually the same font your
-			app uses. ex: "Inter"
-		</ResponseField>
-		<ResponseField
-			name='queryType'
-			type="'DashboardItem' | 'Table' | 'SavedReport'">
-			The type associated with the query. A Quill query can either be a
-			dashboard item (think chart, metric tile, etc), a table (a query that is
-			formatted into a table in the quill portal), or a saved query (just a
-			query and the corresponding data - not located on a dashboard)
-		</ResponseField>
-		<ResponseField name='chartType' type="'bar' | 'pie' | 'line' | 'metric'">
-			The chart type associated with the report.
-		</ResponseField>
-		<ResponseField name='dateField' type='string?'>
-			The chart type associated with the report.
-		</ResponseField>
-	</Expandable>
+
+<ParamField path='chartId' type='string' required>
+	The id of the chart you created in the Quill Portal.
+
+    <Tip>
+    	Don't have a chartId yet? Learn how to [create a chart](https://docs.quillsql.com/portal/quickstart) in the Quill portal to get started.
+    </Tip>
+
 </ParamField>

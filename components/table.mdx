@@ -1,0 +1,107 @@
+---
+title: "Table"
+description: "A simple table component that displays useful information"
+---
+
+```tsx App.tsx
+import { QuillProvider, Table } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider
+			publicKey={process.env.QUILL_API_KEY}
+			organizationId={user.organizationId}>
+			<Table chartId='6eb19044196e' />
+		</QuillProvider>
+	);
+}
+```
+
+<RequestExample>
+	```jsx With chartId
+	<Table chartId="964504993938" />
+	```
+
+    ```jsx With data
+    <Table
+    	rows={[
+    		{ x: 1, y: 1, z: 0 },
+    		{ x: 2, y: 2, z: 0 },
+    		{ x: 3, y: 3, z: 0 },
+    		{ x: 4, y: 4, z: 0 }
+    	]}
+    	columns={[
+    		{ label: "My X-Axis", field: "x" },
+    		{ label: "My Y-Axis", field: "y" }
+    	]}
+    />
+    ```
+
+</RequestExample>
+
+A simple component that displays the given data as a table.
+
+<Info>Make sure `QuillProvider` is a parent of the `Table` component.</Info>
+
+## Props
+
+<ParamField path='chartId' type='string'>
+	The chart id. The most usage is through a detail page built to navigate from
+	the dashboard - using the onClick callback to get the dashboardItemId, and
+	navigating to a route (say, reports/:id) where the url param is passed in as
+	the chartId. For a standalone table, you can find the chartId in the Quill
+	Portal and pass it in directly.
+
+    When a `chartId` is passed, the table will first fetch the data necessary
+    to render this table, and then it will render the rows and columns that it
+    receives from the server.
+
+    <Info>A `chartId` must be passed if `rows` and `columns` are not present.</Info>
+
+</ParamField>
+
+<ParamField path='rows' type='{ [key: string]: any }[]'>
+	The rows of the table to show, if any.
+
+    When `rows` and `columns` are passed, the table will not refetch the given
+    dashboard item and will instead simply render the rows and columns it was
+    given.
+
+    <Info>Both `rows` and `columns` must be passed if `chartId` is not present.</Info>
+
+</ParamField>
+
+<ParamField path='columns' type='{ label: string; field: string; }[]'>
+	The columns of the table to show, if any.
+	
+	When `rows` and `columns` are passed, the table will not refetch the given
+    dashboard item and will instead simply render the rows and columns it was
+    given.
+	
+	<Info>Both `rows` and `columns` must be passed if `chartId` is not present.</Info>
+
+</ParamField>
+
+<ParamField path='csvFilename' type='string'>
+	The placeholder filename to use when downloading this table as a csv file.
+</ParamField>
+
+<ParamField path='showDownloadCSVButton' type='boolean'>
+	Whether to show the download csv button
+</ParamField>
+
+<ParamField path='isLoading' type='boolean'>
+	Whether this table component is loading.
+</ParamField>
+
+<ParamField path='downloadCSV' type='() => void'>
+	A callback that is fired when the user clicks download csv.
+</ParamField>
+
+<ParamField path='LoadingComponent' type='boolean'>
+	A loading component to show when the table is loading.
+</ParamField>
+
+<ParamField path='containerStyle' type='React.CSSProperties'>
+	The CSS styles that wrap the chart.
+</ParamField>
