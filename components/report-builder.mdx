@@ -45,7 +45,7 @@ as a CSV.
 	The default table name to show when first loading the ReportBuilder.
 </ParamField>
 
-<ParamField path='onSubmitChartBuilder' type='() => void' required>
+<ParamField path='onSubmitChartBuilder' type='(item: DashboardItem) => void' required>
 	A callback fired when the chart builder flow has been completed.
 </ParamField>
 
@@ -70,6 +70,12 @@ as a CSV.
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
 				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
+				</ResponseField>
 			</Expandable>
 		</ParamField>
 	</Expandable>
@@ -87,6 +93,12 @@ as a CSV.
 				</ResponseField>
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
+				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
 				</ResponseField>
 			</Expandable>
 		</ParamField>

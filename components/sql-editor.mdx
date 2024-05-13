@@ -52,6 +52,12 @@ queries into their dashboard as a metric, chart, or table.
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
 				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
+				</ResponseField>
 			</Expandable>
 		</ParamField>
 	</Expandable>
@@ -69,6 +75,12 @@ queries into their dashboard as a metric, chart, or table.
 				</ResponseField>
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
+				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -182,7 +194,7 @@ queries into their dashboard as a metric, chart, or table.
 	A callback that is fired when the data columns change.
 </ParamField>
 
-<ParamField path='onAddToDashboardComplete' type='() => void'>
+<ParamField path='onAddToDashboardComplete' type='(dashboardItem: DashboardItem) => void'>
 	A callback that is fired when a dashboard item has been added to a dashboard.
 </ParamField>
 

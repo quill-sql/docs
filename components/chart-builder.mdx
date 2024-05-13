@@ -59,6 +59,12 @@ and then add that dashboard item into one of their dashboards.
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
 				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
+				</ResponseField>
 			</Expandable>
 		</ParamField>
 	</Expandable>
@@ -76,6 +82,12 @@ and then add that dashboard item into one of their dashboards.
 				</ResponseField>
 				<ResponseField name='label' type='string' required>
 					The text content of the button.
+				</ResponseField>
+				<ResponseField name='disabled' type='boolean'>
+					Whether the button is disabled.
+				</ResponseField>
+				<ResponseField name='icon' type='ReactNode'>
+					An icon to put in front of the label.
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -265,6 +277,142 @@ and then add that dashboard item into one of their dashboards.
 	</Expandable>
 </ParamField>
 
+<ParamField
+	path='TableComponent'
+	type='(props: TableComponentProps) => JSX.Element'>
+	A table component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TableComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+					The rows of the table are an array of objects.
+				</ResponseField>
+				<ResponseField
+					name='columns'
+					type='{ label: string; field: string; }[]'
+					required>
+					The columns of the table are an array of label, field pairs.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether the table is loading.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ErrorMessageComponent'
+	type='(props: ErrorMessageComponentProps) => JSX.Element'>
+	A component that displays error messages.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ErrorMessageComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='errorMessage' type='string' required>
+					The error message to display.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputRowContainer'
+	type='(props: ChartBuilderInputRowContainerProps) => JSX.Element'>
+	A container around each row of inputs in the chart builder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ChartBuilderInputRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The input components in this row of the form.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputColumnContainer'
+	type='(props: ChartBuilderInputColumnContainerProps) => JSX.Element'>
+	A container around each column of input rows in the chart builder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ChartBuilderInputColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The input rows that make up this vertical stack.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotRowContainer'
+	type='(props: PivotRowContainerProps) => JSX.Element'>
+	A container for each row of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='PivotRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The input components in this row of the pivot form.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotColumnContainer'
+	type='(props: PivotColumnContainerProps) => JSX.Element'>
+	A container for vertically-stacked rows of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='PivotColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The input rows that make up this vertical stack.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='FormContainer'
+	type='(props: FormContainerProps) => JSX.Element'>
+	A container that wraps the chart builder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='FormContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The sections of the chart builder form.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField path='rows' type='{ [key: string]: any }[]'>
+	The rows of this query response.
+</ParamField>
+
+<ParamField path='columns' type='Column[]'>
+	The columns of this query response.
+
+    <Accordion title="Click to see Field definition">
+    	```ts
+    	interface Column {
+    		label: string;
+    		field: string;
+    		name: string;
+    		displayName: string;
+    		fieldType: string;
+    		format: string;
+    	}
+    	```
+    </Accordion>
+
+</ParamField>
+
 <ParamField path='fields' type='Field[]'>
 	The fields on this query.
 
@@ -308,7 +456,7 @@ and then add that dashboard item into one of their dashboards.
 	Whether to show the dashboard dropdown.
 </ParamField>
 
-<ParamField path='onAddToDashboardComplete' type='() => void'>
+<ParamField path='onAddToDashboardComplete' type='(dashboardItem: DashboardItem) => void'>
 	A callback that is fired when a dashboard item has been added to a dashboard.
 </ParamField>
 

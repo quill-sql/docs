@@ -44,7 +44,7 @@
 		},
 		{
 			"group": "Getting Started",
-			"pages": ["components/start", "components/themes", "components/examples"]
+			"pages": ["components/start", "components/themes"]
 		},
 		{
 			"group": "API Reference",
