@@ -98,8 +98,14 @@ A simple component that displays the given data as a table.
 	A callback that is fired when the user clicks download csv.
 </ParamField>
 
-<ParamField path='LoadingComponent' type='boolean'>
+<ParamField path='LoadingComponent' type='() => JSX.Element'>
 	A loading component to show when the table is loading.
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Styles the top-level container of the Table.
+
+	This can be useful for TailwindCSS-style classname strings.
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>

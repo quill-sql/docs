@@ -14,7 +14,7 @@ function App() {
 			<Dashboard
 				name='spend_dashboard'
 				containerStyle={{ width: "100%", height: 400 }}
-				onClickDashboardItem={(item) => console.log(item)}
+				onClick={(item) => console.log(item)}
 			/>
 		</QuillProvider>
 	);
@@ -33,7 +33,7 @@ function App() {
     	MetricComponent={MyMetric}
     	ChartComponent={MyChart}
     	TableComponent={MyTable}
-    	onClickDashboardItem={(item) => router.push(`/detail/${item.id}`)}
+    	onClick={(item) => router.push(`/detail/${item.id}`)}
     	containerStyle={{ backgroundColor: 'white', padding: '10px' }}
     />
     ```
@@ -71,7 +71,7 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 					The current dashboard item.
 				</ResponseField>
 				<ResponseField
-					name='onClickDashboardItem'
+					name='onClick'
 					type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
@@ -106,7 +106,7 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<ResponseField name="dashboardItem" type="DashboardItem" required>
 				The current dashboard item.
 			</ResponseField>
-			<ResponseField name="onClickDashboardItem" type="(item: DashboardItem) => void">
+			<ResponseField name="onClick" type="(item: DashboardItem) => void">
 				A callback that should be fired when the user clicks on this dashboardItem.
 
     			<Info>See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
@@ -140,7 +140,7 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 					The current dashboard item.
 				</ResponseField>
 				<ResponseField
-					name='onClickDashboardItem'
+					name='onClick'
 					type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
@@ -169,6 +169,9 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<Expandable title='properties'>
 				<ResponseField name='value' type='string' required>
 					The value of the select element.
+				</ResponseField>
+				<ResponseField name='width' type='number' required>
+					The width of the select element in pixels.
 				</ResponseField>
 				<ResponseField name='label' type='string'>
 					The label above the select element.
@@ -267,7 +270,21 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
     		</Expandable>
     	</ParamField>
     </Expandable>
+</ParamField>
 
+<ParamField
+	path='FilterContainerComponent'
+	type='(props: FilterContainerComponentProps) => JSX.Element'>
+	A component that wraps the row of dashboard filters.
+    <Expandable defaultOpen={false} title='props'>
+    	<ParamField path='FilterContainerComponentProps' type='object'>
+    		<Expandable title='properties'>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the filter container.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
 </ParamField>
 
 <ParamField path='EmptyDashboardComponent' type='() => JSX.Element'>
@@ -324,7 +341,10 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>
-	The CSS styles that wrap the dashboard.
+	The CSS styles that wrap the dashboard container.
+
+	This container is the parent of all the filtering buttons as well as any
+	dashboard sections.
 </ParamField>
 
 <ParamField path='chartContainerStyle' type='React.CSSProperties'>

@@ -21,7 +21,11 @@ function App() {
 
 <RequestExample>
 	```jsx Simple Example
-	<ChartEditor isOpen={isOpen} setIsOpen={setIsOpen} chartId='263775e2af12' />
+	<ChartEditor
+		isOpen={isOpen}
+		setIsOpen={setIsOpen}
+		chartId='263775e2af12'
+	/>
 	```
 
     ```jsx With custom components
@@ -72,12 +76,80 @@ Presents the Quill Chart Builder form as a modal.
 	The button label for the chart builder.
 </ParamField>
 
-<ParamField path='onAddToDashboardComplete' type='(dashboardItem: DashboardItem) => void'>
+<ParamField
+	path='onAddToDashboardComplete'
+	type='(dashboardItem: DashboardItem) => void'>
 	A callback that is fired when the add to dashboard flow has been completed.
 </ParamField>
 
 <ParamField path='onDelete' type='() => void'>
 	A callback that is fired when the item is deleted.
+</ParamField>
+
+<ParamField
+	path='SelectComponent'
+	type='(props: SelectComponentProps) => JSX.Element'>
+	A select element for letting the user select from a set of options.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SelectComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='value' type='string' required>
+					The value of the select.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					A label for the select.
+				</ResponseField>
+				<ResponseField
+					name='options'
+					type='{ value: string; label: string; }[]'
+					required>
+					The select options.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLInputElement>) => void'
+					required>
+					An event callback that is fired when the selected element changes.
+				</ResponseField>
+				<ResponseField name='width' type='number' required>
+					The width of the select element in pixels.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='TextInputComponent'
+	type='(props: TextInputComponentProps) => JSX.Element'>
+	A input element for getting text from the user.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TextInputComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='id' type='string' required>
+					The id of the input element.
+				</ResponseField>
+				<ResponseField name='width' type='number' required>
+					The width of the input element in pixels.
+				</ResponseField>
+				<ResponseField name='value' type='string' required>
+					The width of the input element in pixels.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					A label for the text input.
+				</ResponseField>
+				<ResponseField name='placeholder' type='string'>
+					The placeholder for the input element.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLInputElement>) => void'
+					required>
+					An event callback that is fired when the input value changes.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
 </ParamField>
 
 <ParamField
@@ -144,66 +216,6 @@ Presents the Quill Chart Builder form as a modal.
 </ParamField>
 
 <ParamField
-	path='SelectComponent'
-	type='(props: SelectComponentProps) => JSX.Element'>
-	A select component.
-	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='SelectComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='value' type='string' required>
-					The value of the select element.
-				</ResponseField>
-				<ResponseField name='label' type='string'>
-					The label above the select element.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLSelectElement>) => void'
-					required>
-					An event callback that is fired when the select value changes.
-				</ResponseField>
-				<ResponseField
-					name='options'
-					type='{ value: string; label: string; }[]'
-					required>
-					An array of value, label pairs which represent the select options.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
-</ParamField>
-
-<ParamField
-	path='TextInputComponent'
-	type='(props: TextInputComponentProps) => JSX.Element'>
-	A input element for getting text from the user.
-	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='TextInputComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='id' type='string' required>
-					The id of the input element.
-				</ResponseField>
-				<ResponseField name='width' type='number' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='value' type='string' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='placeholder' type='string'>
-					The placeholder for the input element.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void'
-					required>
-					An event callback that is fired when the input value changes.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
-</ParamField>
-
-<ParamField
 	path='LabelComponent'
 	type='(props: LabelComponentProps) => JSX.Element'>
 	A label component.
@@ -234,6 +246,21 @@ Presents the Quill Chart Builder form as a modal.
 </ParamField>
 
 <ParamField
+	path='SubHeaderComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A sub-header component describes a group of inputs.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SubHeaderComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='() => void' required>
+					The label of the sub-header component.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
 	path='TextComponent'
 	type='(props: TextComponentProps) => JSX.Element'>
 	A simple text component.
@@ -242,6 +269,27 @@ Presents the Quill Chart Builder form as a modal.
 			<Expandable title='properties'>
 				<ResponseField name='label' type='string' required>
 					The text content of the element.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='CardComponent'
+	type='(props: CardComponentProps) => JSX.Element'>
+	A card component used as a dismissable container of pivot information.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='CardComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+				<ResponseField name='onClick' type='() => void'>
+					A callback that is fired when the card is clicked.
+				</ResponseField>
+				<ResponseField name='onDelete' type='() => void'>
+					A callback that is fired the card is deleted.
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -311,6 +359,120 @@ Presents the Quill Chart Builder form as a modal.
 	</Expandable>
 </ParamField>
 
+<ParamField
+	path='TableComponent'
+	type='(props: TableComponentProps) => JSX.Element'>
+	A table component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='TableComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+					The rows of the table are an array of objects.
+				</ResponseField>
+				<ResponseField
+					name='columns'
+					type='{ label: string; field: string; }[]'
+					required>
+					The columns of the table are an array of label, field pairs.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether the table is loading.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputRowContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for each row of inputs for the ChartBuilder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ChartBuilderInputRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputColumnContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked rows of inputs for the ChartBuilder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ChartBuilderInputColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderFormContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked sections of the chart builder form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ChartBuilderFormContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotRowContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for each row of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='PivotRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotColumnContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked rows of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='PivotColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ErrorMessageComponent'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A component that displays error messages.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ErrorMessageComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
 <ParamField path='destinationDashboard' type='string'>
 	The default dashboard to add the item to.
 </ParamField>
@@ -321,4 +483,12 @@ Presents the Quill Chart Builder form as a modal.
 
 <ParamField path='isHorizontalView' type='boolean' default={true}>
 	Whether the ChartBuilder is in horizontal view mode.
+</ParamField>
+
+<ParamField path='hideDeleteButton' type='boolean' default={false}>
+	Whether to hide the delete button.
+</ParamField>
+
+<ParamField path='hideSubmitButton' type='boolean' default={false}>
+	Whether to hide the submit button.
 </ParamField>

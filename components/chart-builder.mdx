@@ -200,6 +200,21 @@ and then add that dashboard item into one of their dashboards.
 </ParamField>
 
 <ParamField
+	path='SubHeaderComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A sub-header component describes a group of inputs.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='SubHeaderComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='label' type='() => void' required>
+					The label of the sub-header component.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
 	path='TextComponent'
 	type='(props: TextComponentProps) => JSX.Element'>
 	A simple text component.
@@ -398,7 +413,7 @@ and then add that dashboard item into one of their dashboards.
 <ParamField path='columns' type='Column[]'>
 	The columns of this query response.
 
-    <Accordion title="Click to see Field definition">
+    <Accordion title="Click to see Column definition">
     	```ts
     	interface Column {
     		label: string;
@@ -406,25 +421,6 @@ and then add that dashboard item into one of their dashboards.
     		name: string;
     		displayName: string;
     		fieldType: string;
-    		format: string;
-    	}
-    	```
-    </Accordion>
-
-</ParamField>
-
-<ParamField path='fields' type='Field[]'>
-	The fields on this query.
-
-    <Accordion title="Click to see Field definition">
-    	```ts
-    	interface Field {
-    		name: string;
-    		tableID: number;
-    		columnID: number;
-    		dataTypeID: number;
-    		dataTypeSize: number;
-    		dataTypeModifier: number;
     		format: string;
     	}
     	```
@@ -556,4 +552,24 @@ and then add that dashboard item into one of their dashboards.
 
 <ParamField path='organizationName' type='string'>
 	The name of the current organization.
+</ParamField>
+
+<ParamField path='hideDeleteButton' type='boolean'>
+	Whether to hide the delete button.
+</ParamField>
+
+<ParamField path='hideSubmitButton' type='boolean'>
+	Whether to hide the submit button.
+</ParamField>
+
+<ParamField path='hideDateRangeFilter' type='boolean'>
+	Whether to hide date range filters.
+</ParamField>
+
+<ParamField path='initialUniqueValues' type='boolean'>
+	Initial unique values for the pivot modal restrictions.
+</ParamField>
+
+<ParamField path='pivotRecommendationsEnabled' type='boolean'>
+	Whether the PivotModal's AI features are enabled.
 </ParamField>

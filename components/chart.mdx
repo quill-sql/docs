@@ -102,6 +102,18 @@ A simple component that displays the given data in one of many chart types.
 	Whether the date range filter should be hidden.
 </ParamField>
 
+<ParamField path='hideHorizontalCartesianGrid' type='boolean' default={false}>
+	Whether to hide the horizontal cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideVerticalCartesianGrid' type='boolean' default={true}>
+	Whether to hide the vertical cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideSubsequentXAxisTicks' type='boolean' default={false}>
+	Whether to hide the all but the first of the X-Axis ticks.
+</ParamField>
+
 <ParamField path='comparisonLineStyle' type="'solid' | 'dashed'">
 	Whether the comparison range shows as dashed for date comparison line charts
 	(as opposed to the default solid line).
@@ -150,6 +162,12 @@ A simple component that displays the given data in one of many chart types.
 
     </Expandable>
 
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Styles the top-level container of the Chart.
+
+	This can be useful for TailwindCSS-style classname strings.
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>
