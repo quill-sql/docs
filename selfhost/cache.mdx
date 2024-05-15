@@ -3,4 +3,50 @@ title: "Data Cache"
 description: "Load dashboards fast by saving frequently used queries"
 ---
 
-<Info>This guide is under construction, please check back later.</Info>
+Hey there! 👋 Speeding up your dashboards is easy with Quill self hosting. Bring your own cache and get setup in just a few lines of code.
+
+<CodeGroup>
+
+```js Node
+import { Quill } from "@quillsql/node";
+
+const quill = new Quill({
+	privateKey: process.env.QULL_PRIVATE_KEY,
+	databaseConnectionString: process.env.POSTGRES_READ,
+	databaseType: "postgresql",
+    // STEP 1: add a cache config to the quill instance
+    cache: {
+        username: process.env.REDIS_USERNAME,
+        password: process.env.REDIS_PASSWORD,
+        host: process.env.REDIS_HOST,
+        port: process.env.REDIS_PORT,
+        cacheType: "redis",
+    }.
+});
+
+// STEP 2: Use quill as you normally would in your API endpoints!
+```
+
+```python Python
+from quillsql import Quill
+
+quill = Quill(
+  private_key=os.environ.get("QUILL_PRIVATE_KEY"),
+  database_connection_string=os.environ.get("POSTGRES_READ"),
+  # STEP 1: Add a cache config to the quill instance.
+  cache={
+    "username": os.environ.get("REDIS_USERNAME"),
+    "password": os.environ.get("REDIS_PASSWORD"),
+    "host": os.environ.get("REDIS_HOST"),
+    "port": os.environ.get("REDIS_PORT"),
+    "cacheType": "redis",
+  }
+)
+
+# STEP 2: Use quill as you normally would in your API endpoints!
+```
+
+</CodeGroup>
+
+Then you're done! When Quill detects a valid cache configuration it will start
+using the cache provided to speed up frequently used queries.
