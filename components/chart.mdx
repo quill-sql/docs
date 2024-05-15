@@ -60,7 +60,7 @@ A simple component that displays the given data in one of many chart types.
     render this chart, and then it will render the dashboard item that it
     receives from the server.
 
-	See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).
+    See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).
 
     <Info>A `chartId` must be passed if `config` is not present.</Info>
 
@@ -114,7 +114,17 @@ A simple component that displays the given data in one of many chart types.
 	Whether to hide the all but the first of the X-Axis ticks.
 </ParamField>
 
-<ParamField path='comparisonLineStyle' type="'solid' | 'dashed'">
+<ParamField
+	path='cartesianGridLineStyle'
+	type="'solid' | 'dashed'"
+	default={"solid"}>
+	Whether the cartesian grid lines show as dashed or solid.
+</ParamField>
+
+<ParamField
+	path='comparisonLineStyle'
+	type="'solid' | 'dashed'"
+	default={"solid"}>
 	Whether the comparison range shows as dashed for date comparison line charts
 	(as opposed to the default solid line).
 </ParamField>
@@ -167,7 +177,8 @@ A simple component that displays the given data in one of many chart types.
 <ParamField path='className' type='string'>
 	Styles the top-level container of the Chart.
 
-	This can be useful for TailwindCSS-style classname strings.
+    This can be useful for TailwindCSS-style classname strings.
+
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>

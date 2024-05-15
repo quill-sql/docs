@@ -411,6 +411,9 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 <ResponseField name='comparisonAggregation' type='string'>
 	The formatted comparison range aggregation value, if any.
 </ResponseField>
+<ResponseField name='aggregationPercentChange' type='string'>
+	The percent change in the aggragations, if any.
+</ResponseField>
 <ResponseField name='xAxisLabel' type='string' required>
 	The label of the xAxis.
 </ResponseField>
@@ -442,6 +445,6 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	The rows of data returned from this item's query over the comparison date
 	range as opposed to the primary date range.
 </ResponseField>
-<ResponseField name='filtersApplied' type='{ [key: string]: any }[]'>
+<ResponseField name='filtersApplied' type='{ [key: string]: any }'>
 	A map of filters that have been applied to this query.
 </ResponseField>
