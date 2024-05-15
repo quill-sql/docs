@@ -230,6 +230,27 @@ and then add that dashboard item into one of their dashboards.
 </ParamField>
 
 <ParamField
+	path='CardComponent'
+	type='(props: CardComponentProps) => JSX.Element'>
+	A card component used as a dismissable container of pivot information.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='CardComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+				<ResponseField name='onClick' type='() => void'>
+					A callback that is fired when the card is clicked.
+				</ResponseField>
+				<ResponseField name='onDelete' type='() => void'>
+					A callback that is fired the card is deleted.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
 	path='ModalComponent'
 	type='(props: ModalComponentProps) => JSX.Element'>
 	A modal component.
