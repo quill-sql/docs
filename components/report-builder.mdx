@@ -45,20 +45,6 @@ as a CSV.
 	The default table name to show when first loading the ReportBuilder.
 </ParamField>
 
-<ParamField
-	path='onSubmitCreateReport'
-	type='(item: DashboardItem) => void'
-	required>
-	A callback function that will trigger when a new chart is saved.
-</ParamField>
-
-<ParamField
-	path='onSubmitEditReport'
-	type='(item: DashboardItem) => void'
-	required>
-	A callback function that will trigger when a chart is edited.
-</ParamField>
-
 <ParamField path='destinationDashboard' type='string'>
 	The dashboard to add items to once they have been created.
 </ParamField>
@@ -749,4 +735,18 @@ as a CSV.
 
 <ParamField path='reportId' type='string'>
 	A report id that the Report Builder will query from and modify.
+</ParamField>
+
+<ParamField
+	path='onSubmitCreateReport'
+	type='(item: DashboardItem) => void'
+	required>
+	A callback function that will trigger when a new chart is saved.
+</ParamField>
+
+<ParamField
+	path='onSubmitEditReport'
+	type='(item: DashboardItem) => void'
+	required>
+	A callback function that will trigger when a chart is edited.
 </ParamField>
