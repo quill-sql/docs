@@ -46,10 +46,17 @@ as a CSV.
 </ParamField>
 
 <ParamField
-	path='onSubmitChartBuilder'
+	path='onSubmitCreateReport'
 	type='(item: DashboardItem) => void'
 	required>
-	A callback fired when the chart builder flow has been completed.
+	A callback function that will trigger when a new chart is saved.
+</ParamField>
+
+<ParamField
+	path='onSubmitEditReport'
+	type='(item: DashboardItem) => void'
+	required>
+	A callback function that will trigger when a chart is edited.
 </ParamField>
 
 <ParamField path='destinationDashboard' type='string'>
@@ -740,7 +747,6 @@ as a CSV.
 	Custom styling properties for the ReportBuilder's top-level container.
 </ParamField>
 
-<ParamField path='initialChartId' type='string'>
-	The default chartId for the ReportBuilder, this will override
-	initialTableName.
+<ParamField path='reportId' type='string'>
+	A report id that the Report Builder will query from and modify.
 </ParamField>
