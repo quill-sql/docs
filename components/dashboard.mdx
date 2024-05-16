@@ -1,49 +1,32 @@
 ---
 title: "Dashboard"
 description: "Ship dashboards without building from scratch"
+mode: "wide"
 ---
 
-<Note>
-	To see an example of a \<Dashboard\> component visit the [examples
-	page](/components/examples).
-</Note>
+<iframe
+	src='https://5wp4n7-5173.csb.app/dashboard'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 500,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, Dashboard } from "@quillsql/react";
 
 function App() {
 	return (
-		<QuillProvider
-			publicKey={process.env.QUILL_API_KEY}
-			organizationId={user.organizationId}>
-			<Dashboard
-				name='spend_dashboard'
-				containerStyle={{ width: "100%", height: 400 }}
-				onClick={(item) => console.log(item)}
-			/>
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Dashboard name='Transactions' />
 		</QuillProvider>
 	);
 }
 ```
-
-<RequestExample>
-	```jsx Simple Example
-	<Dashboard name="saved_reports" />
-	```
-
-    ```jsx With custom components
-    <Dashboard
-    	name="saved_reports"
-    	SelectComponent={MySelect}
-    	MetricComponent={MyMetric}
-    	ChartComponent={MyChart}
-    	TableComponent={MyTable}
-    	onClick={(item) => router.push(`/detail/${item.id}`)}
-    	containerStyle={{ backgroundColor: 'white', padding: '10px' }}
-    />
-    ```
-
-</RequestExample>
 
 Dynamically displays a filterable grid of charts, metrics, and tables with live
 data from your database. Once implemented, Quill lets you perform zero-downtime,
@@ -58,6 +41,54 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	dashboard](https://docs.quillsql.com/portal/quickstart) in the Quill portal
 	to get started.
 </Tip>
+
+## Examples
+
+<Tabs>
+  <Tab title="Ant Design">
+  [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/ant'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 500,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Ant Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+  </Tab>
+  <Tab title="Material Design">
+  [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/material'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 500,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Material Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+  <Tab title="Shadcn UI">
+  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/shadcn'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 500,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+</Tabs>
 
 ## Props
 

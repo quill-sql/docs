@@ -1,39 +1,32 @@
 ---
 title: "SQL Editor"
 description: "Let your users create their own charts with the power of SQL."
+mode: "wide"
 ---
 
-<Note>
-	To see an example of a \<SQLEditor\> component visit the [examples
-	page](/components/examples).
-</Note>
+<iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, SQLEditor } from "@quillsql/react";
 
 function App() {
 	return (
-		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
 			<SQLEditor />
 		</QuillProvider>
 	);
 }
 ```
-
-<RequestExample>
-	```jsx Simple Example
-	<SQLEditor />
-	```
-
-    ```jsx With custom components
-    <SQLEditor
-    	defaultQuery="SELECT SUM(amount) FROM TRANSACTIONS"
-    	ButtonComponen={MyButton}
-    	SecondaryButtonComponen={MySecondaryButton}
-    />
-    ```
-
-</RequestExample>
 
 Allows your users to build and write custom SQL queries and then add those
 queries into their dashboard as a metric, chart, or table.
@@ -41,6 +34,54 @@ queries into their dashboard as a metric, chart, or table.
 <Info>
 	Make sure `QuillProvider` is a parent of the `SQLEditor` component.
 </Info>
+
+## Examples
+
+<Tabs>
+  <Tab title="Ant Design">
+  [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/ant'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Ant Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+  </Tab>
+  <Tab title="Material Design">
+  [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/material'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Material Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+  <Tab title="Shadcn UI">
+  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/shadcn'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+</Tabs>
 
 ## Props
 
@@ -515,7 +556,8 @@ queries into their dashboard as a metric, chart, or table.
 <ParamField path='className' type='string'>
 	Styles the top-level container of the SQLEditor.
 
-	This can be useful for TailwindCSS-style classname strings.
+    This can be useful for TailwindCSS-style classname strings.
+
 </ParamField>
 
 <ParamField path='containerStyle' type='CSSProperties'>

@@ -1,39 +1,30 @@
 ---
 title: "Report Builder"
 description: "Let your users create their own charts, even if they don't know SQL."
+mode: "wide"
 ---
 
-<Note>
-	To see an example of a \<ReportBuilder\> component visit the [examples
-	page](/components/examples).
-</Note>
+<iframe
+	src='https://5wp4n7-5173.csb.app/report-builder'
+	style={{
+		width: "100%",
+		height: 600,
+	}}
+	title='Report Builder'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
 	return (
-		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
-			<ReportBuilder initialTableName='transactions' />
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<ReportBuilder />
 		</QuillProvider>
 	);
 }
 ```
-
-<RequestExample>
-	```jsx Simple Example
-	<ReportBuilder initialTableName='transactions' />
-	```
-
-    ```jsx With custom components
-    <ReportBuilder
-        initialTableName='transactions'
-    	ButtonComponen={MyButton}
-    	SecondaryButtonComponen={MySecondaryButton}
-    />
-    ```
-
-</RequestExample>
 
 Allows non-technical users to build SQL queries using either UI or AI and
 then edit them on the fly. Once users have constructed a query they like,
@@ -43,6 +34,48 @@ as a CSV.
 <Info>
 	Make sure `QuillProvider` is a parent of the `ReportBuilder` component.
 </Info>
+
+## Examples
+
+<Tabs>
+  <Tab title="Ant Design">
+  [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/report-builder/ant'
+	style={{
+		width: "100%",
+		height: 800,
+	}}
+	title='[Ant Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+  </Tab>
+  <Tab title="Material Design">
+  [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/report-builder/material'
+	style={{
+		width: "100%",
+		height: 800,
+	}}
+	title='[Material Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+  <Tab title="Shadcn UI">
+  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/report-builder/shadcn'
+	style={{
+		width: "100%",
+		height: 800,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  </Tab>
+</Tabs>
 
 ## Props
 
