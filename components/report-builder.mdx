@@ -77,6 +77,58 @@ as a CSV.
   </Tab>
 </Tabs>
 
+### Prefetch data from a particular table
+
+You can pass an `initialTableName` to have the report builder automatically load
+data from a particular table in your schema.
+
+```tsx App.tsx
+import { QuillProvider, ReportBuilder } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<ReportBuilder initialTableName='transactions' />
+		</QuillProvider>
+	);
+}
+```
+
+### Edit an existing report
+
+You can pass a `reportId` to have the report builder load the metadata for a
+pre-existing dashboard item. This might be useful if you want to allow your end
+users to edit the reports they created.
+
+```tsx App.tsx
+import { QuillProvider, ReportBuilder } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<ReportBuilder reportId='664283fb4db8ad000bfe54d7' />
+		</QuillProvider>
+	);
+}
+```
+
+### Query all views in your Quill schema
+
+By default, the Quill Report Builder will query all tables in your schema and
+new reports will be created upon completion.
+
+```tsx App.tsx
+import { QuillProvider, ReportBuilder } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<ReportBuilder />
+		</QuillProvider>
+	);
+}
+```
+
 ## Props
 
 <ParamField path='initialTableName' type='string'>
