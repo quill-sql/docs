@@ -105,14 +105,14 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<Expandable title='properties'>
 				<ResponseField name='dashboardItem' type='DashboardItem' required>
 					The current dashboard item.
-				</ResponseField>
-				<ResponseField name='onClick' type='(item: DashboardItem) => void'>
-					A callback that should be fired when the user clicks on this
-					dashboardItem.
 					<Info>
 						See the API Reference for a `DashboardItem`
 						[here](/components/dashboard#dashboarditem).
 					</Info>
+				</ResponseField>
+				<ResponseField name='onClick' type='(item: DashboardItem) => void'>
+					A callback that should be fired when the user clicks on this
+					dashboardItem.
 				</ResponseField>
 				<ResponseField name='isLoading' type='boolean'>
 					Whether this dashboard item is loading.
@@ -139,11 +139,11 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 		<Expandable title="properties">
 			<ResponseField name="dashboardItem" type="DashboardItem" required>
 				The current dashboard item.
-			</ResponseField>
-			<ResponseField name="onClick" type="(item: DashboardItem) => void">
-				A callback that should be fired when the user clicks on this dashboardItem.
 
     			<Info>See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
+    		</ResponseField>
+    		<ResponseField name="onClick" type="(item: DashboardItem) => void">
+    			A callback that should be fired when the user clicks on this dashboardItem.
     		</ResponseField>
     		<ResponseField name="isLoading" type="boolean">
     			Whether this dashboard item is loading.
@@ -172,14 +172,13 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 			<Expandable title='properties'>
 				<ResponseField name='dashboardItem' type='DashboardItem' required>
 					The current dashboard item.
+    				<Info> See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
 				</ResponseField>
 				<ResponseField
 					name='onClick'
 					type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
-
-    				<Info> See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).</Info>
     			</ResponseField>
     			<ResponseField name='isLoading' type='boolean'>
     				Whether this dashboard item is loading.
