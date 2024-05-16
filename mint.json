@@ -47,7 +47,7 @@
 			"pages": ["components/start", "components/themes", "components/examples"]
 		},
 		{
-			"group": "API Reference",
+			"group": "Components",
 			"pages": [
 				"components/quill-provider",
 				"components/dashboard",
@@ -56,9 +56,12 @@
 				"components/sql-editor",
 				"components/chart-editor",
 				"components/chart-builder",
-				"components/report-builder",
-				"components/use-quill"
+				"components/report-builder"
 			]
+		},
+		{
+			"group": "Hooks",
+			"pages": ["components/use-quill"]
 		},
 		{
 			"group": "Self-Hosting",

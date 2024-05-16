@@ -3,18 +3,24 @@ title: "Table"
 description: "A simple table component that displays useful information"
 ---
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/table'
+	style={{
+		width: "100%",
+		height: 320,
+	}}
+	title='Table Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```tsx App.tsx
 import { QuillProvider, Table } from "@quillsql/react";
 
-function App() {
-	return (
-		<QuillProvider
-			publicKey={process.env.QUILL_API_KEY}
-			organizationId={user.organizationId}>
-			<Table chartId='6eb19044196e' />
-		</QuillProvider>
-	);
-}
+const MyTable = () => (
+	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+		<Table chartId='6644088e6e2470000cbdb109' />
+	</QuillProvider>
+);
 ```
 
 <RequestExample>
@@ -105,7 +111,8 @@ A simple component that displays the given data as a table.
 <ParamField path='className' type='string'>
 	Styles the top-level container of the Table.
 
-	This can be useful for TailwindCSS-style classname strings.
+    This can be useful for TailwindCSS-style classname strings.
+
 </ParamField>
 
 <ParamField path='containerStyle' type='React.CSSProperties'>

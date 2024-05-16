@@ -3,23 +3,25 @@ title: "Chart"
 description: "A simple component that displays useful information"
 ---
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+		marginLeft: -20,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```tsx App.tsx
 import { QuillProvider, Chart } from "@quillsql/react";
 
-function App() {
-	return (
-		<QuillProvider
-			organizationId={organizationId}
-			publicKey={API_KEY}
-			theme={THEME}>
-			<Chart
-				chartId='2348yfge987fq348fg'
-				containerStyle={{ width: "100%", height: 400 }}
-				colors={["#6269E9", "#E14F62"]}
-			/>
-		</QuillProvider>
-	);
-}
+const MyChart = () => (
+	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+		<Chart chartId='664283fb4db8ad000bfe54d7' />
+	</QuillProvider>
+);
 ```
 
 <RequestExample>
@@ -124,8 +126,8 @@ A simple component that displays the given data in one of many chart types.
 <ParamField path='mapColorsToFields' type='(dashboardItem: DashboardItem, theme: QuillTheme) => ColorMapType'>
     An optional function that takes a dashboard item and theme and returns a
     map of keys used in that dashboard item to the colors they should use.
-	
-	The color values support RGB hexcodes and CSS color literals.
+
+    The color values support RGB hexcodes and CSS color literals.
 
     ```js
     function mapColorsToFields(item, theme): ColorMapType {
@@ -176,3 +178,4 @@ A simple component that displays the given data in one of many chart types.
 <ParamField path='containerStyle' type='React.CSSProperties'>
 	The CSS styles that wrap the chart.
 </ParamField>
+````

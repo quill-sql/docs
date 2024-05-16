@@ -3,6 +3,11 @@ title: "Dashboard"
 description: "Ship dashboards without building from scratch"
 ---
 
+<Note>
+	To see an example of a \<Dashboard\> component visit the [examples
+	page](/components/examples).
+</Note>
+
 ```tsx App.tsx
 import { QuillProvider, Dashboard } from "@quillsql/react";
 
@@ -70,9 +75,7 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 				<ResponseField name='dashboardItem' type='DashboardItem' required>
 					The current dashboard item.
 				</ResponseField>
-				<ResponseField
-					name='onClick'
-					type='(item: DashboardItem) => void'>
+				<ResponseField name='onClick' type='(item: DashboardItem) => void'>
 					A callback that should be fired when the user clicks on this
 					dashboardItem.
 					<Info>
@@ -261,30 +264,30 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	path='DashboardSectionContainerComponent'
 	type='(props: DashboardSectionContainerComponentProps) => JSX.Element'>
 	A component that wraps all dashboard sections.
-    <Expandable defaultOpen={false} title='props'>
-    	<ParamField path='DashboardSectionContainerComponentProps' type='object'>
-    		<Expandable title='properties'>
-    			<ResponseField name='children' type='ReactNode' required>
-    				The children of the dashboard section.
-    			</ResponseField>
-    		</Expandable>
-    	</ParamField>
-    </Expandable>
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DashboardSectionContainerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the dashboard section.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
 </ParamField>
 
 <ParamField
 	path='FilterContainerComponent'
 	type='(props: FilterContainerComponentProps) => JSX.Element'>
 	A component that wraps the row of dashboard filters.
-    <Expandable defaultOpen={false} title='props'>
-    	<ParamField path='FilterContainerComponentProps' type='object'>
-    		<Expandable title='properties'>
-    			<ResponseField name='children' type='ReactNode' required>
-    				The children of the filter container.
-    			</ResponseField>
-    		</Expandable>
-    	</ParamField>
-    </Expandable>
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='FilterContainerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the filter container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
 </ParamField>
 
 <ParamField path='EmptyDashboardComponent' type='() => JSX.Element'>
@@ -343,8 +346,9 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 <ParamField path='containerStyle' type='React.CSSProperties'>
 	The CSS styles that wrap the dashboard container.
 
-	This container is the parent of all the filtering buttons as well as any
-	dashboard sections.
+    This container is the parent of all the filtering buttons as well as any
+    dashboard sections.
+
 </ParamField>
 
 <ParamField path='chartContainerStyle' type='React.CSSProperties'>
