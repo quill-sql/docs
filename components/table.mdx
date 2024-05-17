@@ -23,28 +23,6 @@ const MyTable = () => (
 );
 ```
 
-<RequestExample>
-	```jsx With chartId
-	<Table chartId="6644088e6e2470000cbdb109" />
-	```
-
-    ```jsx With data
-    <Table
-    	rows={[
-    		{ x: 1, y: 1, z: 0 },
-    		{ x: 2, y: 2, z: 0 },
-    		{ x: 3, y: 3, z: 0 },
-    		{ x: 4, y: 4, z: 0 }
-    	]}
-    	columns={[
-    		{ label: "My X-Axis", field: "x" },
-    		{ label: "My Y-Axis", field: "y" }
-    	]}
-    />
-    ```
-
-</RequestExample>
-
 A simple component that displays the given data as a table.
 
 <Info>Make sure `QuillProvider` is a parent of the `Table` component.</Info>
@@ -90,6 +68,67 @@ A simple component that displays the given data as a table.
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
   </Tab>
 </Tabs>
+
+### Automatically fetch data by id
+
+If you know the id of the table you would like to display, you can pass in the chartId to the Table component and it will load and display the data for that table.
+
+```jsx
+import { QuillProvider, Table } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Table chartId='664283fb4db8ad000bfe54d7' />
+		</QuillProvider>
+	);
+}
+```
+
+### Pass data directly into the table
+
+Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in that data directly to the Table component and it will display that data without doing any async fetching.
+
+<CodeGroup>
+
+```jsx Using useQuill
+import { QuillProvider, Table } from "@quillsql/react";
+import { MY_TABLE_ID } from "./constants";
+
+function App() {
+	const report = useQuill(MY_TABLE_ID);
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Table rows={report.rows} columns={report.columns} />
+		</QuillProvider>
+	);
+}
+```
+
+```jsx Using raw data
+import { QuillProvider, Table } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Table
+				rows={[
+					{ x: 1, y: 1, z: 0 },
+					{ x: 2, y: 2, z: 0 },
+					{ x: 3, y: 3, z: 0 },
+					{ x: 4, y: 4, z: 0 },
+				]}
+				columns={[
+					{ label: "My X-Axis", field: "x" },
+					{ label: "My Y-Axis", field: "y" },
+				]}
+			/>
+		</QuillProvider>
+	);
+}
+```
+
+</CodeGroup>
 
 ## Props
 

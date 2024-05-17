@@ -24,17 +24,6 @@ const MyChart = () => (
 );
 ```
 
-<RequestExample>
-	```jsx With chartId
-	<Chart chartId="664283fb4db8ad000bfe54d7" />
-	```
-
-    ```jsx With dashboardItem
-    <Chart config={dashboardItem} />
-    ```
-
-</RequestExample>
-
 A simple component that displays the given data in one of many chart types.
 
 <Info>Make sure `QuillProvider` is a parent of the `Chart` component.</Info>
@@ -115,6 +104,39 @@ A simple component that displays the given data in one of many chart types.
 			sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 	</Tab>
 </Tabs>
+
+### Automatically fetch data by id
+
+If you know the id of the chart you would like to display, you can pass in the chartId to the Chart component and it will load and display the data for that chart.
+
+```jsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Chart chartId='664283fb4db8ad000bfe54d7' />
+		</QuillProvider>
+	);
+}
+```
+
+### Pass data directly into the chart
+
+Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in a `DashboardItem` directly to the Chart component and it will display that data without async fetching.
+
+```jsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+function App() {
+	const dashboardItem = { ... };
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Chart config={dashboardItem} />
+		</QuillProvider>
+	);
+}
+```
 
 ## Props
 

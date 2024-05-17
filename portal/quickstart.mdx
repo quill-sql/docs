@@ -1,48 +1,33 @@
 ---
 title: "Quickstart"
-description: "Build your first dashboard in less than a minute"
-mode: "wide"
+description: "Get up and running with Quill in less than a minute"
 ---
 
-#### 1. Go to the Dashboards tab and select the admin organization
+### 1. Connect your database
 
-<img
-  src="/images/adminorg.svg"
-  style={{
-    boxShadow: "0px 1px 4px 0px rgb(63,82,149, 0.09)",
-    marginLeft: 4,
-    marginTop: 25,
-    borderRadius: 12,
-    borderWidth: 0.5,
-    borderColor: "#E7E7E7",
-  }}
-/>
+Go to [app.quill.co/onboard](https://app.quill.co/onboard) using your favorite browser and enter a read-only database connection string for your database.
 
-#### 2. Use the Report Builder or SQL Editor to run a query
+<Tip>
+	To learn how to setup a read-only user for your database type, check out our
+	guide [here](/datasources).
+</Tip>
 
-<img
-  src="/images/reportbuilder.png"
-  style={{
-    boxShadow: "0px 1px 4px 0px rgb(63,82,149, 0.09)",
-    marginLeft: 4,
-    marginTop: 25,
-    borderRadius: 12,
-    borderWidth: 0.5,
-    borderColor: "#E7E7E7",
-  }}
-/>
+<img src='/images/onboard_1.png' />
 
-#### 3. Click “Add to dashboard” and configure chart
+### 2. Connect your schema
 
-<img
-  src="/images/dashboardbuilder.png"
-  style={{
-    boxShadow: "0px 1px 4px 0px rgb(63,82,149, 0.09)",
-    marginLeft: 4,
-    marginTop: 25,
-    borderRadius: 12,
-    borderWidth: 0.5,
-    borderColor: "#E7E7E7",
-    width: "50%",
-  }}
-/>
+The Quill platform provides powerful filtering and reporting tools to help you get the insights you want, faster. Let us know which table to use for your organizations and Quill will use this information to partition data by organization.
+
+<img src='/images/onboard_2.png' />
+
+### 3. Add SQL Views
+
+Create a cleaned schema that makes it easier to write queries and reports. The views you create here will be used to create charts and tables later on. Don't worry, you can always create and edit these views later.
+
+<img src='/images/onboard_3.png' />
+
+<Tip>
+	Once you have connected your database, you're ready to create your first
+	dashboard! Check out our guide on how to create your first dashboard
+	[here](/portal/dashboard).
+</Tip>

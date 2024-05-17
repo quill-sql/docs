@@ -40,7 +40,12 @@
 		},
 		{
 			"group": "Admin Portal",
-			"pages": ["portal/quickstart"]
+			"pages": [
+				"portal/quickstart",
+				"portal/dashboard",
+				"portal/chart",
+				"portal/view"
+			]
 		},
 		{
 			"group": "Getting Started",
