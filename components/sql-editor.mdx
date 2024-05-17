@@ -51,6 +51,27 @@ queries into their dashboard as a metric, chart, or table.
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+import { AntTable } from "./ui/ant/Table";
+import { AntSelectComponent } from "./ui/ant/SelectComponent";
+import { AntButton, AntSecondaryButton } from "./ui/ant/Button";
+import { AntTextInput } from "./ui/ant/Input";
+
+export function AntSQLEditor() {
+	return (
+		<SQLEditor
+			ButtonComponent={AntButton}
+			SecondaryButtonComponent={AntSecondaryButton}
+			TextInputComponent={AntTextInput}
+			SelectComponent={AntSelectComponent}
+			TableComponent={AntTable}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Material Design">
   [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
@@ -65,6 +86,28 @@ queries into their dashboard as a metric, chart, or table.
 	title='[Material Design] Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+import { MaterialTable } from "./ui/material/Table";
+import { MaterialSelect } from "./ui/material/Select";
+import { MaterialButton, MaterialSecondaryButton } from "./ui/material/Button";
+import { MaterialTextInput } from "./ui/material/Input";
+
+export function MaterialSQLEditor() {
+	return (
+		<SQLEditor
+			ButtonComponent={MaterialButton}
+			SecondaryButtonComponent={MaterialSecondaryButton}
+			TextInputComponent={MaterialTextInput}
+			SelectComponent={MaterialSelect}
+			TableComponent={MaterialTable}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Shadcn UI">
   [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
@@ -79,6 +122,15 @@ queries into their dashboard as a metric, chart, or table.
 	title='Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+export function ShadcnSQLEditor() {
+	return <SQLEditor />;
+}
+```
+
   </Tab>
 </Tabs>
 

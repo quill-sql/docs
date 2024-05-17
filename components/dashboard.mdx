@@ -37,8 +37,8 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 
 <Tip>
 	Don't have a dashboard name yet? Learn how to [create a
-	dashboard](https://docs.quillsql.com/portal/chart) in the Quill portal
-	to get started.
+	dashboard](https://docs.quillsql.com/portal/chart) in the Quill portal to get
+	started.
 </Tip>
 
 ## Examples
@@ -58,6 +58,31 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+import { AntDateRangePickerComponent } from "./ui/ant/DateRangePickerComponent";
+import { AntTableComponent } from "./ui/ant/TableComponent";
+import { AntSelectComponent } from "./ui/ant/SelectComponent";
+import { AntChartComponent } from "./ui/ant/ChartComponent";
+import { AntMetricComponent } from "./ui/ant/MetricComponent";
+
+export function AntDashboard() {
+	return (
+		<Dashboard
+			name='Transactions'
+			containerStyle={dashboardStyles}
+			DateRangePickerComponent={AntDateRangePickerComponent}
+			SelectComponent={AntSelectComponent}
+			TableComponent={AntTableComponent}
+			MetricComponent={AntMetricComponent}
+			ChartComponent={AntChartComponent}
+			FilterContainerComponent={AntFilterContainerComponent}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Material Design">
   [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
@@ -72,6 +97,33 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	title='[Material Design] Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+import { MaterialDateRangePickerComponent } from "./ui/material/DateRangePickerComponent";
+import { MaterialTableComponent } from "./ui/material/TableComponent";
+import { MaterialSelectComponent } from "./ui/material/SelectComponent";
+import { MaterialChartComponent } from "./ui/material/ChartComponent";
+import { MaterialMetricComponent } from "./ui/material/MetricComponent";
+import { MaterialFilterContainerComponent } from "./ui/material/Layout";
+
+export function MaterialDashboard() {
+	return (
+		<Dashboard
+			name='Transactions'
+			containerStyle={dashboardStyles}
+			DateRangePickerComponent={MaterialDateRangePickerComponent}
+			SelectComponent={MaterialSelectComponent}
+			TableComponent={MaterialTableComponent}
+			MetricComponent={MaterialMetricComponent}
+			ChartComponent={MaterialChartComponent}
+			FilterContainerComponent={MaterialFilterContainerComponent}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Shadcn UI">
   [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
@@ -86,6 +138,15 @@ zero-code updates to your dashboard on an org-level as well as company-wide.
 	title='Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+export function ShadcnDashboard() {
+	return <Dashboard name='Transactions' containerStyle={dashboardStyles} />;
+}
+```
+
   </Tab>
 </Tabs>
 

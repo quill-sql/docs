@@ -50,6 +50,65 @@ Presents the Quill Chart Builder form as a modal.
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
+```tsx
+import { ChartEditor } from "@quillsql/react";
+
+import {
+	AntButton,
+	AntDeleteButton,
+	AntSecondaryButton,
+} from "./ui/ant/Button";
+import { AntCard } from "./ui/ant/Card";
+import { AntTextInput } from "./ui/ant/Input";
+import {
+	AntChartBuilderFormContainer,
+	AntChartBuilderInputColumnContainer,
+	AntChartBuilderInputRowContainer,
+	AntErrorMessageComponent,
+	AntPivotColumnContainer,
+	AntPivotRowContainer,
+} from "./ui/ant/Layout";
+import { AntModal } from "./ui/ant/Modal";
+import { AntPopover } from "./ui/ant/Popover";
+import { AntSelect } from "./ui/ant/Select";
+import { AntTable } from "./ui/ant/Table";
+import {
+	AntLabel,
+	AntHeader,
+	AntText,
+	AntSubHeader,
+} from "./ui/ant/Typography";
+
+export function AntChartEditor() {
+	return (
+		<ChartEditor
+			isOpen={true}
+			setIsOpen={() => null}
+			chartId={"664283fb4db8ad000bfe54d7"}
+			TableComponent={AntTable}
+			PopoverComponent={AntPopover}
+			CardComponent={AntCard}
+			ButtonComponent={AntButton}
+			ModalComponent={AntModal}
+			SecondaryButtonComponent={AntSecondaryButton}
+			TextInputComponent={AntTextInput}
+			SelectComponent={AntSelect}
+			LabelComponent={AntLabel}
+			HeaderComponent={AntHeader}
+			SubHeaderComponent={AntSubHeader}
+			TextComponent={AntText}
+			DeleteButtonComponent={AntDeleteButton}
+			ErrorMessageComponent={AntErrorMessageComponent}
+			ChartBuilderInputRowContainer={AntChartBuilderInputRowContainer}
+			ChartBuilderInputColumnContainer={AntChartBuilderInputColumnContainer}
+			PivotRowContainer={AntPivotRowContainer}
+			PivotColumnContainer={AntPivotColumnContainer}
+			ChartBuilderFormContainer={AntChartBuilderFormContainer}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Material Design">
   [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
@@ -62,6 +121,68 @@ Presents the Quill Chart Builder form as a modal.
 	title='[Material Design] Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { ChartEditor } from "@quillsql/react";
+
+import {
+	MaterialButton,
+	MaterialDeleteButton,
+	MaterialSecondaryButton,
+} from "./ui/material/Button";
+import { MaterialCard } from "./ui/material/Card";
+import { MaterialTextInput } from "./ui/material/Input";
+import {
+	MaterialChartBuilderFormContainer,
+	MaterialChartBuilderInputColumnContainer,
+	MaterialChartBuilderInputRowContainer,
+	MaterialErrorMessageComponent,
+	MaterialPivotColumnContainer,
+	MaterialPivotRowContainer,
+} from "./ui/material/Layout";
+import { MaterialModal } from "./ui/material/Modal";
+import { MaterialPopover } from "./ui/material/Popover";
+import { MaterialSelect } from "./ui/material/Select";
+import { MaterialTable } from "./ui/material/Table";
+import {
+	MaterialLabel,
+	MaterialHeader,
+	MaterialText,
+	MaterialSubHeader,
+} from "./ui/material/Typography";
+
+export function MaterialChartEditor() {
+	return (
+		<ChartEditor
+			isOpen={true}
+			setIsOpen={() => null}
+			chartId={"664283fb4db8ad000bfe54d7"}
+			TableComponent={MaterialTable}
+			PopoverComponent={MaterialPopover}
+			CardComponent={MaterialCard}
+			ButtonComponent={MaterialButton}
+			ModalComponent={MaterialModal}
+			SecondaryButtonComponent={MaterialSecondaryButton}
+			TextInputComponent={MaterialTextInput}
+			SelectComponent={MaterialSelect}
+			LabelComponent={MaterialLabel}
+			HeaderComponent={MaterialHeader}
+			SubHeaderComponent={MaterialSubHeader}
+			TextComponent={MaterialText}
+			DeleteButtonComponent={MaterialDeleteButton}
+			ErrorMessageComponent={MaterialErrorMessageComponent}
+			ChartBuilderInputRowContainer={MaterialChartBuilderInputRowContainer}
+			ChartBuilderInputColumnContainer={
+				MaterialChartBuilderInputColumnContainer
+			}
+			PivotRowContainer={MaterialPivotRowContainer}
+			PivotColumnContainer={MaterialPivotColumnContainer}
+			ChartBuilderFormContainer={MaterialChartBuilderFormContainer}
+		/>
+	);
+}
+```
+
   </Tab>
   <Tab title="Shadcn UI">
   [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
@@ -74,6 +195,21 @@ Presents the Quill Chart Builder form as a modal.
 	title='Quill React Components'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
 	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { ChartEditor } from "@quillsql/react";
+
+export function ShadcnChartEditor() {
+	return (
+		<ChartEditor
+			isOpen={true}
+			setIsOpen={() => null}
+			chartId={"664283fb4db8ad000bfe54d7"}
+		/>
+	);
+}
+```
+
   </Tab>
 </Tabs>
 

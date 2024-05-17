@@ -1,0 +1,38 @@
+---
+title: "useFormat"
+description: "A simple way to format data from Quill"
+---
+
+```tsx App.tsx
+import { format } from "@quillsql/react";
+
+function formatExample() {
+	format(123.45, "dollar_cents"); // "$123.45"
+	format(123, "dollar_cents"); // "$123.00"
+}
+```
+
+<ParamField path='value' type='string' required>
+	The value of the thing being formatted.
+</ParamField>
+
+<ParamField
+	path='format'
+	type="'percent' |
+	'dollar_amount' | 
+    'dollar_cents' | 
+    'whole_number' | 
+    'one_decimal_place' | 
+    'two_decimal_places' | 
+    'string' | 
+    'yyyy' | 
+    'MMM_yyyy' | 
+    'MMM_dd_yyyy' | 
+    'MMM_dd' | 
+    'hh_ap_pm' | 
+    'MMM_dd-MMM_dd' | 
+    'MMM_dd_hh:mm_ap_pm' | 
+    'wo, yyyy'"
+	required>
+	The Quill format type of how you want to format the value.
+</ParamField>
