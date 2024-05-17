@@ -3,24 +3,134 @@ title: "Quickstart"
 description: "Get up and running with Quill in less than a minute"
 ---
 
-### 1. Connect your database
+### 1. Create a read-only user
 
-Go to [app.quill.co/onboard](https://app.quill.co/onboard) using your favorite browser and enter a read-only database connection string for your database.
+<Tabs>
+	<Tab title='PostgreSQL'>
+    	To create a read-only user in PostgreSQL, do the following:
+    	<Steps>
+    		<Step title="Create a new user">
+    		```SQL PostgreSQL
+			-- Replace 'password' with a strong password.
+    		CREATE USER quill_read_only WITH PASSWORD 'password';
+    		```
+    		</Step>
+    		<Step title="Grant CONNECT privileges">
+    		```SQL PostgreSQL
+			-- Allows the user to connect to the database.
+    		GRANT CONNECT ON DATABASE your_database TO quill_read_only;
+    		```
+    		</Step>
+    		<Step title="Grant USAGE on the schema">
+    		```SQL PostgreSQL
+			-- Allows the user to access the objects within the schema.
+    		GRANT USAGE ON SCHEMA your_schema TO quill_read_only;
+    		```
+    		</Step>
+    		<Step title="Grant SELECT privileges on the schema">
+    		```SQL PostgreSQL
+			-- Allows the user to read data from the tables.
+    		GRANT SELECT ON ALL TABLES IN SCHEMA your_schema TO quill_read_only;
+    		```
+    		</Step>
+    	</Steps>
+
+    	<Tip>
+    		The connection string for the read-only user we just created will be something like: `postgresql://quill_read_only:password@db.example.com:5432/your_database`
+    	</Tip>
+
+    	<img src='/images/onboard_1_pg.png' />
+    </Tab>
+    <Tab title='Big Query'>
+    	To create a read-only user in Big Query, do the following:
+    	<Steps>
+    		<Step title="Create a service account for Quill">
+    		In the Google Cloud Console, navigate to the IAM & Admin > Service Accounts page. Click `Create Service Account` and follow the prompts to create a new service account.
+    		</Step>
+    		<Step title="Grant permissions to the service account">
+    		Grant the `bigquery.dataViewer` role to the service account for a dataset. You can do this by navigating to the dataset’s Permissions page and adding the service account with the `bigquery.dataViewer` role.
+    		</Step>
+    		<Step title="Create the access token">
+    		Create a new JSON key for the service account by clicking the `Actions` dropdown next to the service account on the IAM & Admin > Service Accounts page, and then selecting `Create Key`. Select `JSON` as the key type and click `Create`. This will prompt you to save it one your local machine.
+
+    		In the next step you’ll upload this JSON file into the Quill Portal.
+    		</Step>
+    	</Steps>
+
+    	<img src='/images/onboard_1_bq.png' />
+    </Tab>
+    <Tab title='Snowflake'>
+    	To create a read-only user in Snowflake, do the following:
+    	<Steps>
+    		<Step title="Create a new user">
+    		```SQL Snowflake SQL
+    		-- Replace 'password' with a strong password.
+    		CREATE USER quill_read_only PASSWORD 'password';
+    		```
+    		</Step>
+    		<Step title="Create a new read-only role">
+    		```SQL Snowflake SQL
+    		-- Creates a role specifically for read-only access.
+    		CREATE ROLE quill_read_only_role;
+    		```
+    		</Step>
+    		<Step title="Grant SELECT privileges to the role">
+    		```SQL Snowflake SQL
+    		-- Allows the role to read data from the tables.
+    		GRANT SELECT ON ALL TABLES IN SCHEMA my_schema TO quill_read_only_role;
+    		```
+    		</Step>
+    		<Step title="Assign the user to the role">
+    		```SQL Snowflake SQL
+    		-- Gives user the permissions of the role
+    		GRANT quill_read_only_role TO quill_read_only;
+    		```
+    		</Step>
+    	</Steps>
+
+    	<img src='/images/onboard_1_sf.png' />
+    </Tab>
+    <Tab title='MySQL'>
+    	<Steps>
+    		<Step title="Create a new user">
+    		```SQL MySQL
+    		-- Replace 'password' with a strong password.
+    		CREATE USER 'quill_read_only'@'%' IDENTIFIED BY 'password';
+    		```
+    		</Step>
+    		<Step title="Grant USAGE on the schema">
+    		```SQL MySQL
+    		-- Allows the user to read data from the tables.
+    		GRANT SELECT ON your_database.* TO 'quill_read_only'@'%';
+    		```
+    		</Step>
+    	</Steps>
+
+    	<Tip>
+    		The connection string for the read-only user we just created will be something like: `mysql://quill_read_only:password@db.example.com:3306/your_database`
+    	</Tip>
+
+    	<img src='/images/onboard_1_ms.png' />
+    </Tab>
+
+</Tabs>
+
+### 2. Connect your database
+
+Go to [app.quill.co/onboard](https://app.quill.co/onboard) and enter the read-only database connection string that we created in the last step.
 
 <Tip>
-	To learn how to setup a read-only user for your database type, check out our
-	guide [here](/datasources).
+	Make sure to add the quill server to your database IP whitelist, if you have
+	one. Requests from Quill will always come from `34.133.137.225`.
 </Tip>
 
-<img src='/images/onboard_1.png' />
-
-### 2. Connect your schema
+### 3. Connect your schema
 
 The Quill platform provides powerful filtering and reporting tools to help you get the insights you want, faster. Let us know which table to use for your organizations and Quill will use this information to partition data by organization.
 
 <img src='/images/onboard_2.png' />
 
-### 3. Add SQL Views
+### 4. Add SQL Views
 
 Create a cleaned schema that makes it easier to write queries and reports. The views you create here will be used to create charts and tables later on. Don't worry, you can always create and edit these views later.
 
