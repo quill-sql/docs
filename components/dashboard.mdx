@@ -456,7 +456,7 @@ export function ShadcnDashboard() {
 <ResponseField name='dashboardName' type='string' required>
 	The name of the dashboard this item belongs to.
 </ResponseField>
-<ResponseField name='rows' type='{ [key: string]: string }[]'>
+<ResponseField name='rows' type='{ [key: string]: any }[]'>
 	The rows of data returned from this item's query.
 </ResponseField>
 <ResponseField name='columns' type='any[]'>
@@ -495,7 +495,10 @@ export function ShadcnDashboard() {
 			The type of the column field, if any.
 		</ResponseField>
 		<ResponseField name='valueField' type='string' required>
-			The type of the column field, if any.
+			The value field, if any.
+		</ResponseField>
+		<ResponseField name='valueFieldType' type='string' required>
+			The type of the value field, if any.
 		</ResponseField>
 	</Expandable>
 </ResponseField>
@@ -505,7 +508,7 @@ export function ShadcnDashboard() {
 <ResponseField name='comparisonAggregation' type='string'>
 	The formatted comparison range aggregation value, if any.
 </ResponseField>
-<ResponseField name='aggregationPercentChange' type='string'>
+<ResponseField name='aggregationPercentChange' type='number'>
 	The percent change in the aggragations, if any.
 </ResponseField>
 <ResponseField name='xAxisLabel' type='string' required>
@@ -535,7 +538,7 @@ export function ShadcnDashboard() {
     items in between.
 
 </ResponseField>
-<ResponseField name='compareRows' type='{ [key: string]: string }[]'>
+<ResponseField name='compareRows' type='{ [key: string]: any }[]'>
 	The rows of data returned from this item's query over the comparison date
 	range as opposed to the primary date range.
 </ResponseField>

@@ -452,6 +452,39 @@ function App() {
 </ParamField>
 
 <ParamField
+	path='ChartBuilderModalComponent'
+	type='(props: ModalComponentProps) => JSX.Element'>
+	A modal component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='ModalComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='isOpen' type='boolean' required>
+					Whether the modal is open.
+				</ResponseField>
+				<ResponseField
+					name='setIsOpen'
+					type='(isOpen: boolean) => void'
+					required>
+					A callback to set whether the modal is open.
+				</ResponseField>
+				<ResponseField name='title' type='string'>
+					The title of the modal, if any.
+				</ResponseField>
+				<ResponseField name='children' type='ReactNode' required>
+					The body of the modal.
+				</ResponseField>
+				<ResponseField name='width' type='number'>
+					The width of the modal, in pixels.
+				</ResponseField>
+				<ResponseField name='height' type='number'>
+					The height of the modal, in pixels.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
 	path='SelectComponent'
 	type='(props: SelectComponentProps) => JSX.Element'>
 	A select component.
@@ -969,8 +1002,8 @@ function App() {
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='ErrorMessageComponentProps' type='object'>
 			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
+				<ResponseField name='errorMessage' type='ReactNode' required>
+					The error message.
 				</ResponseField>
 			</Expandable>
 		</ParamField>
@@ -1018,4 +1051,17 @@ function App() {
 
 <ParamField path='onSubmitEditReport' type='(item: DashboardItem) => void'>
 	A callback function that will trigger when a chart is edited.
+</ParamField>
+
+<ParamField path='hideCopySQL' type='boolean' default={true}>
+	Whether to hide the copy SQL button.
+</ParamField>
+
+<ParamField path='isChartBuilderHorizontalView' type='boolean' default={true}>
+	Whether the chart builder is in horizontal view mode.
+
+    Horizontal view mode is where the chart and table are displayed on the left
+    and the editing form is displayed on the right, rather than being stacked
+    vertically.
+
 </ParamField>
