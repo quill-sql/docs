@@ -21,6 +21,11 @@ const observer = new MutationObserver(function (mutations) {
 					if (toc) toc.style.display = "none";
 				}
 
+				const contentArea = document.querySelector("#content-area");
+				if (contentArea) {
+					contentArea.style.overflow = "visible";
+				}
+
 				const codeblocks = document.querySelectorAll(
 					"[class*='dark:bg-codeblock']"
 				);
