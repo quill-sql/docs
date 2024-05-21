@@ -6,7 +6,8 @@ description: "Let your users create their own charts, even if they don't know SQ
 <iframe
 	src='https://5wp4n7-5173.csb.app/report-builder'
 	style={{
-		width: "100%",
+		width: "calc(100% + 2rem)",
+		marginLeft: "-1rem",
 		height: 800,
 	}}
 	title='Report Builder'
@@ -19,7 +20,7 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 function App() {
 	return (
 		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ReportBuilder />
+			<ReportBuilder initialTableName='transactions' />
 		</QuillProvider>
 	);
 }
@@ -261,6 +262,17 @@ export function ShadcnReportBuilder() {
 You can pass an `initialTableName` to have the report builder automatically load
 data from a particular table in your schema.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/report-builder'
+	style={{
+		width: "calc(100% + 2rem)",
+		marginLeft: "-1rem",
+		height: 800,
+	}}
+	title='Report Builder'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
@@ -279,6 +291,17 @@ You can pass a `reportId` to have the report builder load the metadata for a
 pre-existing dashboard item. This might be useful if you want to allow your end
 users to edit the reports they created.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/report-builder/reportId'
+	style={{
+		width: "calc(100% + 2rem)",
+		marginLeft: "-1rem",
+		height: 800,
+	}}
+	title='Report Builder'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
@@ -295,6 +318,17 @@ function App() {
 
 By default, the Quill Report Builder will query all tables in your schema and
 new reports will be created upon completion.
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/report-builder/allViews'
+	style={{
+		width: "calc(100% + 2rem)",
+		marginLeft: "-1rem",
+		height: 800,
+	}}
+	title='Report Builder'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
