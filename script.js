@@ -20,6 +20,15 @@ const observer = new MutationObserver(function (mutations) {
 					const toc = document.querySelector("#table-of-contents");
 					if (toc) toc.style.display = "none";
 				}
+
+				const codeblocks = document.querySelectorAll(
+					"[class*='dark:bg-codeblock']"
+				);
+				for (block of codeblocks) {
+					block.style.maxHeight = "400px";
+					block.style.overflow = "auto";
+				}
+				// if (toc) toc.style.display = "none";
 			} catch (error) {
 				console.error("Error handling mutation:", error);
 			}
