@@ -63,14 +63,14 @@ quill = Quill(
   database_connection_string=os.environ.get("POSTGRES_READ")
 )
 
-# POST endpoint you create for quill
+# POST endpoint you create for Quill
 @app.route('/quill', methods=['POST'])
 # "token_required" is your own pre-existing auth middleware
 @token_required
 def quill_endpoint():
   data = request.json
   # assuming current user comes from existing auth
-  # org_id is the id on the organizations table that you use with quill (ex: organizations, businesses, companies, stores etc)
+  # org_id is the id on the organizations table that you use with Quill (ex: organizations, businesses, companies, stores etc)
   return quill.query(current_user.org_id, data)
 ```
 

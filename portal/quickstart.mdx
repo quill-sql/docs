@@ -120,13 +120,19 @@ description: "Get up and running with Quill in less than a minute"
 Go to [app.quill.co/onboard](https://app.quill.co/onboard) and enter the read-only database connection string that we created in the last step.
 
 <Tip>
-	Make sure to add the quill server to your database IP whitelist, if you have
-	one. Requests from Quill will always come from `34.133.137.225`.
+	If you're using our fully-managed Quill instance, make sure to add the Quill
+	server to your database IP whitelist, if you have one. Requests from Quill
+	will always come from `34.133.137.225`.
 </Tip>
+
+<Info>
+	For more information about data and access control, you can read our
+	self-hosting guide [here](/selfhost/quickstart.mdx).
+</Info>
 
 ### 3. Connect your schema
 
-The Quill platform provides powerful filtering and reporting tools to help you get the insights you want, faster. Let us know which table to use for your organizations and Quill will use this information to partition data by organization.
+The Quill platform provides powerful filtering and reporting tools to help you get the insights you want, faster. Since Quill provides organization-based filtering out-of-the-box, simply let us know which table to use and Quill will automatically partition your data by organization.
 
 <img src='/images/onboard_2.png' />
 
@@ -134,10 +140,10 @@ The Quill platform provides powerful filtering and reporting tools to help you g
 
 Create a cleaned schema that makes it easier to write queries and reports. The views you create here will be used to create charts and tables later on. Don't worry, you can always create and edit these views later.
 
-<img src='/images/onboard_3.png' />
-
 <Tip>
 	Once you have connected your database, you're ready to create your first
 	dashboard! Check out our guide on how to create your first dashboard
 	[here](/portal/dashboard).
 </Tip>
+
+<img src='/images/onboard_3.png' />

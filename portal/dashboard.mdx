@@ -1,10 +1,10 @@
 ---
 title: "Create a dashboard"
-description: "Build your first dashboard in less than a minute"
+description: "Build your first dashboard with Quill in less than a minute"
 ---
 
 <Note>
-	This guide assumes you have already connected your database with quill. If
+	This guide assumes you have already connected your database with Quill. If
 	you haven't done that yet, check out our onboarding guide
 	[here](/portal/quickstart).
 </Note>
@@ -23,7 +23,7 @@ Go ahead and give your new dashboard a name.
 
 If you would like to automatically filter every chart in this dashboard by date, you can keep the date filter option selected. Additionally, if you would like to compare this date range against historical ranges you can select the "date comparison" feature.
 
-Finally, if you would like to automatically filter every chart in this table by a string field on your schema (eg. filtering by user, merchant, etc.) you can add as many string filters as you would like. Remember, you can always create more than one database.
+Finally, if you would like to automatically filter every chart in this table by a string field on your schema (eg. filtering by user, merchant, etc.) you can add as many string filters as you would like. Remember, you can always create more than one dashboard.
 
 <Frame>
 	<img src='/images/new_dashboard.png' />
@@ -32,6 +32,12 @@ Finally, if you would like to automatically filter every chart in this table by 
 ### 2. Save your dashboard
 
 When you're done, go ahead and hit save. You should see your dashboard in the top-left of the screen.
+
+<Tip>
+	Since Quill automatically partitions by organization, you can select an
+	organization in the top-right to filter any dashboard by (eg. "Acme") or you
+	can select "All Organizations" to show all data.
+</Tip>
 
 <Frame>
 	<img src='/images/create_chart.png' />
@@ -51,7 +57,7 @@ You can also edit the settings for any existing dashboard by selecting that dash
 	<img src='/images/manage_dashboard.png' />
 </Frame>
 
-That will open the Manage Dropdown modal which allows you to edit the title of the dashboard, add and remove filters, edit the order of charts, and delete the dashboard.
+That will open the Manage Dashboard modal which allows you to edit the title of the dashboard, add and remove filters, edit the order of charts, and delete the dashboard.
 
 <Frame>
 	<img src='/images/edit_dashboard.png' />

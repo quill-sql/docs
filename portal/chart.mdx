@@ -1,6 +1,6 @@
 ---
 title: "Create a chart"
-description: "Build your first chart in less than a minute"
+description: "Build your first chart with Quill in less than a minute"
 ---
 
 <Note>
@@ -8,6 +8,8 @@ description: "Build your first chart in less than a minute"
 	that yet, check out our guide on how to create your first dashboard
 	[here](/portal/dashboard).
 </Note>
+
+There are two ways to create a chart with Quill, with SQL or without SQL.
 
 <CardGroup cols={2}>
 	<Card
@@ -25,6 +27,9 @@ description: "Build your first chart in less than a minute"
 </CardGroup>
 
 ## With SQL (SQLEditor)
+
+The SQL Editor is a powerful SQL-based code editor that you can use in your
+product to help your users create and edit their own reports.
 
 <Frame>
 	<img src='/images/sql_editor.png' />
@@ -61,6 +66,10 @@ Here, you can edit the name of the chart, the dashboard this chart should belong
 
 ## No Code (ReportBuilder)
 
+The Report Builder is an easy-to-use, AI-enabled query creation tool that you
+can use in your product to allow nontechnical users to create and edit their own
+reports without knowing SQL.
+
 <Frame>
 	<img src='/images/report_builder.png' />
 </Frame>
@@ -96,11 +105,15 @@ Here, you can edit the name of the chart, the dashboard this chart should belong
 
 ## Editing a Chart
 
+Once you have created a query, you can edit the resulting chart before adding it
+to your dashboard. You can edit the name of the chart, the dashboard this chart
+should belong to, the chart type, and much more. When used in an embedded flow
+where the dashboard is known ahead of time, developers can pre-select this
+dashboard and the option will be hidden in this form.
+
 <Frame>
 	<img src='/images/edit_chart_3.png' />
 </Frame>
-
-Here, you can edit the name of the chart, the dashboard this chart should belong to, the chart type, and much more. When used in an embedded flow where the dashboard is known ahead of time, developers can pre-select this dashboard and the option will be hidden in this form.
 
 ### Pivots
 

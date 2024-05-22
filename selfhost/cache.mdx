@@ -14,7 +14,7 @@ const quill = new Quill({
 	privateKey: process.env.QULL_PRIVATE_KEY,
 	databaseConnectionString: process.env.POSTGRES_READ,
 	databaseType: "postgresql",
-    // STEP 1: add a cache config to the quill instance
+    // STEP 1: add a cache config to the Quill instance
     cache: {
         username: process.env.REDIS_USERNAME,
         password: process.env.REDIS_PASSWORD,
@@ -24,7 +24,7 @@ const quill = new Quill({
     }.
 });
 
-// STEP 2: Use quill as you normally would in your API endpoints!
+// STEP 2: Use Quill as you normally would in your API endpoints!
 ```
 
 ```python Python
@@ -33,7 +33,7 @@ from quillsql import Quill
 quill = Quill(
   private_key=os.environ.get("QUILL_PRIVATE_KEY"),
   database_connection_string=os.environ.get("POSTGRES_READ"),
-  # STEP 1: Add a cache config to the quill instance.
+  # STEP 1: Add a cache config to the Quill instance.
   cache={
     "username": os.environ.get("REDIS_USERNAME"),
     "password": os.environ.get("REDIS_PASSWORD"),
@@ -43,7 +43,7 @@ quill = Quill(
   }
 )
 
-# STEP 2: Use quill as you normally would in your API endpoints!
+# STEP 2: Use Quill as you normally would in your API endpoints!
 ```
 
 </CodeGroup>
