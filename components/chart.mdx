@@ -8,7 +8,6 @@ description: "A simple component that displays useful information"
 	style={{
 		width: "100%",
 		height: 300,
-		marginLeft: -20,
 	}}
 	title='Chart Component'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
@@ -32,6 +31,16 @@ A simple component that displays the given data in one of many chart types.
 
 If you know the id of the chart you would like to display, you can pass in the reportId to the Chart component and it will load and display the data for that chart.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```jsx
 import { QuillProvider, Chart } from "@quillsql/react";
 
@@ -48,11 +57,21 @@ function App() {
 
 Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in a `QuillReport` directly to the Chart component and it will display that data without async fetching.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```jsx
 import { QuillProvider, Chart } from "@quillsql/react";
 
 function App() {
-	const report = { ... };
+	const report = useQuill("664283fb4db8ad000bfe54d7");
 	return (
 		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
 			<Chart config={report} />
@@ -71,7 +90,7 @@ function App() {
 	Portal and pass it in directly.
 
     When config is passed, the chart will not refetch the given report and will
-	instead simply render the report it was given.
+    instead simply render the report it was given.
 
     <Info>A `config` must be passed if `reportId` is not present.</Info>
 
@@ -82,7 +101,7 @@ function App() {
 
     When a reportId is passed, the chart will first fetch the data necessary to
     render this chart, and then it will render the report that it receives from
-	the server.
+    the server.
 
     See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).
 
@@ -204,4 +223,3 @@ function App() {
 <ParamField path='containerStyle' type='React.CSSProperties'>
 	The CSS styles that wrap the chart.
 </ParamField>
-

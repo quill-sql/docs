@@ -9,11 +9,11 @@ Hello! 👋 This short tutorial gets you up and running with Quill self hosting.
 
 <CodeGroup>
 ```bash Node.js
-npm i @quillsql/node --save
+npm install @quillsql/node
 ```
 
 ```bash Python
-pip3 install --upgrade quillsql
+pip3 install quillsql
 ```
 
 ```bash Go
@@ -24,11 +24,11 @@ go get https://github.com/quill-sql/quill-go
 
 ## 2. Create a new endpoint
 
-Instantiate `quill` with your credentials and add the below `POST` endpoint.
+Instantiate `Quill` with your credentials and add the below `POST` endpoint.
 
 <Info>
-	We assume you have an organization id on the user returned by your auth
-	middleware. Queries will not work properly without the organization id.
+	This example assumes you have an organization id on the user returned by your
+	auth middleware. Queries will not work properly without the organization id.
 </Info>
 
 <CodeGroup>

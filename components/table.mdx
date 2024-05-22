@@ -109,6 +109,16 @@ export function ShadcnTable() {
 
 If you know the id of the table you would like to display, you can pass in the reportId to the Table component and it will load and display the data for that table.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/table'
+	style={{
+		width: "100%",
+		height: 320,
+	}}
+	title='Table Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 ```jsx
 import { QuillProvider, Table } from "@quillsql/react";
 
@@ -125,21 +135,17 @@ function App() {
 
 Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in that data directly to the Table component and it will display that data without doing any async fetching.
 
+<iframe
+	src='https://5wp4n7-5173.csb.app/table/raw'
+	style={{
+		width: "100%",
+		height: 320,
+	}}
+	title='Table Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
 <CodeGroup>
-
-```jsx Using useQuill
-import { QuillProvider, Table } from "@quillsql/react";
-import { MY_TABLE_ID } from "./constants";
-
-function App() {
-	const report = useQuill(MY_TABLE_ID);
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Table rows={report.rows} columns={report.columns} />
-		</QuillProvider>
-	);
-}
-```
 
 ```jsx Using raw data
 import { QuillProvider, Table } from "@quillsql/react";
@@ -153,12 +159,28 @@ function App() {
 					{ x: 2, y: 2, z: 0 },
 					{ x: 3, y: 3, z: 0 },
 					{ x: 4, y: 4, z: 0 },
+					{ x: 5, y: 5, z: 0 },
+					{ x: 6, y: 6, z: 0 },
 				]}
 				columns={[
 					{ label: "My X-Axis", field: "x" },
 					{ label: "My Y-Axis", field: "y" },
 				]}
 			/>
+		</QuillProvider>
+	);
+}
+```
+
+```jsx Using useQuill
+import { QuillProvider, Table } from "@quillsql/react";
+import { MY_TABLE_ID } from "./constants";
+
+function App() {
+	const report = useQuill(MY_TABLE_ID);
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Table rows={report.rows} columns={report.columns} />
 		</QuillProvider>
 	);
 }
