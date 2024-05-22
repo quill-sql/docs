@@ -7,7 +7,7 @@ description: "A pragmatic data API for your data"
 import { QuillProvider, useQuill } from "@quillsql/react";
 
 function CustomComponent() {
-	// pass in any report or chart created in the Quill Portal
+	// pass in any report created in the Quill Portal
 	const report = useQuill(QUILL_ID);
 	return <pre>{JSON.stringify(report, null, 2)}</pre>;
 }
@@ -55,10 +55,10 @@ const report = useQuill("299286dd2d85");
 ## Props
 
 <ParamField path='reportId' type='string' required>
-	The id of the chart you created in the Quill Portal.
+	The id of the report you created in the Quill Portal.
 
     <Tip>
-    	Don't have a reportId yet? Learn how to [create a chart](https://docs.quillsql.com/portal/chart) in the Quill portal to get started.
+    	Don't have an id yet? Learn how to [create a chart](https://docs.quillsql.com/portal/chart) in the Quill portal to get started.
     </Tip>
 
 </ParamField>

@@ -299,7 +299,7 @@ users to edit the reports they created.
 	style={{
 		width: "calc(100% + 124px)",
 		marginLeft: -44,
-		height: 800,
+		height: 1000,
 	}}
 	title='Report Builder'
 	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
@@ -1083,11 +1083,11 @@ function App() {
 </ParamField>
 
 <ParamField path='onSubmitCreateReport' type='(report: QuillReport) => void'>
-	A callback function that will trigger when a new chart is saved.
+	A callback function that will trigger when a new report is created.
 </ParamField>
 
 <ParamField path='onSubmitEditReport' type='(report: QuillReport) => void'>
-	A callback function that will trigger when a chart is edited.
+	A callback function that will trigger when a existing report is edited.
 </ParamField>
 
 <ParamField path='hideCopySQL' type='boolean' default={true}>
