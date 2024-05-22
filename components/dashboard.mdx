@@ -382,10 +382,10 @@ export function ShadcnDashboard() {
 	A fallback component displayed when an active dashboard has no reports.
 </ParamField>
 
-<ParamField path='onClickDashboardItem' type='(report: QuillReport) => void'>
+<ParamField path='onClickReport' type='(report: QuillReport) => void'>
 	Callback function that fires when a report is clicked. A common use
-	case is navigating to a new page based on the report's id. Dashboard
-	items are the list of charts that are in a Dashboard.
+	case is navigating to a new page based on the report's id. A dashboard is
+	composed of a list of reports that could be metrics, charts, or tables.
 
     <Info>See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
 
