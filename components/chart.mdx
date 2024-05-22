@@ -19,7 +19,7 @@ import { QuillProvider, Chart } from "@quillsql/react";
 
 const MyChart = () => (
 	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-		<Chart chartId='664283fb4db8ad000bfe54d7' />
+		<Chart reportId='664283fb4db8ad000bfe54d7' />
 	</QuillProvider>
 );
 ```
@@ -30,7 +30,7 @@ A simple component that displays the given data in one of many chart types.
 
 ### Automatically fetch data by id
 
-If you know the id of the chart you would like to display, you can pass in the chartId to the Chart component and it will load and display the data for that chart.
+If you know the id of the chart you would like to display, you can pass in the reportId to the Chart component and it will load and display the data for that chart.
 
 ```jsx
 import { QuillProvider, Chart } from "@quillsql/react";
@@ -38,7 +38,7 @@ import { QuillProvider, Chart } from "@quillsql/react";
 function App() {
 	return (
 		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Chart chartId='664283fb4db8ad000bfe54d7' />
+			<Chart reportId='664283fb4db8ad000bfe54d7' />
 		</QuillProvider>
 	);
 }
@@ -46,16 +46,16 @@ function App() {
 
 ### Pass data directly into the chart
 
-Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in a `DashboardItem` directly to the Chart component and it will display that data without async fetching.
+Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in a `QuillReport` directly to the Chart component and it will display that data without async fetching.
 
 ```jsx
 import { QuillProvider, Chart } from "@quillsql/react";
 
 function App() {
-	const dashboardItem = { ... };
+	const report = { ... };
 	return (
 		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Chart config={dashboardItem} />
+			<Chart config={report} />
 		</QuillProvider>
 	);
 }
@@ -63,30 +63,30 @@ function App() {
 
 ## Props
 
-<ParamField path='chartId' type='string'>
+<ParamField path='reportId' type='string'>
 	The chart id. The most usage is through a detail page built to navigate from
-	the dashboard - using the onClick callback to get the dashboardItemId, and
+	the dashboard - using the onClick callback to get the reportId, and
 	navigating to a route (say, reports/:id) where the url param is passed in as
-	the chartId. For a standalone table, you can find the chartId in the Quill
+	the reportId. For a standalone table, you can find the reportId in the Quill
 	Portal and pass it in directly.
 
-    When config is passed, the chart will not refetch the given dashboard item
-    and will instead simply render the item it was given.
+    When config is passed, the chart will not refetch the given report and will
+	instead simply render the report it was given.
 
-    <Info>A `config` must be passed if `chartId` is not present.</Info>
+    <Info>A `config` must be passed if `reportId` is not present.</Info>
 
 </ParamField>
 
-<ParamField path='config' type='DashboardItem'>
-	A dashboard item to render, if any.
+<ParamField path='config' type='QuillReport'>
+	A report to render, if any.
 
-    When a chartId is passed, the chart will first fetch the data necessary to
-    render this chart, and then it will render the dashboard item that it
-    receives from the server.
+    When a reportId is passed, the chart will first fetch the data necessary to
+    render this chart, and then it will render the report that it receives from
+	the server.
 
-    See the API Reference for a `DashboardItem` [here](/components/dashboard#dashboarditem).
+    See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).
 
-    <Info>A `chartId` must be passed if `config` is not present.</Info>
+    <Info>A `reportId` must be passed if `config` is not present.</Info>
 
 </ParamField>
 
@@ -149,14 +149,14 @@ function App() {
 	(as opposed to the default solid line).
 </ParamField>
 
-<ParamField path='mapColorsToFields' type='(dashboardItem: DashboardItem, theme: QuillTheme) => ColorMapType'>
-    An optional function that takes a dashboard item and theme and returns a
-    map of keys used in that dashboard item to the colors they should use.
+<ParamField path='mapColorsToFields' type='(report: QuillReport, theme: QuillTheme) => ColorMapType'>
+    An optional function that takes a report and theme and returns a map of keys
+	used in that report to the colors they should use.
 
     The color values support RGB hexcodes and CSS color literals.
 
     ```js
-    function mapColorsToFields(item, theme): ColorMapType {
+    function mapColorsToFields(report, theme): ColorMapType {
     	return {
     		amount: {
     			primary: 'red',
@@ -204,4 +204,4 @@ function App() {
 <ParamField path='containerStyle' type='React.CSSProperties'>
 	The CSS styles that wrap the chart.
 </ParamField>
-````
+

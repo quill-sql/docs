@@ -550,8 +550,8 @@ export function ShadcnSQLEditor() {
 
 <ParamField
 	path='onAddToDashboardComplete'
-	type='(dashboardItem: DashboardItem) => void'>
-	A callback that is fired when a dashboard item has been added to a dashboard.
+	type='(report: QuillReport) => void'>
+	A callback that is fired when a new report has been added to a dashboard.
 </ParamField>
 
 <ParamField path='isChartBuilderHorizontalView' type='boolean' default={true}>
@@ -578,8 +578,8 @@ export function ShadcnSQLEditor() {
 	Whether to show access control options.
 </ParamField>
 
-<ParamField path='dashboardItem' type='DashboardItem'>
-	A dashboard item
+<ParamField path='report' type='QuillReport'>
+	An existing report to edit.
 </ParamField>
 
 <ParamField path='defaultQuery' type='string'>
@@ -587,7 +587,7 @@ export function ShadcnSQLEditor() {
 </ParamField>
 
 <ParamField path='destinationDashboard' type='string'>
-	The default dashboard to dashboard items to.
+	The default dashboard to add reports to.
 </ParamField>
 
 <ParamField path='chartBuilderTitle' type='string'>

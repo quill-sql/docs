@@ -18,7 +18,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 
 const MyTable = () => (
 	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-		<Table chartId='6644088e6e2470000cbdb109' />
+		<Table reportId='6644088e6e2470000cbdb109' />
 	</QuillProvider>
 );
 ```
@@ -98,7 +98,7 @@ export function MaterialDesignTable() {
 import { Table } from "@quillsql/react";
 
 export function ShadcnTable() {
-	return <Table chartId='6644088e6e2470000cbdb109' />;
+	return <Table reportId='6644088e6e2470000cbdb109' />;
 }
 ```
 
@@ -107,7 +107,7 @@ export function ShadcnTable() {
 
 ### Automatically fetch data by id
 
-If you know the id of the table you would like to display, you can pass in the chartId to the Table component and it will load and display the data for that table.
+If you know the id of the table you would like to display, you can pass in the reportId to the Table component and it will load and display the data for that table.
 
 ```jsx
 import { QuillProvider, Table } from "@quillsql/react";
@@ -115,7 +115,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 function App() {
 	return (
 		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Table chartId='664283fb4db8ad000bfe54d7' />
+			<Table reportId='664283fb4db8ad000bfe54d7' />
 		</QuillProvider>
 	);
 }
@@ -168,18 +168,18 @@ function App() {
 
 ## Props
 
-<ParamField path='chartId' type='string'>
+<ParamField path='reportId' type='string'>
 	The chart id. The most usage is through a detail page built to navigate from
-	the dashboard - using the onClick callback to get the dashboardItemId, and
+	the dashboard - using the onClick callback to get the report id, and
 	navigating to a route (say, reports/:id) where the url param is passed in as
-	the chartId. For a standalone table, you can find the chartId in the Quill
+	the reportId. For a standalone table, you can find the reportId in the Quill
 	Portal and pass it in directly.
 
-    When a `chartId` is passed, the table will first fetch the data necessary
+    When a `reportId` is passed, the table will first fetch the data necessary
     to render this table, and then it will render the rows and columns that it
     receives from the server.
 
-    <Info>A `chartId` must be passed if `rows` and `columns` are not present.</Info>
+    <Info>A `reportId` must be passed if `rows` and `columns` are not present.</Info>
 
 </ParamField>
 
@@ -187,10 +187,9 @@ function App() {
 	The rows of the table to show, if any.
 
     When `rows` and `columns` are passed, the table will not refetch the given
-    dashboard item and will instead simply render the rows and columns it was
-    given.
+    report and will instead simply render the rows and columns it was given.
 
-    <Info>Both `rows` and `columns` must be passed if `chartId` is not present.</Info>
+    <Info>Both `rows` and `columns` must be passed if `reportId` is not present.</Info>
 
 </ParamField>
 
@@ -198,10 +197,9 @@ function App() {
 	The columns of the table to show, if any.
 	
 	When `rows` and `columns` are passed, the table will not refetch the given
-    dashboard item and will instead simply render the rows and columns it was
-    given.
+    report and will instead simply render the rows and columns it was given.
 	
-	<Info>Both `rows` and `columns` must be passed if `chartId` is not present.</Info>
+	<Info>Both `rows` and `columns` must be passed if `reportId` is not present.</Info>
 
 </ParamField>
 

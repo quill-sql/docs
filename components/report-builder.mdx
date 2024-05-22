@@ -288,7 +288,7 @@ function App() {
 ### Edit an existing report
 
 You can pass a `reportId` to have the report builder load the metadata for a
-pre-existing dashboard item. This might be useful if you want to allow your end
+pre-existing report. This might be useful if you want to allow your end
 users to edit the reports they created.
 
 <iframe
@@ -349,7 +349,7 @@ function App() {
 </ParamField>
 
 <ParamField path='destinationDashboard' type='string'>
-	The dashboard to add items to once they have been created.
+	The dashboard to add reports to once they have been created.
 </ParamField>
 
 <ParamField path='organizationName' type='string'>
@@ -1079,11 +1079,11 @@ function App() {
 	A report id that the Report Builder will query from and modify.
 </ParamField>
 
-<ParamField path='onSubmitCreateReport' type='(item: DashboardItem) => void'>
+<ParamField path='onSubmitCreateReport' type='(report: QuillReport) => void'>
 	A callback function that will trigger when a new chart is saved.
 </ParamField>
 
-<ParamField path='onSubmitEditReport' type='(item: DashboardItem) => void'>
+<ParamField path='onSubmitEditReport' type='(report: QuillReport) => void'>
 	A callback function that will trigger when a chart is edited.
 </ParamField>
 

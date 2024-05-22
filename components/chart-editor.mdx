@@ -23,7 +23,7 @@ function App() {
 			<ChartEditor
 				isOpen={isOpen}
 				setIsOpen={setIsOpen}
-				chartId='664283fb4db8ad000bfe54d7'
+				reportId='664283fb4db8ad000bfe54d7'
 			/>
 		</QuillProvider>
 	);
@@ -85,7 +85,7 @@ export function AntChartEditor() {
 		<ChartEditor
 			isOpen={true}
 			setIsOpen={() => null}
-			chartId={"664283fb4db8ad000bfe54d7"}
+			reportId={"664283fb4db8ad000bfe54d7"}
 			TableComponent={AntTable}
 			PopoverComponent={AntPopover}
 			CardComponent={AntCard}
@@ -157,7 +157,7 @@ export function MaterialChartEditor() {
 		<ChartEditor
 			isOpen={true}
 			setIsOpen={() => null}
-			chartId={"664283fb4db8ad000bfe54d7"}
+			reportId={"664283fb4db8ad000bfe54d7"}
 			TableComponent={MaterialTable}
 			PopoverComponent={MaterialPopover}
 			CardComponent={MaterialCard}
@@ -205,7 +205,7 @@ export function ShadcnChartEditor() {
 		<ChartEditor
 			isOpen={true}
 			setIsOpen={() => null}
-			chartId={"664283fb4db8ad000bfe54d7"}
+			reportId={"664283fb4db8ad000bfe54d7"}
 		/>
 	);
 }
@@ -224,7 +224,7 @@ export function ShadcnChartEditor() {
 	A callback that sets the open state of the ChartEditor.
 </ParamField>
 
-<ParamField path='chartId' type='string' required>
+<ParamField path='reportId' type='string' required>
 	The id of the chart that is being edited.
 </ParamField>
 
@@ -242,12 +242,12 @@ export function ShadcnChartEditor() {
 
 <ParamField
 	path='onAddToDashboardComplete'
-	type='(dashboardItem: DashboardItem) => void'>
+	type='(report: QuillReport) => void'>
 	A callback that is fired when the add to dashboard flow has been completed.
 </ParamField>
 
 <ParamField path='onDelete' type='() => void'>
-	A callback that is fired when the item is deleted.
+	A callback that is fired when the report is deleted.
 </ParamField>
 
 <ParamField
@@ -647,7 +647,7 @@ export function ShadcnChartEditor() {
 </ParamField>
 
 <ParamField path='destinationDashboard' type='string'>
-	The default dashboard to add the item to.
+	The default dashboard to add the report to.
 </ParamField>
 
 <ParamField path='organizationName' type='string'>
