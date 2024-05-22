@@ -50,7 +50,6 @@
 				"components/chart",
 				"components/table",
 				"components/sql-editor",
-				"components/chart-editor",
 				"components/report-builder",
 				"components/examples"
 			]
