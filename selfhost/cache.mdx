@@ -3,7 +3,88 @@ title: "Data Cache"
 description: "Load dashboards fast by saving frequently used queries"
 ---
 
-Hey there! 👋 Speeding up your dashboards is easy with Quill self hosting. Bring your own cache and get setup in just a few lines of code.
+## 1. Install the Quill SDK
+
+If you haven't already, start by installing the Quill Server SDK on your machine:
+
+<CodeGroup>
+```bash Node.js
+npm install @quillsql/node
+```
+
+```bash Python
+pip3 install quillsql
+```
+
+```bash Go
+go get https://github.com/quill-sql/quill-go
+```
+
+</CodeGroup>
+
+## 2. Create a cache config
+
+To get started with the Quill data cache, you can either bring your own cache or
+use our built-in cache in Quill Cloud. If you bring your own cache, you'll need
+the connection info such as username, password, host, and port.
+
+<Tip>
+	A typical redis connection string with all of the parts might look something
+	like this: `redis://quill_username:secret_password@example.com:12345`
+</Tip>
+
+<Tabs>
+  <Tab title='Quill Cloud'>
+    Using Quill Cloud is the easiest way to get started with Quill. Reach out to
+    our team and ask about the Quill data cache to get started.
+
+    <Tip>
+      Make sure to add the Quill server to your database IP whitelist, if you
+      have one. Requests from Quill will always come from `34.133.137.225`
+    </Tip>
+
+    ```mermaid
+    flowchart LR
+      subgraph yourdomain.com
+        db[(Database)]
+      end
+
+      subgraph api.quill.co
+        direction LR
+        sdk(Quill SDK)
+        sdk <--> redis(Cache)
+      end
+
+      web(User) <--> |GET api.quill.co/quill|sdk
+      sdk <--> yourdomain.com
+    ```
+
+  </Tab>
+  <Tab title='Self-Hosted'>
+    With Self-Hosted Quill, your data never leaves your servers. Our code runs
+    on your machines either in your cloud or on-premise.
+
+    <Info>
+      We operate the connected cache in a cache-aside manner which gives great
+      performance in read-heavy situations.
+    </Info>
+
+    ```mermaid
+    flowchart LR
+      subgraph yourdomain.com
+        direction LR
+        sdk(Quill SDK)
+        sdk <--> redis(Cache)
+        sdk <--> db[(Database)]
+      end
+
+      web(User) <--> |GET yourdomain.com/quill|sdk
+    ```
+
+  </Tab>
+</Tabs>
+
+## 3. Pass cache to Quill SDK
 
 <CodeGroup>
 
@@ -14,17 +95,15 @@ const quill = new Quill({
 	privateKey: process.env.QULL_PRIVATE_KEY,
 	databaseConnectionString: process.env.POSTGRES_READ,
 	databaseType: "postgresql",
-    // STEP 1: add a cache config to the Quill instance
-    cache: {
-        username: process.env.REDIS_USERNAME,
-        password: process.env.REDIS_PASSWORD,
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
-        cacheType: "redis",
-    }.
+	// Just pass a cache config to the Quill instance:
+	cache: {
+		username: process.env.REDIS_USERNAME,
+		password: process.env.REDIS_PASSWORD,
+		host: process.env.REDIS_HOST,
+		port: process.env.REDIS_PORT,
+		cacheType: "redis", // or 'rediss' if SSL encrypted
+	},
 });
-
-// STEP 2: Use Quill as you normally would in your API endpoints!
 ```
 
 ```python Python
@@ -33,17 +112,15 @@ from quillsql import Quill
 quill = Quill(
   private_key=os.environ.get("QUILL_PRIVATE_KEY"),
   database_connection_string=os.environ.get("POSTGRES_READ"),
-  # STEP 1: Add a cache config to the Quill instance.
+  # Just pass a cache config to the Quill instance:
   cache={
     "username": os.environ.get("REDIS_USERNAME"),
     "password": os.environ.get("REDIS_PASSWORD"),
     "host": os.environ.get("REDIS_HOST"),
     "port": os.environ.get("REDIS_PORT"),
-    "cacheType": "redis",
+    "cacheType": "redis", # or 'rediss' if SSL encrypted
   }
 )
-
-# STEP 2: Use Quill as you normally would in your API endpoints!
 ```
 
 </CodeGroup>
