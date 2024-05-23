@@ -270,32 +270,33 @@ export function ShadcnChartEditor() {
     	}
     	```
 
-		<ParamField path='SelectComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='value' type='string' required>
-					The value of the select.
-				</ResponseField>
-				<ResponseField name='label' type='string'>
-					A label for the select.
-				</ResponseField>
-				<ResponseField
-					name='options'
-					type='{ value: string; label: string; }[]'
-					required>
-					The select options.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void'
-					required>
-					An event callback that is fired when the selected element changes.
-				</ResponseField>
-				<ResponseField name='width' type='number' required>
-					The width of the select element in pixels.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='SelectComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='value' type='string' required>
+    				The value of the select.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the select.
+    			</ResponseField>
+    			<ResponseField
+    				name='options'
+    				type='{ value: string; label: string; }[]'
+    				required>
+    				The select options.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the selected element changes.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the select element in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -455,8 +456,15 @@ export function ShadcnChartEditor() {
 	type='(props: LabelComponentProps) => JSX.Element'>
 	A label component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/label.png' />
+
+    	```jsx Example
+    	export function LabelComponent({ label }) {
+    		return <h4>{label}</h4>;
+    	}
+    	```
 		<ParamField path='LabelComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='label' type='string' required>
 					The text content of the element.
 				</ResponseField>
@@ -470,14 +478,22 @@ export function ShadcnChartEditor() {
 	type='(props: HeaderComponentProps) => JSX.Element'>
 	A header component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='HeaderComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/header.png' />
+
+    	```jsx Example
+    	export function HeaderComponent({ label }) {
+    		return <h2>{label}</h2>;
+    	}
+    	```
+    	<ParamField path='HeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -485,14 +501,22 @@ export function ShadcnChartEditor() {
 	type='(props: { label: string }) => JSX.Element'>
 	A sub-header component describes a group of inputs.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='SubHeaderComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='label' type='() => void' required>
-					The label of the sub-header component.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/subheader.png' />
+
+    	```jsx Example
+    	export function SubHeaderComponent({ label }) {
+    		return <h3>{label}</h3>;
+    	}
+    	```
+    	<ParamField path='SubHeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='() => void' required>
+    				The label of the sub-header component.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -500,8 +524,15 @@ export function ShadcnChartEditor() {
 	type='(props: TextComponentProps) => JSX.Element'>
 	A simple text component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/text.png' />
+
+    	```jsx Example
+    	export function TextComponent({ label }) {
+    		return <p>{label}</p>;
+    	}
+    	```
 		<ParamField path='TextComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='label' type='string' required>
 					The text content of the element.
 				</ResponseField>
@@ -515,20 +546,35 @@ export function ShadcnChartEditor() {
 	type='(props: CardComponentProps) => JSX.Element'>
 	A card component used as a dismissable container of pivot information.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='CardComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-				<ResponseField name='onClick' type='() => void'>
-					A callback that is fired when the card is clicked.
-				</ResponseField>
-				<ResponseField name='onDelete' type='() => void'>
-					A callback that is fired the card is deleted.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/card.png' />
+
+    	```jsx Example
+    	import { Card } from "./ui/card";
+    	export function CardComponent({ onClick, onDelete, children }) {
+    		const style = { position: 'absolute', top: 0, right: 0 };
+    		return (
+    			<Card onClick={onClick} style={{ position: 'relative' }}>
+    				{onDelete && <DeleteButton style={style} onClick={onDelete} />}
+    				{children}
+    			</Card>
+    		);
+    	}
+    	```
+    	<ParamField path='CardComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the container.
+    			</ResponseField>
+    			<ResponseField name='onClick' type='() => void'>
+    				A callback that is fired when the card is clicked.
+    			</ResponseField>
+    			<ResponseField name='onDelete' type='() => void'>
+    				A callback that is fired the card is deleted.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -539,47 +585,48 @@ export function ShadcnChartEditor() {
 		<img src='/images/modal.png' />
 
     	```jsx Example
-		import { Modal } from "./ui/modal";
+    	import { Modal } from "./ui/modal";
     	export function ModalComponent({ isOpen, setIsOpen, title, children, width, height }) {
     		return (
     			<Modal
-					isOpen={isOpen}
-					setIsOpen={setIsOpen}
-					title={title}
-					style={{ width, height }}
-				>
-					{children}
+    				isOpen={isOpen}
+    				setIsOpen={setIsOpen}
+    				title={title}
+    				style={{ width, height }}
+    			>
+    				{children}
     			</Modal>
     		);
     	}
     	```
 
-		<ParamField path='ModalComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='isOpen' type='boolean' required>
-					Whether the modal is open.
-				</ResponseField>
-				<ResponseField
-					name='setIsOpen'
-					type='(isOpen: boolean) => void'
-					required>
-					A callback to set whether the modal is open.
-				</ResponseField>
-				<ResponseField name='title' type='string'>
-					The title of the modal, if any.
-				</ResponseField>
-				<ResponseField name='children' type='ReactNode' required>
-					The body of the modal.
-				</ResponseField>
-				<ResponseField name='width' type='number'>
-					The width of the modal, in pixels.
-				</ResponseField>
-				<ResponseField name='height' type='number'>
-					The height of the modal, in pixels.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='ModalComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the modal is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the modal is open.
+    			</ResponseField>
+    			<ResponseField name='title' type='string'>
+    				The title of the modal, if any.
+    			</ResponseField>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The body of the modal.
+    			</ResponseField>
+    			<ResponseField name='width' type='number'>
+    				The width of the modal, in pixels.
+    			</ResponseField>
+    			<ResponseField name='height' type='number'>
+    				The height of the modal, in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -587,29 +634,44 @@ export function ShadcnChartEditor() {
 	type='(props: PopoverComponentProps) => JSX.Element'>
 	A popover component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='PopoverComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='isOpen' type='boolean' required>
-					Whether the popover is open.
-				</ResponseField>
-				<ResponseField
-					name='setIsOpen'
-					type='(isOpen: boolean) => void'
-					required>
-					A callback to set whether the popover is open.
-				</ResponseField>
-				<ResponseField name='triggerLabel' type='string'>
-					The label of the popover trigger, if any.
-				</ResponseField>
-				<ResponseField name='popoverTitle' type='string'>
-					The title of the popover, if any.
-				</ResponseField>
-				<ResponseField name='popoverChildren' type='ReactNode' required>
-					The body of the popover.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/pivot_popover.png' />
+
+    	```jsx Example
+    	import { Popover } from "./ui/popover";
+
+    	export function PopoverComponent({ isOpen, setIsOpen, popoverTitle, popoverChildren }) {
+    		return (
+    			<Popover isOpen={isOpen} setIsOpen={setIsOpen} title={popoverTitle}>
+    				{popoverChildren}
+    			</Popover>
+    		);
+    	}
+    	```
+
+    	<ParamField path='PopoverComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the popover is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the popover is open.
+    			</ResponseField>
+    			<ResponseField name='triggerLabel' type='string'>
+    				The label of the popover trigger, if any.
+    			</ResponseField>
+    			<ResponseField name='popoverTitle' type='string'>
+    				The title of the popover, if any.
+    			</ResponseField>
+    			<ResponseField name='popoverChildren' type='ReactNode' required>
+    				The body of the popover.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -620,32 +682,33 @@ export function ShadcnChartEditor() {
 		<img src='/images/table.png' />
 
     	```jsx Example
-		import { Table } from "./ui/table";
-		import { LoadingSkeleton } from "./ui/loading";
+    	import { Table } from "./ui/table";
+    	import { LoadingSkeleton } from "./ui/loading";
 
     	export function TableComponent({ rows, columns, isLoading }) {
-			if (isLoading) return <LoadingSkeleton />
+    		if (isLoading) return <LoadingSkeleton />
     		return <Table rows={rows} columns={columns} />;
     	}
     	```
 
-		<ParamField path='TableComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
-					The rows of the table are an array of objects.
-				</ResponseField>
-				<ResponseField
-					name='columns'
-					type='{ label: string; field: string; }[]'
-					required>
-					The columns of the table are an array of label, field pairs.
-				</ResponseField>
-				<ResponseField name='isLoading' type='boolean'>
-					Whether the table is loading.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='TableComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+    				The rows of the table are an array of objects.
+    			</ResponseField>
+    			<ResponseField
+    				name='columns'
+    				type='{ label: string; field: string; }[]'
+    				required>
+    				The columns of the table are an array of label, field pairs.
+    			</ResponseField>
+    			<ResponseField name='isLoading' type='boolean'>
+    				Whether the table is loading.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -740,14 +803,15 @@ export function ShadcnChartEditor() {
     		return <div>{errorMessage}</div>
     	}
     	```
-		<ParamField path='ErrorMessageComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='errorMessage' type='ReactNode' required>
-					The error message.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='ErrorMessageComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='errorMessage' type='ReactNode' required>
+    				The error message.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField path='LoadingComponent' type='() => JSX.Element'>

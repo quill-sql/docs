@@ -384,20 +384,35 @@ export function ShadcnSQLEditor() {
 	type='(props: CardComponentProps) => JSX.Element'>
 	A card component used as a dismissable container of pivot information.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='CardComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-				<ResponseField name='onClick' type='() => void'>
-					A callback that is fired when the card is clicked.
-				</ResponseField>
-				<ResponseField name='onDelete' type='() => void'>
-					A callback that is fired the card is deleted.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/card.png' />
+
+    	```jsx Example
+    	import { Card } from "./ui/card";
+    	export function CardComponent({ onClick, onDelete, children }) {
+    		const style = { position: 'absolute', top: 0, right: 0 };
+    		return (
+    			<Card onClick={onClick} style={{ position: 'relative' }}>
+    				{onDelete && <DeleteButton style={style} onClick={onDelete} />}
+    				{children}
+    			</Card>
+    		);
+    	}
+    	```
+    	<ParamField path='CardComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the container.
+    			</ResponseField>
+    			<ResponseField name='onClick' type='() => void'>
+    				A callback that is fired when the card is clicked.
+    			</ResponseField>
+    			<ResponseField name='onDelete' type='() => void'>
+    				A callback that is fired the card is deleted.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -457,29 +472,44 @@ export function ShadcnSQLEditor() {
 	type='(props: PopoverComponentProps) => JSX.Element'>
 	A popover component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='PopoverComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='isOpen' type='boolean' required>
-					Whether the modal is open.
-				</ResponseField>
-				<ResponseField
-					name='setIsOpen'
-					type='(isOpen: boolean) => void'
-					required>
-					A callback to set whether the modal is open.
-				</ResponseField>
-				<ResponseField name='triggerLabel' type='string'>
-					The label for the trigger of this popover.
-				</ResponseField>
-				<ResponseField name='popoverTitle' type='string'>
-					The title of the popover.
-				</ResponseField>
-				<ResponseField name='popoverChildren' type='ReactNode'>
-					The children of this popover.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/pivot_popover.png' />
+
+    	```jsx Example
+    	import { Popover } from "./ui/popover";
+
+    	export function PopoverComponent({ isOpen, setIsOpen, popoverTitle, popoverChildren }) {
+    		return (
+    			<Popover isOpen={isOpen} setIsOpen={setIsOpen} title={popoverTitle}>
+    				{popoverChildren}
+    			</Popover>
+    		);
+    	}
+    	```
+
+    	<ParamField path='PopoverComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the modal is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the modal is open.
+    			</ResponseField>
+    			<ResponseField name='triggerLabel' type='string'>
+    				The label for the trigger of this popover.
+    			</ResponseField>
+    			<ResponseField name='popoverTitle' type='string'>
+    				The title of the popover.
+    			</ResponseField>
+    			<ResponseField name='popoverChildren' type='ReactNode'>
+    				The children of this popover.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -487,8 +517,15 @@ export function ShadcnSQLEditor() {
 	type='(props: { label: string }) => JSX.Element'>
 	A label component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/label.png' />
+
+    	```jsx Example
+    	export function LabelComponent({ label }) {
+    		return <h4>{label}</h4>;
+    	}
+    	```
 		<ParamField path='LabelComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='label' type='() => void' required>
 					The label of the label component.
 				</ResponseField>
@@ -502,14 +539,22 @@ export function ShadcnSQLEditor() {
 	type='(props: { label: string }) => JSX.Element'>
 	A header component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='HeaderComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='label' type='() => void' required>
-					The label of the header component.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/header.png' />
+
+    	```jsx Example
+    	export function HeaderComponent({ label }) {
+    		return <h2>{label}</h2>;
+    	}
+    	```
+    	<ParamField path='HeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='() => void' required>
+    				The label of the header component.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -517,8 +562,15 @@ export function ShadcnSQLEditor() {
 	type='(props: { label: string }) => JSX.Element'>
 	A sub-header component describes a group of inputs.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/subheader.png' />
+
+    	```jsx Example
+    	export function SubHeaderComponent({ label }) {
+    		return <h3>{label}</h3>;
+    	}
+    	```
 		<ParamField path='SubHeaderComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='label' type='() => void' required>
 					The label of the sub-header component.
 				</ResponseField>
@@ -532,8 +584,15 @@ export function ShadcnSQLEditor() {
 	type='(props: { label: string }) => JSX.Element'>
 	A simple text component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/text.png' />
+
+    	```jsx Example
+    	export function TextComponent({ label }) {
+    		return <p>{label}</p>;
+    	}
+    	```
 		<ParamField path='TextComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='label' type='() => void' required>
 					The label of the text component.
 				</ResponseField>
