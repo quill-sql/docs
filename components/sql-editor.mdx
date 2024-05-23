@@ -241,32 +241,52 @@ export function ShadcnSQLEditor() {
 	type='(props: TextInputComponentProps) => JSX.Element'>
 	A input element for getting text from the user.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='TextInputComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='id' type='string' required>
-					The id of the input element.
-				</ResponseField>
-				<ResponseField name='width' type='number' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='value' type='string' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='label' type='string'>
-					A label for the text input.
-				</ResponseField>
-				<ResponseField name='placeholder' type='string'>
-					The placeholder for the input element.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void'
-					required>
-					An event callback that is fired when the input value changes.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/text_input.png' />
+
+    	```jsx Example
+    	export function TextInputComponent({ id, width, value, label, placeholder, onChange }) {
+    		return (
+    			<label>
+    				{label}
+    				<input
+    					id={id}
+    					style={{ width }}
+    					value={value}
+    					placeholder={placeholder}
+    					onChange={onChange}
+    				/>
+    			</label>
+    		);
+    	}
+    	```
+
+    	<ParamField path='TextInputComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='id' type='string' required>
+    				The id of the input element.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='value' type='string' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the text input.
+    			</ResponseField>
+    			<ResponseField name='placeholder' type='string'>
+    				The placeholder for the input element.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the input value changes.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -274,32 +294,48 @@ export function ShadcnSQLEditor() {
 	type='(props: SelectComponentProps) => JSX.Element'>
 	A select element for letting the user select from a set of options.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='SelectComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='value' type='string' required>
-					The value of the select.
-				</ResponseField>
-				<ResponseField name='label' type='string'>
-					A label for the select.
-				</ResponseField>
-				<ResponseField
-					name='options'
-					type='{ value: string; label: string; }[]'
-					required>
-					The select options.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void'
-					required>
-					An event callback that is fired when the selected element changes.
-				</ResponseField>
-				<ResponseField name='width' type='number' required>
-					The width of the select element in pixels.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/select.png' />
+
+    	```jsx Example
+    	export function SelectComponent({ value, label, width, onChange, options }) {
+    		return (
+    			<label>
+    				{label}
+    				<select value={value} onChange={onChange} style={{ width }}>
+    					{options.map(({ value, label }) => <option value={value}>{label}</option>)}
+    				</select>
+    			</label>
+    		);
+    	}
+    	```
+
+    	<ParamField path='SelectComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='value' type='string' required>
+    				The value of the select.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the select.
+    			</ResponseField>
+    			<ResponseField
+    				name='options'
+    				type='{ value: string; label: string; }[]'
+    				required>
+    				The select options.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the selected element changes.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the select element in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -307,23 +343,36 @@ export function ShadcnSQLEditor() {
 	type='(props: TableComponentProps) => JSX.Element'>
 	A table component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='TableComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
-					The rows of the table are an array of objects.
-				</ResponseField>
-				<ResponseField
-					name='columns'
-					type='{ label: string; field: string; }[]'
-					required>
-					The columns of the table are an array of label, field pairs.
-				</ResponseField>
-				<ResponseField name='isLoading' type='boolean'>
-					Whether the table is loading.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/table.png' />
+
+    	```jsx Example
+    	import { Table } from "./ui/table";
+    	import { LoadingSkeleton } from "./ui/loading";
+
+    	export function TableComponent({ rows, columns, isLoading }) {
+    		if (isLoading) return <LoadingSkeleton />
+    		return <Table rows={rows} columns={columns} />;
+    	}
+    	```
+
+    	<ParamField path='TableComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+    				The rows of the table are an array of objects.
+    			</ResponseField>
+    			<ResponseField
+    				name='columns'
+    				type='{ label: string; field: string; }[]'
+    				required>
+    				The columns of the table are an array of label, field pairs.
+    			</ResponseField>
+    			<ResponseField name='isLoading' type='boolean'>
+    				Whether the table is loading.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField path='LoadingComponent' type='() => JSX.Element'>
@@ -356,32 +405,51 @@ export function ShadcnSQLEditor() {
 	type='(props: ModalComponentProps) => JSX.Element'>
 	A modal component to use to open the add to dashboard dialog.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='ModalComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='isOpen' type='boolean' required>
-					Whether the modal is open.
-				</ResponseField>
-				<ResponseField
-					name='setIsOpen'
-					type='(isOpen: boolean) => void'
-					required>
-					A callback to set whether the modal is open.
-				</ResponseField>
-				<ResponseField name='title' type='string'>
-					The title of the modal, if any.
-				</ResponseField>
-				<ResponseField name='children' type='ReactNode' required>
-					The body of the modal.
-				</ResponseField>
-				<ResponseField name='width' type='number'>
-					The width of the modal, in pixels.
-				</ResponseField>
-				<ResponseField name='height' type='number'>
-					The height of the modal, in pixels.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/modal.png' />
+
+    	```jsx Example
+    	import { Modal } from "./ui/modal";
+    	export function ModalComponent({ isOpen, setIsOpen, title, children, width, height }) {
+    		return (
+    			<Modal
+    				isOpen={isOpen}
+    				setIsOpen={setIsOpen}
+    				title={title}
+    				style={{ width, height }}
+    			>
+    				{children}
+    			</Modal>
+    		);
+    	}
+    	```
+
+    	<ParamField path='ModalComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the modal is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the modal is open.
+    			</ResponseField>
+    			<ResponseField name='title' type='string'>
+    				The title of the modal, if any.
+    			</ResponseField>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The body of the modal.
+    			</ResponseField>
+    			<ResponseField name='width' type='number'>
+    				The width of the modal, in pixels.
+    			</ResponseField>
+    			<ResponseField name='height' type='number'>
+    				The height of the modal, in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -559,14 +627,22 @@ export function ShadcnSQLEditor() {
 	type='(props: { children: ReactNode }) => JSX.Element'>
 	A component that displays error messages.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='ErrorMessageComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='errorMessage' type='ReactNode' required>
-					The error message.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/error_message.png' />
+
+    	```jsx Example
+    	export function ErrorMessageComponent({ errorMessage }) {
+    		return <div>{errorMessage}</div>
+    	}
+    	```
+    	<ParamField path='ErrorMessageComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='errorMessage' type='ReactNode' required>
+    				The error message.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField path='onChangeQuery' type='(query: string) => void'>

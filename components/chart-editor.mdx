@@ -255,8 +255,23 @@ export function ShadcnChartEditor() {
 	type='(props: SelectComponentProps) => JSX.Element'>
 	A select element for letting the user select from a set of options.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/select.png' />
+
+    	```jsx Example
+    	export function SelectComponent({ value, label, width, onChange, options }) {
+    		return (
+    			<label>
+    				{label}
+    				<select value={value} onChange={onChange} style={{ width }}>
+    					{options.map(({ value, label }) => <option value={value}>{label}</option>)}
+    				</select>
+    			</label>
+    		);
+    	}
+    	```
+
 		<ParamField path='SelectComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='value' type='string' required>
 					The value of the select.
 				</ResponseField>
@@ -289,31 +304,51 @@ export function ShadcnChartEditor() {
 	A input element for getting text from the user.
 	<Expandable defaultOpen={false} title='props'>
 		<ParamField path='TextInputComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='id' type='string' required>
-					The id of the input element.
-				</ResponseField>
-				<ResponseField name='width' type='number' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='value' type='string' required>
-					The width of the input element in pixels.
-				</ResponseField>
-				<ResponseField name='label' type='string'>
-					A label for the text input.
-				</ResponseField>
-				<ResponseField name='placeholder' type='string'>
-					The placeholder for the input element.
-				</ResponseField>
-				<ResponseField
-					name='onChange'
-					type='(event: ChangeEvent<HTMLInputElement>) => void'
-					required>
-					An event callback that is fired when the input value changes.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+			<img src='/images/text_input.png' />
+
+    		```jsx Example
+    		export function TextInputComponent({ id, width, value, label, placeholder, onChange }) {
+    			return (
+    				<label>
+    					{label}
+    					<input
+    						id={id}
+    						style={{ width }}
+    						value={value}
+    						placeholder={placeholder}
+    						onChange={onChange}
+    					/>
+    				</label>
+    			);
+    		}
+    		```
+
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='id' type='string' required>
+    				The id of the input element.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='value' type='string' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the text input.
+    			</ResponseField>
+    			<ResponseField name='placeholder' type='string'>
+    				The placeholder for the input element.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the input value changes.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -370,23 +405,24 @@ export function ShadcnChartEditor() {
     		);
     	}
     	```
-		<ParamField path='ButtonComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='onClick' type='() => void' required>
-					A callback fired when the button is clicked.
-				</ResponseField>
-				<ResponseField name='label' type='string' required>
-					The text content of the button.
-				</ResponseField>
-				<ResponseField name='disabled' type='boolean'>
-					Whether the button is disabled.
-				</ResponseField>
-				<ResponseField name='icon' type='ReactNode'>
-					An icon to put in front of the label.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='ButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the button.
+    			</ResponseField>
+    			<ResponseField name='disabled' type='boolean'>
+    				Whether the button is disabled.
+    			</ResponseField>
+    			<ResponseField name='icon' type='ReactNode'>
+    				An icon to put in front of the label.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -397,20 +433,21 @@ export function ShadcnChartEditor() {
 		<img src='/images/delete_button.png' />
 
     	```jsx Example
-		import { deleteSVG } from "./ui/icons";
+    	import { deleteSVG } from "./ui/icons";
     	export function DeleteButtonComponent({ onClick }) {
     		return <button onClick={onClick}>{deleteSVG}</button>;
     	}
     	```
 
-		<ParamField path='DeleteButtonComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='onClick' type='() => void' required>
-					A callback fired when the button is clicked.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='DeleteButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -499,8 +536,26 @@ export function ShadcnChartEditor() {
 	type='(props: ModalComponentProps) => JSX.Element'>
 	A modal component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/modal.png' />
+
+    	```jsx Example
+		import { Modal } from "./ui/modal";
+    	export function ModalComponent({ isOpen, setIsOpen, title, children, width, height }) {
+    		return (
+    			<Modal
+					isOpen={isOpen}
+					setIsOpen={setIsOpen}
+					title={title}
+					style={{ width, height }}
+				>
+					{children}
+    			</Modal>
+    		);
+    	}
+    	```
+
 		<ParamField path='ModalComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='isOpen' type='boolean' required>
 					Whether the modal is open.
 				</ResponseField>
@@ -562,8 +617,20 @@ export function ShadcnChartEditor() {
 	type='(props: TableComponentProps) => JSX.Element'>
 	A table component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/table.png' />
+
+    	```jsx Example
+		import { Table } from "./ui/table";
+		import { LoadingSkeleton } from "./ui/loading";
+
+    	export function TableComponent({ rows, columns, isLoading }) {
+			if (isLoading) return <LoadingSkeleton />
+    		return <Table rows={rows} columns={columns} />;
+    	}
+    	```
+
 		<ParamField path='TableComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='rows' type='{ [key: string]: any }[]' required>
 					The rows of the table are an array of objects.
 				</ResponseField>
@@ -666,8 +733,15 @@ export function ShadcnChartEditor() {
 	type='(props: { children: ReactNode }) => JSX.Element'>
 	A component that displays error messages.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/error_message.png' />
+
+    	```jsx Example
+    	export function ErrorMessageComponent({ errorMessage }) {
+    		return <div>{errorMessage}</div>
+    	}
+    	```
 		<ParamField path='ErrorMessageComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='errorMessage' type='ReactNode' required>
 					The error message.
 				</ResponseField>

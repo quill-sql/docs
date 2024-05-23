@@ -256,8 +256,23 @@ export function ShadcnDashboard() {
 	type='(props: SelectComponentProps) => JSX.Element'>
 	A select component.
 	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/select.png' />
+
+    	```jsx Example
+    	export function SelectComponent({ value, label, width, onChange, options }) {
+    		return (
+    			<label>
+    				{label}
+    				<select value={value} onChange={onChange} style={{ width }}>
+    					{options.map(({ value, label }) => <option value={value}>{label}</option>)}
+    				</select>
+    			</label>
+    		);
+    	}
+    	```
+
 		<ParamField path='SelectComponentProps' type='object'>
-			<Expandable title='properties'>
+			<Expandable title='properties' defaultOpen={true}>
 				<ResponseField name='value' type='string' required>
 					The value of the select element.
 				</ResponseField>
