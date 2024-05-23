@@ -141,23 +141,36 @@ export function ShadcnSQLEditor() {
 	type='(props: ButtonComponentProps) => JSX.Element'>
 	A primary button component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='ButtonComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='onClick' type='() => void' required>
-					A callback fired when the button is clicked.
-				</ResponseField>
-				<ResponseField name='label' type='string' required>
-					The text content of the button.
-				</ResponseField>
-				<ResponseField name='disabled' type='boolean'>
-					Whether the button is disabled.
-				</ResponseField>
-				<ResponseField name='icon' type='ReactNode'>
-					An icon to put in front of the label.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/button.png' />
+
+    	```jsx Example
+    	export function ButtonComponent({ onClick, label, disabled, icon }) {
+    		return (
+    			<button onClick={onClick} disabled={disabled}>
+    				{icon}
+    				{label}
+    			</button>
+    		);
+    	}
+    	```
+    	<ParamField path='ButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the button.
+    			</ResponseField>
+    			<ResponseField name='disabled' type='boolean'>
+    				Whether the button is disabled.
+    			</ResponseField>
+    			<ResponseField name='icon' type='ReactNode'>
+    				An icon to put in front of the label.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -165,23 +178,37 @@ export function ShadcnSQLEditor() {
 	type='(props: ButtonComponentProps) => JSX.Element'>
 	A secondary button component.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='ButtonComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='onClick' type='() => void' required>
-					A callback fired when the button is clicked.
-				</ResponseField>
-				<ResponseField name='label' type='string' required>
-					The text content of the button.
-				</ResponseField>
-				<ResponseField name='disabled' type='boolean'>
-					Whether the button is disabled.
-				</ResponseField>
-				<ResponseField name='icon' type='ReactNode'>
-					An icon to put in front of the label.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/secondary_button.png' />
+
+    	```jsx Example
+    	export function SecondaryButtonComponent({ onClick, label, disabled, icon }) {
+    		return (
+    			<button onClick={onClick} disabled={disabled}>
+    				{icon}
+    				{label}
+    			</button>
+    		);
+    	}
+    	```
+
+    	<ParamField path='ButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the button.
+    			</ResponseField>
+    			<ResponseField name='disabled' type='boolean'>
+    				Whether the button is disabled.
+    			</ResponseField>
+    			<ResponseField name='icon' type='ReactNode'>
+    				An icon to put in front of the label.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -189,14 +216,24 @@ export function ShadcnSQLEditor() {
 	type='(props: DeleteButtonComponentProps) => JSX.Element'>
 	A small delete button used to click out of things. Usually an "X" icon.
 	<Expandable defaultOpen={false} title='props'>
-		<ParamField path='DeleteButtonComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='onClick' type='() => void' required>
-					A callback fired when the button is clicked.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+		<img src='/images/delete_button.png' />
+
+    	```jsx Example
+    	import { deleteSVG } from "./ui/icons";
+    	export function DeleteButtonComponent({ onClick }) {
+    		return <button onClick={onClick}>{deleteSVG}</button>;
+    	}
+    	```
+
+    	<ParamField path='DeleteButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
