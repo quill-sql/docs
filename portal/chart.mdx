@@ -1,0 +1,144 @@
+---
+title: "Create a chart"
+description: "Build your first chart with Quill in less than a minute"
+---
+
+<Note>
+	This guide assumes you have already created a dashboard. If you haven't done
+	that yet, check out our guide on how to create your first dashboard
+	[here](/portal/dashboard).
+</Note>
+
+There are two ways to create a chart with Quill, with SQL or without SQL.
+
+<CardGroup cols={2}>
+	<Card
+		title='With SQL (SQLEditor)'
+		icon='code'
+		href='/portal/chart#with-sql-sqleditor'>
+		Create a chart with the power of SQL
+	</Card>
+	<Card
+		title='No Code (ReportBuilder)'
+		icon='hammer'
+		href='/portal/chart#no-code-reportbuilder'>
+		Create a chart from a user interface
+	</Card>
+</CardGroup>
+
+## With SQL (SQLEditor)
+
+The SQL Editor is a powerful SQL-based code editor that you can use in your
+product to help your users create and edit their own reports.
+
+<Frame>
+	<img src='/images/sql_editor.png' />
+</Frame>
+
+### 1. Enter a query or ask AI
+
+Use the code editor to enter a SQL query. Alternatively, you can also use the text box to ask AI to write a SQL query for you using your available schemas. When you're finished with your query, click `Run Query` to execute that query against your database.
+
+### 2. Edit your query
+
+Take a look at the response table to make sure the data was what you expected. If it isn't, you can either manually update the SQL query using the code editor or you can use the text box again to have the AI fix the query.
+
+If the query didn't work at all, you can also have the AI automatically fix the broken query by clicking `Fix with AI`:
+
+<Frame>
+	<img src='/images/fix_query.png' />
+</Frame>
+
+### 3. Edit the chart
+
+Once you are satisfied with your query and the query results, click `Add to dashboard` in the bottom right to turn the query into a report.
+
+<Frame>
+	<img src='/images/edit_chart.png' />
+</Frame>
+
+Here, you can edit the name of the chart, the dashboard this chart should belong to, the chart type, and much more.
+
+<Tip>
+	For a more detailed guide for each of each option, see [Editing a
+	Chart](#editing-a-chart) below.
+</Tip>
+
+## No Code (ReportBuilder)
+
+The Report Builder is an easy-to-use, AI-enabled query creation tool that you
+can use in your product to allow nontechnical users to create and edit their own
+reports without knowing SQL.
+
+<Frame>
+	<img src='/images/report_builder.png' />
+</Frame>
+
+### 1. Create a report or ask AI
+
+To create a report using the ReportBuilder, you can either ask AI to generate a report for you or use the interface on the left sidebar to select columns.
+
+### 2. Edit the report
+
+Once you have a report that is populated with data, you can edit the report using AI or the left sidebar.
+
+To apply a filter, simply select the column you wish to filter against and then how you would like to filter (the options change based on the type of the column).
+
+To apply one- or two-dimensional groupings or aggregations you can add a pivot which will orient your data based on the columns and aggregation type you select.
+
+You can sort the data in the report by one or more columns using the sort feature and you can limit the number of rows returned in the report using the limit feature.
+
+### 3. Edit the chart
+
+Once you are satisfied with your query and the query results, click `Add to dashboard` in the bottom right to turn the query into a report.
+
+<Frame>
+	<img src='/images/edit_chart_2.png' />
+</Frame>
+
+Here, you can edit the name of the chart, the dashboard this chart should belong to, the chart type, and much more.
+
+<Tip>
+	For a more detailed guide for each of each option, see [Editing a
+	Chart](#editing-a-chart) below.
+</Tip>
+
+## Editing a Chart
+
+Once you have created a query, you can edit the resulting chart before adding it
+to your dashboard. You can edit the name of the chart, the dashboard this chart
+should belong to, the chart type, and much more. When used in an embedded flow
+where the dashboard is known ahead of time, developers can pre-select this
+dashboard and the option will be hidden in this form.
+
+<Frame>
+	<img src='/images/edit_chart_3.png' />
+</Frame>
+
+### Pivots
+
+Editing queries with SQL gives you fine-grain control over your data, but you can also add a pivot to the result of the query to apply extra groupings or breakdowns to get exactly the information you want.
+
+### Chart Axis
+
+You can update the axis information for each chart by selecting which columns to use for each axis, what labels to give those columns (defaults to the name of the column), and the formatting type that should be applied to values for that axis.
+
+### Table Info
+
+In Quill, every chart is backed by a SQL query. The results of that query are represented as a table which can be useful for reporting or sharing with other teams. Similar to the chart axis you can change the columns, labels, and formatting applied to this table.
+
+### Date Field
+
+For dashboards with date filters, you can select which date field to use for this query. This column will be used when filtering all charts on that dashboard by a common date filter automatically.
+
+### Organization Access
+
+By default, this chart will only be visible for your current organization (in this case, "Acme") but you can make this chart visible to all organizations by toggling the organization access toggle. This option can also be disabled.
+
+## Next Steps
+
+With chart and a dashboard, you're ready to start using Quill. If you'd like, you can also add a new view to give Quill access to even more data for making charts!
+
+<Card title='Create a view' icon='square-1' href={"/portal/view"}>
+	Add a SQL view with Quill in less than a minute.
+</Card>

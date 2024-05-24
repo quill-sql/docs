@@ -1,0 +1,793 @@
+---
+title: "SQLEditor"
+description: "A UI component for creating and editing Quill Reports with SQL"
+---
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx App.tsx
+import { QuillProvider, SQLEditor } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<SQLEditor />
+		</QuillProvider>
+	);
+}
+```
+
+Allows your users to build and write custom SQL queries and then add those
+queries into their dashboard as a metric, chart, or table.
+
+<Info>
+	Make sure `QuillProvider` is a parent of the `SQLEditor` component.
+</Info>
+
+## Examples
+
+<Tabs>
+  <Tab title="Ant Design">
+  [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/ant'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Ant Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+import { AntTable } from "./ui/ant/Table";
+import { AntSelectComponent } from "./ui/ant/SelectComponent";
+import { AntButton, AntSecondaryButton } from "./ui/ant/Button";
+import { AntTextInput } from "./ui/ant/Input";
+
+export function AntSQLEditor() {
+	return (
+		<SQLEditor
+			ButtonComponent={AntButton}
+			SecondaryButtonComponent={AntSecondaryButton}
+			TextInputComponent={AntTextInput}
+			SelectComponent={AntSelectComponent}
+			TableComponent={AntTable}
+		/>
+	);
+}
+```
+
+  </Tab>
+  <Tab title="Material Design">
+  [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/material'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Material Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+import { MaterialTable } from "./ui/material/Table";
+import { MaterialSelect } from "./ui/material/Select";
+import { MaterialButton, MaterialSecondaryButton } from "./ui/material/Button";
+import { MaterialTextInput } from "./ui/material/Input";
+
+export function MaterialSQLEditor() {
+	return (
+		<SQLEditor
+			ButtonComponent={MaterialButton}
+			SecondaryButtonComponent={MaterialSecondaryButton}
+			TextInputComponent={MaterialTextInput}
+			SelectComponent={MaterialSelect}
+			TableComponent={MaterialTable}
+		/>
+	);
+}
+```
+
+  </Tab>
+  <Tab title="Shadcn UI">
+  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/sql-editor/shadcn'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 800,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { SQLEditor } from "@quillsql/react";
+
+export function ShadcnSQLEditor() {
+	return <SQLEditor />;
+}
+```
+
+  </Tab>
+</Tabs>
+
+## Props
+
+<ParamField
+	path='ButtonComponent'
+	type='(props: ButtonComponentProps) => JSX.Element'>
+	A primary button component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/button.png' />
+
+    	```jsx Example
+    	export function ButtonComponent({ onClick, label, disabled, icon }) {
+    		return (
+    			<button onClick={onClick} disabled={disabled}>
+    				{icon}
+    				{label}
+    			</button>
+    		);
+    	}
+    	```
+    	<ParamField path='ButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the button.
+    			</ResponseField>
+    			<ResponseField name='disabled' type='boolean'>
+    				Whether the button is disabled.
+    			</ResponseField>
+    			<ResponseField name='icon' type='ReactNode'>
+    				An icon to put in front of the label.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='SecondaryButtonComponent'
+	type='(props: ButtonComponentProps) => JSX.Element'>
+	A secondary button component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/secondary_button.png' />
+
+    	```jsx Example
+    	export function SecondaryButtonComponent({ onClick, label, disabled, icon }) {
+    		return (
+    			<button onClick={onClick} disabled={disabled}>
+    				{icon}
+    				{label}
+    			</button>
+    		);
+    	}
+    	```
+
+    	<ParamField path='ButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the button.
+    			</ResponseField>
+    			<ResponseField name='disabled' type='boolean'>
+    				Whether the button is disabled.
+    			</ResponseField>
+    			<ResponseField name='icon' type='ReactNode'>
+    				An icon to put in front of the label.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='DeleteButtonComponent'
+	type='(props: DeleteButtonComponentProps) => JSX.Element'>
+	A small delete button used to click out of things. Usually an "X" icon.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/delete_button.png' />
+
+    	```jsx Example
+    	import { deleteSVG } from "./ui/icons";
+    	export function DeleteButtonComponent({ onClick }) {
+    		return <button onClick={onClick}>{deleteSVG}</button>;
+    	}
+    	```
+
+    	<ParamField path='DeleteButtonComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='onClick' type='() => void' required>
+    				A callback fired when the button is clicked.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='TextInputComponent'
+	type='(props: TextInputComponentProps) => JSX.Element'>
+	A input element for getting text from the user.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/text_input.png' />
+
+    	```jsx Example
+    	export function TextInputComponent({ id, width, value, label, placeholder, onChange }) {
+    		return (
+    			<label>
+    				{label}
+    				<input
+    					id={id}
+    					style={{ width }}
+    					value={value}
+    					placeholder={placeholder}
+    					onChange={onChange}
+    				/>
+    			</label>
+    		);
+    	}
+    	```
+
+    	<ParamField path='TextInputComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='id' type='string' required>
+    				The id of the input element.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='value' type='string' required>
+    				The width of the input element in pixels.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the text input.
+    			</ResponseField>
+    			<ResponseField name='placeholder' type='string'>
+    				The placeholder for the input element.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the input value changes.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='SelectComponent'
+	type='(props: SelectComponentProps) => JSX.Element'>
+	A select element for letting the user select from a set of options.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/select.png' />
+
+    	```jsx Example
+    	export function SelectComponent({ value, label, width, onChange, options }) {
+    		return (
+    			<label>
+    				{label}
+    				<select value={value} onChange={onChange} style={{ width }}>
+    					{options.map(({ value, label }) => <option value={value}>{label}</option>)}
+    				</select>
+    			</label>
+    		);
+    	}
+    	```
+
+    	<ParamField path='SelectComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='value' type='string' required>
+    				The value of the select.
+    			</ResponseField>
+    			<ResponseField name='label' type='string'>
+    				A label for the select.
+    			</ResponseField>
+    			<ResponseField
+    				name='options'
+    				type='{ value: string; label: string; }[]'
+    				required>
+    				The select options.
+    			</ResponseField>
+    			<ResponseField
+    				name='onChange'
+    				type='(event: ChangeEvent<HTMLInputElement>) => void'
+    				required>
+    				An event callback that is fired when the selected element changes.
+    			</ResponseField>
+    			<ResponseField name='width' type='number' required>
+    				The width of the select element in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='TableComponent'
+	type='(props: TableComponentProps) => JSX.Element'>
+	A table component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/table.png' />
+
+    	```jsx Example
+    	import { Table } from "./ui/table";
+    	import { LoadingSkeleton } from "./ui/loading";
+
+    	export function TableComponent({ rows, columns, isLoading }) {
+    		if (isLoading) return <LoadingSkeleton />
+    		return <Table rows={rows} columns={columns} />;
+    	}
+    	```
+
+    	<ParamField path='TableComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='rows' type='{ [key: string]: any }[]' required>
+    				The rows of the table are an array of objects.
+    			</ResponseField>
+    			<ResponseField
+    				name='columns'
+    				type='{ label: string; field: string; }[]'
+    				required>
+    				The columns of the table are an array of label, field pairs.
+    			</ResponseField>
+    			<ResponseField name='isLoading' type='boolean'>
+    				Whether the table is loading.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField path='LoadingComponent' type='() => JSX.Element'>
+	A component to show while the query results are loading.
+</ParamField>
+
+<ParamField
+	path='CardComponent'
+	type='(props: CardComponentProps) => JSX.Element'>
+	A card component used as a dismissable container of pivot information.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/card.png' />
+
+    	```jsx Example
+    	import { Card } from "./ui/card";
+    	export function CardComponent({ onClick, onDelete, children }) {
+    		const style = { position: 'absolute', top: 0, right: 0 };
+    		return (
+    			<Card onClick={onClick} style={{ position: 'relative' }}>
+    				{onDelete && <DeleteButton style={style} onClick={onDelete} />}
+    				{children}
+    			</Card>
+    		);
+    	}
+    	```
+    	<ParamField path='CardComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the container.
+    			</ResponseField>
+    			<ResponseField name='onClick' type='() => void'>
+    				A callback that is fired when the card is clicked.
+    			</ResponseField>
+    			<ResponseField name='onDelete' type='() => void'>
+    				A callback that is fired the card is deleted.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='ModalComponent'
+	type='(props: ModalComponentProps) => JSX.Element'>
+	A modal component to use to open the add to dashboard dialog.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/modal.png' />
+
+    	```jsx Example
+    	import { Modal } from "./ui/modal";
+    	export function ModalComponent({ isOpen, setIsOpen, title, children, width, height }) {
+    		return (
+    			<Modal
+    				isOpen={isOpen}
+    				setIsOpen={setIsOpen}
+    				title={title}
+    				style={{ width, height }}
+    			>
+    				{children}
+    			</Modal>
+    		);
+    	}
+    	```
+
+    	<ParamField path='ModalComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the modal is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the modal is open.
+    			</ResponseField>
+    			<ResponseField name='title' type='string'>
+    				The title of the modal, if any.
+    			</ResponseField>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The body of the modal.
+    			</ResponseField>
+    			<ResponseField name='width' type='number'>
+    				The width of the modal, in pixels.
+    			</ResponseField>
+    			<ResponseField name='height' type='number'>
+    				The height of the modal, in pixels.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='PopoverComponent'
+	type='(props: PopoverComponentProps) => JSX.Element'>
+	A popover component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/pivot_popover.png' />
+
+    	```jsx Example
+    	import { Popover } from "./ui/popover";
+
+    	export function PopoverComponent({ isOpen, setIsOpen, popoverTitle, popoverChildren }) {
+    		return (
+    			<Popover isOpen={isOpen} setIsOpen={setIsOpen} title={popoverTitle}>
+    				{popoverChildren}
+    			</Popover>
+    		);
+    	}
+    	```
+
+    	<ParamField path='PopoverComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='isOpen' type='boolean' required>
+    				Whether the modal is open.
+    			</ResponseField>
+    			<ResponseField
+    				name='setIsOpen'
+    				type='(isOpen: boolean) => void'
+    				required>
+    				A callback to set whether the modal is open.
+    			</ResponseField>
+    			<ResponseField name='triggerLabel' type='string'>
+    				The label for the trigger of this popover.
+    			</ResponseField>
+    			<ResponseField name='popoverTitle' type='string'>
+    				The title of the popover.
+    			</ResponseField>
+    			<ResponseField name='popoverChildren' type='ReactNode'>
+    				The children of this popover.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='LabelComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A label component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/label.png' />
+
+    	```jsx Example
+    	export function LabelComponent({ label }) {
+    		return <h4>{label}</h4>;
+    	}
+    	```
+		<ParamField path='LabelComponentProps' type='object'>
+			<Expandable title='properties' defaultOpen={true}>
+				<ResponseField name='label' type='() => void' required>
+					The label of the label component.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='HeaderComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A header component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/header.png' />
+
+    	```jsx Example
+    	export function HeaderComponent({ label }) {
+    		return <h2>{label}</h2>;
+    	}
+    	```
+    	<ParamField path='HeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='() => void' required>
+    				The label of the header component.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='SubHeaderComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A sub-header component describes a group of inputs.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/subheader.png' />
+
+    	```jsx Example
+    	export function SubHeaderComponent({ label }) {
+    		return <h3>{label}</h3>;
+    	}
+    	```
+		<ParamField path='SubHeaderComponentProps' type='object'>
+			<Expandable title='properties' defaultOpen={true}>
+				<ResponseField name='label' type='() => void' required>
+					The label of the sub-header component.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='TextComponent'
+	type='(props: { label: string }) => JSX.Element'>
+	A simple text component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/text.png' />
+
+    	```jsx Example
+    	export function TextComponent({ label }) {
+    		return <p>{label}</p>;
+    	}
+    	```
+		<ParamField path='TextComponentProps' type='object'>
+			<Expandable title='properties' defaultOpen={true}>
+				<ResponseField name='label' type='() => void' required>
+					The label of the text component.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputRowContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for each row of inputs for the ChartBuilder form.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/chart_builder_input_row_container.png' />
+		<ParamField path='ChartBuilderInputRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderInputColumnContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked rows of inputs for the ChartBuilder form.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/chart_builder_input_column_container.png' />
+		<ParamField path='ChartBuilderInputColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotRowContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for each row of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/pivot_row_container.png' />
+		<ParamField path='PivotRowContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='PivotColumnContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked rows of inputs for the pivot form.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/pivot_column_container.png' />
+		<ParamField path='PivotColumnContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ChartBuilderFormContainer'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A container for vertically-stacked sections of the chart builder form.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/chart_builder_form_container.png' />
+		<ParamField path='ChartBuilderFormContainerProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='ErrorMessageComponent'
+	type='(props: { children: ReactNode }) => JSX.Element'>
+	A component that displays error messages.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/error_message.png' />
+
+    	```jsx Example
+    	export function ErrorMessageComponent({ errorMessage }) {
+    		return <div>{errorMessage}</div>
+    	}
+    	```
+    	<ParamField path='ErrorMessageComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='errorMessage' type='ReactNode' required>
+    				The error message.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField path='onChangeQuery' type='(query: string) => void'>
+	A callback that is fired when the query changes.
+</ParamField>
+
+<ParamField path='onChangeData' type='(query: string) => void'>
+	A callback that is fired when the data changes.
+</ParamField>
+
+<ParamField path='onChangeFields' type='(query: string) => void'>
+	A callback that is fired when the data fields change.
+</ParamField>
+
+<ParamField path='onChangeColumns' type='(query: string) => void'>
+	A callback that is fired when the data columns change.
+</ParamField>
+
+<ParamField
+	path='onAddToDashboardComplete'
+	type='(report: QuillReport) => void'>
+	A callback that is fired when a new report has been added to a dashboard.
+</ParamField>
+
+<ParamField path='isChartBuilderHorizontalView' type='boolean' default={true}>
+	Whether the ReportBuilder is in admin mode (default: `true`).
+</ParamField>
+
+<ParamField path='isChartBuilderEnabled' type='boolean' default={true}>
+	A callback that is fired when the data columns change.
+</ParamField>
+
+<ParamField path='isNewQueryEnabled' type='boolean' default={true}>
+	Whether the "new query" button is enabled.
+</ParamField>
+
+<ParamField path='showTableFormatOptions' type='boolean' default={true}>
+	Whether to show table format options.
+</ParamField>
+
+<ParamField path='showDateFieldOptions' type='boolean' default={true}>
+	Whether to show date field options.
+</ParamField>
+
+<ParamField path='showAccessControlOptions' type='boolean' default={true}>
+	Whether to show access control options.
+</ParamField>
+
+<ParamField path='report' type='QuillReport'>
+	An existing report to edit.
+</ParamField>
+
+<ParamField path='defaultQuery' type='string'>
+	The default query to use as a placeholder.
+</ParamField>
+
+<ParamField path='destinationDashboard' type='string'>
+	The default dashboard to add reports to.
+</ParamField>
+
+<ParamField path='chartBuilderTitle' type='string'>
+	The title of the ChartBuilder dialog.
+</ParamField>
+
+<ParamField path='chartBuilderButtonLabel' type='string'>
+	The label of the button to add the current query to a dashboard.
+</ParamField>
+
+<ParamField
+	path='addToDashboardButtonLabel'
+	type='string'
+	default='Add to dashboard'>
+	The label of the button to open the ChartBuilder dialog.
+</ParamField>
+
+<ParamField path='organizationName' type='string'>
+	The name of the current organization.
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Styles the top-level container of the SQLEditor.
+
+    This can be useful for TailwindCSS-style classname strings.
+
+</ParamField>
+
+<ParamField path='containerStyle' type='CSSProperties'>
+	Custom styling properties for the ReportBuilder's top-level container.
+</ParamField>

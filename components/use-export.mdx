@@ -1,0 +1,36 @@
+---
+title: "useExport"
+description: "A simple way to export data from Quill"
+---
+
+```tsx App.tsx
+import { QuillProvider, useQuill } from "@quillsql/react";
+
+function CustomComponent() {
+	// pass in any report created in the Quill Portal
+	const { downloadCSV } = useExport(QUILL_ID);
+	return <button onClick={downloadCSV}>Save</button>;
+}
+
+function App() {
+	return (
+		<QuillProvider organizationId={organizationId} publicKey={process.env.QUILL_API_KEY}>
+			<CustomComponent />
+		</QuillProvider>
+	);
+}
+```
+
+<Info>
+	Make sure `QuillProvider` is a parent of the component using the `useExport`
+	hook.
+</Info>
+
+<ParamField path='reportId' type='string' required>
+	The id of the report you created in the Quill Portal.
+
+    <Tip>
+    	Don't have an id yet? Learn how to [create a chart](https://docs.quillsql.com/portal/chart) in the Quill portal to get started.
+    </Tip>
+
+</ParamField>

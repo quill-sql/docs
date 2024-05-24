@@ -1,0 +1,89 @@
+---
+title: "QuillProvider"
+description: "A context provider that wraps all quill components"
+mode: "wide"
+---
+
+```tsx App.tsx
+import { QuillProvider } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider
+			publicKey={process.env.QUILL_API_KEY}
+			organizationId={user.organizationId}>
+			{children}
+		</QuillProvider>
+	);
+}
+```
+
+The quill provider allows all the quill components in your app to share
+information which lets your dashboards render fast and update dynamically.
+
+Similar to React's `Context.Provider`, `QuillProvider` wraps your React app
+and places Quill Client on the context, enabling you to access it from
+anywhere in your component tree. We suggest putting the QuillProvider
+somewhere high in your app, above any component that might need to access
+your quill data.
+
+### With OrgId
+
+If you're using the Quill Cloud, you can pass in your public key and the current
+organizationId (if any) and the Quill Provider will automatically connect to the
+hosted Quill Cloud.
+
+```jsx With OrgId
+<QuillProvider
+	publicKey={process.env.QUILL_API_KEY}
+	organizationId={user.organizationId}>
+	{children}
+</QuillProvider>
+```
+
+### With QueryEndpoint
+
+If you're self-hosting Quill, you can point the Quill Provider to the location
+of the server running the Quill SDK. You may also pass a map of query headers
+that will be forwarded to your server with every request Quill sends. This can
+be useful if the `/quill` endpoint is behind a preexisting auth middleware.
+
+```jsx With QueryEndpoint
+<QuillProvider
+	publicKey={process.env.QUILL_API_KEY}
+	queryEndpoint='https://yourdomain.com/quill'
+	queryHeaders={{}}>
+	{children}
+</QuillProvider>
+```
+
+## Props
+
+<ParamField path='publicKey' type='string' required>
+	The public Quill API key. This can be found in the Quill portal in the
+	"Settings" tab.
+</ParamField>
+<ParamField path='environment' type='string'>
+	The environment this app is running in (eg. "production").
+</ParamField>
+<ParamField path='organizationId' type='string'>
+	The organization id of the user. Required if not passing a queryEndpoint. If
+	this value is not passed in on the frontend, it should be passed in on the
+	backend if you are using a self-hosted server.
+</ParamField>
+<ParamField path='queryEndpoint' type='string'>
+	The url of your self-hosted server running the quill server SDK, if any.
+</ParamField>
+<ParamField path='queryHeaders' type='object'>
+	Additional query headers passed along with all requests to the custom query
+	endpoint, if any.
+</ParamField>
+<ParamField path='withCredentials' type='boolean'>
+	Whether to include credentials with requests to the query endpoint.
+</ParamField>
+<ParamField path='theme' type='QuillTheme'>
+	A custom theme used throughout your dashboard.
+</ParamField>
+<ParamField path='children' type='ReactNode'>
+	The children of the provider. This is usually the rest of your app.
+</ParamField>

@@ -1,0 +1,64 @@
+---
+title: "useQuill"
+description: "A pragmatic data API for your data"
+---
+
+```tsx App.tsx
+import { QuillProvider, useQuill } from "@quillsql/react";
+
+function CustomComponent() {
+	// pass in any report created in the Quill Portal
+	const report = useQuill(QUILL_ID);
+	return <pre>{JSON.stringify(report, null, 2)}</pre>;
+}
+
+function App() {
+	return (
+		<QuillProvider organizationId={organizationId} publicKey={process.env.QUILL_API_KEY}>
+			<CustomComponent />
+		</QuillProvider>
+	);
+}
+```
+
+<RequestExample>
+```jsx
+const report = useQuill("299286dd2d85");
+```
+</RequestExample>
+<ResponseExample>
+```json
+{
+	data: {
+		name: "My Report",
+		rows: [...],
+		columns: [...],
+		chartType: "table",
+		fields: [...],
+		xAxisField: "created_at",
+		yAxisField: "amount",
+		xAxisLabel: "Created"
+		yAxisLabel: "Total Amount",
+		queryString: "SELECT * FROM transactions;",
+	},
+	loading: false,
+	error: null
+}
+```
+</ResponseExample>
+
+<Info>
+	Make sure `QuillProvider` is a parent of the component using the `useQuill`
+	hook.
+</Info>
+
+## Props
+
+<ParamField path='reportId' type='string' required>
+	The id of the report you created in the Quill Portal.
+
+    <Tip>
+    	Don't have an id yet? Learn how to [create a chart](https://docs.quillsql.com/portal/chart) in the Quill portal to get started.
+    </Tip>
+
+</ParamField>

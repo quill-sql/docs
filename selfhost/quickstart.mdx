@@ -1,22 +1,17 @@
 ---
-title: "Get started with Quill Self Hosting"
-description: " "
+title: "Quickstart"
+description: "Get up and running with Quill on your own server in 10 minutes"
 ---
 
-Hello! 👋 This short tutorial gets you up and running with Quill self hosting. Instead of hosting a Docker container, all you need to do is create an endpoint using our sdk and a few lines of code.
-
-## Step 1: Create endpoint on your server
-
-<br />
+## 1. Install the Quill SDK
 
 <CodeGroup>
-
-```bash Node
-npm i @quillsql/node --save
+```bash Node.js
+npm install @quillsql/node
 ```
 
 ```bash Python
-pip3 install --upgrade quillsql
+pip3 install quillsql
 ```
 
 ```bash Go
@@ -25,32 +20,36 @@ go get https://github.com/quill-sql/quill-go
 
 </CodeGroup>
 
-Instantiate `quill` with your credentials and add the below `POST` endpoint.
+## 2. Create a new endpoint
 
-Note that we assume you have an organization id on the user returned by your auth middleware. Queries will not work properly without the organization id.
+Instantiate `Quill` with your credentials and add the below `POST` endpoint.
+
+<Info>
+	This example assumes you have an organization id on the user returned by your
+	auth middleware. Queries will not work properly without the organization id.
+</Info>
 
 <CodeGroup>
 
 ```js Node
-import { Quill } from "@quillsql/node"
-
+import { Quill } from "@quillsql/node";
 
 const quill = new Quill({
-  privateKey: process.env.QULL_PRIVATE_KEY,
-  databaseConnectionString: process.env.POSTGRES_READ,
-  databaseType: "postgresql"
+	privateKey: process.env.QULL_PRIVATE_KEY,
+	databaseConnectionString: process.env.POSTGRES_READ,
+	databaseType: "postgresql",
 });
 
 // "authenticateJWT" is your own pre-existing auth middleware
 app.post("/quill", authenticateJWT, async (req, res) => {
-  // assuming user fetched via auth middleware has an organizationId
-  const { organizationId } = req.user;
-  const { metadata } = req.body;
-  const result = await quill.query({
-    orgId: organizationId,
-    metadata,
-  });
-  res.send(result);
+	// assuming user fetched via auth middleware has an organizationId
+	const { organizationId } = req.user;
+	const { metadata } = req.body;
+	const result = await quill.query({
+		orgId: organizationId,
+		metadata,
+	});
+	res.send(result);
 });
 ```
 
@@ -62,14 +61,14 @@ quill = Quill(
   database_connection_string=os.environ.get("POSTGRES_READ")
 )
 
-# POST endpoint you create for quill
+# POST endpoint you create for Quill
 @app.route('/quill', methods=['POST'])
 # "token_required" is your own pre-existing auth middleware
 @token_required
 def quill_endpoint():
   data = request.json
   # assuming current user comes from existing auth
-  # org_id is the id on the organizations table that you use with quill (ex: organizations, businesses, companies, stores etc)
+  # org_id is the id on the organizations table that you use with Quill (ex: organizations, businesses, companies, stores etc)
   return quill.query(current_user.org_id, data)
 ```
 
@@ -105,7 +104,7 @@ http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
 
 </CodeGroup>
 
-## Step 2: Connect Endpoint in React QuillProvider
+## 3. Connect the frontend
 
 You connect Quill to React with the `QuillProvider` component. Similar to React's `Context.Provider`, `QuillProvider` wraps your React app and places Quill Client on the context, enabling you to access it from anywhere in your component tree.
 
@@ -117,19 +116,24 @@ import Routes from "./Routes";
 import UserContext from "./UserContext";
 
 function App() {
-  // your existing auth user
-  const [user] = useContext(UserContext);
-  return (
-    <QuillProvider
-      // POST endpoint on your server for quill requests
-      queryEndpoint="https://api.yourserver.com/quill"
-      // we pass this to the endpoint url as a header on every request
-      queryHeaders={{ Authorization: `Bearer ${user.jwt}` }}
-      publicKey="YOUR_PUBLIC_KEY"
-      theme={THEME}
-    >
-      <Routes />
-    </QuillProvider>
-  );
+	// Use your existing auth and user context
+	const [user] = useContext(UserContext);
+
+	return (
+		<QuillProvider
+			publicKey='YOUR_PUBLIC_KEY'
+			queryEndpoint='https://yourserver.com/quill' // your POST endpoint
+			queryHeaders={{
+				// We'll pass these headers on every request to your endpoint
+				Authorization: `Bearer ${user.jwt}`,
+			}}>
+			<Routes />
+		</QuillProvider>
+	);
 }
 ```
+
+<Tip>
+	See the `QuillProvider` [API docs](/components/quill-provider) for more
+	information.
+</Tip>

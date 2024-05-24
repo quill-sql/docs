@@ -1,0 +1,74 @@
+---
+title: "Quickstart"
+description: "Add Quill to your app in less than a minute"
+---
+
+### 1. Install dependencies
+
+Install `@quillsql/react` using your favorite package manager:
+
+<CodeGroup>
+```bash npm
+npm install @quillsql/react
+```
+
+```bash yarn
+yarn add @quillsql/react
+```
+
+```bash pnpm
+pnpm add @quillsql/react
+```
+
+```bash bun
+bun add @quillsql/react
+```
+
+</CodeGroup>
+
+### 2. Add QuillProvider
+
+You connect Quill to React with the `QuillProvider` component. Similar to React's `Context.Provider`, `QuillProvider` wraps your React app and places Quill Client on the context, enabling you to access it from anywhere in your component tree.
+
+In App.js, let's wrap our React app with an `QuillProvider`. We suggest putting the `QuillProvider` somewhere high in your app, above any component that might need to access Quill data.
+
+<Tip>
+	You can find your **organizationId** and **publicKey** from the portal at
+	https://app.quill.co.
+</Tip>
+
+```js App.js
+import { QuillProvider } from "@quillsql/react";
+import MyApp from "./MyApp";
+
+function App() {
+	// Replace organizationId and publicKey with your values
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<MyApp />
+		</QuillProvider>
+	);
+}
+```
+
+### 3. Add your first component
+
+After your QuillProvider is hooked up, you can add Quill Components to your app. Let's start with the dashboard we created in the [portal tutorial](/portal).
+
+<Tip>
+	If you forget, you can always find the dashboard **name** in the portal at
+	https://app.quill.co.
+</Tip>
+
+<Info>
+	With Quill, the underlying queries and charts can be updated via the Quill
+	Portal, and the dashboard will render the newest version.
+</Info>
+
+```js App.js
+import { QuillProvider, Dashboard } from "@quillsql/react";
+
+function MyDashboardPage() {
+	return <Dashboard name='Transactions' />;
+}
+```

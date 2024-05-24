@@ -1,54 +1,70 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
-  "name": "Quill",
-  "logo": {
-    "dark": "/logo/dark.png",
-    "light": "/logo/light.png"
-  },
-  "favicon": "/favicon.png",
-  "colors": {
-    "primary": "#212121",
-    "light": "#FFFFFF",
-    "dark": "#212121"
-  },
-  "topbarCtaButton": {
-    "name": "Learn more",
-    "url": "https://quill.co"
-  },
-  "tabs": [
-    {
-      "name": "React SDK",
-      "url": "components"
-    },
-    {
-      "name": "Server SDK",
-      "url": "selfhost"
-    },
-    {
-      "name": "Admin Portal",
-      "url": "portal"
-    }
-  ],
-  "navigation": [
-    {
-      "group": "Connect a data source",
-      "pages": [
-        "datasources/postgres",
-        "datasources/snowflake",
-        "datasources/bigquery"
-      ]
-    },
-    {
-      "group": "Create dashboards in portal",
-      "pages": ["portal/quickstart"]
-    },
-    {
-      "group": "Add components to your app",
-      "pages": ["components/start", "components/docs"]
-    },
-    {
-      "group": "Self host on your own server",
-      "pages": ["selfhost/start"]
-    }
-  ]
+	"$schema": "https://mintlify.com/schema.json",
+	"name": "Quill",
+	"logo": {
+		"dark": "/logo/dark.png",
+		"light": "/logo/light.png"
+	},
+	"favicon": "/favicon.png",
+	"colors": {
+		"primary": "#212121",
+		"light": "#FFFFFF",
+		"dark": "#212121"
+	},
+	"topbarCtaButton": {
+		"name": "Learn more",
+		"url": "https://quill.co"
+	},
+	"primaryTab": {
+		"name": "Admin Portal"
+	},
+	"tabs": [
+		{
+			"name": "React SDK",
+			"url": "components"
+		},
+		{
+			"name": "Server SDK",
+			"url": "selfhost"
+		}
+	],
+	"navigation": [
+		{
+			"group": "Admin Portal",
+			"pages": [
+				"portal/quickstart",
+				"portal/dashboard",
+				"portal/chart",
+				"portal/view"
+			]
+		},
+		{
+			"group": "Getting Started",
+			"pages": ["components/quickstart", "components/themes"]
+		},
+		{
+			"group": "Components",
+			"pages": [
+				"components/quill-provider",
+				"components/dashboard",
+				"components/report-builder",
+				"components/chart",
+				"components/table",
+				"components/sql-editor",
+				"components/examples"
+			]
+		},
+		{
+			"group": "Hooks",
+			"pages": [
+				"components/use-quill",
+				"components/use-export",
+				"components/format"
+			]
+		},
+		{
+			"group": "Self-Hosting",
+			"pages": ["selfhost/quickstart", "selfhost/cache"]
+		}
+	]
 }

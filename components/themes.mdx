@@ -1,0 +1,122 @@
+---
+title: "Custom Themes"
+description: "Customize your dashboard by passing a custom theme"
+mode: "wide"
+---
+
+<Tip>
+	For pixel-perfect control over theming and styling, all Quill components
+	accept custom components as props. See our [dashboard
+	docs](/components/dashboard.mdx) for an example.
+</Tip>
+
+```tsx App.tsx
+import { QuillProvider } from "@quillsql/react";
+
+// You can a custom theme to be applied to the default Quill
+// components, or you can pass your own components with
+// pixel-perfect styling.
+const MY_CUSTOM_THEME = {
+	fontFamily: "Inter; Helvetica",
+	backgroundColor: "#FFFFFF",
+	primaryTextColor: "#364153",
+	secondaryTextColor: "#6C727F",
+	chartLabelFontFamily: "Inter; Helvetica",
+	chartLabelColor: "#666666",
+	chartTickColor: "#CCCCCC",
+	chartColors: ["#4E80EE", "#E14F62", "#55B5A6", "#E9A23B"],
+	borderColor: "#E5E7EB",
+	primaryButtonColor: "#364153",
+	secondaryButtonColor: "#384151",
+	borderWidth: 1,
+	labelFontWeight: 500,
+	fontSize: 14,
+	loadingStateBackgroundColor: "#F9F9FA",
+	hoverBackgroundColor: "#F4F4F5",
+};
+
+function App() {
+	return (
+		<QuillProvider
+			publicKey={process.env.QUILL_API_KEY}
+			organizationId={user.organizationId}
+			theme={MY_CUSTOM_THEME}>
+			{children}
+		</QuillProvider>
+	);
+}
+```
+
+## QuillTheme
+
+<ResponseField name='fontFamily' type='string' required>
+	The font family you want Quill to use. This is usually the same font your app
+	uses. ex: "Inter"
+</ResponseField>
+<ResponseField name='fontSize' type='number' required>
+	The default font size you want Quill to use. This is usually the same as the
+	fontSize of your app (eg. 16 for "16px").
+</ResponseField>
+<ResponseField name='backgroundColor' type='string' required>
+	The background color you want Quill to use. This is usually the same
+	background color your app uses. ex: "#FFFFFF"
+</ResponseField>
+<ResponseField name='hoverBackgroundColor' type='string' required>
+	The background color you want Quill to use while hovering.
+</ResponseField>
+<ResponseField name='primaryTextColor' type='string' required>
+	The color you want Quill to use for primary text. This is usually the same
+	primary text color color your app uses. ex: "#000000"
+</ResponseField>
+<ResponseField name='secondaryTextColor' type='string' required>
+	The text color you want Quill to use for secondary text. This is usually the
+	same secondary font color your app uses. ex: "#888888"
+</ResponseField>
+<ResponseField name='chartLabelFontFamily' type='string' required>
+	The font family you want Quill to use for chart labels. This is usually the
+	same as your base font family. ex: "Inter"
+</ResponseField>
+<ResponseField name='chartLabelColor' type='string' required>
+	The text color you want Quill to use for chart labels. This is usually the
+	same as or similar to the secondary color your app uses. ex: "#666666"
+</ResponseField>
+<ResponseField name='chartTickColor' type='string' required>
+	The color you want Quill to use for chart ticks. This is usually the same as
+	or similar to the secondary color your app uses. ex: "#CCCCCC"
+</ResponseField>
+<ResponseField name='chartColors' type='string[]' required>
+	The chart colors you want Quill to use. This is usually the same as the
+	primary and secondary colors your app uses. You can pass in as many colors as
+	you want, and you can also override these by passing in an array for the
+	colors prop in the Chart component. ex: ['#6269E9', '#E14F62']
+</ResponseField>
+<ResponseField name='borderColor' type='string' required>
+	The border color you want Quill to use. This is usually the same as or
+	similar to the border color your app uses. ex: "#CCCCCC"
+</ResponseField>
+<ResponseField name='borderWidth' type='number' required>
+	The border width you want Quill to use. This is usually the same as or
+	similar to the border width your app uses. ex: 1 (ie. "1px")
+</ResponseField>
+<ResponseField name='primaryButtonColor' type='string'>
+	The color of the primary buttons you want Quill to use. Typically, you can
+	just pass in a custom button with the styling you want instead of using this.
+</ResponseField>
+<ResponseField name='secondaryButtonColor' type='string'>
+	The color of the secondary buttons you want Quill to use. Typically, you can
+	just pass in a custom button with the styling you want instead of using this.
+</ResponseField>
+<ResponseField name='buttonFontWeight' type='number'>
+	The font weight you want Quill to use for buttons. Typically, you can just
+	pass in a custom button with the styling you want instead of using this. (eg.
+	600)
+</ResponseField>
+<ResponseField name='labelFontWeight' type='number'>
+	The font weight you want Quill to use for labels. Typically, you can just
+	pass in a custom label component with the styling you want instead of using
+	this. (eg. 400)
+</ResponseField>
+<ResponseField name='loadingStateBackgroundColor' type='string'>
+	The background color you want Quill to use while in a loading state. This is
+	usually the same as the background color you app uses (eg. '#FFFFFF').
+</ResponseField>

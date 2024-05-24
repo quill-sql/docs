@@ -1,0 +1,225 @@
+---
+title: "Chart"
+description: "The Chart view of a Quill Report"
+---
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx App.tsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+const MyChart = () => (
+	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+		<Chart reportId='664283fb4db8ad000bfe54d7' />
+	</QuillProvider>
+);
+```
+
+A simple component that displays the given data in one of many chart types.
+
+<Info>Make sure `QuillProvider` is a parent of the `Chart` component.</Info>
+
+### Automatically fetch data by id
+
+If you know the id of the chart you would like to display, you can pass in the reportId to the Chart component and it will load and display the data for that chart.
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```jsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Chart reportId='664283fb4db8ad000bfe54d7' />
+		</QuillProvider>
+	);
+}
+```
+
+### Pass data directly into the chart
+
+Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in a `QuillReport` directly to the Chart component and it will display that data without async fetching.
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/chart'
+	style={{
+		width: "100%",
+		height: 300,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```jsx
+import { QuillProvider, Chart } from "@quillsql/react";
+
+function App() {
+	const report = useQuill("664283fb4db8ad000bfe54d7");
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Chart config={report} />
+		</QuillProvider>
+	);
+}
+```
+
+## Props
+
+<ParamField path='reportId' type='string'>
+	The chart id. The most usage is through a detail page built to navigate from
+	the dashboard - using the onClick callback to get the reportId, and
+	navigating to a route (say, reports/:id) where the url param is passed in as
+	the reportId. For a standalone table, you can find the reportId in the Quill
+	Portal and pass it in directly.
+
+    When config is passed, the chart will not refetch the given report and will
+    instead simply render the report it was given.
+
+    <Info>A `config` must be passed if `reportId` is not present.</Info>
+
+</ParamField>
+
+<ParamField path='config' type='QuillReport'>
+	A report to render, if any.
+
+    When a reportId is passed, the chart will first fetch the data necessary to
+    render this chart, and then it will render the report that it receives from
+    the server.
+
+    See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).
+
+    <Info>A `reportId` must be passed if `config` is not present.</Info>
+
+</ParamField>
+
+<ParamField path='colors' type='string[]'>
+	A list of color strings used to color the chart.
+
+    For example, a pie chart would use the colors for each section and a bar
+    chart would use the colors for each bar.
+
+</ParamField>
+
+<ParamField path='isAnimationActive' type='boolean'>
+	Whether to show animations on render complete.
+</ParamField>
+
+<ParamField path='hideXAxis' type='boolean'>
+	Whether to hide the x axis.
+</ParamField>
+
+<ParamField path='hideYAxis' type='boolean'>
+	Whether to hide the y axis.
+</ParamField>
+
+<ParamField path='hideCartesianGrid' type='boolean'>
+	Whether to hide the cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideDateRangeFilter' type='boolean'>
+	Whether the date range filter should be hidden.
+</ParamField>
+
+<ParamField path='hideHorizontalCartesianGrid' type='boolean' default={false}>
+	Whether to hide the horizontal cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideVerticalCartesianGrid' type='boolean' default={true}>
+	Whether to hide the vertical cartesian grid lines.
+</ParamField>
+
+<ParamField path='hideSubsequentXAxisTicks' type='boolean' default={false}>
+	Whether to hide the all but the first of the X-Axis ticks.
+</ParamField>
+
+<ParamField
+	path='cartesianGridLineStyle'
+	type="'solid' | 'dashed'"
+	default={"solid"}>
+	Whether the cartesian grid lines show as dashed or solid.
+</ParamField>
+
+<ParamField path='cartesianGridLineColor' type='string'>
+	The color of cartesian grid lines.
+</ParamField>
+
+<ParamField
+	path='comparisonLineStyle'
+	type="'solid' | 'dashed'"
+	default={"solid"}>
+	Whether the comparison range shows as dashed for date comparison line charts
+	(as opposed to the default solid line).
+</ParamField>
+
+<ParamField path='mapColorsToFields' type='(report: QuillReport, theme: QuillTheme) => ColorMapType'>
+    An optional function that takes a report and theme and returns a map of keys
+	used in that report to the colors they should use.
+
+    The color values support RGB hexcodes and CSS color literals.
+
+    ```js
+    function mapColorsToFields(report, theme): ColorMapType {
+    	return {
+    		amount: {
+    			primary: 'red',
+    			comparison: 'gray',
+    			primaryGradientStart: 'red',
+    			primaryGradientStop: 'lightred',
+    			comparisonGradientStart: '#EFEFEF',
+    			comparisonGradientStop: '#EFEFEF00',
+    		},
+    		total: {
+    			primary: 'red'
+    		},
+    	};
+    }
+    ```
+
+    ### ColorMapType
+
+    <Expandable title='ColorMapType'>
+
+    	```ts
+    	export type ColorMapType = {
+    		[field: string]: {
+    			primary: string;
+    			comparison?: string;
+    			primaryGradientStart?: string;
+    			primaryGradientStop?: string;
+    			comparisonGradientStart?: string;
+    			comparisonGradientStop?: string;
+    		};
+    	}
+    	```
+
+    </Expandable>
+
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Styles the top-level container of the Chart.
+
+    This can be useful for TailwindCSS-style classname strings.
+
+</ParamField>
+
+<ParamField path='containerStyle' type='React.CSSProperties'>
+	The CSS styles that wrap the chart.
+</ParamField>

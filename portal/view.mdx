@@ -1,0 +1,65 @@
+---
+title: "Create a view"
+description: "Add a SQL view with Quill in less than a minute"
+---
+
+<Note>
+	This guide assumes you have already connected your database with Quill. If
+	you haven't done that yet, check out our onboarding guide
+	[here](/portal/quickstart).
+</Note>
+
+When you first get started with the Quill platform, you only see the initial views you created in the onboarding flow.
+
+<Frame>
+	<img src='/images/views.png' />
+</Frame>
+
+### 1. Create a view
+
+To add a new SQL view, you can click `Add view +` to open a SQL Editor that shows the visible tables that Quill can see in your schema.
+
+<Tip>
+	SQL views can help you organize and group different data together to make it
+	easier to build charts and tables on top of.
+</Tip>
+
+### 2. Edit the view and save
+
+Go ahead and write some SQL for a new view that you would like to create. Run the query by clicking `Run Query` and make sure the data looks correct.
+
+<Frame>
+	<img src='/images/create_sql_view.png' />
+</Frame>
+
+Give your new view a descriptive, clear name and then hit `Create view` to add the view to Quill. You can now query data from that view in charts and dashboards.
+
+<Frame>
+	<img src='/images/add_view.png' />
+</Frame>
+
+### 3. Manage your views
+
+If you ever want to edit or delete an existing view, click on the view in the SQL Views list to open the view manager.
+
+<Frame>
+	<img src='/images/edit_view.png' />
+</Frame>
+
+<Warning>
+	Be careful when editing and deleting views! Make sure the charts that
+	reference that view are up to date so they don't get out of sync.
+</Warning>
+
+### Next Steps
+
+Now that you have a view, you're ready to start using Quill! You can come back at any time and add more dashboards, charts, and views.
+
+<CardGroup cols={3}>
+	<Card
+		title='Add a dashboard'
+		icon='square-1'
+		href={"/portal/dashboard"}></Card>
+	<Card title='Add a chart' icon='square-2' href={"/portal/chart"}></Card>
+	<Card title='Add a view' icon='square-3' href={"/portal/view"}></Card>
+</CardGroup>

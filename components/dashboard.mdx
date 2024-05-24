@@ -1,0 +1,561 @@
+---
+title: "Dashboard"
+description: "A list of Quill Reports grouped into Metrics, Charts, and Tables."
+---
+
+<iframe
+	src='https://5wp4n7-5173.csb.app/dashboard'
+	style={{
+		width: "calc(100% + 106px)",
+		height: 600,
+		marginLeft: -24,
+		marginTop: -30,
+	}}
+	title='Chart Component'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx App.tsx
+import { QuillProvider, Dashboard } from "@quillsql/react";
+
+function App() {
+	return (
+		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
+			<Dashboard name='Transactions' />
+		</QuillProvider>
+	);
+}
+```
+
+Dynamically displays a filterable grid of charts, metrics, and tables with live
+data from your database. Once implemented, Quill lets you perform zero-downtime,
+zero-code updates to your dashboard on an org-level as well as company-wide.
+
+<Info>
+	Make sure `QuillProvider` is a parent of the `Dashboard` component.
+</Info>
+
+<Tip>
+	Don't have a dashboard name yet? Learn how to [create a
+	dashboard](https://docs.quillsql.com/portal/chart) in the Quill portal to get
+	started.
+</Tip>
+
+## Examples
+
+<Tabs>
+  <Tab title="Ant Design">
+  [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/ant'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 600,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Ant Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+import { AntDateRangePickerComponent } from "./ui/ant/DateRangePickerComponent";
+import { AntTableComponent } from "./ui/ant/TableComponent";
+import { AntSelectComponent } from "./ui/ant/SelectComponent";
+import { AntChartComponent } from "./ui/ant/ChartComponent";
+import { AntMetricComponent } from "./ui/ant/MetricComponent";
+
+export function AntDashboard() {
+	return (
+		<Dashboard
+			name='Transactions'
+			containerStyle={dashboardStyles}
+			DateRangePickerComponent={AntDateRangePickerComponent}
+			SelectComponent={AntSelectComponent}
+			TableComponent={AntTableComponent}
+			MetricComponent={AntMetricComponent}
+			ChartComponent={AntChartComponent}
+			FilterContainerComponent={AntFilterContainerComponent}
+		/>
+	);
+}
+```
+
+  </Tab>
+  <Tab title="Material Design">
+  [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/material'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 600,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='[Material Design] Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+import { MaterialDateRangePickerComponent } from "./ui/material/DateRangePickerComponent";
+import { MaterialTableComponent } from "./ui/material/TableComponent";
+import { MaterialSelectComponent } from "./ui/material/SelectComponent";
+import { MaterialChartComponent } from "./ui/material/ChartComponent";
+import { MaterialMetricComponent } from "./ui/material/MetricComponent";
+import { MaterialFilterContainerComponent } from "./ui/material/Layout";
+
+export function MaterialDashboard() {
+	return (
+		<Dashboard
+			name='Transactions'
+			containerStyle={dashboardStyles}
+			DateRangePickerComponent={MaterialDateRangePickerComponent}
+			SelectComponent={MaterialSelectComponent}
+			TableComponent={MaterialTableComponent}
+			MetricComponent={MaterialMetricComponent}
+			ChartComponent={MaterialChartComponent}
+			FilterContainerComponent={MaterialFilterContainerComponent}
+		/>
+	);
+}
+```
+
+  </Tab>
+  <Tab title="Shadcn UI">
+  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
+    <iframe
+	src='https://5wp4n7-5173.csb.app/dashboard/shadcn'
+	style={{
+		width: "calc(100% + 32px)",
+		height: 600,
+		marginLeft: -32,
+		marginTop: -30,
+	}}
+	title='Quill React Components'
+	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
+	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+
+```tsx
+import { Dashboard } from "@quillsql/react";
+
+export function ShadcnDashboard() {
+	return <Dashboard name='Transactions' containerStyle={dashboardStyles} />;
+}
+```
+
+  </Tab>
+</Tabs>
+
+## Props
+
+<ParamField path='name' type='string' required>
+	The name of the dashboard you created in the Quill Portal.
+</ParamField>
+
+<ParamField
+	path='MetricComponent'
+	type='(props: QuillReportProps) => JSX.Element'>
+	A component that wraps a report for 'metric' chart types.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='QuillReportProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='report' type='QuillReport' required>
+					The current report.
+					<Info>
+						See the API Reference for a `QuillReport`
+						[here](/components/dashboard#quill-report).
+					</Info>
+				</ResponseField>
+				<ResponseField name='onClick' type='(report: QuillReport) => void'>
+					A callback that should be fired when the user clicks on this report.
+				</ResponseField>
+				<ResponseField name='isLoading' type='boolean'>
+					Whether this report is loading.
+				</ResponseField>
+				<ResponseField name='error' type='string'>
+					An error message that resulted from the loading of this report, if
+					any.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+  path="ChartComponent"
+  type="(props: QuillReportProps) => JSX.Element"
+>
+  A component that wraps a report for non-metric, non-table chart types.
+	<Expandable defaultOpen={false} title="props">
+		<ParamField
+		path="QuillReportProps"
+		type="object"
+		>
+		<Expandable title="properties">
+			<ResponseField name="report" type="QuillReport" required>
+				The current report.
+
+    			<Info>See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+    		</ResponseField>
+    		<ResponseField name="onClick" type="(report: QuillReport) => void">
+    			A callback that should be fired when the user clicks on this report.
+    		</ResponseField>
+    		<ResponseField name="isLoading" type="boolean">
+    			Whether this report is loading.
+    		</ResponseField>
+    		<ResponseField name="error" type="string">
+    			An error message that resulted from the loading of this report, if any.
+    		</ResponseField>
+    		<ResponseField name="children" type="ReactNode">
+    			The child of a chart component is a chart graph by default.
+
+    			You can override this behavior by not passing children in your implemented
+    			version and instead rendering your own Chart.
+    		</ResponseField>
+    	</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='TableComponent'
+	type='(props: QuillReportProps) => JSX.Element'>
+	A component that wraps a report for 'table' chart types.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='QuillReportProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='report' type='QuillReport' required>
+					The current report.
+    				<Info> See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+				</ResponseField>
+				<ResponseField
+					name='onClick'
+					type='(report: QuillReport) => void'>
+					A callback that should be fired when the user clicks on this
+					report.
+    			</ResponseField>
+    			<ResponseField name='isLoading' type='boolean'>
+    				Whether this report is loading.
+    			</ResponseField>
+    			<ResponseField name='error' type='string'>
+    				An error message that resulted from the loading of this report, if any.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='SelectComponent'
+	type='(props: SelectComponentProps) => JSX.Element'>
+	A select component.
+	<Expandable defaultOpen={false} title='props'>
+		<img src='/images/select.png' />
+
+    	```jsx Example
+    	export function SelectComponent({ value, label, width, onChange, options }) {
+    		return (
+    			<label>
+    				{label}
+    				<select value={value} onChange={onChange} style={{ width }}>
+    					{options.map(({ value, label }) => <option value={value}>{label}</option>)}
+    				</select>
+    			</label>
+    		);
+    	}
+    	```
+
+		<ParamField path='SelectComponentProps' type='object'>
+			<Expandable title='properties' defaultOpen={true}>
+				<ResponseField name='value' type='string' required>
+					The value of the select element.
+				</ResponseField>
+				<ResponseField name='width' type='number' required>
+					The width of the select element in pixels.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					The label above the select element.
+				</ResponseField>
+				<ResponseField
+					name='onChange'
+					type='(event: ChangeEvent<HTMLSelectElement>) => void'
+					required>
+					An event callback that is fired when the select value changes.
+				</ResponseField>
+				<ResponseField
+					name='options'
+					type='{ value: string; label: string; }[]'
+					required>
+					An array of value, label pairs which represent the select options.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='DateRangePickerComponent'
+	type='(props: DateRangePickerComponentProps) => JSX.Element'>
+	A date range picker component.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DateRangePickerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='preset' type='string' required>
+					The date preset.
+				</ResponseField>
+				<ResponseField name='label' type='string'>
+					The label above the date range picker.
+				</ResponseField>
+				<ResponseField
+					name='dateRange'
+					type='{ startDate: Date; endDate: Date }'
+					required>
+					The current date range.
+				</ResponseField>
+				<ResponseField
+					name='presetOptions'
+					type='{ label: string; value: string }[]'
+					required>
+					A set of options to select presets from.
+				</ResponseField>
+				<ResponseField
+					name='onChangeDateRange'
+					type='({ startDate, endDate }: { startDate: Date; endDate: Date; }) => void'
+					required>
+					A callback that is fired when the selected date range changes.
+				</ResponseField>
+				<ResponseField
+					name='onChangePreset'
+					type='(event: ChangeEvent<HTMLSelectElement>) => void'
+					required>
+					An event callback that is fired when the preset value changes.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='DashboardSectionComponent'
+	type='(props: DashboardSectionComponentProps) => JSX.Element'>
+	A component that wraps each dashboard section.
+
+    Each dashboard is grouped into three sections: metrics, charts, and tables
+    (in that order). Some sections may be empty, in which case they are omitted.
+    <Expandable defaultOpen={false} title='props'>
+    	<ParamField path='DashboardSectionComponentProps' type='object'>
+    		<Expandable title='properties'>
+    			<ResponseField name='section' type="'metrics' | 'charts' | 'tables'" required>
+    				The name of the section.
+    			</ResponseField>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the dashboard section.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
+</ParamField>
+
+<ParamField
+	path='DashboardSectionContainerComponent'
+	type='(props: DashboardSectionContainerComponentProps) => JSX.Element'>
+	A component that wraps all dashboard sections.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='DashboardSectionContainerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the dashboard section.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField
+	path='FilterContainerComponent'
+	type='(props: FilterContainerComponentProps) => JSX.Element'>
+	A component that wraps the row of dashboard filters.
+	<Expandable defaultOpen={false} title='props'>
+		<ParamField path='FilterContainerComponentProps' type='object'>
+			<Expandable title='properties'>
+				<ResponseField name='children' type='ReactNode' required>
+					The children of the filter container.
+				</ResponseField>
+			</Expandable>
+		</ParamField>
+	</Expandable>
+</ParamField>
+
+<ParamField path='EmptyDashboardComponent' type='() => JSX.Element'>
+	A fallback component displayed when an active dashboard has no reports.
+</ParamField>
+
+<ParamField path='onClickReport' type='(report: QuillReport) => void'>
+	Callback function that fires when a report is clicked. A common use
+	case is navigating to a new page based on the report's id. A dashboard is
+	composed of a list of reports that could be metrics, charts, or tables.
+
+    <Info>See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+
+</ParamField>
+
+<ParamField path='onChangeLoading' type='(isLoading: boolean) => void'>
+	A callback that is fired when the loading status of the dashboard changes.
+</ParamField>
+
+<ParamField path='hideFilters' type='boolean' default={false}>
+	Whether to hide dashboard filters.
+</ParamField>
+
+<ParamField path='hideDateRangeFilter' type='boolean' default={false}>
+	Whether the date range filters on the dashboard are hidden.
+</ParamField>
+
+<ParamField path='hideXAxis' type='boolean' default={false}>
+	Whether to hide the xAxis for all charts on this dashboard.
+</ParamField>
+
+<ParamField path='hideYAxis' type='boolean' default={false}>
+	Whether to hide the yAxis for all charts on this dashboard.
+</ParamField>
+
+<ParamField path='hideCartesianGrid' type='boolean' default={false}>
+	Whether to hide the cartesian grid for all charts on this dashboard.
+</ParamField>
+
+<ParamField
+	path='comparisonLineStyle'
+	type="'solid' | 'dashed'"
+	default='solid'>
+	The line style for comparison ranges on all line charts on this dashboard.
+</ParamField>
+
+<ParamField path='className' type='string'>
+	Applies the following classes to the ReportBuilder.
+
+    This container is the parent of all the filtering buttons as well as any
+    dashboard sections. This can be useful for TailwindCSS-style classname
+    strings.
+
+</ParamField>
+
+<ParamField path='containerStyle' type='React.CSSProperties'>
+	The CSS styles that wrap the dashboard container.
+
+    This container is the parent of all the filtering buttons as well as any
+    dashboard sections.
+
+</ParamField>
+
+<ParamField path='chartContainerStyle' type='React.CSSProperties'>
+	The styles for the chart container.
+</ParamField>
+
+## Quill Report
+
+<ResponseField name='id' type='string' required>
+	The report's unique id.
+</ResponseField>
+<ResponseField name='name' type='string' required>
+	The name of the report.
+</ResponseField>
+<ResponseField name='dashboardName' type='string' required>
+	The name of the dashboard this report belongs to.
+</ResponseField>
+<ResponseField name='rows' type='{ [key: string]: any }[]'>
+	The rows of data returned from this report's query.
+</ResponseField>
+<ResponseField name='columns' type='any[]'>
+	The columns data returned from this report's query.
+</ResponseField>
+<ResponseField
+	name='chartType'
+	type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
+	The type of this chart.
+</ResponseField>
+<ResponseField name='dateField' type='{ table: string; field: string } | null'>
+	The table and field this chart uses for date filtering.
+</ResponseField>
+<ResponseField name='pivot' type='Pivot | null'>
+	The pivot used in this query, if any.
+	<Expandable title='Pivot'>
+		<ResponseField name='title' type='string' required>
+			The pivot title.
+		</ResponseField>
+		<ResponseField
+			name='aggregationType'
+			type="'sum' | 'average' | 'count' | 'min' | 'max'"
+			required>
+			The aggregation type for the values in this pivot.
+		</ResponseField>
+		<ResponseField name='rowField' type='string' required>
+			The row field.
+		</ResponseField>
+		<ResponseField name='rowFieldType' type='string' required>
+			The type of the row field.
+		</ResponseField>
+		<ResponseField name='columnField' type='string'>
+			The column field, if any.
+		</ResponseField>
+		<ResponseField name='columnFieldType' type='string'>
+			The type of the column field, if any.
+		</ResponseField>
+		<ResponseField name='valueField' type='string' required>
+			The value field, if any.
+		</ResponseField>
+		<ResponseField name='valueFieldType' type='string' required>
+			The type of the value field, if any.
+		</ResponseField>
+	</Expandable>
+</ResponseField>
+<ResponseField name='primaryAggregation' type='string'>
+	The formatted primary range aggregation value, if any.
+</ResponseField>
+<ResponseField name='comparisonAggregation' type='string'>
+	The formatted comparison range aggregation value, if any.
+</ResponseField>
+<ResponseField name='aggregationPercentChange' type='number'>
+	The percent change in the aggragations, if any.
+</ResponseField>
+<ResponseField name='xAxisLabel' type='string' required>
+	The label of the xAxis.
+</ResponseField>
+<ResponseField name='xAxisField' type='string' required>
+	The field to use for the report's xAxis.
+</ResponseField>
+<ResponseField name='xAxisFormat' type='string' required>
+	The format for the report's xAxis.
+</ResponseField>
+<ResponseField
+	name='yAxisFields'
+	type='{ field: string; label: string; format: string; }[]'
+	required>
+	A list of metadata bout the yAxes of this report.
+</ResponseField>
+<ResponseField name='order' type='number' required>
+	The relative ordering of this report in relation to its siblings. Ordering
+	starts at 1 and counts up.
+
+    <Info>
+    	Reports in the same section are first grouped by `chartType` and then
+		each group is sorted by `order`.
+    </Info>
+
+    Currently, the first group is `metric` and the last group is `table` with
+	the rest of the reports in between.
+
+</ResponseField>
+<ResponseField name='compareRows' type='{ [key: string]: any }[]'>
+	The rows of data returned from this report's query over the comparison date
+	range as opposed to the primary date range.
+</ResponseField>
+<ResponseField name='filtersApplied' type='{ [key: string]: any }'>
+	A map of filters that have been applied to this query.
+</ResponseField>
