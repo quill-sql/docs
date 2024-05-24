@@ -1,6 +1,7 @@
 ---
 title: "Quill Provider"
-description: "Wrap your app with Quill context"
+description: "Wrap your app with a Quill context provider"
+mode: "wide"
 ---
 
 ```tsx App.tsx
@@ -17,26 +18,6 @@ function App() {
 }
 ```
 
-<RequestExample>
-	```jsx With OrgId
-	<QuillProvider
-		publicKey={process.env.QUILL_API_KEY}
-		organizationId={user.organizationId}>
-		{children}
-	</QuillProvider>
-	```
-
-    ```jsx With QueryEndpoint
-    <QuillProvider
-    	publicKey={process.env.QUILL_API_KEY}
-    	queryEndpoint='https://yourdomain.com/quill'
-    	queryHeaders={{}}>
-    	{children}
-    </QuillProvider>
-    ```
-
-</RequestExample>
-
 The quill provider allows all the quill components in your app to share
 information which lets your dashboards render fast and update dynamically.
 
@@ -45,6 +26,36 @@ and places Quill Client on the context, enabling you to access it from
 anywhere in your component tree. We suggest putting the QuillProvider
 somewhere high in your app, above any component that might need to access
 your quill data.
+
+### With OrgId
+
+If you're using the Quill Cloud, you can pass in your public key and the current
+organizationId (if any) and the Quill Provider will automatically connect to the
+hosted Quill Cloud.
+
+```jsx With OrgId
+<QuillProvider
+	publicKey={process.env.QUILL_API_KEY}
+	organizationId={user.organizationId}>
+	{children}
+</QuillProvider>
+```
+
+### With QueryEndpoint
+
+If you're self-hosting Quill, you can point the Quill Provider to the location
+of the server running the Quill SDK. You may also pass a map of query headers
+that will be forwarded to your server with every request Quill sends. This can
+be useful if the `/quill` endpoint is behind a preexisting auth middleware.
+
+```jsx With QueryEndpoint
+<QuillProvider
+	publicKey={process.env.QUILL_API_KEY}
+	queryEndpoint='https://yourdomain.com/quill'
+	queryHeaders={{}}>
+	{children}
+</QuillProvider>
+```
 
 ## Props
 

@@ -14,7 +14,7 @@ function CustomComponent() {
 
 function App() {
 	return (
-		<QuillProvider organizationId={organizationId} publicKey={API_KEY}>
+		<QuillProvider organizationId={organizationId} publicKey={process.env.QUILL_API_KEY}>
 			<CustomComponent />
 		</QuillProvider>
 	);
