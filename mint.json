@@ -47,10 +47,10 @@
 			"pages": [
 				"components/quill-provider",
 				"components/dashboard",
+				"components/report-builder",
 				"components/chart",
 				"components/table",
 				"components/sql-editor",
-				"components/report-builder",
 				"components/examples"
 			]
 		},
