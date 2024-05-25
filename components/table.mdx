@@ -4,22 +4,23 @@ description: "The Tabular view of a Quill Report"
 ---
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/table'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='Table Component'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/table"
+  style={{
+    width: "100%",
+    height: 320,
+  }}
+  title="Table Component"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, Table } from "@quillsql/react";
 
 const MyTable = () => (
-	<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-		<Table reportId='6644088e6e2470000cbdb109' />
-	</QuillProvider>
+  <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <Table reportId="6644088e6e2470000cbdb109" />
+  </QuillProvider>
 );
 ```
 
@@ -47,9 +48,9 @@ import { Table, useQuill } from "@quillsql/react";
 import { AntTable } from "./ui/ant/Table";
 
 export function AntDesignTable() {
-	const report = useQuill("6644088e6e2470000cbdb109");
-	if (!report || !report.data) return null;
-	return <AntTable rows={report.data.rows} columns={report.data.columns} />;
+  const report = useQuill("6644088e6e2470000cbdb109");
+  if (!report || !report.data) return null;
+  return <AntTable rows={report.data.rows} columns={report.data.columns} />;
 }
 ```
 
@@ -71,34 +72,13 @@ import { Table, useQuill } from "@quillsql/react";
 import { MaterialTable } from "./ui/ant/Table";
 
 export function MaterialDesignTable() {
-	const report = useQuill("6644088e6e2470000cbdb109");
-	if (!report || !report.data) return null;
-	return (
-		<div style={{ padding: 12 }}>
-			<MaterialTable rows={report.data.rows} columns={report.data.columns} />
-		</div>
-	);
-}
-```
-
-  </Tab>
-  <Tab title="Shadcn UI">
-  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/table/shadcn'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
-
-```tsx
-import { Table } from "@quillsql/react";
-
-export function ShadcnTable() {
-	return <Table reportId='6644088e6e2470000cbdb109' />;
+  const report = useQuill("6644088e6e2470000cbdb109");
+  if (!report || !report.data) return null;
+  return (
+    <div style={{ padding: 12 }}>
+      <MaterialTable rows={report.data.rows} columns={report.data.columns} />
+    </div>
+  );
 }
 ```
 
@@ -110,24 +90,25 @@ export function ShadcnTable() {
 If you know the id of the table you would like to display, you can pass in the reportId to the Table component and it will load and display the data for that table.
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/table'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='Table Component'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/table"
+  style={{
+    width: "100%",
+    height: 320,
+  }}
+  title="Table Component"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```jsx
 import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Table reportId='664283fb4db8ad000bfe54d7' />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <Table reportId="664283fb4db8ad000bfe54d7" />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -136,14 +117,15 @@ function App() {
 Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in that data directly to the Table component and it will display that data without doing any async fetching.
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/table/raw'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='Table Component'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/table/raw"
+  style={{
+    width: "100%",
+    height: 320,
+  }}
+  title="Table Component"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 <CodeGroup>
 
@@ -151,24 +133,24 @@ Alternatively, if you have the actual data you would like to display (eg. you fe
 import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Table
-				rows={[
-					{ x: 1, y: 1, z: 0 },
-					{ x: 2, y: 2, z: 0 },
-					{ x: 3, y: 3, z: 0 },
-					{ x: 4, y: 4, z: 0 },
-					{ x: 5, y: 5, z: 0 },
-					{ x: 6, y: 6, z: 0 },
-				]}
-				columns={[
-					{ label: "My X-Axis", field: "x" },
-					{ label: "My Y-Axis", field: "y" },
-				]}
-			/>
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <Table
+        rows={[
+          { x: 1, y: 1, z: 0 },
+          { x: 2, y: 2, z: 0 },
+          { x: 3, y: 3, z: 0 },
+          { x: 4, y: 4, z: 0 },
+          { x: 5, y: 5, z: 0 },
+          { x: 6, y: 6, z: 0 },
+        ]}
+        columns={[
+          { label: "My X-Axis", field: "x" },
+          { label: "My Y-Axis", field: "y" },
+        ]}
+      />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -177,12 +159,12 @@ import { QuillProvider, Table } from "@quillsql/react";
 import { MY_TABLE_ID } from "./constants";
 
 function App() {
-	const report = useQuill(MY_TABLE_ID);
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<Table rows={report.rows} columns={report.columns} />
-		</QuillProvider>
-	);
+  const report = useQuill(MY_TABLE_ID);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <Table rows={report.rows} columns={report.columns} />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -225,24 +207,24 @@ function App() {
 
 </ParamField>
 
-<ParamField path='csvFilename' type='string'>
-	The placeholder filename to use when downloading this table as a csv file.
+<ParamField path="csvFilename" type="string">
+  The placeholder filename to use when downloading this table as a csv file.
 </ParamField>
 
-<ParamField path='hideDownloadCSVButton' type='boolean'>
-	Whether to hide the download csv button.
+<ParamField path="hideDownloadCSVButton" type="boolean">
+  Whether to hide the download csv button.
 </ParamField>
 
-<ParamField path='isLoading' type='boolean'>
-	Whether this table component is loading.
+<ParamField path="isLoading" type="boolean">
+  Whether this table component is loading.
 </ParamField>
 
-<ParamField path='downloadCSV' type='() => void'>
-	A callback that is fired when the user clicks download csv.
+<ParamField path="downloadCSV" type="() => void">
+  A callback that is fired when the user clicks download csv.
 </ParamField>
 
-<ParamField path='LoadingComponent' type='() => JSX.Element'>
-	A loading component to show when the table is loading.
+<ParamField path="LoadingComponent" type="() => JSX.Element">
+  A loading component to show when the table is loading.
 </ParamField>
 
 <ParamField path='className' type='string'>
@@ -252,6 +234,6 @@ function App() {
 
 </ParamField>
 
-<ParamField path='containerStyle' type='React.CSSProperties'>
-	The CSS styles that wrap the table.
+<ParamField path="containerStyle" type="React.CSSProperties">
+  The CSS styles that wrap the table.
 </ParamField>

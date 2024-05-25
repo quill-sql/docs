@@ -4,25 +4,26 @@ description: "A UI component for creating and editing Quill Reports without SQL"
 ---
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='Report Builder'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/report-builder"
+  style={{
+    width: "calc(100% + 124px)",
+    marginLeft: -44,
+    height: 800,
+  }}
+  title="Report Builder"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ReportBuilder initialTableName='transactions' />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <ReportBuilder initialTableName="transactions" />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -32,7 +33,7 @@ they can click a button and add that report to their dashboard or export it
 as a CSV.
 
 <Info>
-	Make sure `QuillProvider` is a parent of the `ReportBuilder` component.
+  Make sure `QuillProvider` is a parent of the `ReportBuilder` component.
 </Info>
 
 ## Examples
@@ -55,84 +56,84 @@ as a CSV.
 import { ReportBuilder } from "@quillsql/react";
 
 import {
-	AntButton,
-	AntDeleteButton,
-	AntSecondaryButton,
+  AntButton,
+  AntDeleteButton,
+  AntSecondaryButton,
 } from "./ui/ant/Button";
 import { AntCard } from "./ui/ant/Card";
 import { AntCheckbox } from "./ui/ant/Checkbox";
 import {
-	AntSelectColumn,
-	AntDraggableColumn,
-	AntColumnSearchEmptyState,
+  AntSelectColumn,
+  AntDraggableColumn,
+  AntColumnSearchEmptyState,
 } from "./ui/ant/Column";
 import { AntTextInput } from "./ui/ant/Input";
 import {
-	AntChartBuilderFormContainer,
-	AntChartBuilderInputColumnContainer,
-	AntChartBuilderInputRowContainer,
-	AntContainer,
-	AntErrorMessageComponent,
-	AntLoadingComponent,
-	AntPivotColumnContainer,
-	AntPivotRowContainer,
-	AntSidebar,
+  AntChartBuilderFormContainer,
+  AntChartBuilderInputColumnContainer,
+  AntChartBuilderInputRowContainer,
+  AntContainer,
+  AntErrorMessageComponent,
+  AntLoadingComponent,
+  AntPivotColumnContainer,
+  AntPivotRowContainer,
+  AntSidebar,
 } from "./ui/ant/Layout";
 import { AntModal } from "./ui/ant/Modal";
 import {
-	AntPopover,
-	AntFilterPopover,
-	AntSortPopover,
-	AntLimitPopover,
+  AntPopover,
+  AntFilterPopover,
+  AntSortPopover,
+  AntLimitPopover,
 } from "./ui/ant/Popover";
 import { AntSelect } from "./ui/ant/Select";
 import { AntTable } from "./ui/ant/Table";
 import { AntTabs } from "./ui/ant/Tabs";
 import {
-	AntSidebarHeading,
-	AntLabel,
-	AntHeader,
-	AntText,
-	AntSubHeader,
+  AntSidebarHeading,
+  AntLabel,
+  AntHeader,
+  AntText,
+  AntSubHeader,
 } from "./ui/ant/Typography";
 
 export function AntReportBuilder() {
-	return (
-		<ReportBuilder
-			destinationDashboard='Transactions'
-			TableComponent={AntTable}
-			SidebarComponent={AntSidebar}
-			ContainerComponent={AntContainer}
-			PopoverComponent={AntPopover}
-			CardComponent={AntCard}
-			ButtonComponent={AntButton}
-			ModalComponent={AntModal}
-			SecondaryButtonComponent={AntSecondaryButton}
-			TextInputComponent={AntTextInput}
-			SelectComponent={AntSelect}
-			TabsComponent={AntTabs}
-			CheckboxComponent={AntCheckbox}
-			SelectColumnComponent={AntSelectColumn}
-			DraggableColumnComponent={AntDraggableColumn}
-			SidebarHeadingComponent={AntSidebarHeading}
-			FilterPopoverComponent={AntFilterPopover}
-			SortPopoverComponent={AntSortPopover}
-			LimitPopoverComponent={AntLimitPopover}
-			LabelComponent={AntLabel}
-			HeaderComponent={AntHeader}
-			SubHeaderComponent={AntSubHeader}
-			TextComponent={AntText}
-			DeleteButtonComponent={AntDeleteButton}
-			ErrorMessageComponent={AntErrorMessageComponent}
-			ChartBuilderInputRowContainer={AntChartBuilderInputRowContainer}
-			ChartBuilderInputColumnContainer={AntChartBuilderInputColumnContainer}
-			PivotRowContainer={AntPivotRowContainer}
-			PivotColumnContainer={AntPivotColumnContainer}
-			LoadingComponent={AntLoadingComponent}
-			ColumnSearchEmptyState={AntColumnSearchEmptyState}
-			ChartBuilderFormContainer={AntChartBuilderFormContainer}
-		/>
-	);
+  return (
+    <ReportBuilder
+      destinationDashboard="Transactions"
+      TableComponent={AntTable}
+      SidebarComponent={AntSidebar}
+      ContainerComponent={AntContainer}
+      PopoverComponent={AntPopover}
+      CardComponent={AntCard}
+      ButtonComponent={AntButton}
+      ModalComponent={AntModal}
+      SecondaryButtonComponent={AntSecondaryButton}
+      TextInputComponent={AntTextInput}
+      SelectComponent={AntSelect}
+      TabsComponent={AntTabs}
+      CheckboxComponent={AntCheckbox}
+      SelectColumnComponent={AntSelectColumn}
+      DraggableColumnComponent={AntDraggableColumn}
+      SidebarHeadingComponent={AntSidebarHeading}
+      FilterPopoverComponent={AntFilterPopover}
+      SortPopoverComponent={AntSortPopover}
+      LimitPopoverComponent={AntLimitPopover}
+      LabelComponent={AntLabel}
+      HeaderComponent={AntHeader}
+      SubHeaderComponent={AntSubHeader}
+      TextComponent={AntText}
+      DeleteButtonComponent={AntDeleteButton}
+      ErrorMessageComponent={AntErrorMessageComponent}
+      ChartBuilderInputRowContainer={AntChartBuilderInputRowContainer}
+      ChartBuilderInputColumnContainer={AntChartBuilderInputColumnContainer}
+      PivotRowContainer={AntPivotRowContainer}
+      PivotColumnContainer={AntPivotColumnContainer}
+      LoadingComponent={AntLoadingComponent}
+      ColumnSearchEmptyState={AntColumnSearchEmptyState}
+      ChartBuilderFormContainer={AntChartBuilderFormContainer}
+    />
+  );
 }
 ```
 
@@ -154,106 +155,84 @@ export function AntReportBuilder() {
 import { ReportBuilder } from "@quillsql/react";
 
 import {
-	MaterialButton,
-	MaterialDeleteButton,
-	MaterialSecondaryButton,
+  MaterialButton,
+  MaterialDeleteButton,
+  MaterialSecondaryButton,
 } from "./ui/material/Button";
 import { MaterialCard } from "./ui/material/Card";
 import { MaterialCheckbox } from "./ui/material/Checkbox";
 import {
-	MaterialSelectColumn,
-	MaterialDraggableColumn,
-	MaterialColumnSearchEmptyState,
+  MaterialSelectColumn,
+  MaterialDraggableColumn,
+  MaterialColumnSearchEmptyState,
 } from "./ui/material/Column";
 import { MaterialTextInput } from "./ui/material/Input";
 import {
-	MaterialChartBuilderFormContainer,
-	MaterialChartBuilderInputColumnContainer,
-	MaterialChartBuilderInputRowContainer,
-	MaterialContainer,
-	MaterialErrorMessageComponent,
-	MaterialPivotColumnContainer,
-	MaterialPivotRowContainer,
-	MaterialSidebar,
+  MaterialChartBuilderFormContainer,
+  MaterialChartBuilderInputColumnContainer,
+  MaterialChartBuilderInputRowContainer,
+  MaterialContainer,
+  MaterialErrorMessageComponent,
+  MaterialPivotColumnContainer,
+  MaterialPivotRowContainer,
+  MaterialSidebar,
 } from "./ui/material/Layout";
 import { MaterialModal } from "./ui/material/Modal";
 import {
-	MaterialPopover,
-	MaterialFilterPopover,
-	MaterialSortPopover,
-	MaterialLimitPopover,
+  MaterialPopover,
+  MaterialFilterPopover,
+  MaterialSortPopover,
+  MaterialLimitPopover,
 } from "./ui/material/Popover";
 import { MaterialSelect } from "./ui/material/Select";
 import { MaterialTable } from "./ui/material/Table";
 import { MaterialTabs } from "./ui/material/Tabs";
 import {
-	MaterialSidebarHeading,
-	MaterialLabel,
-	MaterialHeader,
-	MaterialText,
-	MaterialSubHeader,
+  MaterialSidebarHeading,
+  MaterialLabel,
+  MaterialHeader,
+  MaterialText,
+  MaterialSubHeader,
 } from "./ui/material/Typography";
 
 export function MaterialReportBuilder() {
-	return (
-		<ReportBuilder
-			destinationDashboard='Transactions'
-			TableComponent={MaterialTable}
-			SidebarComponent={MaterialSidebar}
-			ContainerComponent={MaterialContainer}
-			PopoverComponent={MaterialPopover}
-			CardComponent={MaterialCard}
-			ButtonComponent={MaterialButton}
-			ModalComponent={MaterialModal}
-			SecondaryButtonComponent={MaterialSecondaryButton}
-			TextInputComponent={MaterialTextInput}
-			SelectComponent={MaterialSelect}
-			TabsComponent={MaterialTabs}
-			CheckboxComponent={MaterialCheckbox}
-			SelectColumnComponent={MaterialSelectColumn}
-			DraggableColumnComponent={MaterialDraggableColumn}
-			SidebarHeadingComponent={MaterialSidebarHeading}
-			FilterPopoverComponent={MaterialFilterPopover}
-			SortPopoverComponent={MaterialSortPopover}
-			LimitPopoverComponent={MaterialLimitPopover}
-			LabelComponent={MaterialLabel}
-			HeaderComponent={MaterialHeader}
-			SubHeaderComponent={MaterialSubHeader}
-			TextComponent={MaterialText}
-			DeleteButtonComponent={MaterialDeleteButton}
-			ErrorMessageComponent={MaterialErrorMessageComponent}
-			ChartBuilderInputRowContainer={MaterialChartBuilderInputRowContainer}
-			ChartBuilderInputColumnContainer={
-				MaterialChartBuilderInputColumnContainer
-			}
-			PivotRowContainer={MaterialPivotRowContainer}
-			PivotColumnContainer={MaterialPivotColumnContainer}
-			ColumnSearchEmptyState={MaterialColumnSearchEmptyState}
-			ChartBuilderFormContainer={MaterialChartBuilderFormContainer}
-		/>
-	);
-}
-```
-
-  </Tab>
-  <Tab title="Shadcn UI">
-  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder/shadcn'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
-
-```tsx Shadcn UI
-import { ReportBuilder } from "@quillsql/react";
-
-export function ShadcnReportBuilder() {
-	return <ReportBuilder />;
+  return (
+    <ReportBuilder
+      destinationDashboard="Transactions"
+      TableComponent={MaterialTable}
+      SidebarComponent={MaterialSidebar}
+      ContainerComponent={MaterialContainer}
+      PopoverComponent={MaterialPopover}
+      CardComponent={MaterialCard}
+      ButtonComponent={MaterialButton}
+      ModalComponent={MaterialModal}
+      SecondaryButtonComponent={MaterialSecondaryButton}
+      TextInputComponent={MaterialTextInput}
+      SelectComponent={MaterialSelect}
+      TabsComponent={MaterialTabs}
+      CheckboxComponent={MaterialCheckbox}
+      SelectColumnComponent={MaterialSelectColumn}
+      DraggableColumnComponent={MaterialDraggableColumn}
+      SidebarHeadingComponent={MaterialSidebarHeading}
+      FilterPopoverComponent={MaterialFilterPopover}
+      SortPopoverComponent={MaterialSortPopover}
+      LimitPopoverComponent={MaterialLimitPopover}
+      LabelComponent={MaterialLabel}
+      HeaderComponent={MaterialHeader}
+      SubHeaderComponent={MaterialSubHeader}
+      TextComponent={MaterialText}
+      DeleteButtonComponent={MaterialDeleteButton}
+      ErrorMessageComponent={MaterialErrorMessageComponent}
+      ChartBuilderInputRowContainer={MaterialChartBuilderInputRowContainer}
+      ChartBuilderInputColumnContainer={
+        MaterialChartBuilderInputColumnContainer
+      }
+      PivotRowContainer={MaterialPivotRowContainer}
+      PivotColumnContainer={MaterialPivotColumnContainer}
+      ColumnSearchEmptyState={MaterialColumnSearchEmptyState}
+      ChartBuilderFormContainer={MaterialChartBuilderFormContainer}
+    />
+  );
 }
 ```
 
@@ -266,25 +245,26 @@ You can pass an `initialTableName` to have the report builder automatically load
 data from a particular table in your schema.
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='Report Builder'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/report-builder"
+  style={{
+    width: "calc(100% + 124px)",
+    marginLeft: -44,
+    height: 800,
+  }}
+  title="Report Builder"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ReportBuilder initialTableName='transactions' />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <ReportBuilder initialTableName="transactions" />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -295,25 +275,26 @@ pre-existing report. This might be useful if you want to allow your end
 users to edit the reports they created.
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder/reportId'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 1000,
-	}}
-	title='Report Builder'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/report-builder/reportId"
+  style={{
+    width: "calc(100% + 124px)",
+    marginLeft: -44,
+    height: 1000,
+  }}
+  title="Report Builder"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ReportBuilder reportId='664283fb4db8ad000bfe54d7' />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <ReportBuilder reportId="664283fb4db8ad000bfe54d7" />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -323,25 +304,26 @@ By default, the Quill Report Builder will query all tables in your schema and
 new reports will be created upon completion.
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder/allViews'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='Report Builder'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/report-builder/allViews"
+  style={{
+    width: "calc(100% + 124px)",
+    marginLeft: -44,
+    height: 800,
+  }}
+  title="Report Builder"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ReportBuilder />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <ReportBuilder />
+    </QuillProvider>
+  );
 }
 ```
 
@@ -1050,8 +1032,8 @@ function App() {
 
 </ParamField>
 
-<ParamField path='LoadingComponent' type='() => JSX.Element'>
-	A component to show while the query results are loading.
+<ParamField path="LoadingComponent" type="() => JSX.Element">
+  A component to show while the query results are loading.
 </ParamField>
 
 <ParamField
@@ -1103,35 +1085,36 @@ function App() {
 		<img src='/images/drag_column.png' />
 
     	```jsx Example
-		import { DeleteSVG } from "./ui/icons";
+    	import { DeleteSVG } from "./ui/icons";
     	export function DraggableColumnComponent({ label, onDelete, DragHandle }) {
     		return (
     			<div>
     				<DragHandle/>
     				{label}
-					<button onClick={onDelete}>
-						<DeleteSVG />
-					</button>
+    				<button onClick={onDelete}>
+    					<DeleteSVG />
+    				</button>
     			</div>
     		);
     	}
     	```
-		<ParamField path='DraggableColumnComponentProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='label' type='string' required>
-					The label of the draggable column.
-				</ResponseField>
-				<ResponseField name='onDelete' type='() => void' required>
-					A callback that is fired when this column is removed from the query.
-				</ResponseField>
-				<ResponseField
-					name='DragHandle'
-					type='({ dragIcon }: { dragIcon: () => JSX.Element }) => JSX.Element'>
-					The handle the user drags this column by.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='DraggableColumnComponentProps' type='object'>
+    		<Expandable title='properties'>
+    			<ResponseField name='label' type='string' required>
+    				The label of the draggable column.
+    			</ResponseField>
+    			<ResponseField name='onDelete' type='() => void' required>
+    				A callback that is fired when this column is removed from the query.
+    			</ResponseField>
+    			<ResponseField
+    				name='DragHandle'
+    				type='({ dragIcon }: { dragIcon: () => JSX.Element }) => JSX.Element'>
+    				The handle the user drags this column by.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1146,14 +1129,15 @@ function App() {
     		return <h2>{label}</h2>;
     	}
     	```
-		<ParamField path='SidebarHeadingComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the sidebar heading.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='SidebarHeadingComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the sidebar heading.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1164,31 +1148,32 @@ function App() {
 		<img src='/images/card.png' />
 
     	```jsx Example
-		import { Card } from "./ui/card";
+    	import { Card } from "./ui/card";
     	export function CardComponent({ onClick, onDelete, children }) {
-			const style = { position: 'absolute', top: 0, right: 0 };
+    		const style = { position: 'absolute', top: 0, right: 0 };
     		return (
-				<Card onClick={onClick} style={{ position: 'relative' }}>
-					{onDelete && <DeleteButton style={style} onClick={onDelete} />}
-					{children}
-				</Card>
-			);
+    			<Card onClick={onClick} style={{ position: 'relative' }}>
+    				{onDelete && <DeleteButton style={style} onClick={onDelete} />}
+    				{children}
+    			</Card>
+    		);
     	}
     	```
-		<ParamField path='CardComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-				<ResponseField name='onClick' type='() => void'>
-					A callback that is fired when the card is clicked.
-				</ResponseField>
-				<ResponseField name='onDelete' type='() => void'>
-					A callback that is fired the card is deleted.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='CardComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='children' type='ReactNode' required>
+    				The children of the container.
+    			</ResponseField>
+    			<ResponseField name='onClick' type='() => void'>
+    				A callback that is fired when the card is clicked.
+    			</ResponseField>
+    			<ResponseField name='onDelete' type='() => void'>
+    				A callback that is fired the card is deleted.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1203,14 +1188,15 @@ function App() {
     		return <h4>{label}</h4>;
     	}
     	```
-		<ParamField path='LabelComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='LabelComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1225,14 +1211,15 @@ function App() {
     		return <h2>{label}</h2>;
     	}
     	```
-		<ParamField path='HeaderComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='HeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1247,14 +1234,15 @@ function App() {
     		return <p>{label}</p>;
     	}
     	```
-		<ParamField path='TextComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='TextComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1269,14 +1257,15 @@ function App() {
     		return <h3>{label}</h3>;
     	}
     	```
-		<ParamField path='SubHeaderComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='() => void' required>
-					The label of the sub-header component.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='SubHeaderComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='() => void' required>
+    				The label of the sub-header component.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -1447,24 +1436,24 @@ function App() {
 
 </ParamField>
 
-<ParamField path='ColumnSearchEmptyState' type='() => JSX.Element'>
-	A component to show when no columns match the user's query.
+<ParamField path="ColumnSearchEmptyState" type="() => JSX.Element">
+  A component to show when no columns match the user's query.
 </ParamField>
 
-<ParamField path='isAdminEnabled' type='boolean' default={false}>
-	Whether the ReportBuilder is in admin mode (default: `false`).
+<ParamField path="isAdminEnabled" type="boolean" default={false}>
+  Whether the ReportBuilder is in admin mode (default: `false`).
 </ParamField>
 
-<ParamField path='isAIEnabled' type='boolean' default={true}>
-	Whether the ReportBuilder's AI features are enabled (default: `true`).
+<ParamField path="isAIEnabled" type="boolean" default={true}>
+  Whether the ReportBuilder's AI features are enabled (default: `true`).
 </ParamField>
 
-<ParamField path='pivotRecommendationsEnabled' type='boolean'>
-	Whether the PivotModal's AI features are enabled.
+<ParamField path="pivotRecommendationsEnabled" type="boolean">
+  Whether the PivotModal's AI features are enabled.
 </ParamField>
 
-<ParamField path='showChartBuilderTableFormatOptions' type='boolean'>
-	Whether to show the table format options on the ChartBuilder form.
+<ParamField path="showChartBuilderTableFormatOptions" type="boolean">
+  Whether to show the table format options on the ChartBuilder form.
 </ParamField>
 
 <ParamField path='className' type='CSSProperties'>
@@ -1474,8 +1463,8 @@ function App() {
 
 </ParamField>
 
-<ParamField path='containerStyle' type='CSSProperties'>
-	Custom styling properties for the ReportBuilder's top-level container.
+<ParamField path="containerStyle" type="CSSProperties">
+  Custom styling properties for the ReportBuilder's top-level container.
 </ParamField>
 
 <ParamField path='reportId' type='string'>
@@ -1485,16 +1474,16 @@ function App() {
 
 </ParamField>
 
-<ParamField path='onSubmitCreateReport' type='(report: QuillReport) => void'>
-	A callback function that will trigger when a new report is created.
+<ParamField path="onSubmitCreateReport" type="(report: QuillReport) => void">
+  A callback function that will trigger when a new report is created.
 </ParamField>
 
-<ParamField path='onSubmitEditReport' type='(report: QuillReport) => void'>
-	A callback function that will trigger when a existing report is edited.
+<ParamField path="onSubmitEditReport" type="(report: QuillReport) => void">
+  A callback function that will trigger when a existing report is edited.
 </ParamField>
 
-<ParamField path='hideCopySQL' type='boolean' default={true}>
-	Whether to hide the copy SQL button.
+<ParamField path="hideCopySQL" type="boolean" default={true}>
+  Whether to hide the copy SQL button.
 </ParamField>
 
 <ParamField path='isChartBuilderHorizontalView' type='boolean' default={true}>

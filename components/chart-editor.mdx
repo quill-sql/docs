@@ -4,36 +4,37 @@ description: "Edit Quill Reports using a simple form"
 ---
 
 <iframe
-	src='https://5wp4n7-5173.csb.app/chart-editor'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 900,
-	}}
-	title='ChartEditor Component'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
+  src="https://5wp4n7-5173.csb.app/chart-editor"
+  style={{
+    width: "calc(100% + 124px)",
+    marginLeft: -44,
+    height: 900,
+  }}
+  title="ChartEditor Component"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ChartEditor } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider organizationId='2' publicKey='6579031b3e41c378aa8180ec'>
-			<ChartEditor
-				isOpen={isOpen}
-				setIsOpen={setIsOpen}
-				reportId='664283fb4db8ad000bfe54d7'
-			/>
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+      <ChartEditor
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        reportId="664283fb4db8ad000bfe54d7"
+      />
+    </QuillProvider>
+  );
 }
 ```
 
 Presents the Quill Chart Builder form as a modal.
 
 <Info>
-	Make sure `QuillProvider` is a parent of the `ChartEditor` component.
+  Make sure `QuillProvider` is a parent of the `ChartEditor` component.
 </Info>
 
 ## Examples
@@ -55,58 +56,58 @@ Presents the Quill Chart Builder form as a modal.
 import { ChartEditor } from "@quillsql/react";
 
 import {
-	AntButton,
-	AntDeleteButton,
-	AntSecondaryButton,
+  AntButton,
+  AntDeleteButton,
+  AntSecondaryButton,
 } from "./ui/ant/Button";
 import { AntCard } from "./ui/ant/Card";
 import { AntTextInput } from "./ui/ant/Input";
 import {
-	AntChartBuilderFormContainer,
-	AntChartBuilderInputColumnContainer,
-	AntChartBuilderInputRowContainer,
-	AntErrorMessageComponent,
-	AntPivotColumnContainer,
-	AntPivotRowContainer,
+  AntChartBuilderFormContainer,
+  AntChartBuilderInputColumnContainer,
+  AntChartBuilderInputRowContainer,
+  AntErrorMessageComponent,
+  AntPivotColumnContainer,
+  AntPivotRowContainer,
 } from "./ui/ant/Layout";
 import { AntModal } from "./ui/ant/Modal";
 import { AntPopover } from "./ui/ant/Popover";
 import { AntSelect } from "./ui/ant/Select";
 import { AntTable } from "./ui/ant/Table";
 import {
-	AntLabel,
-	AntHeader,
-	AntText,
-	AntSubHeader,
+  AntLabel,
+  AntHeader,
+  AntText,
+  AntSubHeader,
 } from "./ui/ant/Typography";
 
 export function AntChartEditor() {
-	return (
-		<ChartEditor
-			isOpen={true}
-			setIsOpen={() => null}
-			reportId={"664283fb4db8ad000bfe54d7"}
-			TableComponent={AntTable}
-			PopoverComponent={AntPopover}
-			CardComponent={AntCard}
-			ButtonComponent={AntButton}
-			ModalComponent={AntModal}
-			SecondaryButtonComponent={AntSecondaryButton}
-			TextInputComponent={AntTextInput}
-			SelectComponent={AntSelect}
-			LabelComponent={AntLabel}
-			HeaderComponent={AntHeader}
-			SubHeaderComponent={AntSubHeader}
-			TextComponent={AntText}
-			DeleteButtonComponent={AntDeleteButton}
-			ErrorMessageComponent={AntErrorMessageComponent}
-			ChartBuilderInputRowContainer={AntChartBuilderInputRowContainer}
-			ChartBuilderInputColumnContainer={AntChartBuilderInputColumnContainer}
-			PivotRowContainer={AntPivotRowContainer}
-			PivotColumnContainer={AntPivotColumnContainer}
-			ChartBuilderFormContainer={AntChartBuilderFormContainer}
-		/>
-	);
+  return (
+    <ChartEditor
+      isOpen={true}
+      setIsOpen={() => null}
+      reportId={"664283fb4db8ad000bfe54d7"}
+      TableComponent={AntTable}
+      PopoverComponent={AntPopover}
+      CardComponent={AntCard}
+      ButtonComponent={AntButton}
+      ModalComponent={AntModal}
+      SecondaryButtonComponent={AntSecondaryButton}
+      TextInputComponent={AntTextInput}
+      SelectComponent={AntSelect}
+      LabelComponent={AntLabel}
+      HeaderComponent={AntHeader}
+      SubHeaderComponent={AntSubHeader}
+      TextComponent={AntText}
+      DeleteButtonComponent={AntDeleteButton}
+      ErrorMessageComponent={AntErrorMessageComponent}
+      ChartBuilderInputRowContainer={AntChartBuilderInputRowContainer}
+      ChartBuilderInputColumnContainer={AntChartBuilderInputColumnContainer}
+      PivotRowContainer={AntPivotRowContainer}
+      PivotColumnContainer={AntPivotColumnContainer}
+      ChartBuilderFormContainer={AntChartBuilderFormContainer}
+    />
+  );
 }
 ```
 
@@ -127,87 +128,60 @@ export function AntChartEditor() {
 import { ChartEditor } from "@quillsql/react";
 
 import {
-	MaterialButton,
-	MaterialDeleteButton,
-	MaterialSecondaryButton,
+  MaterialButton,
+  MaterialDeleteButton,
+  MaterialSecondaryButton,
 } from "./ui/material/Button";
 import { MaterialCard } from "./ui/material/Card";
 import { MaterialTextInput } from "./ui/material/Input";
 import {
-	MaterialChartBuilderFormContainer,
-	MaterialChartBuilderInputColumnContainer,
-	MaterialChartBuilderInputRowContainer,
-	MaterialErrorMessageComponent,
-	MaterialPivotColumnContainer,
-	MaterialPivotRowContainer,
+  MaterialChartBuilderFormContainer,
+  MaterialChartBuilderInputColumnContainer,
+  MaterialChartBuilderInputRowContainer,
+  MaterialErrorMessageComponent,
+  MaterialPivotColumnContainer,
+  MaterialPivotRowContainer,
 } from "./ui/material/Layout";
 import { MaterialModal } from "./ui/material/Modal";
 import { MaterialPopover } from "./ui/material/Popover";
 import { MaterialSelect } from "./ui/material/Select";
 import { MaterialTable } from "./ui/material/Table";
 import {
-	MaterialLabel,
-	MaterialHeader,
-	MaterialText,
-	MaterialSubHeader,
+  MaterialLabel,
+  MaterialHeader,
+  MaterialText,
+  MaterialSubHeader,
 } from "./ui/material/Typography";
 
 export function MaterialChartEditor() {
-	return (
-		<ChartEditor
-			isOpen={true}
-			setIsOpen={() => null}
-			reportId={"664283fb4db8ad000bfe54d7"}
-			TableComponent={MaterialTable}
-			PopoverComponent={MaterialPopover}
-			CardComponent={MaterialCard}
-			ButtonComponent={MaterialButton}
-			ModalComponent={MaterialModal}
-			SecondaryButtonComponent={MaterialSecondaryButton}
-			TextInputComponent={MaterialTextInput}
-			SelectComponent={MaterialSelect}
-			LabelComponent={MaterialLabel}
-			HeaderComponent={MaterialHeader}
-			SubHeaderComponent={MaterialSubHeader}
-			TextComponent={MaterialText}
-			DeleteButtonComponent={MaterialDeleteButton}
-			ErrorMessageComponent={MaterialErrorMessageComponent}
-			ChartBuilderInputRowContainer={MaterialChartBuilderInputRowContainer}
-			ChartBuilderInputColumnContainer={
-				MaterialChartBuilderInputColumnContainer
-			}
-			PivotRowContainer={MaterialPivotRowContainer}
-			PivotColumnContainer={MaterialPivotColumnContainer}
-			ChartBuilderFormContainer={MaterialChartBuilderFormContainer}
-		/>
-	);
-}
-```
-
-  </Tab>
-  <Tab title="Shadcn UI">
-  [![Edit Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/sad-cdn-y1nb3m?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/chart-editor/shadcn'
-	style={{
-		width: "100%",
-		height: 800,
-	}}
-	title='Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
-
-```tsx
-import { ChartEditor } from "@quillsql/react";
-
-export function ShadcnChartEditor() {
-	return (
-		<ChartEditor
-			isOpen={true}
-			setIsOpen={() => null}
-			reportId={"664283fb4db8ad000bfe54d7"}
-		/>
-	);
+  return (
+    <ChartEditor
+      isOpen={true}
+      setIsOpen={() => null}
+      reportId={"664283fb4db8ad000bfe54d7"}
+      TableComponent={MaterialTable}
+      PopoverComponent={MaterialPopover}
+      CardComponent={MaterialCard}
+      ButtonComponent={MaterialButton}
+      ModalComponent={MaterialModal}
+      SecondaryButtonComponent={MaterialSecondaryButton}
+      TextInputComponent={MaterialTextInput}
+      SelectComponent={MaterialSelect}
+      LabelComponent={MaterialLabel}
+      HeaderComponent={MaterialHeader}
+      SubHeaderComponent={MaterialSubHeader}
+      TextComponent={MaterialText}
+      DeleteButtonComponent={MaterialDeleteButton}
+      ErrorMessageComponent={MaterialErrorMessageComponent}
+      ChartBuilderInputRowContainer={MaterialChartBuilderInputRowContainer}
+      ChartBuilderInputColumnContainer={
+        MaterialChartBuilderInputColumnContainer
+      }
+      PivotRowContainer={MaterialPivotRowContainer}
+      PivotColumnContainer={MaterialPivotColumnContainer}
+      ChartBuilderFormContainer={MaterialChartBuilderFormContainer}
+    />
+  );
 }
 ```
 
@@ -216,38 +190,39 @@ export function ShadcnChartEditor() {
 
 ## Props
 
-<ParamField path='isOpen' type='boolean' required>
-	Whether the ChartEditor is open.
+<ParamField path="isOpen" type="boolean" required>
+  Whether the ChartEditor is open.
 </ParamField>
 
-<ParamField path='setIsOpen' type='boolean' required>
-	A callback that sets the open state of the ChartEditor.
+<ParamField path="setIsOpen" type="boolean" required>
+  A callback that sets the open state of the ChartEditor.
 </ParamField>
 
-<ParamField path='reportId' type='string' required>
-	The id of the report that is being edited.
+<ParamField path="reportId" type="string" required>
+  The id of the report that is being edited.
 </ParamField>
 
-<ParamField path='isAdmin' type='boolean'>
-	Whether the editor has administrative priveleges.
+<ParamField path="isAdmin" type="boolean">
+  Whether the editor has administrative priveleges.
 </ParamField>
 
-<ParamField path='chartBuilderTitle' type='string'>
-	The title of the chart builder form.
+<ParamField path="chartBuilderTitle" type="string">
+  The title of the chart builder form.
 </ParamField>
 
-<ParamField path='chartBuilderButtonLabel' type='string'>
-	The button label for the chart builder.
+<ParamField path="chartBuilderButtonLabel" type="string">
+  The button label for the chart builder.
 </ParamField>
 
 <ParamField
-	path='onAddToDashboardComplete'
-	type='(report: QuillReport) => void'>
-	A callback that is fired when the add to dashboard flow has been completed.
+  path="onAddToDashboardComplete"
+  type="(report: QuillReport) => void"
+>
+  A callback that is fired when the add to dashboard flow has been completed.
 </ParamField>
 
-<ParamField path='onDelete' type='() => void'>
-	A callback that is fired when the report is deleted.
+<ParamField path="onDelete" type="() => void">
+  A callback that is fired when the report is deleted.
 </ParamField>
 
 <ParamField
@@ -463,14 +438,15 @@ export function ShadcnChartEditor() {
     		return <h4>{label}</h4>;
     	}
     	```
-		<ParamField path='LabelComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='LabelComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -531,14 +507,15 @@ export function ShadcnChartEditor() {
     		return <p>{label}</p>;
     	}
     	```
-		<ParamField path='TextComponentProps' type='object'>
-			<Expandable title='properties' defaultOpen={true}>
-				<ResponseField name='label' type='string' required>
-					The text content of the element.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+    	<ParamField path='TextComponentProps' type='object'>
+    		<Expandable title='properties' defaultOpen={true}>
+    			<ResponseField name='label' type='string' required>
+    				The text content of the element.
+    			</ResponseField>
+    		</Expandable>
+    	</ParamField>
+    </Expandable>
+
 </ParamField>
 
 <ParamField
@@ -712,83 +689,88 @@ export function ShadcnChartEditor() {
 </ParamField>
 
 <ParamField
-	path='ChartBuilderInputRowContainer'
-	type='(props: { children: ReactNode }) => JSX.Element'>
-	A container for each row of inputs for the ChartBuilder form.
-	<Expandable defaultOpen={false} title='props'>
-		<img src='/images/chart_builder_input_row_container.png' />
-		<ParamField path='ChartBuilderInputRowContainerProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+  path="ChartBuilderInputRowContainer"
+  type="(props: { children: ReactNode }) => JSX.Element"
+>
+  A container for each row of inputs for the ChartBuilder form.
+  <Expandable defaultOpen={false} title="props">
+    <img src="/images/chart_builder_input_row_container.png" />
+    <ParamField path="ChartBuilderInputRowContainerProps" type="object">
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField
-	path='ChartBuilderInputColumnContainer'
-	type='(props: { children: ReactNode }) => JSX.Element'>
-	A container for vertically-stacked rows of inputs for the ChartBuilder form.
-	<Expandable defaultOpen={false} title='props'>
-		<img src='/images/chart_builder_input_column_container.png' />
-		<ParamField path='ChartBuilderInputColumnContainerProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+  path="ChartBuilderInputColumnContainer"
+  type="(props: { children: ReactNode }) => JSX.Element"
+>
+  A container for vertically-stacked rows of inputs for the ChartBuilder form.
+  <Expandable defaultOpen={false} title="props">
+    <img src="/images/chart_builder_input_column_container.png" />
+    <ParamField path="ChartBuilderInputColumnContainerProps" type="object">
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField
-	path='ChartBuilderFormContainer'
-	type='(props: { children: ReactNode }) => JSX.Element'>
-	A container for vertically-stacked sections of the chart builder form.
-	<Expandable defaultOpen={false} title='props'>
-		<img src='/images/chart_builder_form_container.png' />
-		<ParamField path='ChartBuilderFormContainerProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+  path="ChartBuilderFormContainer"
+  type="(props: { children: ReactNode }) => JSX.Element"
+>
+  A container for vertically-stacked sections of the chart builder form.
+  <Expandable defaultOpen={false} title="props">
+    <img src="/images/chart_builder_form_container.png" />
+    <ParamField path="ChartBuilderFormContainerProps" type="object">
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField
-	path='PivotRowContainer'
-	type='(props: { children: ReactNode }) => JSX.Element'>
-	A container for each row of inputs for the pivot form.
-	<Expandable defaultOpen={false} title='props'>
-		<img src='/images/pivot_row_container.png' />
-		<ParamField path='PivotRowContainerProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+  path="PivotRowContainer"
+  type="(props: { children: ReactNode }) => JSX.Element"
+>
+  A container for each row of inputs for the pivot form.
+  <Expandable defaultOpen={false} title="props">
+    <img src="/images/pivot_row_container.png" />
+    <ParamField path="PivotRowContainerProps" type="object">
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField
-	path='PivotColumnContainer'
-	type='(props: { children: ReactNode }) => JSX.Element'>
-	A container for vertically-stacked rows of inputs for the pivot form.
-	<Expandable defaultOpen={false} title='props'>
-		<img src='/images/pivot_column_container.png' />
-		<ParamField path='PivotColumnContainerProps' type='object'>
-			<Expandable title='properties'>
-				<ResponseField name='children' type='ReactNode' required>
-					The children of the container.
-				</ResponseField>
-			</Expandable>
-		</ParamField>
-	</Expandable>
+  path="PivotColumnContainer"
+  type="(props: { children: ReactNode }) => JSX.Element"
+>
+  A container for vertically-stacked rows of inputs for the pivot form.
+  <Expandable defaultOpen={false} title="props">
+    <img src="/images/pivot_column_container.png" />
+    <ParamField path="PivotColumnContainerProps" type="object">
+      <Expandable title="properties">
+        <ResponseField name="children" type="ReactNode" required>
+          The children of the container.
+        </ResponseField>
+      </Expandable>
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ParamField
@@ -814,26 +796,26 @@ export function ShadcnChartEditor() {
 
 </ParamField>
 
-<ParamField path='LoadingComponent' type='() => JSX.Element'>
-	A component to show while the query results are loading.
+<ParamField path="LoadingComponent" type="() => JSX.Element">
+  A component to show while the query results are loading.
 </ParamField>
 
-<ParamField path='destinationDashboard' type='string'>
-	The default dashboard to add the report to.
+<ParamField path="destinationDashboard" type="string">
+  The default dashboard to add the report to.
 </ParamField>
 
-<ParamField path='organizationName' type='string'>
-	The name of the current organization.
+<ParamField path="organizationName" type="string">
+  The name of the current organization.
 </ParamField>
 
-<ParamField path='isHorizontalView' type='boolean' default={true}>
-	Whether the ChartBuilder is in horizontal view mode.
+<ParamField path="isHorizontalView" type="boolean" default={true}>
+  Whether the ChartBuilder is in horizontal view mode.
 </ParamField>
 
-<ParamField path='hideDeleteButton' type='boolean' default={false}>
-	Whether to hide the delete button.
+<ParamField path="hideDeleteButton" type="boolean" default={false}>
+  Whether to hide the delete button.
 </ParamField>
 
-<ParamField path='hideSubmitButton' type='boolean' default={false}>
-	Whether to hide the submit button.
+<ParamField path="hideSubmitButton" type="boolean" default={false}>
+  Whether to hide the submit button.
 </ParamField>
