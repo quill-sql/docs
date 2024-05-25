@@ -7,27 +7,24 @@ description: "A pragmatic data API for your data"
 import { QuillProvider, useQuill } from "@quillsql/react";
 
 function CustomComponent() {
-	// pass in any report created in the Quill Portal
-	const report = useQuill(QUILL_ID);
-	return <pre>{JSON.stringify(report, null, 2)}</pre>;
+  // pass in any report created in the Quill Portal
+  const report = useQuill(QUILL_ID);
+  return <pre>{JSON.stringify(report, null, 2)}</pre>;
 }
 
 function App() {
-	return (
-		<QuillProvider organizationId={organizationId} publicKey={process.env.QUILL_API_KEY}>
-			<CustomComponent />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider
+      organizationId={organizationId}
+      publicKey={process.env.QUILL_API_KEY}
+    >
+      <CustomComponent />
+    </QuillProvider>
+  );
 }
 ```
 
-<RequestExample>
-```jsx
-const report = useQuill("299286dd2d85");
-```
-</RequestExample>
-<ResponseExample>
-```json
+```json Sample Response
 {
 	data: {
 		name: "My Report",
@@ -45,11 +42,10 @@ const report = useQuill("299286dd2d85");
 	error: null
 }
 ```
-</ResponseExample>
 
 <Info>
-	Make sure `QuillProvider` is a parent of the component using the `useQuill`
-	hook.
+  Make sure `QuillProvider` is a parent of the component using the `useQuill`
+  hook.
 </Info>
 
 ## Props
