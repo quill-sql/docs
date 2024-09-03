@@ -72,7 +72,8 @@ quill = Quill(
 def quill_endpoint():
   data = request.json
   # assuming current user comes from existing auth
-  # org_id is the id on the organizations table that you use with Quill (ex: organizations, businesses, companies, stores etc)
+  # org_id is the id on the organizations table that you
+  # use with Quill (ex: organizations, businesses, companies, stores etc)
   return quill.query(current_user.org_id, data)
 ```
 
@@ -81,7 +82,8 @@ import (
     "github.com/quill-sql/quill-go"
 )
 
-client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"), DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
+client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"),
+DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
 
 // Add an endpoint
 http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
