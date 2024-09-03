@@ -113,10 +113,9 @@ http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
 $quill = new \Quill\Quill($privateKey, $databaseType, $databaseConnectionString);
 
 if ($requestMethod === 'POST' && $endpoint === '/quill') {
-    // Assuming you've authenticated the user and set their data in a session or token
-    session_start();
-    $authUser = $_SESSION['auth_user']; // Example for session-based authentication
-    $orgId = $authUser['org_id'];
+
+    // authUser is an example of how you might reference your existing authenticated user. 'company_id' is an example of what your organizationId might be
+    $orgId = $authUser['company_id'];
 
     $input = file_get_contents('php://input');
     $data = json_decode($input, true);
