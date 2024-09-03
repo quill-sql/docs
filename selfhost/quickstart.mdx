@@ -18,6 +18,10 @@ pip3 install quillsql
 go get https://github.com/quill-sql/quill-go
 ```
 
+```bash PHP
+composer require quill.co/quill-php
+```
+
 </CodeGroup>
 
 ## 2. Create a new endpoint
@@ -25,8 +29,8 @@ go get https://github.com/quill-sql/quill-go
 Instantiate `Quill` with your credentials and add the below `POST` endpoint.
 
 <Info>
-	This example assumes you have an organization id on the user returned by your
-	auth middleware. Queries will not work properly without the organization id.
+  This example assumes you have an organization id on the user returned by your
+  auth middleware. Queries will not work properly without the organization id.
 </Info>
 
 <CodeGroup>
@@ -35,21 +39,21 @@ Instantiate `Quill` with your credentials and add the below `POST` endpoint.
 import { Quill } from "@quillsql/node";
 
 const quill = new Quill({
-	privateKey: process.env.QULL_PRIVATE_KEY,
-	databaseConnectionString: process.env.POSTGRES_READ,
-	databaseType: "postgresql",
+  privateKey: process.env.QULL_PRIVATE_KEY,
+  databaseConnectionString: process.env.POSTGRES_READ,
+  databaseType: "postgresql",
 });
 
 // "authenticateJWT" is your own pre-existing auth middleware
 app.post("/quill", authenticateJWT, async (req, res) => {
-	// assuming user fetched via auth middleware has an organizationId
-	const { organizationId } = req.user;
-	const { metadata } = req.body;
-	const result = await quill.query({
-		orgId: organizationId,
-		metadata,
-	});
-	res.send(result);
+  // assuming user fetched via auth middleware has an organizationId
+  const { organizationId } = req.user;
+  const { metadata } = req.body;
+  const result = await quill.query({
+    orgId: organizationId,
+    metadata,
+  });
+  res.send(result);
 });
 ```
 
@@ -102,6 +106,35 @@ http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
 })
 ```
 
+```php PHP
+<?php
+ require __DIR__ . "/vendor/autoload.php";
+
+$quill = new \Quill\Quill($privateKey, $databaseType, $databaseConnectionString);
+
+if ($requestMethod === 'POST' && $endpoint === '/quill') {
+    // Assuming you've authenticated the user and set their data in a session or token
+    session_start();
+    $authUser = $_SESSION['auth_user'] ?? null; // Example for session-based authentication
+    $orgId = $authUser['org_id'];
+
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+
+    $params = [
+        'metadata' => $data['metadata'],
+        'orgId' => $orgId
+    ];
+
+    $response = $quill->query($params);
+
+    header('Content-Type: application/json');
+    $body = json_encode($response, JSON_PRETTY_PRINT);
+    echo $body;
+    exit;
+}
+```
+
 </CodeGroup>
 
 ## 3. Connect the frontend
@@ -116,24 +149,25 @@ import Routes from "./Routes";
 import UserContext from "./UserContext";
 
 function App() {
-	// Use your existing auth and user context
-	const [user] = useContext(UserContext);
+  // Use your existing auth and user context
+  const [user] = useContext(UserContext);
 
-	return (
-		<QuillProvider
-			publicKey='YOUR_PUBLIC_KEY'
-			queryEndpoint='https://yourserver.com/quill' // your POST endpoint
-			queryHeaders={{
-				// We'll pass these headers on every request to your endpoint
-				Authorization: `Bearer ${user.jwt}`,
-			}}>
-			<Routes />
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider
+      publicKey="YOUR_PUBLIC_KEY"
+      queryEndpoint="https://yourserver.com/quill" // your POST endpoint
+      queryHeaders={{
+        // We'll pass these headers on every request to your endpoint
+        Authorization: `Bearer ${user.jwt}`,
+      }}
+    >
+      <Routes />
+    </QuillProvider>
+  );
 }
 ```
 
 <Tip>
-	See the `QuillProvider` [API docs](/components/quill-provider) for more
-	information.
+  See the `QuillProvider` [API docs](/components/quill-provider) for more
+  information.
 </Tip>
