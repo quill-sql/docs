@@ -82,8 +82,10 @@ import (
     "github.com/quill-sql/quill-go"
 )
 
-client := quill.NewClient(quill.ClientParams{PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"),
-DatabaseConnectionString: os.Getenv("POSTGRES_READ")})
+client := quill.NewClient(quill.ClientParams{
+	PrivateKey: os.Getenv("QUILL_PRIVATE_KEY"),
+	DatabaseConnectionString: os.Getenv("POSTGRES_READ")
+})
 
 // Add an endpoint
 http.HandleFunc("/quill", func(w http.ResponseWriter, r *http.Request) {
