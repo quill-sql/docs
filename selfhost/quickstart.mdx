@@ -114,7 +114,8 @@ $quill = new \Quill\Quill($privateKey, $databaseType, $databaseConnectionString)
 
 if ($requestMethod === 'POST' && $endpoint === '/quill') {
 
-    // authUser is an example of how you might reference your existing authenticated user. 'company_id' is an example of what your organizationId might be
+    // authUser is an example of how you might reference your existing authenticated user.
+	// 'company_id' is an example of what your organizationId field might be
     $orgId = $authUser['company_id'];
 
     $input = file_get_contents('php://input');
