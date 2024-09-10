@@ -3,18 +3,6 @@ title: "ReportBuilder"
 description: "A UI component for creating and editing Quill Reports"
 ---
 
-<iframe
-  src="https://5wp4n7-5173.csb.app/report-builder"
-  style={{
-    width: "calc(100% + 124px)",
-    marginLeft: -44,
-    height: 800,
-  }}
-  title="Report Builder"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
@@ -41,16 +29,6 @@ as a CSV.
 <Tabs>
   <Tab title="Ant Design">
   [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder/ant'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='[Ant Design] Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx Ant Design
 import { ReportBuilder } from "@quillsql/react";
@@ -140,16 +118,6 @@ export function AntReportBuilder() {
   </Tab>
   <Tab title="Material Design">
   [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/report-builder/material'
-	style={{
-		width: "calc(100% + 124px)",
-		marginLeft: -44,
-		height: 800,
-	}}
-	title='[Material Design] Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx Material Design
 import { ReportBuilder } from "@quillsql/react";
@@ -244,18 +212,6 @@ export function MaterialReportBuilder() {
 You can pass an `initialTableName` to have the report builder automatically load
 data from a particular table in your schema.
 
-<iframe
-  src="https://5wp4n7-5173.csb.app/report-builder"
-  style={{
-    width: "calc(100% + 124px)",
-    marginLeft: -44,
-    height: 800,
-  }}
-  title="Report Builder"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
@@ -274,18 +230,6 @@ You can pass a `reportId` to have the report builder load the metadata for a
 pre-existing report. This might be useful if you want to allow your end
 users to edit the reports they created.
 
-<iframe
-  src="https://5wp4n7-5173.csb.app/report-builder/reportId"
-  style={{
-    width: "calc(100% + 124px)",
-    marginLeft: -44,
-    height: 1000,
-  }}
-  title="Report Builder"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
@@ -302,18 +246,6 @@ function App() {
 
 By default, the Quill Report Builder will query all tables in your schema and
 new reports will be created upon completion.
-
-<iframe
-  src="https://5wp4n7-5173.csb.app/report-builder/allViews"
-  style={{
-    width: "calc(100% + 124px)",
-    marginLeft: -44,
-    height: 800,
-  }}
-  title="Report Builder"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
 
 ```tsx App.tsx
 import { QuillProvider, ReportBuilder } from "@quillsql/react";

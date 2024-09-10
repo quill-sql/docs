@@ -3,17 +3,6 @@ title: "Table"
 description: "The Tabular view of a Quill Report"
 ---
 
-<iframe
-  src="https://5wp4n7-5173.csb.app/table"
-  style={{
-    width: "100%",
-    height: 320,
-  }}
-  title="Table Component"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
 ```tsx App.tsx
 import { QuillProvider, Table } from "@quillsql/react";
 
@@ -33,15 +22,6 @@ A simple component that displays the given data as a table.
 <Tabs>
   <Tab title="Ant Design">
   [![Edit [Ant Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/ant-design-quill-react-components-9qcs8k?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/table/ant'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='[Ant Design] Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx
 import { Table, useQuill } from "@quillsql/react";
@@ -57,15 +37,6 @@ export function AntDesignTable() {
   </Tab>
   <Tab title="Material Design">
   [![Edit [Material Design] Quill React Components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/devbox/material-design-quill-react-components-d862dk?embed=1)
-    <iframe
-	src='https://5wp4n7-5173.csb.app/table/material'
-	style={{
-		width: "100%",
-		height: 320,
-	}}
-	title='[Material Design] Quill React Components'
-	allow='accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking'
-	sandbox='allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts'></iframe>
 
 ```tsx
 import { Table, useQuill } from "@quillsql/react";
@@ -89,17 +60,6 @@ export function MaterialDesignTable() {
 
 If you know the id of the table you would like to display, you can pass in the reportId to the Table component and it will load and display the data for that table.
 
-<iframe
-  src="https://5wp4n7-5173.csb.app/table"
-  style={{
-    width: "100%",
-    height: 320,
-  }}
-  title="Table Component"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
-
 ```jsx
 import { QuillProvider, Table } from "@quillsql/react";
 
@@ -115,17 +75,6 @@ function App() {
 ### Pass data directly into the table
 
 Alternatively, if you have the actual data you would like to display (eg. you fetched the data using our `useQuill` hook) you can also pass in that data directly to the Table component and it will display that data without doing any async fetching.
-
-<iframe
-  src="https://5wp4n7-5173.csb.app/table/raw"
-  style={{
-    width: "100%",
-    height: 320,
-  }}
-  title="Table Component"
-  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
 
 <CodeGroup>
 
