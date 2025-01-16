@@ -47,10 +47,10 @@ const quill = new Quill({
 // "authenticateJWT" is your own pre-existing auth middleware
 app.post("/quill", authenticateJWT, async (req, res) => {
   // assuming user fetched via auth middleware has an organizationId
-  const { organizationId } = req.user;
+  const { userId } = req.user;
   const { metadata } = req.body;
   const result = await quill.query({
-    orgId: organizationId,
+    tenants: [{ tenantField: "user_id", tenantIds: [userId] }]
     metadata,
   });
   res.send(result);
