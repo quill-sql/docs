@@ -7,7 +7,7 @@ description: "The Chart view of a Quill Report"
 import { QuillProvider, Chart } from "@quillsql/react";
 
 const MyChart = () => (
-  <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+  <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
     <Chart reportId="664283fb4db8ad000bfe54d7" />
   </QuillProvider>
 );
@@ -26,7 +26,7 @@ import { QuillProvider, Chart } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <Chart reportId="664283fb4db8ad000bfe54d7" />
     </QuillProvider>
   );
@@ -43,7 +43,7 @@ import { QuillProvider, Chart } from "@quillsql/react";
 function App() {
   const report = useQuill("664283fb4db8ad000bfe54d7");
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <Chart config={report} />
     </QuillProvider>
   );
