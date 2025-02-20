@@ -8,13 +8,14 @@ mode: "wide"
 import { QuillProvider } from "@quillsql/react";
 
 function App() {
-	return (
-		<QuillProvider
-			publicKey={process.env.QUILL_API_KEY}
-			organizationId={user.organizationId}>
-			{children}
-		</QuillProvider>
-	);
+  return (
+    <QuillProvider
+      publicKey={process.env.QUILL_API_KEY}
+      tenants={[user.organizationId]}
+    >
+      {children}
+    </QuillProvider>
+  );
 }
 ```
 
@@ -35,9 +36,10 @@ hosted Quill Cloud.
 
 ```jsx With OrgId
 <QuillProvider
-	publicKey={process.env.QUILL_API_KEY}
-	organizationId={user.organizationId}>
-	{children}
+  publicKey={process.env.QUILL_API_KEY}
+  tenants={[user.organizationId]}
+>
+  {children}
 </QuillProvider>
 ```
 
@@ -50,40 +52,41 @@ be useful if the `/quill` endpoint is behind a preexisting auth middleware.
 
 ```jsx With QueryEndpoint
 <QuillProvider
-	publicKey={process.env.QUILL_API_KEY}
-	queryEndpoint='https://yourdomain.com/quill'
-	queryHeaders={{}}>
-	{children}
+  publicKey={process.env.QUILL_API_KEY}
+  queryEndpoint="https://yourdomain.com/quill"
+  queryHeaders={{}}
+>
+  {children}
 </QuillProvider>
 ```
 
 ## Props
 
-<ParamField path='publicKey' type='string' required>
-	The public Quill API key. This can be found in the Quill portal in the
-	"Settings" tab.
+<ParamField path="publicKey" type="string" required>
+  The public Quill API key. This can be found in the Quill portal in the
+  "Settings" tab.
 </ParamField>
-<ParamField path='environment' type='string'>
-	The environment this app is running in (eg. "production").
+<ParamField path="environment" type="string">
+  The environment this app is running in (eg. "production").
 </ParamField>
-<ParamField path='organizationId' type='string'>
-	The organization id of the user. Required if not passing a queryEndpoint. If
-	this value is not passed in on the frontend, it should be passed in on the
-	backend if you are using a self-hosted server.
+<ParamField path="tenants" type="array">
+  The tenant ids of the user. Required if not passing a queryEndpoint. If this
+  value is not passed in on the frontend, it should be passed in on the backend
+  if you are using a self-hosted server.
 </ParamField>
-<ParamField path='queryEndpoint' type='string'>
-	The url of your self-hosted server running the quill server SDK, if any.
+<ParamField path="queryEndpoint" type="string">
+  The url of your self-hosted server running the quill server SDK, if any.
 </ParamField>
-<ParamField path='queryHeaders' type='object'>
-	Additional query headers passed along with all requests to the custom query
-	endpoint, if any.
+<ParamField path="queryHeaders" type="object">
+  Additional query headers passed along with all requests to the custom query
+  endpoint, if any.
 </ParamField>
-<ParamField path='withCredentials' type='boolean'>
-	Whether to include credentials with requests to the query endpoint.
+<ParamField path="withCredentials" type="boolean">
+  Whether to include credentials with requests to the query endpoint.
 </ParamField>
-<ParamField path='theme' type='QuillTheme'>
-	A custom theme used throughout your dashboard.
+<ParamField path="theme" type="QuillTheme">
+  A custom theme used throughout your dashboard.
 </ParamField>
-<ParamField path='children' type='ReactNode'>
-	The children of the provider. This is usually the rest of your app.
+<ParamField path="children" type="ReactNode">
+  The children of the provider. This is usually the rest of your app.
 </ParamField>
