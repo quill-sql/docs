@@ -8,7 +8,7 @@ import { QuillProvider, Dashboard } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <Dashboard name="Transactions" />
     </QuillProvider>
   );

@@ -8,7 +8,7 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <ReportBuilder initialTableName="transactions" />
     </QuillProvider>
   );
@@ -217,7 +217,7 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <ReportBuilder initialTableName="transactions" />
     </QuillProvider>
   );
@@ -235,7 +235,7 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <ReportBuilder reportId="664283fb4db8ad000bfe54d7" />
     </QuillProvider>
   );
@@ -252,7 +252,7 @@ import { QuillProvider, ReportBuilder } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <ReportBuilder />
     </QuillProvider>
   );
