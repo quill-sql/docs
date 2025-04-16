@@ -22,6 +22,10 @@ go get https://github.com/quill-sql/quill-go
 composer require quill.co/quill-php
 ```
 
+```bash Ruby
+bundle install quill-sql
+```
+
 </CodeGroup>
 
 ## 2. Create a new endpoint
@@ -139,7 +143,7 @@ if ($requestMethod === 'POST' && $endpoint === '/quill') {
 }
 ```
 
-```ruby ruby
+```ruby Ruby
 require "quill-sql"
 
 quill = Quill.new(
