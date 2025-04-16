@@ -139,6 +139,28 @@ if ($requestMethod === 'POST' && $endpoint === '/quill') {
 }
 ```
 
+```ruby ruby
+require "quill-sql"
+
+quill = Quill.new(
+  private_key: ENV["PRIVATE_KEY"],
+  database_connection_string: ENV["DB_URL"],
+  database_type: "clickhouse"
+)
+
+post "/quill" do
+  # Assuming user fetched via auth middleware has a user_id
+  org_id = request.env["org_id"]
+  metadata = JSON.parse(request.body.read)["metadata"]
+  result = quill.query(
+    tenants: [{ tenantField: "org_id", tenantIds: [org_id] }],
+    metadata: metadata
+  )
+
+  result.to_json
+end
+```
+
 </CodeGroup>
 
 ## 3. Connect the frontend
