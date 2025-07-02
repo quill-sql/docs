@@ -1,65 +1,74 @@
 ---
-title: "Create a view"
-description: "Add a SQL view with Quill in less than a minute"
+title: "Create a virtual table"
+description: "Add a virtual table to Quill virtual schema"
 ---
 
 <Note>
-	This guide assumes you have already connected your database with Quill. If
-	you haven't done that yet, check out our onboarding guide
-	[here](/portal/quickstart).
+  This guide assumes you have already connected your database with Quill. If you
+  haven't done that yet, check out our onboarding guide
+  [here](/bi-platform/quickstart).
 </Note>
 
 When you first get started with the Quill platform, you only see the initial views you created in the onboarding flow.
 
 <Frame>
-	<img src='/images/views.png' />
+  <img src="/images/views.png" />
 </Frame>
 
-### 1. Create a view
+### 1. Create a virtual table
 
-To add a new SQL view, you can click `Add view +` to open a SQL Editor that shows the visible tables that Quill can see in your schema.
+To add a new SQL virtual table, you can click `Add virtual table +` to open a SQL Editor that shows the visible tables that Quill can see in your schema.
 
 <Tip>
-	SQL views can help you organize and group different data together to make it
-	easier to build charts and tables on top of.
+  SQL virtual tables can help you organize and group different data together to
+  make it easier to build charts and tables on top of.
 </Tip>
 
-### 2. Edit the view and save
+### 2. Edit the virtual table and save
 
-Go ahead and write some SQL for a new view that you would like to create. Run the query by clicking `Run Query` and make sure the data looks correct.
+Go ahead and write some SQL for a new virtual table that you would like to create. Run the query by clicking `Run Query` and make sure the data looks correct.
 
 <Frame>
-	<img src='/images/create_sql_view.png' />
+  <img src="/images/create_sql_view.png" />
 </Frame>
 
-Give your new view a descriptive, clear name and then hit `Create view` to add the view to Quill. You can now query data from that view in charts and dashboards.
+Give your new virtual table a descriptive, clear name and then hit `Create virtual table` to add the virtual table to Quill. You can now query data from that virtual table in charts and dashboards.
 
 <Frame>
-	<img src='/images/add_view.png' />
+  <img src="/images/add_view.png" />
 </Frame>
 
-### 3. Manage your views
+### 3. Manage your virtual tables
 
-If you ever want to edit or delete an existing view, click on the view in the SQL Views list to open the view manager.
+If you ever want to edit or delete an existing virtual table, click on the virtual table in the SQL virtual tables list to open the virtual table manager.
 
 <Frame>
-	<img src='/images/edit_view.png' />
+  <img src="/images/edit_view.png" />
 </Frame>
 
 <Warning>
-	Be careful when editing and deleting views! Make sure the charts that
-	reference that view are up to date so they don't get out of sync.
+  Be careful when editing and deleting virtual tables! Make sure the charts that
+  reference that virtual table are up to date so they don't get out of sync.
 </Warning>
 
 ### Next Steps
 
-Now that you have a view, you're ready to start using Quill! You can come back at any time and add more dashboards, charts, and views.
+Now that you have a virtual table, you're ready to start using Quill! You can come back at any time and add more dashboards, reports, and virtual tables.
 
 <CardGroup cols={3}>
-	<Card
-		title='Add a dashboard'
-		icon='square-1'
-		href={"/portal/dashboard"}></Card>
-	<Card title='Add a chart' icon='square-2' href={"/portal/chart"}></Card>
-	<Card title='Add a view' icon='square-3' href={"/portal/view"}></Card>
+  <Card
+    title="Create a dashboard"
+    icon="square-1"
+    href={"/bi-platform/dashboard"}
+  ></Card>
+  <Card
+    title="Create a report"
+    icon="square-2"
+    href={"/bi-platform/report"}
+  ></Card>
+  <Card
+    title="Create a virtual table"
+    icon="square-3"
+    href={"/bi-platform/virtual-table"}
+  ></Card>
 </CardGroup>
