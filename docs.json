@@ -27,9 +27,10 @@
             "pages": [
               "bi-platform/overview",
               "bi-platform/quickstart",
+              "bi-platform/tenant",
+              "bi-platform/virtual-table",
               "bi-platform/dashboard",
-              "bi-platform/report",
-              "bi-platform/virtual-table"
+              "bi-platform/report"
             ]
           }
         ]
@@ -43,11 +44,7 @@
           },
           {
             "group": "Use cases",
-            "pages": [
-              "react/headless-dashboard",
-              "react/headless-data-export",
-              "react/headless-reporting"
-            ]
+            "pages": ["react/headless-dashboard", "react/headless-data-export"]
           },
           {
             "group": "Components",
