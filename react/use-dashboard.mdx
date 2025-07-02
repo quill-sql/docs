@@ -1,0 +1,91 @@
+---
+title: "useDashboard"
+description: "Add a dashboard to your app, styled with your existing UI components."
+---
+
+Used alongside [useDashboardReport](/react/use-dashboard-report) for fully customizable dashboards. Below is an example with shadcn showing fully custom styling.
+
+```tsx App.tsx
+import {
+  QuillProvider,
+  useDashboard,
+  useDashboardReport,
+  format,
+} from "@quillsql/react";
+import { Card, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantdIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
+      <CustomDashboard />
+    </QuillProvider>
+  );
+}
+
+function CustomDashboard() {
+  const { sections, isLoading } = useDashboard("quill demo dashboard");
+
+  return (
+    <>
+      <MetricReportsSection reports={sections["metrics"]} />
+    </>
+  );
+}
+
+function MetricsSection({ reports }: { reports: any[] }) {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
+      {reports.map((report: any) => (
+        <MetricCard key={report.id} reportId={report.id} name={report.name} />
+      ))}
+    </div>
+  );
+}
+
+interface MetricCardProps {
+  reportId: string;
+  name: string;
+}
+
+export function MetricCard({ reportId, name }: MetricCardProps) {
+  const { report, loading } = useDashboardReport(reportId);
+
+  if (loading) {
+    return (
+      <div className="lg:col-span-1">
+        <Card className="h-full shadow-none bg-transparent border-none">
+          <CardHeader className="pb-4">
+            <div className="space-y-1">
+              <Skeleton className="h-10 w-24" />
+              <Skeleton className="h-4 w-32" />
+              <p className="text-sm text-muted-foreground">{name}</p>
+            </div>
+          </CardHeader>
+        </Card>
+      </div>
+    );
+  }
+
+  if (!report) return null;
+
+  const mainValue = format({
+    value: report.pivotRows?.[0]?.[report.xAxisField],
+    format: report.xAxisFormat,
+  });
+
+  return (
+    <Card className="h-full shadow-none bg-transparent border-none">
+      <CardHeader className="pb-4 bg-transparent">
+        <div className="space-y-1">
+          <h1 className="text-4xl font-bold tracking-tight">{mainValue}</h1>
+          <p className="text-sm text-muted-foreground">{name}</p>
+        </div>
+      </CardHeader>
+    </Card>
+  );
+}
+```

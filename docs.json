@@ -1,0 +1,100 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "willow",
+  "name": "Quill",
+  "colors": {
+    "primary": "#212121",
+    "light": "#FFFFFF",
+    "dark": "#212121"
+  },
+  "favicon": "/favicon.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Architecture",
+        "groups": [
+          {
+            "group": "Architecture",
+            "pages": ["architecture"]
+          }
+        ]
+      },
+      {
+        "tab": "BI Platform",
+        "groups": [
+          {
+            "group": "BI Platform",
+            "pages": [
+              "bi-platform/overview",
+              "bi-platform/quickstart",
+              "bi-platform/dashboard",
+              "bi-platform/report",
+              "bi-platform/virtual-table"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "React SDK",
+        "groups": [
+          {
+            "group": "Getting Started",
+            "pages": ["react/quickstart", "react/themes", "react/headless"]
+          },
+          {
+            "group": "Use cases",
+            "pages": [
+              "react/headless-dashboard",
+              "react/headless-data-export",
+              "react/headless-reporting"
+            ]
+          },
+          {
+            "group": "Components",
+            "pages": [
+              "react/quill-provider",
+              "react/dashboard",
+              "react/report-builder",
+              "react/chart",
+              "react/table",
+              "react/sql-editor"
+            ]
+          },
+          {
+            "group": "Hooks",
+            "pages": [
+              "react/use-dashboard",
+              "react/use-dashboard-report",
+              "react/use-quill",
+              "react/use-export"
+            ]
+          },
+          {
+            "group": "Functions",
+            "pages": ["react/format"]
+          }
+        ]
+      },
+      {
+        "tab": "Server SDK",
+        "groups": [
+          {
+            "group": "Server SDK",
+            "pages": ["server/quickstart"]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Learn more",
+      "href": "https://quill.co"
+    }
+  }
+}

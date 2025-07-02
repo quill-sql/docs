@@ -1,0 +1,34 @@
+---
+title: "Architecture"
+description: "A new BI architecture, purpose built for end user facing, in-product dashboards and reporting."
+mode: "wide"
+"twitter:image": "/images/quillarchitecture.png"
+keywords: ["self-hosted", "security", "container", "docker"]
+---
+
+Traditionally in Business Intelligence products, there are 2 architectures, each with their own set of problems.
+
+| Architecture    | Description                                                            | Problems                                                             |
+| --------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| **Cloud**       | A web app that you embed via an iframe                                 | Limited customization, security concerns, performance issues         |
+| **Self-hosted** | A docker container or kubernetes cluster hosted on your infrastructure | Complex setup, maintenance overhead, still requires iframe embedding |
+
+By building backend and frontend logic into your existing stack, we solved these problems.
+
+## Hybrid
+
+<Frame caption="Production">
+  <img width="1000px" src="/images/quillhybridarchitecture.png" />
+</Frame>
+
+## Self Hosted
+
+<Frame caption="Typical for High Security Industries Like Finance, Healthcare, Government">
+  <img width="1000px" src="/images/quillselfhostedarchitecture.png" />
+</Frame>
+
+## Cloud
+
+<Frame caption="Similar to Other Cloud Developer Products">
+  <img width="1000px" src="/images/quillcloudarchitecture.png" />
+</Frame>

@@ -1,0 +1,34 @@
+---
+title: "What is Headless UI?"
+description: ""
+---
+
+"Headless" in React refers to a design pattern where UI components are separated into two parts:
+
+1. **Logic/State Management** - The "headless" part that handles all the business logic, state, and behavior
+2. **UI/Presentation** - The visual components that you style and customize
+
+## How Headless Components Work
+
+Headless components provide all the functionality without any default styling or visual elements. They give you:
+
+- Data processing
+- State management
+- Business logic
+
+But leave the UI completely up to you.
+
+> The hardest parts of building complex UIs usually revolve around state, events, side-effects, data computation/management. By removing these concerns from the markup, styles and implementation details, our logic and components can be more modular and reusable.
+
+— [**TanStack**](https://tanstack.com/table/v8/docs/introduction)
+
+![Quill Architecture](/images/quillarchitecture.png)
+
+## Popular Libraries that leverage React Hooks
+
+- [TanStack Table (useReactTable)](https://tanstack.com/table/latest)
+- [TanStack Query (useQuery)](https://tanstack.com/query/latest)
+- [Clerk React SDK (useUser)](https://clerk.com/docs/hooks/use-user)
+- [React Hook Form (useForm)](https://react-hook-form.com/docs/useform)
+- [React Window (useVirtualizer)](https://tanstack.com/virtual/latest)
+- [React DnD (useDrag, useDrop)](https://react-dnd.github.io/react-dnd/docs/overview)

@@ -1,0 +1,135 @@
+---
+title: "Overview"
+description: "Relevant concepts in Quill BI Platform"
+keywords: ["multitenant", "tenant", "tenancy"]
+---
+
+## 1. Environments
+
+### What is an Environment?
+
+An Environment is a single instance of Quill. Each environment has at least one tenant, a virtual schema, and dashboards that belong to it.
+
+You can promote changes in one environment to another environment on a report, dashboard, virtual table level.
+
+## Common Example
+
+A Development and Production environment.
+
+### Development
+
+- Points to development postgres database
+- Development Environment publicKey is used in your development and staging react apps
+- Development Environment privateKey is used in your development and staging server apps
+- When your server's schema changes, you can test those changes on the Development Environment
+- You can promote changes to the Production Environment when they are ready
+
+### Production
+
+- Points to production postgres database
+- Production environment publicKey is used in your development and staging react apps
+- Production environment privateKey is used in your development and staging server apps
+
+## 2. Tenant
+
+### What is a Tenant?
+
+A tenant is a **logical partition** of data within a datasource.
+
+### Tenant Roles
+
+- **Owner**:
+
+  - Controls access to data at the **virtual table** level.
+  - Dashboards must only use virtual tables owned by that tenant.
+
+- **Viewer**:
+  - Can view dashboards if a **mapping** exists.
+  - The mapping is a **SQL query** that defines which owners a viewer can access.
+
+---
+
+## 3. Virtual Table
+
+### Creating a Virtual Table
+
+To create a virtual table:
+
+1. Navigate to the **Virtual Schema** tab.
+2. Click **Create Table**.
+
+### What is a Virtual Table?
+
+A virtual table is:
+
+- A **SQL query** executed on top of your datasource.
+- Designed to **enforce tenancy** by requiring a tenant foreign key field (called an **owner**).
+- A mechanism for **cleaning and structuring** data for reporting purposes.
+
+> Note: A virtual table can have **multiple owners**.
+
+---
+
+## 4. Dashboard
+
+### What is a Dashboard?
+
+A dashboard organizes and presents reports. It includes:
+
+- **Sections**:
+
+  - Each section has a name and a list of reports.
+
+- **Global Filters**:
+  - Apply across all reports in the dashboard.
+  - Common filters include **date filters** and tenant-level fields.
+
+> A dashboard provides a unified interface to explore tenant-filtered, structured, and visualized data.
+
+---
+
+## 5. Report
+
+### Creating a Report
+
+Once you have created at least one virtual table, you can create a report.
+
+### What is a Report?
+
+A report is a SQL query based on the **virtual schema**. It supports the following views:
+
+- **Chart view**
+- **Tabular view** – A formatted output of the SQL query.
+- **Pivot (optional)** – Adds grouping and/or aggregation to the result, useful for visualizations.
+
+### Report Features
+
+- **Access Control**:
+
+  - Defines which **subset of tenants** can view the report on their dashboards.
+
+- **Dashboard Filter Field Mappings**:
+  - Used when a common field appears across multiple tables.
+  - Ensures proper linkage to dashboard-level filters.
+
+### Report Placement
+
+- A report can be assigned to only **one dashboard**.
+- It can be placed in only **one section** within that dashboard.
+
+### Promoting a report
+
+- You can promote a report from one dashboard to another, in the same environment
+
+---
+
+## Summary
+
+The virtual table reporting model consists of:
+
+1. **Virtual Tables**: SQL-based, tenant-aware cleaned data structures.
+2. **Reports**: Charted and tabular queries built from virtual tables.
+3. **Tenants**: Access control units for data partitioning and security.
+4. **Dashboards**: Grouped reports with global filters and sectioning.
+
+This structure ensures multi-tenant, clean, and secure reporting across your datasource.

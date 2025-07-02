@@ -65,20 +65,31 @@ app.post("/quill", authenticateJWT, async (req, res) => {
 from quillsql import Quill
 
 quill = Quill(
-  private_key=os.environ.get("QUILL_PRIVATE_KEY"),
-  database_connection_string=os.environ.get("POSTGRES_READ")
+    private_key=os.getenv("QULL_PRIVATE_KEY"),
+    database_connection_string=os.getenv("POSTGRES_READ"),
+    database_type="postgresql"
 )
 
-# POST endpoint you create for Quill
-@app.route('/quill', methods=['POST'])
-# "token_required" is your own pre-existing auth middleware
-@token_required
-def quill_endpoint():
-  data = request.json
-  # assuming current user comes from existing auth
-  # org_id is the id on the organizations table that you
-  # use with Quill (ex: organizations, businesses, companies, stores etc)
-  return quill.query(current_user.org_id, data)
+security = HTTPBearer()
+
+async def authenticate_jwt(token: str = Depends(security)):
+    # Your JWT validation logic here
+    # Return user object or raise HTTPException
+    user = validate_jwt_token(token.credentials)
+    return user
+
+@app.post("/quill")
+async def quill_post(data: Request, user: dict = Depends(authenticate_jwt)):
+    # assuming user fetched via auth middleware has an userId
+    user_id = user["user_id"]
+    body = await data.json()
+    metadata = body.get("metadata")
+
+    result = quill.query(
+        tenants=[{"tenantField": "user_id", "tenantIds": [user_id]}],
+        metadata=metadata
+    )
+    return result
 ```
 
 ```go Go
