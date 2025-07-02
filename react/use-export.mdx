@@ -7,7 +7,7 @@ description: "A simple way to export data from Quill"
 import { QuillProvider, useExport } from "@quillsql/react";
 
 function CustomComponent() {
-  // pass in any report created in the Quill Portal
+  // pass in any report created in the Quill BI Platform
   const { downloadCSV } = useExport(QUILL_ID);
   return <button onClick={downloadCSV}>Save</button>;
 }
@@ -30,7 +30,7 @@ function App() {
 </Info>
 
 <ParamField path='reportId' type='string' required>
-	The id of the report you created in the Quill Portal.
+	The id of the report you created in the Quill BI Platform.
 
     <Tip>
     	Don't have an id yet? Learn how to [create a report](https://docs.quillsql.com/bi-platform/report) in the Quill BI Platform to get started.

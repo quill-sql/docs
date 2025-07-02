@@ -53,7 +53,7 @@ description: "Get up and running with Quill in less than a minute"
     		<Step title="Create the access token">
     		Create a new JSON key for the service account by clicking the `Actions` dropdown next to the service account on the IAM & Admin > Service Accounts page, and then selecting `Create Key`. Select `JSON` as the key type and click `Create`. This will prompt you to save it one your local machine.
 
-    		In the next step you’ll upload this JSON file into the Quill Portal.
+    		In the next step you’ll upload this JSON file into the Quill BI Platform.
     		</Step>
     	</Steps>
 
@@ -121,32 +121,36 @@ description: "Get up and running with Quill in less than a minute"
 Go to [https://app.quill.co/onboard](https://app.quill.co/onboard) and enter the read-only database connection string that we created in the last step.
 
 <Tip>
-	If you're using our fully-managed Quill instance, make sure to add the Quill
-	server to your database IP whitelist, if you have one. Requests from Quill
-	will always come from `34.133.137.225`.
+  If you're using our fully-managed Quill instance, make sure to add the Quill
+  server to your database IP whitelist, if you have one. Requests from Quill
+  will always come from `34.133.137.225`.
 </Tip>
 
 <Info>
-	For more information about data and access control, you can read our
-	self-hosting guide [here](/selfhost/quickstart.mdx).
+  For more information about data and access control, you can read our
+  self-hosting guide [here](/selfhost/quickstart.mdx).
 </Info>
 
 ### 3. Connect your schema
 
 The Quill platform provides powerful filtering and reporting tools to help you get the insights you want, faster. Since Quill provides organization-based filtering out-of-the-box, simply let us know which table to use and Quill will automatically partition your data by organization.
 
-<img src='/images/onboard_2.png' />
+<img src="/images/onboard_2.png" />
 
 ### 4. Add SQL Views
 
 Create a cleaned schema that makes it easier to write queries and reports. The views you create here will be used to create charts and tables later on. Don't worry, you can always create and edit these views later.
 
-<img src='/images/onboard_3.png' />
+<img src="/images/onboard_3.png" />
 
 ### Next Steps
 
 Once you have connected your database, you're ready to create your first dashboard! Check out our guides on how to create your first dashboard below.
 
-<Card title='Create a dashboard' icon='square-1' href={"/portal/dashboard"}>
-	Build your first dashboard with Quill in less than a minute.
+<Card
+  title="Create a dashboard"
+  icon="square-1"
+  href={"/bi-platform/dashboard"}
+>
+  Build your first dashboard with Quill in less than a minute.
 </Card>
