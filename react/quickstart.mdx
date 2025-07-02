@@ -39,7 +39,10 @@ import MyApp from "./MyApp";
 function App() {
   // Replace organizationId and publicKey with your values
   return (
-    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantdIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
       <MyApp />
     </QuillProvider>
   );
