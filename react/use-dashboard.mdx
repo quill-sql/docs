@@ -89,3 +89,156 @@ export function MetricCard({ reportId, name }: MetricCardProps) {
   );
 }
 ```
+
+<ParamField body="dashboardName" type="string" required>
+  The name of the dashboard to load
+</ParamField>
+
+<ParamField body="isLoading" type="boolean">
+  Whether the dashboard data is currently loading
+</ParamField>
+
+<ParamField body="sections" type="Record<string, QuillReport[]> | null">
+  The dashboard sections containing reports, organized by section name
+  <Expandable title='properties'>
+<ResponseField name="id" type="string" required>
+  The report's unique id
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  The name of the report
+</ResponseField>
+
+<ResponseField name="dashboardName" type="string" required>
+  The name of the dashboard this report belongs to
+</ResponseField>
+
+<ResponseField name="rows" type="{ [key: string]: string }[]" required>
+  The rows of data returned from this report's query
+</ResponseField>
+
+<ResponseField name="columns" type="Column[]" required>
+  The columns data returned from this report's query
+</ResponseField>
+
+<ResponseField name="chartType" type="string" required>
+  The type of this chart
+</ResponseField>
+
+<ResponseField name="dateField" type="{ table: string; field: string }">
+  The table and field this report uses for date filtering, if any
+</ResponseField>
+
+<ResponseField name="pivot" type="Pivot | null" required>
+  The pivot used in this query, if any
+</ResponseField>
+
+<ResponseField name="xAxisLabel" type="string" required>
+  The label of the xAxis
+</ResponseField>
+
+<ResponseField name="xAxisField" type="string" required>
+  The field to use for this report's xAxis
+</ResponseField>
+
+<ResponseField name="xAxisFormat" type="AxisFormat" required>
+  The format for this report's xAxis
+</ResponseField>
+
+<ResponseField name="template" type="boolean">
+  The template flag for a report
+</ResponseField>
+
+<ResponseField
+  name="yAxisFields"
+  type="{ field: string; label: string; format: AxisFormat }[]"
+  required
+>
+  A list of metadata about the yAxes of this report
+</ResponseField>
+
+<ResponseField name="order" type="number" required>
+  The relative ordering of this report in relation to its siblings. Ordering
+  starts at 1 and counts up (eg. 1, 2, 3, etc.). Reports in the same section are
+  first grouped by chartType and then each group is sorted by order.
+</ResponseField>
+
+<ResponseField name="compareRows" type="{ [key: string]: string }[]" required>
+  The rows of data returned from this report's query over the comparison date
+  range as opposed to the primary date range
+</ResponseField>
+
+<ResponseField name="filtersApplied" type="InternalFilter[]">
+  An array filters that have been applied to this query
+</ResponseField>
+
+<ResponseField name="pagination" type="Pagination">
+  A page prop used for smart table pagination
+</ResponseField>
+
+<ResponseField name="sort" type="{ field: string; direction: string }">
+  A sort prop used for smart table pagination
+</ResponseField>
+
+<ResponseField name="rowCount" type="number" required>
+  A total row count used for SQL pagination
+</ResponseField>
+
+<ResponseField name="queryString" type="string" required>
+  A query for the report used by the report builder on initial load of report
+</ResponseField>
+
+<ResponseField
+  name="filterMap"
+  type="{ [key: string]: { table: string; field: string } }"
+>
+  A map of dashboard filters to the appropriate table and field for the report
+</ResponseField>
+
+<ResponseField
+  name="referenceLines"
+  type="{ label: string; query: [number, number] | string }[]"
+>
+  A list of reference lines to render on compatible charts
+</ResponseField>
+
+<ResponseField
+  name="referenceLineYValues"
+  type="{ label: string; query: [number, number] }[]"
+>
+  Resolved reference line y values
+</ResponseField>
+
+<ResponseField name="includeCustomFields" type="boolean">
+  A flag to determine whether to automatically display custom fields
+</ResponseField>
+
+<ResponseField name="columnsWithCustomFields" type="Column[]">
+  Columns with custom fields
+</ResponseField>
+
+<ResponseField name="pivotRows" type="{ [key: string]: string }[]">
+  The pivot row info
+</ResponseField>
+
+<ResponseField name="pivotColumns" type="ColumnInternal[]">
+  A list of metadata about the pivot yAxes of this report
+</ResponseField>
+
+<ResponseField name="pivotRowCount" type="number">
+  Total pivot row count
+</ResponseField>
+</Expandable>
+</ParamField>
+
+<ParamField body="filters" type="DashboardFilter[]">
+  Available filters for the dashboard. These are typically rendered with html
+  select or similar UI components.
+</ParamField>
+
+<ParamField
+  body="applyFilters"
+  type="(filters: Array<{ label: string; value: string | string[] | { startDate?: Date; endDate?: Date }; } | Filter>) => void"
+>
+  Function to apply filters to the dashboard
+</ParamField>
