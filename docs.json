@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "maple",
   "name": "Quill",
   "colors": {
     "primary": "#212121",
@@ -53,6 +53,7 @@
               "react/dashboard",
               "react/report-builder",
               "react/chart",
+              "react/static-chart",
               "react/table",
               "react/sql-editor"
             ]

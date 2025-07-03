@@ -1,0 +1,22 @@
+---
+title: "StaticChart"
+description: "Stateless Chart view of a Quill Report"
+---
+
+Stateless chart component intended for use with useDashboard and useDashboardReport.
+
+<ParamField body="reportId" type="string" required>
+  The unique identifier of the report to display
+</ParamField>
+
+<ParamField body="onClickChartElement" type="(data: any) => void">
+  Callback function triggered when a chart element is clicked
+</ParamField>
+
+<ParamField body="containerStyle" type="React.CSSProperties">
+  Custom CSS styles to apply to the chart container
+</ParamField>
+
+<ParamField body="showLegend" type="boolean" default="false">
+  Whether to display the chart legend
+</ParamField>
