@@ -86,7 +86,8 @@
   },
   "logo": {
     "light": "/logo/light.png",
-    "dark": "/logo/dark.png"
+    "dark": "/logo/dark.png",
+    "href": "https://quill.co"
   },
   "navbar": {
     "primary": {
