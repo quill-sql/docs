@@ -30,7 +30,8 @@
               "bi-platform/tenant",
               "bi-platform/virtual-table",
               "bi-platform/dashboard",
-              "bi-platform/report"
+              "bi-platform/report",
+              "bi-platform/self-host"
             ]
           }
         ]

@@ -1,0 +1,120 @@
+---
+title: "Self-host the BI Platform"
+description: "Set up the BI Platform in your own react app"
+---
+
+If you want the BI Platform to point to a datasource via the server sdk (instead of Quill Cloud), you can add it to any react app in a few lines of code.
+
+### 1. Install dependencies
+
+Install `@quillsql/admin` using your favorite package manager:
+
+<CodeGroup>
+```bash npm
+npm install @quillsql/admin
+```
+
+```bash yarn
+yarn add @quillsql/admin
+```
+
+```bash pnpm
+pnpm add @quillsql/admin
+```
+
+```bash bun
+bun add @quillsql/admin
+```
+
+</CodeGroup>
+
+### 2. Add AdminProvider
+
+You connect Quill to React with the `AdminProvider` component. Similar to React's `Context.Provider`, `AdminProvider` wraps your React app and places Quill on the context, enabling you to access it from anywhere in your component tree.
+
+In App.js, let's wrap our React app with an `AdminProvider`. We suggest putting the `AdminProvider` somewhere high in your app, above any component that might use to access BI Platform components. If you're using `QuillProvider` in the same react app, make sure it is a child of `AdminProvider`.
+
+```js App.js
+import { AdminProvider } from "@quillsql/admin";
+import { QuillProvider } from "@quillsql/react";
+import MyApp from "./MyApp";
+
+function App() {
+  // Replace organizationId and publicKey with your values
+  return (
+    <AdminProvider queryEndpoint="api.youserver.com/quill">
+      <QuillProvider
+        queryEndpoint="api.youserver.com/quill"
+        publicKey="QUILL_PUBLIC_KEY"
+      >
+        <MyApp />
+      </QuillProvider>
+    </AdminProvider>
+  );
+}
+```
+
+The add two routes in your app, one for each page of the BI Platform. Use your existing navigation system, but here is an example using react router.
+
+```js App.js
+import {
+  AdminProvider,
+  VirtualTableManager,
+  DashboardManager,
+} from "@quillsql/admin";
+import { QuillProvider } from "@quillsql/react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+
+function App() {
+  return (
+    <AdminProvider queryEndpoint="api.youserver.com/quill">
+      <QuillProvider
+        queryEndpoint="api.youserver.com/quill"
+        publicKey="QUILL_PUBLIC_KEY"
+      >
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </QuillProvider>
+    </AdminProvider>
+  );
+}
+
+function AppContent() {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      <nav>
+        <Link to="/dashboards">Dashboard Manager</Link>
+        <Link to="/virtual-tables">Virtual Table Manager</Link>
+      </nav>
+
+      <Routes>
+        <Route
+          path="/dashboards"
+          element={
+            <DashboardManager
+              navigateToVirtualTableManager={() => navigate("/virtual-tables")}
+            />
+          }
+        />
+        <Route
+          path="/virtual-tables"
+          element={
+            <VirtualTableManager
+              navigateToDashboardManager={() => navigate("/dashboards")}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  );
+}
+```
