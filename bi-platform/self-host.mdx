@@ -75,7 +75,10 @@ import {
 
 function App() {
   return (
-    <AdminProvider queryEndpoint="api.youserver.com/quill">
+    <AdminProvider
+      queryEndpoint="api.youserver.com/quill"
+      publicKey="QUILL_PUBLIC_KEY"
+    >
       <QuillProvider
         queryEndpoint="api.youserver.com/quill"
         publicKey="QUILL_PUBLIC_KEY"
