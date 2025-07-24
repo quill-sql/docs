@@ -25,6 +25,97 @@ export const DashboardList = () => {
 };
 ```
 
+Can be used alongside [useDashboard](/react/use-dashboard-report) for a fully dynamic directory of dashboards.
+
+```tsx
+import {
+  useDashboards,
+  useDashboard,
+  useDashboardReport,
+  StaticChart,
+} from "@quillsql/react";
+import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
+export const DashboardList = () => {
+  const { dashboards, isLoading } = useDashboards();
+
+  return (
+    <div>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        dashboards.map((dashboard) => (
+          <div key={dashboard.id}>
+            <CustomDashboard name={dashboard.name} />
+          </div>
+        ))
+      )}
+    </div>
+  );
+};
+
+function CustomDashboard({ name }) {
+  const { sections, isLoading } = useDashboard(name);
+
+  if (isLoading) return <div>Loading...</div>;
+
+  return (
+    <>
+      {Object.entries(sections).map(([sectionName, reports]) => (
+        <ReportsSection
+          key={sectionName}
+          sectionName={sectionName}
+          reports={reports}
+        />
+      ))}
+    </>
+  );
+}
+
+function ReportsSection({
+  sectionName,
+  reports,
+}: {
+  sectionName: string;
+  reports: any[];
+}) {
+  return (
+    <div>
+      <h2>{sectionName}</h2>
+      <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
+        {reports.map((report: any) => (
+          <MetricCard key={report.id} reportId={report.id} name={report.name} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+interface ReportCardProps {
+  reportId: string;
+  name: string;
+}
+
+export function ReportCard({ reportId, name }: ReportCardProps) {
+  const { report, loading } = useDashboardReport(reportId);
+
+  if (loading) {
+    return (
+      <Card className="h-full shadow-none bg-transparent border-none">
+        <Skeleton />
+      </Card>
+    );
+  }
+
+  return (
+    <Card className="h-full shadow-none bg-transparent border-none">
+      <StaticChart reportId={reportId} />
+    </Card>
+  );
+}
+```
+
 <ParamField path="dashboards" type="Dashboard[] | null">
   The list of dashboards returned by <code>useDashboards</code>.
   <Expandable title="Dashboard type">
