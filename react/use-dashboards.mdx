@@ -14,9 +14,6 @@ export const DashboardList = () => {
         ? dashboards.map((dashboard) => (
             <div key={dashboard.id}>
               <div>{dashboard.name}</div>
-              {dashboard.reports?.map((report: any) => (
-                <div key={report.id}>{report.id}</div>
-              ))}
             </div>
           ))
         : 'null}
