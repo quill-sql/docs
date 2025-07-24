@@ -3,21 +3,40 @@ title: "useDashboards"
 description: "Get a list of all Quill dashboards."
 ---
 
-```
-import { useDashboards } from '@quillsql/react';
+```tsx
+import { useDashboards } from "@quillsql/react";
 
 export const DashboardList = () => {
-  const { dashboards } = useDashboards();
+  const { dashboards, isLoading } = useDashboards();
+
   return (
     <div>
-      {dashboards
-        ? dashboards.map((dashboard) => (
-            <div key={dashboard.id}>
-              <div>{dashboard.name}</div>
-            </div>
-          ))
-        : 'null}
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        dashboards.map((dashboard) => (
+          <div key={dashboard.id}>
+            <div>{dashboard.name}</div>
+          </div>
+        ))
+      )}
     </div>
   );
 };
 ```
+
+<ParamField path="dashboards" type="Dashboard[] | null">
+  The list of dashboards returned by <code>useDashboards</code>.
+  <Expandable title="Dashboard type">
+    <ResponseField name="id" type="string" required>
+      The unique dashboard ID.
+    </ResponseField>
+    <ResponseField name="name" type="string" required>
+      The dashboard name.
+    </ResponseField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="isLoading" type="boolean">
+  Whether the dashboards are currently loading.
+</ParamField>
