@@ -1,0 +1,26 @@
+---
+title: "useDashboards"
+description: "Get a list of all Quill dashboards."
+---
+
+```
+import { useDashboards } from '@quillsql/react';
+
+export const DashboardList = () => {
+  const { dashboards } = useDashboards();
+  return (
+    <div>
+      {dashboards
+        ? dashboards.map((dashboard) => (
+            <div key={dashboard.id}>
+              <div>{dashboard.name}</div>
+              {dashboard.reports?.map((report: any) => (
+                <div key={report.id}>{report.id}</div>
+              ))}
+            </div>
+          ))
+        : 'null}
+    </div>
+  );
+};
+```

@@ -64,6 +64,7 @@
             "pages": [
               "react/use-dashboard",
               "react/use-dashboard-report",
+              "react/use-dashboards",
               "react/use-quill",
               "react/use-export"
             ]
