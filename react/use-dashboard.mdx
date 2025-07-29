@@ -90,9 +90,23 @@ export function MetricCard({ reportId, name }: MetricCardProps) {
 }
 ```
 
+Parameters
+
 <ParamField body="dashboardName" type="string" required>
   The name of the dashboard to load
 </ParamField>
+
+<ParamField body="config" type="object">
+  Configuration options for the dashboard
+  <Expandable title="config properties">
+    <ResponseField name="pageSize" type="number" default={10}>
+      The number of rows per page for the tabular rows of a report. Defaults to
+      10.
+    </ResponseField>
+  </Expandable>
+</ParamField>
+
+Returns
 
 <ParamField body="isLoading" type="boolean">
   Whether the dashboard data is currently loading

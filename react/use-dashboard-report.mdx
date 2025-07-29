@@ -89,3 +89,58 @@ export function MetricCard({ reportId, name }: MetricCardProps) {
   );
 }
 ```
+
+Parameters
+
+<ParamField body="reportId" type="string" required>
+  The reportId of the report to load
+</ParamField>
+
+Returns
+
+<ParamField path="report" type="QuillReport | null">
+  The report data returned by <code>useDashboardReport</code>.
+  <Expandable title="QuillReport type">
+    <ResponseField name="id" type="string" required>
+      The report's unique id.
+    </ResponseField>
+    <ResponseField name="name" type="string" required>
+      The name of the report.
+    </ResponseField>
+    <ResponseField name="dashboardName" type="string" required>
+      The name of the dashboard this report belongs to.
+    </ResponseField>
+    <ResponseField name="rows" type="{ [key: string]: string }[]" required>
+      The rows of data returned from this report's query.
+    </ResponseField>
+    <ResponseField name="columns" type="Column[]" required>
+      The columns data returned from this report's query.
+    </ResponseField>
+    <ResponseField name="chartType" type="string" required>
+      The type of this chart.
+    </ResponseField>
+    <ResponseField name="xAxisField" type="string" required>
+      The field to use for this report's xAxis.
+    </ResponseField>
+    <ResponseField name="xAxisFormat" type="AxisFormat" required>
+      The format for this report's xAxis.
+    </ResponseField>
+  </Expandable>
+</ParamField>
+
+<ParamField path="isLoading" type="boolean">
+  Whether the report data is currently loading
+</ParamField>
+
+<ParamField path="applyFilters" type="(filters: Filter[]) => void">
+  Function to apply filters to the report.
+</ParamField>
+
+<ParamField path="deleteReport" type="() => void">
+  Function to delete the report.
+</ParamField>
+
+<ParamField path="fetchNextPage" type="() => Promise<void>">
+  Function to fetch the next page of data. Note that the pageSize is set in
+  useDashboard.
+</ParamField>
