@@ -79,14 +79,9 @@ function App() {
       queryEndpoint="api.youserver.com/quill"
       publicKey="QUILL_PUBLIC_KEY"
     >
-      <QuillProvider
-        queryEndpoint="api.youserver.com/quill"
-        publicKey="QUILL_PUBLIC_KEY"
-      >
-        <BrowserRouter>
-          <AppContent />
-        </BrowserRouter>
-      </QuillProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
     </AdminProvider>
   );
 }
