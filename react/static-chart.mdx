@@ -3,7 +3,75 @@ title: "StaticChart"
 description: "Stateless Chart view of a Quill Report"
 ---
 
-Stateless chart component intended for use with useDashboard and useDashboardReport.
+Stateless chart component intended for use with [useDashboard](/react/use-dashboard) and [useDashboardReport](/react/use-dashboard-report).
+
+```tsx App.tsx
+import {
+  QuillProvider,
+  useDashboard,
+  useDashboardReport,
+  StaticChart,
+} from "@quillsql/react";
+import { Card, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
+      <CustomDashboard />
+    </QuillProvider>
+  );
+}
+
+function CustomDashboard() {
+  const { sections, isLoading } = useDashboard("quill demo dashboard");
+
+  return (
+    <>
+      <ChartsSection reports={sections["charts"]} />
+    </>
+  );
+}
+
+function ChartsSection({ reports }: { reports: any[] }) {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
+      {reports.map((report: any) => (
+        <ChartCard reportId={report.id} name={report.name} />
+      ))}
+    </div>
+  );
+}
+
+function ChartCard({ reportId, name }) {
+  const { report, loading } = useDashboardReport(reportId);
+  if (loading) {
+    return (
+      <div className="lg:col-span-1">
+        <Card
+          className="h-full shadow-none bg-transparent border-none"
+          title={report.name}
+        >
+          <Skeleton />
+        </Card>
+      </div>
+    );
+  }
+  return (
+    <div className="lg:col-span-1">
+      <Card
+        className="h-full shadow-none bg-transparent border-none"
+        title={report.name}
+      >
+        <StaticChart reportId={report.id} />
+      </Card>
+    </div>
+  );
+}
+```
 
 <ParamField body="reportId" type="string" required>
   The unique identifier of the report to display

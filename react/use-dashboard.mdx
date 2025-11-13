@@ -40,10 +40,34 @@ function ChartsSection({ reports }: { reports: any[] }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
       {reports.map((report: any) => (
-        <Card key={report.id} name={report.name}>
-          <StaticChart reportId={report.id} />
-        </Card>
+        <ChartCard reportId={report.id} name={report.name} />
       ))}
+    </div>
+  );
+}
+
+function ChartCard({ reportId, name }) {
+  const { report, loading } = useDashboardReport(reportId);
+  if (loading) {
+    return (
+      <div className="lg:col-span-1">
+        <Card
+          className="h-full shadow-none bg-transparent border-none"
+          title={name}
+        >
+          <Skeleton />
+        </Card>
+      </div>
+    );
+  }
+  return (
+    <div className="lg:col-span-1">
+      <Card
+        className="h-full shadow-none bg-transparent border-none"
+        title={name}
+      >
+        <StaticChart reportId={report.id} />
+      </Card>
     </div>
   );
 }
