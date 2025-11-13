@@ -31,61 +31,20 @@ function CustomDashboard() {
 
   return (
     <>
-      <MetricReportsSection reports={sections["metrics"]} />
+      <ChartsSection reports={sections["charts"]} />
     </>
   );
 }
 
-function MetricsSection({ reports }: { reports: any[] }) {
+function ChartsSection({ reports }: { reports: any[] }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
       {reports.map((report: any) => (
-        <MetricCard key={report.id} reportId={report.id} name={report.name} />
+        <Card key={report.id} name={report.name}>
+          <StaticChart reportId={report.id} />
+        </Card>
       ))}
     </div>
-  );
-}
-
-interface MetricCardProps {
-  reportId: string;
-  name: string;
-}
-
-export function MetricCard({ reportId, name }: MetricCardProps) {
-  const { report, loading } = useDashboardReport(reportId);
-
-  if (loading) {
-    return (
-      <div className="lg:col-span-1">
-        <Card className="h-full shadow-none bg-transparent border-none">
-          <CardHeader className="pb-4">
-            <div className="space-y-1">
-              <Skeleton className="h-10 w-24" />
-              <Skeleton className="h-4 w-32" />
-              <p className="text-sm text-muted-foreground">{name}</p>
-            </div>
-          </CardHeader>
-        </Card>
-      </div>
-    );
-  }
-
-  if (!report) return null;
-
-  const mainValue = format({
-    value: report.pivotRows?.[0]?.[report.xAxisField],
-    format: report.xAxisFormat,
-  });
-
-  return (
-    <Card className="h-full shadow-none bg-transparent border-none">
-      <CardHeader className="pb-4 bg-transparent">
-        <div className="space-y-1">
-          <h1 className="text-4xl font-bold tracking-tight">{mainValue}</h1>
-          <p className="text-sm text-muted-foreground">{name}</p>
-        </div>
-      </CardHeader>
-    </Card>
   );
 }
 ```
