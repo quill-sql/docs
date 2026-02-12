@@ -28,7 +28,6 @@ function App() {
 
 function CustomDashboard() {
   const { sections, isLoading } = useDashboard("quill demo dashboard");
-
   const chartsSection = sections ? sections["charts"] : []
 
   if (chartsSection){
