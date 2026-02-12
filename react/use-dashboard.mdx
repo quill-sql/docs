@@ -29,9 +29,18 @@ function App() {
 function CustomDashboard() {
   const { sections, isLoading } = useDashboard("quill demo dashboard");
 
+  const chartsSection = sections ? sections["charts"] : []
+
+  if (chartsSection){
+    return (
+      <>
+        <ChartsSection reports={chartsSection} />
+      </>
+    );
+  }
   return (
     <>
-      <ChartsSection reports={sections["charts"]} />
+      Loading...
     </>
   );
 }
@@ -46,9 +55,9 @@ function ChartsSection({ reports }: { reports: any[] }) {
   );
 }
 
-function ChartCard({ reportId, name }) {
+function ChartCard({ reportId, name }: { reportId: string, name: string}) {
   const { report, loading } = useDashboardReport(reportId);
-  if (loading) {
+  if (loading || !report) {
     return (
       <div className="lg:col-span-1">
         <Card
