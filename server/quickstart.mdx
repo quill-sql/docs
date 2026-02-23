@@ -85,7 +85,7 @@ async def quill_post(data: Request, user: dict = Depends(authenticate_jwt)):
     body = await data.json()
     metadata = body.get("metadata")
 
-    result = quill.query(
+    result = await quill.query(
         tenants=[{"tenantField": "user_id", "tenantIds": [user_id]}],
         metadata=metadata
     )
