@@ -7,7 +7,7 @@ description: "The Tabular view of a Quill Report"
 import { QuillProvider, Table } from "@quillsql/react";
 
 const MyTable = () => (
-  <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+  <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
     <Table reportId="6644088e6e2470000cbdb109" />
   </QuillProvider>
 );
@@ -65,7 +65,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <Table reportId="664283fb4db8ad000bfe54d7" />
     </QuillProvider>
   );
@@ -83,7 +83,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
       <Table
         rows={[
           { x: 1, y: 1, z: 0 },
@@ -104,14 +104,14 @@ function App() {
 ```
 
 ```jsx Using useQuill
-import { QuillProvider, Table } from "@quillsql/react";
+import { QuillProvider, Table, useQuill } from "@quillsql/react";
 import { MY_TABLE_ID } from "./constants";
 
 function App() {
   const report = useQuill(MY_TABLE_ID);
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
-      <Table rows={report.rows} columns={report.columns} />
+    <QuillProvider tenants={[2]} publicKey="6579031b3e41c378aa8180ec">
+      <Table rows={report.data?.rows ?? []} columns={report.data?.columns ?? []} />
     </QuillProvider>
   );
 }
@@ -160,7 +160,7 @@ function App() {
   The placeholder filename to use when downloading this table as a csv file.
 </ParamField>
 
-<ParamField path="hideDownloadCSVButton" type="boolean">
+<ParamField path="hideCSVDownloadButton" type="boolean">
   Whether to hide the download csv button.
 </ParamField>
 

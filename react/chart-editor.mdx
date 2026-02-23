@@ -8,7 +8,10 @@ import { QuillProvider, ChartEditor } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
       <ChartEditor
         isOpen={isOpen}
         setIsOpen={setIsOpen}
@@ -164,7 +167,7 @@ export function MaterialChartEditor() {
   Whether the ChartEditor is open.
 </ParamField>
 
-<ParamField path="setIsOpen" type="boolean" required>
+<ParamField path="setIsOpen" type="(isOpen: boolean) => void" required>
   A callback that sets the open state of the ChartEditor.
 </ParamField>
 

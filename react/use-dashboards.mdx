@@ -135,6 +135,21 @@ Returns
     <ResponseField name="name" type="string" required>
       The dashboard name.
     </ResponseField>
+    <ResponseField name="reports" type="QuillReport[]" required>
+      Reports currently associated with this dashboard.
+    </ResponseField>
+    <ResponseField name="tenantKeys" type="string[]">
+      Dashboard owner tenant fields.
+    </ResponseField>
+    <ResponseField name="createdAt" type="Date">
+      Dashboard creation date.
+    </ResponseField>
+    <ResponseField
+      name="sectionOrder"
+      type="{ _id: string; section: string; reportOrder: string[] }[]"
+    >
+      Section/report ordering metadata.
+    </ResponseField>
   </Expandable>
 </ParamField>
 

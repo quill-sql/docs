@@ -50,11 +50,45 @@ function App() {
 
 ## Props
 
-<ParamField path='reportId' type='string' required>
+<ParamField path='reportId' type='string'>
 	The id of the report you created in the Quill BI Platform.
 
     <Tip>
     	Don't have an id yet? Learn how to [create a chart](/bi-platform/report) in the Quill BI Platform to get started.
     </Tip>
 
+</ParamField>
+
+<ParamField path='pagination' type='{ rowsPerPage: number; rowsPerRequest: number }'>
+	Optional table pagination settings.
+</ParamField>
+
+## Returns
+
+<ParamField path='data' type='QuillReport | null'>
+  The loaded report data.
+</ParamField>
+
+<ParamField path='loading' type='boolean'>
+  Whether the report is loading.
+</ParamField>
+
+<ParamField path='error' type='string | undefined'>
+  Error text when loading fails.
+</ParamField>
+
+<ParamField path='fetchMore' type='(page: number) => void'>
+  Fetch additional table rows for a page.
+</ParamField>
+
+<ParamField path='setSort' type='(field: string, direction: string) => void'>
+  Apply server-side sorting for table rows.
+</ParamField>
+
+<ParamField path='calculate' type='(calcType: Calculation) => number | undefined'>
+  Run a supported metric calculation over loaded rows.
+</ParamField>
+
+<ParamField path='resetFilters' type='() => void'>
+  Reset report-level filters.
 </ParamField>

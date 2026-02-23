@@ -37,3 +37,28 @@ function App() {
     </Tip>
 
 </ParamField>
+
+<ParamField
+  path='options'
+  type='{ CustomDocumentComponent?: (props: QuillPDFProps) => JSX.Element; maximumRowsPerPage?: number; sectionField?: string }'
+>
+  Optional export configuration.
+</ParamField>
+
+## Returns
+
+<ParamField path='downloadCSV' type='(downloadOptions?: { usePivotRows?: boolean }) => Promise<void>'>
+  Downloads report data as CSV.
+</ParamField>
+
+<ParamField path='isCSVLoading' type='boolean'>
+  Whether CSV export is currently in progress.
+</ParamField>
+
+<ParamField path='downloadPDF' type='(downloadOptions?: { usePivotRows?: boolean }) => Promise<void>'>
+  Downloads report data as PDF.
+</ParamField>
+
+<ParamField path='isPDFLoading' type='boolean'>
+  Whether PDF export is currently in progress.
+</ParamField>

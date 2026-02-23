@@ -104,6 +104,10 @@ Parameters
   The Quill <code>reportId</code> of the report to load
 </ParamField>
 
+<ParamField body="config" type="{ initialFilters?: Filter[] }">
+  Optional initial report-level filters.
+</ParamField>
+
 Returns
 
 <ParamField path="report" type="QuillReport | null">
@@ -127,6 +131,9 @@ Returns
     <ResponseField name="chartType" type="string" required>
       The type of this chart.
     </ResponseField>
+    <ResponseField name="showLegend" type="boolean">
+      Whether to show a legend for this chart.
+    </ResponseField>
     <ResponseField name="xAxisField" type="string" required>
       The field to use for this report's xAxis.
     </ResponseField>
@@ -138,6 +145,10 @@ Returns
 
 <ParamField path="isLoading" type="boolean">
   Whether the report data is currently loading
+</ParamField>
+
+<ParamField path="loading" type="boolean">
+  Alias for <code>isLoading</code> (backwards compatibility).
 </ParamField>
 
 <ParamField path="applyFilters" type="(filters: Filter[]) => void">
