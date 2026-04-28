@@ -73,7 +73,174 @@ function ChartCard({ reportId, name }) {
 }
 ```
 
-Parameters
+## Working with filters
+
+`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function for updating them. Each filter has a `type` of `"select"`, `"multiselect"`, `"date"`, or `"tenant"`, plus a `label`, current `value`, and an `options` list.
+
+The example below renders each filter type with a native control and applies updates via `applyFilters`:
+
+```tsx App.tsx
+import {
+  QuillProvider,
+  useDashboard,
+  StaticChart,
+} from "@quillsql/react";
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
+      <FilteredDashboard name="quill demo dashboard" />
+    </QuillProvider>
+  );
+}
+
+function FilteredDashboard({ name }: { name: string }) {
+  const { sections, filters, applyFilters, isLoading } = useDashboard(name);
+
+  return (
+    <div>
+      <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
+        {filters.map((filter) => {
+          if (filter.type === "select") {
+            return (
+              <select
+                key={filter.label}
+                value={filter.value ?? ""}
+                onChange={(e) =>
+                  applyFilters([{ label: filter.label, value: e.target.value }])
+                }
+              >
+                <option value="">All</option>
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
+
+          if (filter.type === "multiselect") {
+            return (
+              <select
+                key={filter.label}
+                multiple
+                value={filter.value}
+                onChange={(e) => {
+                  const value = Array.from(e.target.selectedOptions).map(
+                    (option) => option.value,
+                  );
+                  applyFilters([{ label: filter.label, value }]);
+                }}
+              >
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
+
+          if (filter.type === "date") {
+            return (
+              <select
+                key={filter.label}
+                value={filter.value.presetValue ?? ""}
+                onChange={(e) => {
+                  const preset = filter.options.find(
+                    (option) => option.value === e.target.value,
+                  );
+                  if (!preset) return;
+                  applyFilters([
+                    {
+                      label: filter.label,
+                      value: {
+                        startDate: preset.startDate,
+                        endDate: preset.endDate,
+                      },
+                    },
+                  ]);
+                }}
+              >
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
+
+          if (filter.type === "tenant") {
+            // value is string | number | (string | number)[] | null
+            const selected = Array.isArray(filter.value)
+              ? filter.value.map(String)
+              : filter.value === null
+                ? ""
+                : String(filter.value);
+            return (
+              <select
+                key={filter.label}
+                multiple={Array.isArray(selected)}
+                value={selected}
+                onChange={(e) => {
+                  const value = Array.isArray(selected)
+                    ? Array.from(e.target.selectedOptions).map((o) => o.value)
+                    : e.target.value;
+                  applyFilters([{ label: filter.label, value }]);
+                }}
+              >
+                {!Array.isArray(selected) && <option value="">All</option>}
+                {filter.options.map((option) => (
+                  <option key={option.value} value={String(option.value)}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
+
+          return null;
+        })}
+      </div>
+
+      {!isLoading &&
+        sections &&
+        Object.values(sections)
+          .flat()
+          .map((report) => <StaticChart key={report.id} reportId={report.id} />)}
+    </div>
+  );
+}
+```
+
+### Filter shapes
+
+| `type`          | `value`                                                       | `options`                                                              |
+| --------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `"select"`      | `string`                                                      | `{ label: string; value: string }[]`                                   |
+| `"multiselect"` | `string[]`                                                    | `{ label: string; value: string }[]`                                   |
+| `"date"`        | `{ presetValue?: string; startDate: Date \| undefined; endDate: Date \| undefined }` | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
+| `"tenant"`      | `string \| number \| (string \| number)[] \| null`            | `{ label: string; value: string \| number }[]`                         |
+
+<Note>
+  The `"tenant"` filter only appears if you have multiple [Tenants](/bi-platform/tenant) defined in the BI platform and the viewing tenant has a mapping to the dashboard's owner tenant. For example, a parent organization can use a multiselect tenant filter to view any subset of the child organizations it maps to.
+</Note>
+
+### applyFilters payload
+
+`applyFilters` accepts an array of `{ label, value }` objects. `label` must match a filter's `label` from the `filters` array, and `value` must match the shape expected for that filter:
+
+- `"select"` — `value: string`
+- `"multiselect"` — `value: string[]`
+- `"date"` — `value: { startDate?: Date; endDate?: Date; preset?: string }`
+- `"tenant"` — `value: string | string[]` (coerce numeric tenant IDs to strings; pass an array when the tenant filter is multi-select)
+
+## Parameters
 
 <ParamField body="dashboardName" type="string" required>
   The name of the dashboard to load
@@ -89,7 +256,7 @@ Parameters
   </Expandable>
 </ParamField>
 
-Returns
+## Returns
 
 <ParamField body="isLoading" type="boolean">
   Whether the dashboard data is currently loading
