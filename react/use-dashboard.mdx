@@ -75,18 +75,15 @@ function ChartCard({ reportId, name }) {
 
 ## Working with filters
 
-`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function that replaces the dashboard's filter set on every call. Each entry in `filters` has a `type` of `select`, `multiselect`, `date`, or `tenant`.
+`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function for updating them. Each filter has a `type` of `"select"`, `"multiselect"`, or `"date"`, plus a `label`, current `value`, and (for select/multiselect/date) an `options` list.
 
-Because `applyFilters` replaces the filter set, the typical pattern is to map over the current `filters`, merge in an override for the one filter that changed, and pass the full result to `applyFilters`. This is the same pattern used by the built-in `Dashboard` component in `@quillsql/react`.
-
-### Select, multiselect, and date filters
+The example below renders each filter type with a native control and applies updates via `applyFilters`:
 
 ```tsx App.tsx
 import {
   QuillProvider,
   useDashboard,
   StaticChart,
-  DashboardFilterType,
 } from "@quillsql/react";
 
 function App() {
@@ -103,50 +100,20 @@ function App() {
 function FilteredDashboard({ name }: { name: string }) {
   const { sections, filters, applyFilters, isLoading } = useDashboard(name);
 
-  // Map current filters into the applyFilters payload, overriding the one
-  // that changed. Mirrors the @quillsql/react Dashboard component.
-  const applyDashboardFilters = (
-    overrides: Record<
-      string,
-      string | string[] | { startDate?: Date; endDate?: Date; preset?: string }
-    >,
-  ) => {
-    const payload = filters.map((filter) => {
-      if (filter.type === DashboardFilterType.Date) {
-        const override = overrides[filter.label] as
-          | { startDate?: Date; endDate?: Date; preset?: string }
-          | undefined;
-        return {
-          label: filter.label,
-          value: override ?? {
-            startDate: filter.value.startDate,
-            endDate: filter.value.endDate,
-            preset: filter.value.presetValue ?? "",
-          },
-        };
-      }
-      const override = overrides[filter.label] as string | string[] | undefined;
-      return { label: filter.label, value: override ?? filter.value };
-    });
-    applyFilters(payload);
-  };
-
   return (
     <div>
       <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
         {filters.map((filter) => {
-          // Select filter — value is a string
-          if (filter.type === DashboardFilterType.Select) {
+          if (filter.type === "select") {
             return (
               <select
                 key={filter.label}
                 value={filter.value ?? ""}
                 onChange={(e) =>
-                  applyDashboardFilters({ [filter.label]: e.target.value })
+                  applyFilters([{ label: filter.label, value: e.target.value }])
                 }
-                disabled={isLoading}
               >
-                <option value="">All {filter.label}</option>
+                <option value="">All</option>
                 {filter.options.map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -156,20 +123,18 @@ function FilteredDashboard({ name }: { name: string }) {
             );
           }
 
-          // Multiselect filter — value is a string[]
-          if (filter.type === DashboardFilterType.MultiSelect) {
+          if (filter.type === "multiselect") {
             return (
               <select
                 key={filter.label}
                 multiple
-                value={Array.isArray(filter.value) ? filter.value : []}
+                value={filter.value}
                 onChange={(e) => {
-                  const next = Array.from(e.target.selectedOptions).map(
-                    (o) => o.value,
+                  const value = Array.from(e.target.selectedOptions).map(
+                    (option) => option.value,
                   );
-                  applyDashboardFilters({ [filter.label]: next });
+                  applyFilters([{ label: filter.label, value }]);
                 }}
-                disabled={isLoading}
               >
                 {filter.options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -180,63 +145,33 @@ function FilteredDashboard({ name }: { name: string }) {
             );
           }
 
-          // Date filter — value is { startDate, endDate, presetValue }
-          if (filter.type === DashboardFilterType.Date) {
+          if (filter.type === "date") {
             return (
-              <div key={filter.label} style={{ display: "flex", gap: 8 }}>
-                <select
-                  value={filter.value.presetValue ?? ""}
-                  onChange={(e) => {
-                    const option = filter.options.find(
-                      (o) => o.value === e.target.value,
-                    );
-                    applyDashboardFilters({
-                      [filter.label]: {
-                        startDate: option?.startDate,
-                        endDate: option?.endDate,
-                        preset: e.target.value,
+              <select
+                key={filter.label}
+                value={filter.value.presetValue ?? ""}
+                onChange={(e) => {
+                  const preset = filter.options.find(
+                    (option) => option.value === e.target.value,
+                  );
+                  if (!preset) return;
+                  applyFilters([
+                    {
+                      label: filter.label,
+                      value: {
+                        startDate: preset.startDate,
+                        endDate: preset.endDate,
                       },
-                    });
-                  }}
-                  disabled={isLoading}
-                >
-                  {filter.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-                <input
-                  type="date"
-                  value={
-                    filter.value.startDate?.toISOString().slice(0, 10) ?? ""
-                  }
-                  onChange={(e) =>
-                    applyDashboardFilters({
-                      [filter.label]: {
-                        startDate: new Date(e.target.value),
-                        endDate: filter.value.endDate,
-                        preset: "",
-                      },
-                    })
-                  }
-                  disabled={isLoading}
-                />
-                <input
-                  type="date"
-                  value={filter.value.endDate?.toISOString().slice(0, 10) ?? ""}
-                  onChange={(e) =>
-                    applyDashboardFilters({
-                      [filter.label]: {
-                        startDate: filter.value.startDate,
-                        endDate: new Date(e.target.value),
-                        preset: "",
-                      },
-                    })
-                  }
-                  disabled={isLoading}
-                />
-              </div>
+                    },
+                  ]);
+                }}
+              >
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
             );
           }
 
@@ -244,14 +179,11 @@ function FilteredDashboard({ name }: { name: string }) {
         })}
       </div>
 
-      {sections &&
-        Object.entries(sections).map(([sectionName, reports]) => (
-          <section key={sectionName}>
-            {reports.map((report) => (
-              <StaticChart key={report.id} reportId={report.id} />
-            ))}
-          </section>
-        ))}
+      {!isLoading &&
+        sections &&
+        Object.values(sections)
+          .flat()
+          .map((report) => <StaticChart key={report.id} reportId={report.id} />)}
     </div>
   );
 }
@@ -259,22 +191,19 @@ function FilteredDashboard({ name }: { name: string }) {
 
 ### Filter shapes
 
-| `type`        | `value`                                                              | `options`                                                              |
-| ------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| `select`      | `string`                                                             | `{ label: string; value: string }[]`                                   |
-| `multiselect` | `string[]`                                                           | `{ label: string; value: string }[]`                                   |
-| `date`        | `{ presetValue?: string; startDate?: Date; endDate?: Date }`         | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
-| `tenant`      | `string \| number \| (string \| number)[] \| null`                   | `{ label: string; value: string \| number }[]`                         |
+| `type`          | `value`                                                       | `options`                                                              |
+| --------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `"select"`      | `string`                                                      | `{ label: string; value: string }[]`                                   |
+| `"multiselect"` | `string[]`                                                    | `{ label: string; value: string }[]`                                   |
+| `"date"`        | `{ presetValue?: string; startDate?: Date; endDate?: Date }`  | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
 
 ### applyFilters payload
 
-`applyFilters` accepts an array of `{ label, value }` objects. `label` must match a filter's `label` from the `filters` array, and `value` must match the type expected for that filter:
+`applyFilters` accepts an array of `{ label, value }` objects. `label` must match a filter's `label` from the `filters` array, and `value` must match the shape expected for that filter:
 
-- `select` — `value: string`
-- `multiselect` — `value: string[]`
-- `date` — `value: { startDate?: Date; endDate?: Date; preset?: string }`
-
-Because `applyFilters` replaces the entire filter set on every call, always include the current values for any filters you want to keep.
+- `"select"` — `value: string`
+- `"multiselect"` — `value: string[]`
+- `"date"` — `value: { startDate?: Date; endDate?: Date; preset?: string }`
 
 ## Parameters
 
