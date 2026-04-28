@@ -75,7 +75,7 @@ function ChartCard({ reportId, name }) {
 
 ## Working with filters
 
-`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function for updating them. Each filter has a `type` of `"select"`, `"multiselect"`, or `"date"`, plus a `label`, current `value`, and (for select/multiselect/date) an `options` list.
+`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function for updating them. Each filter has a `type` of `"select"`, `"multiselect"`, `"date"`, or `"tenant"`, plus a `label`, current `value`, and an `options` list.
 
 The example below renders each filter type with a native control and applies updates via `applyFilters`:
 
@@ -175,6 +175,35 @@ function FilteredDashboard({ name }: { name: string }) {
             );
           }
 
+          if (filter.type === "tenant") {
+            // value is string | number | (string | number)[] | null
+            const selected = Array.isArray(filter.value)
+              ? filter.value.map(String)
+              : filter.value === null
+                ? ""
+                : String(filter.value);
+            return (
+              <select
+                key={filter.label}
+                multiple={Array.isArray(selected)}
+                value={selected}
+                onChange={(e) => {
+                  const value = Array.isArray(selected)
+                    ? Array.from(e.target.selectedOptions).map((o) => o.value)
+                    : e.target.value;
+                  applyFilters([{ label: filter.label, value }]);
+                }}
+              >
+                {!Array.isArray(selected) && <option value="">All</option>}
+                {filter.options.map((option) => (
+                  <option key={option.value} value={String(option.value)}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
+
           return null;
         })}
       </div>
@@ -196,6 +225,7 @@ function FilteredDashboard({ name }: { name: string }) {
 | `"select"`      | `string`                                                      | `{ label: string; value: string }[]`                                   |
 | `"multiselect"` | `string[]`                                                    | `{ label: string; value: string }[]`                                   |
 | `"date"`        | `{ presetValue?: string; startDate: Date \| undefined; endDate: Date \| undefined }` | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
+| `"tenant"`      | `string \| number \| (string \| number)[] \| null`            | `{ label: string; value: string \| number }[]`                         |
 
 ### applyFilters payload
 
@@ -204,6 +234,7 @@ function FilteredDashboard({ name }: { name: string }) {
 - `"select"` — `value: string`
 - `"multiselect"` — `value: string[]`
 - `"date"` — `value: { startDate?: Date; endDate?: Date; preset?: string }`
+- `"tenant"` — `value: string | string[]` (coerce numeric tenant IDs to strings; pass an array when the tenant filter is multi-select)
 
 ## Parameters
 
