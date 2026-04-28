@@ -227,6 +227,10 @@ function FilteredDashboard({ name }: { name: string }) {
 | `"date"`        | `{ presetValue?: string; startDate: Date \| undefined; endDate: Date \| undefined }` | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
 | `"tenant"`      | `string \| number \| (string \| number)[] \| null`            | `{ label: string; value: string \| number }[]`                         |
 
+<Note>
+  The `"tenant"` filter only appears if you have multiple [Tenants](/bi-platform/tenant) defined in the BI platform and the viewing tenant has a mapping to the dashboard's owner tenant. For example, a parent organization can use a multiselect tenant filter to view any subset of the child organizations it maps to.
+</Note>
+
 ### applyFilters payload
 
 `applyFilters` accepts an array of `{ label, value }` objects. `label` must match a filter's `label` from the `filters` array, and `value` must match the shape expected for that filter:
