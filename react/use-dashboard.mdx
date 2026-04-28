@@ -75,14 +75,13 @@ function ChartCard({ reportId, name }) {
 
 ## Working with filters
 
-`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function for updating them. Each filter has a `type` of `select`, `multiselect`, `date`, or `tenant`. To apply a filter, pass `{ label, value }` objects to `applyFilters`, where `label` matches the filter's `label` and `value` matches the type expected for that filter.
+`useDashboard` returns a `filters` array describing the dashboard's available filters and an `applyFilters` function that replaces the dashboard's filter set on every call. Each entry in `filters` has a `type` of `select`, `multiselect`, `date`, or `tenant`.
+
+Because `applyFilters` replaces the filter set, the typical pattern is to map over the current `filters`, merge in an override for the one filter that changed, and pass the full result to `applyFilters`. This is the same pattern used by the built-in `Dashboard` component in `@quillsql/react`.
 
 ### Select, multiselect, and date filters
 
-The example below renders each filter type using its own UI control and updates the dashboard via `applyFilters`. It tracks all current filter values in local state so each control can update independently without clearing the others.
-
 ```tsx App.tsx
-import { useMemo, useState } from "react";
 import {
   QuillProvider,
   useDashboard,
@@ -104,133 +103,145 @@ function App() {
 function FilteredDashboard({ name }: { name: string }) {
   const { sections, filters, applyFilters, isLoading } = useDashboard(name);
 
-  // Build the next applyFilters payload by replacing the entry for the
-  // edited filter while preserving every other filter's current value.
-  const buildPayload = (
-    label: string,
-    value: string | string[] | { startDate?: Date; endDate?: Date },
-  ) =>
-    filters.map((f) =>
-      f.label === label
-        ? { label: f.label, value }
-        : {
-            label: f.label,
-            value:
-              f.type === DashboardFilterType.Date
-                ? { startDate: f.value.startDate, endDate: f.value.endDate }
-                : f.value,
+  // Map current filters into the applyFilters payload, overriding the one
+  // that changed. Mirrors the @quillsql/react Dashboard component.
+  const applyDashboardFilters = (
+    overrides: Record<
+      string,
+      string | string[] | { startDate?: Date; endDate?: Date; preset?: string }
+    >,
+  ) => {
+    const payload = filters.map((filter) => {
+      if (filter.type === DashboardFilterType.Date) {
+        const override = overrides[filter.label] as
+          | { startDate?: Date; endDate?: Date; preset?: string }
+          | undefined;
+        return {
+          label: filter.label,
+          value: override ?? {
+            startDate: filter.value.startDate,
+            endDate: filter.value.endDate,
+            preset: filter.value.presetValue ?? "",
           },
-    );
-
-  const selectFilters = filters.filter(
-    (f) => f.type === DashboardFilterType.Select,
-  );
-  const multiSelectFilters = filters.filter(
-    (f) => f.type === DashboardFilterType.MultiSelect,
-  );
-  const dateFilter = useMemo(
-    () => filters.find((f) => f.type === DashboardFilterType.Date),
-    [filters],
-  );
+        };
+      }
+      const override = overrides[filter.label] as string | string[] | undefined;
+      return { label: filter.label, value: override ?? filter.value };
+    });
+    applyFilters(payload);
+  };
 
   return (
     <div>
       <div style={{ display: "flex", gap: 12, marginBottom: 16 }}>
-        {/* Select filter: single-value <select> */}
-        {selectFilters.map((filter) => (
-          <select
-            key={filter.label}
-            value={filter.value ?? ""}
-            onChange={(e) =>
-              applyFilters(buildPayload(filter.label, e.target.value))
-            }
-            disabled={isLoading}
-          >
-            <option value="">All {filter.label}</option>
-            {filter.options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        ))}
+        {filters.map((filter) => {
+          // Select filter — value is a string
+          if (filter.type === DashboardFilterType.Select) {
+            return (
+              <select
+                key={filter.label}
+                value={filter.value ?? ""}
+                onChange={(e) =>
+                  applyDashboardFilters({ [filter.label]: e.target.value })
+                }
+                disabled={isLoading}
+              >
+                <option value="">All {filter.label}</option>
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
 
-        {/* Multiselect filter: multi-value <select multiple>, value is string[] */}
-        {multiSelectFilters.map((filter) => (
-          <select
-            key={filter.label}
-            multiple
-            value={filter.value ?? []}
-            onChange={(e) => {
-              const selected = Array.from(e.target.selectedOptions).map(
-                (o) => o.value,
-              );
-              applyFilters(buildPayload(filter.label, selected));
-            }}
-            disabled={isLoading}
-          >
-            {filter.options.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        ))}
+          // Multiselect filter — value is a string[]
+          if (filter.type === DashboardFilterType.MultiSelect) {
+            return (
+              <select
+                key={filter.label}
+                multiple
+                value={Array.isArray(filter.value) ? filter.value : []}
+                onChange={(e) => {
+                  const next = Array.from(e.target.selectedOptions).map(
+                    (o) => o.value,
+                  );
+                  applyDashboardFilters({ [filter.label]: next });
+                }}
+                disabled={isLoading}
+              >
+                {filter.options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            );
+          }
 
-        {/* Date filter: presets via options, or raw start/end dates */}
-        {dateFilter && (
-          <>
-            <select
-              value={dateFilter.value.presetValue ?? ""}
-              onChange={(e) => {
-                const preset = dateFilter.options.find(
-                  (o) => o.value === e.target.value,
-                );
-                if (!preset) return;
-                applyFilters(
-                  buildPayload(dateFilter.label, {
-                    startDate: preset.startDate,
-                    endDate: preset.endDate,
-                  }),
-                );
-              }}
-              disabled={isLoading}
-            >
-              {dateFilter.options.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          // Date filter — value is { startDate, endDate, presetValue }
+          if (filter.type === DashboardFilterType.Date) {
+            return (
+              <div key={filter.label} style={{ display: "flex", gap: 8 }}>
+                <select
+                  value={filter.value.presetValue ?? ""}
+                  onChange={(e) => {
+                    const option = filter.options.find(
+                      (o) => o.value === e.target.value,
+                    );
+                    applyDashboardFilters({
+                      [filter.label]: {
+                        startDate: option?.startDate,
+                        endDate: option?.endDate,
+                        preset: e.target.value,
+                      },
+                    });
+                  }}
+                  disabled={isLoading}
+                >
+                  {filter.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  type="date"
+                  value={
+                    filter.value.startDate?.toISOString().slice(0, 10) ?? ""
+                  }
+                  onChange={(e) =>
+                    applyDashboardFilters({
+                      [filter.label]: {
+                        startDate: new Date(e.target.value),
+                        endDate: filter.value.endDate,
+                        preset: "",
+                      },
+                    })
+                  }
+                  disabled={isLoading}
+                />
+                <input
+                  type="date"
+                  value={filter.value.endDate?.toISOString().slice(0, 10) ?? ""}
+                  onChange={(e) =>
+                    applyDashboardFilters({
+                      [filter.label]: {
+                        startDate: filter.value.startDate,
+                        endDate: new Date(e.target.value),
+                        preset: "",
+                      },
+                    })
+                  }
+                  disabled={isLoading}
+                />
+              </div>
+            );
+          }
 
-            <input
-              type="date"
-              value={dateFilter.value.startDate?.toISOString().slice(0, 10) ?? ""}
-              onChange={(e) =>
-                applyFilters(
-                  buildPayload(dateFilter.label, {
-                    startDate: new Date(e.target.value),
-                    endDate: dateFilter.value.endDate,
-                  }),
-                )
-              }
-              disabled={isLoading}
-            />
-            <input
-              type="date"
-              value={dateFilter.value.endDate?.toISOString().slice(0, 10) ?? ""}
-              onChange={(e) =>
-                applyFilters(
-                  buildPayload(dateFilter.label, {
-                    startDate: dateFilter.value.startDate,
-                    endDate: new Date(e.target.value),
-                  }),
-                )
-              }
-              disabled={isLoading}
-            />
-          </>
-        )}
+          return null;
+        })}
       </div>
 
       {sections &&
@@ -248,24 +259,22 @@ function FilteredDashboard({ name }: { name: string }) {
 
 ### Filter shapes
 
-Each entry in `filters` is one of the following shapes:
-
-| `type`        | `value`                                                              | `options`                                                          |
-| ------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `select`      | `string`                                                             | `{ label: string; value: string }[]`                               |
-| `multiselect` | `string[]`                                                           | `{ label: string; value: string }[]`                               |
+| `type`        | `value`                                                              | `options`                                                              |
+| ------------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `select`      | `string`                                                             | `{ label: string; value: string }[]`                                   |
+| `multiselect` | `string[]`                                                           | `{ label: string; value: string }[]`                                   |
 | `date`        | `{ presetValue?: string; startDate?: Date; endDate?: Date }`         | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
-| `tenant`      | `string \| number \| (string \| number)[] \| null`                   | `{ label: string; value: string \| number }[]`                     |
+| `tenant`      | `string \| number \| (string \| number)[] \| null`                   | `{ label: string; value: string \| number }[]`                         |
 
 ### applyFilters payload
 
-`applyFilters` accepts an array of `{ label, value }` objects, where `label` matches the filter's `label` from the `filters` array. Use the value type that matches the filter `type`:
+`applyFilters` accepts an array of `{ label, value }` objects. `label` must match a filter's `label` from the `filters` array, and `value` must match the type expected for that filter:
 
 - `select` — `value: string`
 - `multiselect` — `value: string[]`
 - `date` — `value: { startDate?: Date; endDate?: Date; preset?: string }`
 
-`applyFilters` replaces the dashboard's filter set on every call, so always include the current values for the filters you want to keep.
+Because `applyFilters` replaces the entire filter set on every call, always include the current values for any filters you want to keep.
 
 ## Parameters
 
