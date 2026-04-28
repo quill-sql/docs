@@ -195,7 +195,7 @@ function FilteredDashboard({ name }: { name: string }) {
 | --------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `"select"`      | `string`                                                      | `{ label: string; value: string }[]`                                   |
 | `"multiselect"` | `string[]`                                                    | `{ label: string; value: string }[]`                                   |
-| `"date"`        | `{ presetValue?: string; startDate?: Date; endDate?: Date }`  | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
+| `"date"`        | `{ presetValue?: string; startDate: Date \| undefined; endDate: Date \| undefined }` | `{ label: string; value: string; startDate?: Date; endDate?: Date }[]` |
 
 ### applyFilters payload
 
