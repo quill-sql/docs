@@ -28,10 +28,18 @@ function App() {
 
 function CustomDashboard() {
   const { sections, isLoading } = useDashboard("quill demo dashboard");
+  const chartsSection = sections ? sections["charts"] : []
 
+  if (chartsSection){
+    return (
+      <>
+        <ChartsSection reports={chartsSection} />
+      </>
+    );
+  }
   return (
     <>
-      <ChartsSection reports={sections["charts"]} />
+      Loading...
     </>
   );
 }
@@ -46,9 +54,9 @@ function ChartsSection({ reports }: { reports: any[] }) {
   );
 }
 
-function ChartCard({ reportId, name }) {
+function ChartCard({ reportId, name }: { reportId: string, name: string}) {
   const { report, loading } = useDashboardReport(reportId);
-  if (loading) {
+  if (loading || !report) {
     return (
       <div className="lg:col-span-1">
         <Card
@@ -253,6 +261,15 @@ function FilteredDashboard({ name }: { name: string }) {
       The number of rows per page for the tabular rows of a report. Defaults to
       10.
     </ResponseField>
+    <ResponseField name="cacheEnabled" type="boolean" default={false}>
+      Enable dashboard report caching.
+    </ResponseField>
+    <ResponseField name="cacheType" type="'memory' | 'idb'">
+      Cache storage type when caching is enabled.
+    </ResponseField>
+    <ResponseField name="showCacheLogs" type="boolean" default={false}>
+      Whether to log cache stats to the console.
+    </ResponseField>
   </Expandable>
 </ParamField>
 
@@ -287,6 +304,10 @@ function FilteredDashboard({ name }: { name: string }) {
 
 <ResponseField name="chartType" type="string" required>
   The type of this chart
+</ResponseField>
+
+<ResponseField name="showLegend" type="boolean">
+  Whether to show a legend for this chart.
 </ResponseField>
 
 <ResponseField name="dateField" type="{ table: string; field: string }">
@@ -405,4 +426,12 @@ function FilteredDashboard({ name }: { name: string }) {
   type="(filters: Array<{ label: string; value: string | string[] | { startDate?: Date; endDate?: Date }; } | Filter>) => void"
 >
   Function to apply filters to the dashboard
+</ParamField>
+
+<ParamField body="lastUpdated" type="number">
+  Epoch timestamp of the last dashboard report fetch/update.
+</ParamField>
+
+<ParamField body="forceCacheRefresh" type="() => void">
+  Forces a cache refresh when caching is enabled.
 </ParamField>

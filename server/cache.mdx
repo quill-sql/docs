@@ -92,7 +92,7 @@ the connection info such as username, password, host, and port.
 import { Quill } from "@quillsql/node";
 
 const quill = new Quill({
-	privateKey: process.env.QULL_PRIVATE_KEY,
+	privateKey: process.env.QUILL_PRIVATE_KEY,
 	databaseConnectionString: process.env.POSTGRES_READ,
 	databaseType: "postgresql",
 	// Just pass a cache config to the Quill instance:

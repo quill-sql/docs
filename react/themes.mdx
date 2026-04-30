@@ -13,7 +13,7 @@ mode: "wide"
 ```tsx App.tsx
 import { QuillProvider } from "@quillsql/react";
 
-// You can a custom theme to be applied to the default Quill
+// You can pass a custom theme to be applied to the default Quill
 // components, or you can pass your own components with
 // pixel-perfect styling.
 const MY_CUSTOM_THEME = {
@@ -39,7 +39,7 @@ function App() {
 	return (
 		<QuillProvider
 			publicKey={process.env.QUILL_API_KEY}
-			organizationId={user.organizationId}
+			tenants={[user.organizationId]}
 			theme={MY_CUSTOM_THEME}>
 			{children}
 		</QuillProvider>
@@ -119,4 +119,37 @@ function App() {
 <ResponseField name='loadingStateBackgroundColor' type='string'>
 	The background color you want Quill to use while in a loading state. This is
 	usually the same as the background color you app uses (eg. '#FFFFFF').
+</ResponseField>
+<ResponseField name='hoverPrimaryButtonColor' type='string'>
+	The background color for primary buttons on hover.
+</ResponseField>
+<ResponseField name='primaryButtonTextColor' type='string'>
+	The text color for primary buttons.
+</ResponseField>
+<ResponseField name='secondaryButtonTextColor' type='string'>
+	The text color for secondary buttons.
+</ResponseField>
+<ResponseField name='fontSizeSmall' type='number'>
+	Optional small font size token.
+</ResponseField>
+<ResponseField name='fontSizeMedium' type='number'>
+	Optional medium font size token.
+</ResponseField>
+<ResponseField name='fontWeightMedium' type='number'>
+	Optional medium font-weight token.
+</ResponseField>
+<ResponseField name='fontWeightBold' type='number'>
+	Optional bold font-weight token.
+</ResponseField>
+<ResponseField name='hoverTextColor' type='string'>
+	Text color to use for hovered text states.
+</ResponseField>
+<ResponseField name='hoverPrimaryButtonTextColor' type='string'>
+	Text color for primary buttons on hover.
+</ResponseField>
+<ResponseField name='barChartCornerRadius' type='number'>
+	Optional fixed corner radius for bar charts.
+</ResponseField>
+<ResponseField name='barChartCornerRadiusRatio' type='number'>
+	Optional corner-radius ratio applied to bar charts.
 </ResponseField>

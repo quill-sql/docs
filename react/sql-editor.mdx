@@ -8,7 +8,10 @@ import { QuillProvider, SQLEditor } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey="6579031b3e41c378aa8180ec"
+    >
       <SQLEditor />
     </QuillProvider>
   );
@@ -180,7 +183,7 @@ export function MaterialSQLEditor() {
 <ParamField
 	path='TextInputComponent'
 	type='(props: TextInputComponentProps) => JSX.Element'>
-	A input element for getting text from the user.
+	An input element for getting text from the user.
 	<Expandable defaultOpen={false} title='props'>
 		<img src='/images/text_input.png' />
 

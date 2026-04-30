@@ -32,7 +32,7 @@ bun add @quillsql/admin
 
 You connect Quill to React with the `AdminProvider` component. Similar to React's `Context.Provider`, `AdminProvider` wraps your React app and places Quill on the context, enabling you to access it from anywhere in your component tree.
 
-In App.js, let's wrap our React app with an `AdminProvider`. We suggest putting the `AdminProvider` somewhere high in your app, above any component that might use to access BI Platform components. If you're using `QuillProvider` in the same react app, make sure it is a child of `AdminProvider`.
+In App.js, let's wrap our React app with an `AdminProvider`. We suggest putting the `AdminProvider` somewhere high in your app, above any component that might need to access BI Platform components. If you're using `QuillProvider` in the same react app, make sure it is a child of `AdminProvider`.
 
 ```js App.js
 import { AdminProvider } from "@quillsql/admin";
@@ -42,11 +42,11 @@ import MyApp from "./MyApp";
 function App() {
   return (
     <AdminProvider
-      queryEndpoint="api.youserver.com/quill"
+      queryEndpoint="api.yourserver.com/quill"
       publicKey="QUILL_PUBLIC_KEY"
     >
       <QuillProvider
-        queryEndpoint="api.youserver.com/quill"
+        queryEndpoint="api.yourserver.com/quill"
         publicKey="QUILL_PUBLIC_KEY"
       >
         <MyApp />
@@ -76,7 +76,7 @@ import {
 function App() {
   return (
     <AdminProvider
-      queryEndpoint="api.youserver.com/quill"
+      queryEndpoint="api.yourserver.com/quill"
       publicKey="QUILL_PUBLIC_KEY"
     >
       <BrowserRouter>

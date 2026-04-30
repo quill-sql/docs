@@ -40,25 +40,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 export const DashboardList = () => {
   const { dashboards, isLoading } = useDashboards();
 
+  if (dashboards){
+    return (
+      <div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          dashboards.map((dashboard) => (
+            <div key={dashboard.id}>
+              <CustomDashboard name={dashboard.name} />
+            </div>
+          ))
+        )}
+      </div>
+    );
+  }
+
   return (
-    <div>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        dashboards.map((dashboard) => (
-          <div key={dashboard.id}>
-            <CustomDashboard name={dashboard.name} />
-          </div>
-        ))
-      )}
-    </div>
-  );
+    <>
+      Loading...
+    </>
+  )
 };
 
-function CustomDashboard({ name }) {
+function CustomDashboard({ name }: {name: string}) {
   const { sections, isLoading } = useDashboard(name);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading || !sections) return <div>Loading...</div>;
 
   return (
     <>
@@ -85,7 +93,7 @@ function ReportsSection({
       <h2>{sectionName}</h2>
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
         {reports.map((report: any) => (
-          <MetricCard key={report.id} reportId={report.id} name={report.name} />
+          <ReportCard key={report.id} reportId={report.id} name={report.name} />
         ))}
       </div>
     </div>
@@ -126,6 +134,21 @@ Returns
     </ResponseField>
     <ResponseField name="name" type="string" required>
       The dashboard name.
+    </ResponseField>
+    <ResponseField name="reports" type="QuillReport[]" required>
+      Reports currently associated with this dashboard.
+    </ResponseField>
+    <ResponseField name="tenantKeys" type="string[]">
+      Dashboard owner tenant fields.
+    </ResponseField>
+    <ResponseField name="createdAt" type="Date">
+      Dashboard creation date.
+    </ResponseField>
+    <ResponseField
+      name="sectionOrder"
+      type="{ _id: string; section: string; reportOrder: string[] }[]"
+    >
+      Section/report ordering metadata.
     </ResponseField>
   </Expandable>
 </ParamField>

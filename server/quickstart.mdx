@@ -38,14 +38,14 @@ Instantiate `Quill` with your credentials and add the below `POST` endpoint.
 import { Quill } from "@quillsql/node";
 
 const quill = new Quill({
-  privateKey: process.env.QULL_PRIVATE_KEY,
+  privateKey: process.env.QUILL_PRIVATE_KEY,
   databaseConnectionString: process.env.POSTGRES_READ,
   databaseType: "postgresql",
 });
 
 // "authenticateJWT" is your own pre-existing auth middleware
 app.post("/quill", authenticateJWT, async (req, res) => {
-  // assuming user fetched via auth middleware has an userId
+  // assuming user fetched via auth middleware has a userId
   const { userId } = req.user;
   const { metadata } = req.body;
   const result = await quill.query({
@@ -60,7 +60,7 @@ app.post("/quill", authenticateJWT, async (req, res) => {
 from quillsql import Quill
 
 quill = Quill(
-    private_key=os.getenv("QULL_PRIVATE_KEY"),
+    private_key=os.getenv("QUILL_PRIVATE_KEY"),
     database_connection_string=os.getenv("POSTGRES_READ"),
     database_type="postgresql"
 )
@@ -75,7 +75,7 @@ async def authenticate_jwt(token: str = Depends(security)):
 
 @app.post("/quill")
 async def quill_post(data: Request, user: dict = Depends(authenticate_jwt)):
-    # assuming user fetched via auth middleware has an userId
+    # assuming user fetched via auth middleware has a userId
     user_id = user["user_id"]
     body = await data.json()
     metadata = body.get("metadata")
@@ -177,7 +177,7 @@ end
 
 You connect Quill to React with the `QuillProvider` component. Similar to React's `Context.Provider`, `QuillProvider` wraps your React app and places Quill Client on the context, enabling you to access it from anywhere in your component tree.
 
-In App.js, let's wrap our React app with an `QuillProvider`. We suggest putting the `QuillProvider` somewhere high in your app, above any component that might need to access Quill data.
+In App.js, let's wrap our React app with a `QuillProvider`. We suggest putting the `QuillProvider` somewhere high in your app, above any component that might need to access Quill data.
 
 ```js App.js
 import { QuillProvider } from "@quillsql/react";
