@@ -43,11 +43,11 @@ function App() {
   return (
     <AdminProvider
       queryEndpoint="api.youserver.com/quill"
-      publicKey="QUILL_PUBLIC_KEY"
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <QuillProvider
         queryEndpoint="api.youserver.com/quill"
-        publicKey="QUILL_PUBLIC_KEY"
+        publicKey={process.env.QUILL_PUBLIC_KEY}
       >
         <MyApp />
       </QuillProvider>
@@ -77,7 +77,7 @@ function App() {
   return (
     <AdminProvider
       queryEndpoint="api.youserver.com/quill"
-      publicKey="QUILL_PUBLIC_KEY"
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <BrowserRouter>
         <AppContent />

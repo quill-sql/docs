@@ -18,17 +18,23 @@ A Development and Production environment.
 
 ### Development
 
-- Points to development postgres database
-- Development Environment publicKey is used in your development and staging react apps
-- Development Environment privateKey is used in your development and staging server apps
-- When your server's schema changes, you can test those changes on the Development Environment
-- You can promote changes to the Production Environment when they are ready
+- Points to your development postgres database
+- The Development Environment `publicKey` is used in your development and staging React apps (passed to `QuillProvider` as the `publicKey` prop, e.g. `process.env.QUILL_PUBLIC_KEY`).
+- The Development Environment `privateKey` is used in your development and staging server apps (read by the server SDK from `process.env.QUILL_PRIVATE_KEY`).
+- When your server's schema changes, you can test those changes on the Development Environment.
+- You can promote changes to the Production Environment when they are ready.
 
 ### Production
 
-- Points to production postgres database
-- Production environment publicKey is used in your development and staging react apps
-- Production environment privateKey is used in your development and staging server apps
+- Points to your production postgres database
+- The Production Environment `publicKey` is used in your production React apps (passed to `QuillProvider` as the `publicKey` prop, e.g. `process.env.QUILL_PUBLIC_KEY`).
+- The Production Environment `privateKey` is used in your production server apps (read by the server SDK from `process.env.QUILL_PRIVATE_KEY`).
+
+<Note>
+  `publicKey` / `privateKey` are the property names on the SDKs themselves.
+  When stored as environment variables (recommended), use `QUILL_PUBLIC_KEY`
+  and `QUILL_PRIVATE_KEY` respectively.
+</Note>
 
 ## 2. Tenant
 

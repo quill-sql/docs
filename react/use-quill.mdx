@@ -16,7 +16,7 @@ function App() {
   return (
     <QuillProvider
       tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
-      publicKey={process.env.QUILL_API_KEY}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <CustomComponent />
     </QuillProvider>

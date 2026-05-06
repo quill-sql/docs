@@ -10,8 +10,10 @@ import { QuillProvider } from "@quillsql/react";
 function App() {
   return (
     <QuillProvider
-      publicKey={process.env.QUILL_API_KEY}
-      tenants={[user.organizationId]}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
+      tenants={[
+        { tenantField: "customer_id", tenantIds: [user.organizationId] },
+      ]}
     >
       {children}
     </QuillProvider>
@@ -28,31 +30,31 @@ anywhere in your component tree. We suggest putting the QuillProvider
 somewhere high in your app, above any component that might need to access
 your quill data.
 
-### With OrgId
+### With tenants
 
-If you're using the Quill Cloud, you can pass in your public key and the current
-organizationId (if any) and the Quill Provider will automatically connect to the
-hosted Quill Cloud.
+If you're using Quill Cloud, pass your `publicKey` and the current viewer's
+tenant identifiers and the Quill Provider will connect to the hosted Quill
+Cloud automatically.
 
-```jsx With OrgId
+```jsx With tenants
 <QuillProvider
-  publicKey={process.env.QUILL_API_KEY}
-  tenants={[user.organizationId]}
+  publicKey={process.env.QUILL_PUBLIC_KEY}
+  tenants={[{ tenantField: "customer_id", tenantIds: [user.organizationId] }]}
 >
   {children}
 </QuillProvider>
 ```
 
-### With QueryEndpoint
+### With queryEndpoint
 
-If you're self-hosting Quill, you can point the Quill Provider to the location
-of the server running the Quill SDK. You may also pass a map of query headers
-that will be forwarded to your server with every request Quill sends. This can
-be useful if the `/quill` endpoint is behind a preexisting auth middleware.
+If you're self-hosting Quill, point the Quill Provider to the location of the
+server running the Quill SDK. You may also pass a map of query headers that
+will be forwarded to your server with every request Quill sends. This can be
+useful if the `/quill` endpoint is behind a preexisting auth middleware.
 
-```jsx With QueryEndpoint
+```jsx With queryEndpoint
 <QuillProvider
-  publicKey={process.env.QUILL_API_KEY}
+  publicKey={process.env.QUILL_PUBLIC_KEY}
   queryEndpoint="https://yourdomain.com/quill"
   queryHeaders={{}}
 >
@@ -70,10 +72,18 @@ be useful if the `/quill` endpoint is behind a preexisting auth middleware.
 <ParamField path="environment" type="string">
   The environment this app is running in (eg. "production").
 </ParamField>
-<ParamField path="tenants" type="array">
-  The tenant ids of the user. Required if not passing a queryEndpoint. If this
-  value is not passed in on the frontend, it should be passed in on the backend
-  if you are using a self-hosted server.
+<ParamField
+  path="tenants"
+  type="Array<{ tenantField: string; tenantIds: (string | number)[] }>"
+>
+  The tenants the current viewer can see data for. Required when using Quill
+  Cloud (i.e. when no `queryEndpoint` is passed). When self-hosting, pass
+  `tenants` here on the frontend or apply them on the backend in your server
+  SDK call — but not both.
+
+  Each entry pairs a `tenantField` (the column on your tables that identifies
+  a tenant, e.g. `"customer_id"`) with one or more `tenantIds` the viewer is
+  authorized to see.
 </ParamField>
 <ParamField path="queryEndpoint" type="string">
   The url of your self-hosted server running the quill server SDK, if any.

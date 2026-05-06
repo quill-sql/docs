@@ -1,0 +1,143 @@
+---
+title: "Types"
+description: "Canonical TypeScript types exported by @quillsql/react"
+---
+
+This page is the single source of truth for the shared types referenced by the React SDK components and hooks. Other docs link to the anchors here instead of duplicating the schema.
+
+## QuillReport
+
+The `QuillReport` interface represents a single item on a dashboard (a chart, metric tile, table, etc.).
+
+<ResponseField name="id" type="string" required>
+  The report's unique id.
+</ResponseField>
+
+<ResponseField name="name" type="string" required>
+  The name of the report.
+</ResponseField>
+
+<ResponseField name="dashboardName" type="string" required>
+  The name of the dashboard this report belongs to.
+</ResponseField>
+
+<ResponseField name="rows" type="{ [key: string]: string }[]" required>
+  The rows of data returned from this report's query.
+</ResponseField>
+
+<ResponseField name="columns" type="Column[]" required>
+  The columns data returned from this report's query.
+</ResponseField>
+
+<ResponseField name="chartType" type="string" required>
+  The chart type rendered for this report (e.g. `"line"`, `"pie"`, `"table"`, `"bar"`, `"column"`, `"metric"`).
+</ResponseField>
+
+<ResponseField name="showLegend" type="boolean">
+  Whether to show a legend for this chart.
+</ResponseField>
+
+<ResponseField name="dateField" type="{ table: string; field: string }">
+  The table and field this report uses for date filtering, if any.
+</ResponseField>
+
+<ResponseField name="pivot" type="Pivot | null" required>
+  The pivot used in this query, if any.
+</ResponseField>
+
+<ResponseField name="xAxisLabel" type="string" required>
+  The label of the xAxis.
+</ResponseField>
+
+<ResponseField name="xAxisField" type="string" required>
+  The field used for this report's xAxis.
+</ResponseField>
+
+<ResponseField name="xAxisFormat" type="AxisFormat" required>
+  The format used for this report's xAxis.
+</ResponseField>
+
+<ResponseField name="template" type="boolean">
+  Whether this report is a template.
+</ResponseField>
+
+<ResponseField
+  name="yAxisFields"
+  type="{ field: string; label: string; format: AxisFormat }[]"
+  required
+>
+  Metadata about each yAxis on this report.
+</ResponseField>
+
+<ResponseField name="order" type="number" required>
+  The relative ordering of this report among its siblings. Ordering starts at
+  1. Reports in the same section are first grouped by `chartType`, then sorted
+  by `order` within each group.
+</ResponseField>
+
+<ResponseField name="compareRows" type="{ [key: string]: string }[]" required>
+  The rows of data for the comparison date range, when the report supports
+  comparison.
+</ResponseField>
+
+<ResponseField name="filtersApplied" type="InternalFilter[]">
+  The filters currently applied to this report's query.
+</ResponseField>
+
+<ResponseField name="pagination" type="Pagination">
+  Pagination state for table reports.
+</ResponseField>
+
+<ResponseField name="sort" type="{ field: string; direction: string }">
+  Sort state for table reports.
+</ResponseField>
+
+<ResponseField name="rowCount" type="number" required>
+  Total row count used for SQL pagination.
+</ResponseField>
+
+<ResponseField name="queryString" type="string" required>
+  The query that produced this report, used by the report builder on initial
+  load.
+</ResponseField>
+
+<ResponseField
+  name="filterMap"
+  type="{ [key: string]: { table: string; field: string } }"
+>
+  A map of dashboard filters to the table/field they apply to for this report.
+</ResponseField>
+
+<ResponseField
+  name="referenceLines"
+  type="{ label: string; query: [number, number] | string }[]"
+>
+  Reference lines to render on compatible charts.
+</ResponseField>
+
+<ResponseField
+  name="referenceLineYValues"
+  type="{ label: string; query: [number, number] }[]"
+>
+  Resolved reference line y values.
+</ResponseField>
+
+<ResponseField name="includeCustomFields" type="boolean">
+  Whether to automatically display custom fields.
+</ResponseField>
+
+<ResponseField name="columnsWithCustomFields" type="Column[]">
+  Columns that include custom fields.
+</ResponseField>
+
+<ResponseField name="pivotRows" type="{ [key: string]: string }[]">
+  The pivot row data, when the report has a pivot.
+</ResponseField>
+
+<ResponseField name="pivotColumns" type="ColumnInternal[]">
+  Metadata about the pivot yAxes.
+</ResponseField>
+
+<ResponseField name="pivotRowCount" type="number">
+  The total pivot row count.
+</ResponseField>

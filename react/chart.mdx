@@ -8,8 +8,8 @@ import { QuillProvider, Chart } from "@quillsql/react";
 
 const MyChart = () => (
   <QuillProvider
-    tenants={{ tenantField: "customer_id", tenantIds: [2] }}
-    publicKey="6579031b3e41c378aa8180ec"
+    tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+    publicKey={process.env.QUILL_PUBLIC_KEY}
   >
     <Chart reportId="664283fb4db8ad000bfe54d7" />
   </QuillProvider>
@@ -30,8 +30,8 @@ import { QuillProvider, Chart } from "@quillsql/react";
 function App() {
   return (
     <QuillProvider
-      tenants={{ tenantField: "customer_id", tenantIds: [2] }}
-      publicKey="6579031b3e41c378aa8180ec"
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <Chart reportId="664283fb4db8ad000bfe54d7" />
     </QuillProvider>

@@ -7,33 +7,36 @@ description: "A simple way to format data from Quill"
 import { format } from "@quillsql/react";
 
 function formatExample() {
-  format(123.45, "dollar_cents"); // "$123.45"
-  format(123, "dollar_cents"); // "$123.00"
+  format({ value: 123.45, format: "dollar_cents" }); // "$123.45"
+  format({ value: 123, format: "dollar_cents" }); // "$123.00"
 }
 ```
 
-<ParamField path="value" type="string" required>
-  The value of the thing being formatted.
+`format` accepts a single options object.
+
+<ParamField path="value" type="any" required>
+  The value to format. Numbers are accepted for numeric formats; strings or
+  ISO-8601 date strings are accepted for date formats.
 </ParamField>
 
 <ParamField
   path="format"
   type="'percent' |
-	'dollar_amount' | 
-    'dollar_cents' | 
-    'whole_number' | 
-    'one_decimal_place' | 
-    'two_decimal_places' | 
-    'string' | 
-    'yyyy' | 
-    'MMM_yyyy' | 
-    'MMM_dd_yyyy' | 
-    'MMM_dd' | 
-    'hh_ap_pm' | 
-    'MMM_dd-MMM_dd' | 
-    'MMM_dd_hh:mm_ap_pm' | 
+    'dollar_amount' |
+    'dollar_cents' |
+    'whole_number' |
+    'one_decimal_place' |
+    'two_decimal_places' |
+    'string' |
+    'yyyy' |
+    'MMM_yyyy' |
+    'MMM_dd_yyyy' |
+    'MMM_dd' |
+    'hh_ap_pm' |
+    'MMM_dd-MMM_dd' |
+    'MMM_dd_hh:mm_ap_pm' |
     'wo, yyyy'"
   required
 >
-  The Quill format type of how you want to format the value.
+  The Quill format type to apply to `value`.
 </ParamField>
