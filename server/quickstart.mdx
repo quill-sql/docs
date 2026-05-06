@@ -15,15 +15,15 @@ pip3 install quillsql
 ```
 
 ```bash Go
-go get https://github.com/quill-sql/quill-go
+go get github.com/quill-sql/quill-go
 ```
 
 ```bash PHP
-composer require quill.co/quill-php
+composer require quill-sql/quill-php
 ```
 
 ```bash Ruby
-bundle install quill-sql
+gem install quill-sql
 ```
 
 </CodeGroup>
@@ -32,13 +32,20 @@ bundle install quill-sql
 
 Instantiate `Quill` with your credentials and add the below `POST` endpoint.
 
+<Note>
+  The Node.js, Python, and Ruby SDKs accept a multi-tenant `tenants` array of
+  `{ tenantField, tenantIds }` objects. The Go SDK currently uses a single
+  positional `OrgId` (string) and is therefore single-tenant per request. PHP
+  follows the same single-`orgId` shape as Go.
+</Note>
+
 <CodeGroup>
 
 ```js Node
 import { Quill } from "@quillsql/node";
 
 const quill = new Quill({
-  privateKey: process.env.QULL_PRIVATE_KEY,
+  privateKey: process.env.QUILL_PRIVATE_KEY,
   databaseConnectionString: process.env.POSTGRES_READ,
   databaseType: "postgresql",
 });
@@ -49,7 +56,7 @@ app.post("/quill", authenticateJWT, async (req, res) => {
   const { userId } = req.user;
   const { metadata } = req.body;
   const result = await quill.query({
-    tenants: [{ tenantField: "user_id", tenantIds: [userId] }]
+    tenants: [{ tenantField: "user_id", tenantIds: [userId] }],
     metadata,
   });
   res.send(result);
@@ -60,7 +67,7 @@ app.post("/quill", authenticateJWT, async (req, res) => {
 from quillsql import Quill
 
 quill = Quill(
-    private_key=os.getenv("QULL_PRIVATE_KEY"),
+    private_key=os.getenv("QUILL_PRIVATE_KEY"),
     database_connection_string=os.getenv("POSTGRES_READ"),
     database_type="postgresql"
 )
@@ -153,9 +160,9 @@ if ($requestMethod === 'POST' && $endpoint === '/quill') {
 require "quill-sql"
 
 quill = Quill.new(
-  private_key: ENV["PRIVATE_KEY"],
-  database_connection_string: ENV["DB_URL"],
-  database_type: "clickhouse"
+  private_key: ENV["QUILL_PRIVATE_KEY"],
+  database_connection_string: ENV["POSTGRES_READ"],
+  database_type: "postgresql"
 )
 
 post "/quill" do

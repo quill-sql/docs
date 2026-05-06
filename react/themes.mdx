@@ -39,7 +39,9 @@ function App() {
 	return (
 		<QuillProvider
 			publicKey={process.env.QUILL_API_KEY}
-			organizationId={user.organizationId}
+			tenants={[
+				{ tenantField: "customer_id", tenantIds: [user.organizationId] },
+			]}
 			theme={MY_CUSTOM_THEME}>
 			{children}
 		</QuillProvider>
