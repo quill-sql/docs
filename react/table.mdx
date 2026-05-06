@@ -7,7 +7,7 @@ description: "The Tabular view of a Quill Report"
 import { QuillProvider, Table } from "@quillsql/react";
 
 const MyTable = () => (
-  <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+  <QuillProvider tenants={[{ tenantField: "customer_id", tenantIds: [2] }]} publicKey={process.env.QUILL_PUBLIC_KEY}>
     <Table reportId="6644088e6e2470000cbdb109" />
   </QuillProvider>
 );
@@ -65,7 +65,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[{ tenantField: "customer_id", tenantIds: [2] }]} publicKey={process.env.QUILL_PUBLIC_KEY}>
       <Table reportId="664283fb4db8ad000bfe54d7" />
     </QuillProvider>
   );
@@ -83,7 +83,7 @@ import { QuillProvider, Table } from "@quillsql/react";
 
 function App() {
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[{ tenantField: "customer_id", tenantIds: [2] }]} publicKey={process.env.QUILL_PUBLIC_KEY}>
       <Table
         rows={[
           { x: 1, y: 1, z: 0 },
@@ -110,7 +110,7 @@ import { MY_TABLE_ID } from "./constants";
 function App() {
   const report = useQuill(MY_TABLE_ID);
   return (
-    <QuillProvider organizationId="2" publicKey="6579031b3e41c378aa8180ec">
+    <QuillProvider tenants={[{ tenantField: "customer_id", tenantIds: [2] }]} publicKey={process.env.QUILL_PUBLIC_KEY}>
       <Table rows={report.rows} columns={report.columns} />
     </QuillProvider>
   );

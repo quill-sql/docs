@@ -38,7 +38,7 @@ const MY_CUSTOM_THEME = {
 function App() {
 	return (
 		<QuillProvider
-			publicKey={process.env.QUILL_API_KEY}
+			publicKey={process.env.QUILL_PUBLIC_KEY}
 			tenants={[
 				{ tenantField: "customer_id", tenantIds: [user.organizationId] },
 			]}

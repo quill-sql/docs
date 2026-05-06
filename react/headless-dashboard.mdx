@@ -17,7 +17,7 @@ function App() {
   return (
     <QuillProvider
       tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
-      publicKey="6579031b3e41c378aa8180ec"
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <CustomDashboard />
     </QuillProvider>
@@ -34,7 +34,7 @@ function CustomDashboard() {
   );
 }
 
-function MetricsSection({ reports }: { reports: any[] }) {
+function MetricReportsSection({ reports }: { reports: any[] }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-6 gap-6">
       {reports.map((report: any) => (

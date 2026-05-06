@@ -10,7 +10,7 @@ import { QuillProvider } from "@quillsql/react";
 function App() {
   return (
     <QuillProvider
-      publicKey={process.env.QUILL_API_KEY}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
       tenants={[
         { tenantField: "customer_id", tenantIds: [user.organizationId] },
       ]}
@@ -38,7 +38,7 @@ Cloud automatically.
 
 ```jsx With tenants
 <QuillProvider
-  publicKey={process.env.QUILL_API_KEY}
+  publicKey={process.env.QUILL_PUBLIC_KEY}
   tenants={[{ tenantField: "customer_id", tenantIds: [user.organizationId] }]}
 >
   {children}
@@ -54,7 +54,7 @@ useful if the `/quill` endpoint is behind a preexisting auth middleware.
 
 ```jsx With queryEndpoint
 <QuillProvider
-  publicKey={process.env.QUILL_API_KEY}
+  publicKey={process.env.QUILL_PUBLIC_KEY}
   queryEndpoint="https://yourdomain.com/quill"
   queryHeaders={{}}
 >

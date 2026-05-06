@@ -72,6 +72,10 @@
           {
             "group": "Functions",
             "pages": ["react/format"]
+          },
+          {
+            "group": "Reference",
+            "pages": ["react/types"]
           }
         ]
       },

@@ -197,7 +197,7 @@ function App() {
 
   return (
     <QuillProvider
-      publicKey="YOUR_PUBLIC_KEY"
+      publicKey={process.env.QUILL_PUBLIC_KEY}
       queryEndpoint="https://yourserver.com/quill" // your POST endpoint
       queryHeaders={{
         // We'll pass these headers on every request to your endpoint

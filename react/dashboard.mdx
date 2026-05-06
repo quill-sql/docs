@@ -10,7 +10,7 @@ function App() {
   return (
     <QuillProvider
       tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
-      publicKey="6579031b3e41c378aa8180ec"
+      publicKey={process.env.QUILL_PUBLIC_KEY}
     >
       <Dashboard name="Transactions" />
     </QuillProvider>
@@ -110,7 +110,7 @@ export function MaterialDashboard() {
           The current report.
           <Info>
             See the API Reference for a `QuillReport`
-            [here](/components/dashboard#quill-report).
+            [here](/react/types#quillreport).
           </Info>
         </ResponseField>
         <ResponseField name="onClick" type="(report: QuillReport) => void">
@@ -142,7 +142,7 @@ export function MaterialDashboard() {
 			<ResponseField name="report" type="QuillReport" required>
 				The current report.
 
-    			<Info>See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+    			<Info>See the API Reference for a `QuillReport` [here](/react/types#quillreport).</Info>
     		</ResponseField>
     		<ResponseField name="onClick" type="(report: QuillReport) => void">
     			A callback that should be fired when the user clicks on this report.
@@ -174,7 +174,7 @@ export function MaterialDashboard() {
 			<Expandable title='properties'>
 				<ResponseField name='report' type='QuillReport' required>
 					The current report.
-    				<Info> See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+    				<Info> See the API Reference for a `QuillReport` [here](/react/types#quillreport).</Info>
 				</ResponseField>
 				<ResponseField
 					name='onClick'
@@ -353,7 +353,7 @@ export function MaterialDashboard() {
 	case is navigating to a new page based on the report's id. A dashboard is
 	composed of a list of reports that could be metrics, charts, or tables.
 
-    <Info>See the API Reference for a `QuillReport` [here](/components/dashboard#quill-report).</Info>
+    <Info>See the API Reference for a `QuillReport` [here](/react/types#quillreport).</Info>
 
 </ParamField>
 
@@ -412,102 +412,4 @@ export function MaterialDashboard() {
 
 ## QuillReport
 
-<ResponseField name='id' type='string' required>
-	The report's unique id.
-</ResponseField>
-<ResponseField name='name' type='string' required>
-	The name of the report.
-</ResponseField>
-<ResponseField name='dashboardName' type='string' required>
-	The name of the dashboard this report belongs to.
-</ResponseField>
-<ResponseField name='rows' type='{ [key: string]: any }[]'>
-	The rows of data returned from this report's query.
-</ResponseField>
-<ResponseField name='columns' type='any[]'>
-	The columns data returned from this report's query.
-</ResponseField>
-<ResponseField
-	name='chartType'
-	type="'line' | 'pie' | 'table' | 'bar' | 'column' | 'metric'">
-	The type of this chart.
-</ResponseField>
-<ResponseField name='dateField' type='{ table: string; field: string } | null'>
-	The table and field this chart uses for date filtering.
-</ResponseField>
-<ResponseField name='pivot' type='Pivot | null'>
-	The pivot used in this query, if any.
-	<Expandable title='Pivot'>
-		<ResponseField name='title' type='string' required>
-			The pivot title.
-		</ResponseField>
-		<ResponseField
-			name='aggregationType'
-			type="'sum' | 'average' | 'count' | 'min' | 'max'"
-			required>
-			The aggregation type for the values in this pivot.
-		</ResponseField>
-		<ResponseField name='rowField' type='string' required>
-			The row field.
-		</ResponseField>
-		<ResponseField name='rowFieldType' type='string' required>
-			The type of the row field.
-		</ResponseField>
-		<ResponseField name='columnField' type='string'>
-			The column field, if any.
-		</ResponseField>
-		<ResponseField name='columnFieldType' type='string'>
-			The type of the column field, if any.
-		</ResponseField>
-		<ResponseField name='valueField' type='string' required>
-			The value field, if any.
-		</ResponseField>
-		<ResponseField name='valueFieldType' type='string' required>
-			The type of the value field, if any.
-		</ResponseField>
-	</Expandable>
-</ResponseField>
-<ResponseField name='primaryAggregation' type='string'>
-	The formatted primary range aggregation value, if any.
-</ResponseField>
-<ResponseField name='comparisonAggregation' type='string'>
-	The formatted comparison range aggregation value, if any.
-</ResponseField>
-<ResponseField name='aggregationPercentChange' type='number'>
-	The percent change in the aggragations, if any.
-</ResponseField>
-<ResponseField name='xAxisLabel' type='string' required>
-	The label of the xAxis.
-</ResponseField>
-<ResponseField name='xAxisField' type='string' required>
-	The field to use for the report's xAxis.
-</ResponseField>
-<ResponseField name='xAxisFormat' type='string' required>
-	The format for the report's xAxis.
-</ResponseField>
-<ResponseField
-	name='yAxisFields'
-	type='{ field: string; label: string; format: string; }[]'
-	required>
-	A list of metadata bout the yAxes of this report.
-</ResponseField>
-<ResponseField name='order' type='number' required>
-	The relative ordering of this report in relation to its siblings. Ordering
-	starts at 1 and counts up.
-
-    <Info>
-    	Reports in the same section are first grouped by `chartType` and then
-    	each group is sorted by `order`.
-    </Info>
-
-    Currently, the first group is `metric` and the last group is `table` with
-    the rest of the reports in between.
-
-</ResponseField>
-<ResponseField name='compareRows' type='{ [key: string]: any }[]'>
-	The rows of data returned from this report's query over the comparison date
-	range as opposed to the primary date range.
-</ResponseField>
-<ResponseField name='filtersApplied' type='{ [key: string]: any }'>
-	A map of filters that have been applied to this query.
-</ResponseField>
+The full `QuillReport` schema is documented on the [Types reference page](/react/types#quillreport).
