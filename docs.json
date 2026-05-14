@@ -56,7 +56,8 @@
               "react/chart",
               "react/static-chart",
               "react/table",
-              "react/sql-editor"
+              "react/sql-editor",
+              "react/chat"
             ]
           },
           {
@@ -66,7 +67,9 @@
               "react/use-dashboard-report",
               "react/use-dashboards",
               "react/use-quill",
-              "react/use-export"
+              "react/use-export",
+              "react/use-form",
+              "react/use-changelog-refresh"
             ]
           },
           {

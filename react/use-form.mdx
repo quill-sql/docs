@@ -1,0 +1,193 @@
+---
+title: "useForm"
+description: "Build a custom report editor with form state for columns, filters, pivots, and charts."
+---
+
+`useForm` exposes editable form state for a single Quill report, plus a live preview of the resulting chart. Use it to build custom report editors — for example, the chart card the [`Chat`](/react/chat) agent renders, or your own headless report builder.
+
+The hook loads the report, applies filters and pivots in memory as the user edits, and returns a fully normalized chart object you can hand to [`ChartDisplay`](/react/chart) for instant feedback.
+
+```tsx App.tsx
+import { QuillProvider, ChartDisplay, useForm } from "@quillsql/react";
+
+function ReportEditor({ reportId }: { reportId: string }) {
+  const {
+    chart,
+    chartType,
+    chartTypeOptions,
+    groupRowsBy,
+    groupRowsByOptions,
+    aggregations,
+    aggregationOptions,
+    limit,
+    setReport,
+  } = useForm(reportId);
+
+  if (!chart) return null;
+
+  return (
+    <div style={{ display: "flex", gap: 24 }}>
+      <ChartDisplay report={chart} />
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        <select
+          value={chartType ?? ""}
+          onChange={(event) =>
+            setReport({ chartType: event.target.value as typeof chartType })
+          }
+        >
+          {chartTypeOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={groupRowsBy ?? ""}
+          onChange={(event) =>
+            setReport({ groupRowsBy: event.target.value || undefined })
+          }
+        >
+          <option value="">No grouping</option>
+          {groupRowsByOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <input
+          type="number"
+          value={limit?.value ?? ""}
+          onChange={(event) =>
+            setReport({
+              limit: event.target.value
+                ? { value: Number(event.target.value) }
+                : null,
+            })
+          }
+          placeholder="Row limit"
+        />
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
+    >
+      <ReportEditor reportId="664283fb4db8ad000bfe54d7" />
+    </QuillProvider>
+  );
+}
+```
+
+<Info>Make sure `QuillProvider` is a parent of any component using `useForm`.</Info>
+
+## When to use it
+
+Reach for `useForm` when you want a fully custom UI for editing a report — beyond what [`ReportBuilder`](/react/report-builder) gives you out of the box — but you still want Quill to handle data fetching, in-memory filtering, pivoting, and chart normalization.
+
+Common use cases:
+
+- A custom chart card inside the [`Chat`](/react/chat) agent.
+- A "lite" report editor embedded next to a dashboard widget.
+- A guided exploration UI that exposes only a few editable dimensions.
+
+## Parameters
+
+<ParamField path="reportId" type="string" required>
+  The id of the report to load and edit. Find this in the Quill BI Platform or
+  in the response from a Quill agent tool call.
+</ParamField>
+
+<ParamField path="options" type="object">
+  <Expandable title="options properties">
+    <ResponseField name="useInMemoryEngines" type="boolean" default={true}>
+      When `true` (the default), filters and pivots are applied client-side on
+      the cached row set for instant feedback. Set to `false` to round-trip
+      every change through the pivot template endpoint instead.
+    </ResponseField>
+  </Expandable>
+</ParamField>
+
+## Returns
+
+<ParamField body="chart" type="QuillReport | undefined">
+  The current preview of the report with the latest form state applied. Pass it
+  to [`ChartDisplay`](/react/chart) to render.
+</ParamField>
+
+<ParamField body="columns" type="ReportBuilderColumn[]">
+  The currently selected columns.
+</ParamField>
+
+<ParamField body="columnsOptions" type="{ label: string; value: string; options?: { label: string; value: string }[] }[]">
+  Options for the column picker, grouped by source table.
+</ParamField>
+
+<ParamField body="filters" type="Filter[]">
+  The currently applied filters.
+</ParamField>
+
+<ParamField body="groupRowsBy" type="string | undefined">
+  Field used for pivot row grouping.
+</ParamField>
+
+<ParamField body="groupRowsByOptions" type="{ label: string; value: string }[]">
+  Options available for `groupRowsBy`.
+</ParamField>
+
+<ParamField body="groupColumnsBy" type="string | undefined">
+  Field used for pivot column grouping.
+</ParamField>
+
+<ParamField body="groupColumnsByOptions" type="{ label: string; value: string }[]">
+  Options available for `groupColumnsBy`.
+</ParamField>
+
+<ParamField body="aggregations" type="{ valueField?: string; aggregationType?: AggregationType }[]">
+  Active pivot aggregations.
+</ParamField>
+
+<ParamField body="aggregationDescriptionOptions" type="{ key: string; label: string; value?: string; options: { label: string; value: string }[] }[]">
+  Pre-built labels and option lists for rendering an aggregation picker.
+</ParamField>
+
+<ParamField body="aggregationOptions" type="{ label: string; value: string }[]">
+  Flat list of selectable aggregation types.
+</ParamField>
+
+<ParamField body="sort" type="{ field: string; direction: 'ASC' | 'DESC' }[]">
+  Active sort, if any.
+</ParamField>
+
+<ParamField body="sortOptions" type="{ label: string; value: string }[]">
+  Selectable sort fields and directions.
+</ParamField>
+
+<ParamField body="chartType" type="string | undefined">
+  The current chart type.
+</ParamField>
+
+<ParamField body="chartTypes" type="{ label: string; value: string }[]">
+  All chart types available for the current report shape.
+</ParamField>
+
+<ParamField body="chartTypeOptions" type="{ label: string; value: string }[]">
+  Alias for `chartTypes`, provided for parity with other option props.
+</ParamField>
+
+<ParamField body="limit" type="{ value: number } | null">
+  The current row limit, or `null` for unlimited.
+</ParamField>
+
+<ParamField body="setReport" type="(input: SetReportBuilderInput) => void">
+  Merge updates into the form state. Accepts any subset of `columns`,
+  `filters`, `groupRowsBy`, `groupColumnsBy`, `aggregations`, `sort`, `limit`,
+  and `chartType`. Columns can be passed as field strings or as
+  `{ table, field }` pairs.
+</ParamField>
