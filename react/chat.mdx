@@ -1,0 +1,96 @@
+---
+title: "Chat"
+description: "Drop-in conversational AI chat that generates and edits Quill reports."
+---
+
+The `Chat` component renders a streaming chat interface that lets your users ask questions in natural language and receive interactive Quill reports in response. The agent can author new reports, edit existing ones, and answer follow-up questions against your data.
+
+```tsx App.tsx
+import { QuillProvider, Chat } from "@quillsql/react";
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
+    >
+      <Chat
+        selectedDashboard="transactions"
+        suggestions={[
+          "Show me revenue by month",
+          "Which products had the highest refund rate last quarter?",
+        ]}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+<Info>Make sure `QuillProvider` is a parent of the `Chat` component.</Info>
+
+## When to use it
+
+Use `Chat` when you want to embed an AI analyst inside your product so end users can build and explore reports without learning your BI tool. The agent runs against the same tenant context you pass to `QuillProvider`, so results respect your existing tenant isolation.
+
+## Custom chart rendering
+
+By default, the agent renders generated reports inside a built-in card. If you want to control how each generated chart looks — for example, to match your design system or expose extra editing controls — pass a custom `ChartViewComponent`. It receives the `reportId` the agent produced.
+
+```tsx CustomChartView.tsx
+import { ChartDisplay, useForm } from "@quillsql/react";
+
+function CustomChartView({ reportId }: { reportId: string }) {
+  const { chart, chartType, chartTypeOptions, setReport } = useForm(reportId);
+
+  if (!chart) return null;
+
+  return (
+    <div>
+      <select
+        value={chartType ?? ""}
+        onChange={(event) =>
+          setReport({ chartType: event.target.value as typeof chartType })
+        }
+      >
+        {chartTypeOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+      <ChartDisplay report={chart} />
+    </div>
+  );
+}
+```
+
+Then pass it into `Chat`:
+
+```tsx
+<Chat selectedDashboard="transactions" ChartViewComponent={CustomChartView} />
+```
+
+See [`useForm`](/react/use-form) for the full form state API the chart view can drive.
+
+## Props
+
+<ParamField path="selectedDashboard" type="string | null">
+  The dashboard name the agent should target when creating or updating reports.
+  When provided, generated reports are saved into this dashboard's context so
+  follow-up questions can reference them.
+</ParamField>
+
+<ParamField path="ChartViewComponent" type="(props: { reportId: string }) => JSX.Element">
+  Custom component used to render each report the agent produces. Defaults to
+  Quill's built-in chat chart card.
+</ParamField>
+
+<ParamField path="agentEndpoint" type="string">
+  Override the URL the chat client streams from. Leave unset to use the default
+  Quill agent endpoint configured by `QuillProvider`.
+</ParamField>
+
+<ParamField path="suggestions" type="string[]">
+  Optional list of starter prompts shown above the input on an empty
+  conversation. Selecting a suggestion sends it as the user's first message.
+</ParamField>

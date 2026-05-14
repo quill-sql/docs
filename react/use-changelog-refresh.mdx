@@ -1,0 +1,95 @@
+---
+title: "useChangelogRefresh"
+description: "Refresh dashboards, reports, and schemas after the Quill agent edits them."
+---
+
+`useChangelogRefresh` returns a helper that takes a list of changelog entries — typically emitted by the [`Chat`](/react/chat) agent or another upstream process — and reloads only the dashboards, reports, and virtual table schemas that changed. Use it to keep your embedded views in sync without forcing a full page reload.
+
+```tsx App.tsx
+import {
+  QuillProvider,
+  useChangelogRefresh,
+  type ChangelogEntry,
+} from "@quillsql/react";
+
+function RefreshButton({ entries }: { entries: ChangelogEntry[] }) {
+  const { refreshChangelogEntries } = useChangelogRefresh();
+
+  return (
+    <button
+      onClick={() =>
+        refreshChangelogEntries(entries, /* quill client */ undefined)
+      }
+    >
+      Apply latest changes
+    </button>
+  );
+}
+
+function App() {
+  return (
+    <QuillProvider
+      tenants={[{ tenantField: "customer_id", tenantIds: [2] }]}
+      publicKey={process.env.QUILL_PUBLIC_KEY}
+    >
+      <RefreshButton
+        entries={[
+          { entityId: "664283fb4db8ad000bfe54d7", entityType: "report" },
+          { entityId: "transactions", entityType: "dashboard" },
+        ]}
+      />
+    </QuillProvider>
+  );
+}
+```
+
+<Info>
+  Make sure `QuillProvider` is a parent of any component calling
+  `useChangelogRefresh`.
+</Info>
+
+## When to use it
+
+Reach for this hook whenever something outside your React tree mutates Quill content and you need the embedded UI to catch up. Common cases:
+
+- The [`Chat`](/react/chat) agent creates or edits a report and emits changelog entries.
+- A webhook or websocket signals that a dashboard's underlying schema has been republished.
+- An admin tool updates a dashboard in another tab and you want to surface those changes immediately.
+
+The hook is targeted on purpose: it only reloads the entities you pass in. If the agent edits a `report` the hook reloads just that report's owning dashboard. If it edits a `schema` it asks the virtual tables to refetch only that schema.
+
+## Behavior by entity type
+
+| `entityType` | What gets reloaded                                                                              |
+| ------------ | ----------------------------------------------------------------------------------------------- |
+| `"schema"`   | The matching virtual table is refetched via `useVirtualTables`.                                  |
+| `"dashboard"`| The dashboard with that id is reloaded.                                                          |
+| `"report"`   | The dashboard that owns the report is reloaded. If no owning dashboard is found, all dashboards in `dashboardConfig` are reloaded as a fallback. |
+
+Unknown `entityType` values and entries missing `entityId` are ignored, so it's safe to pass through a raw changelog from an upstream service.
+
+## Parameters
+
+`useChangelogRefresh` takes no arguments. It reads dashboard configuration and client state from `QuillProvider`.
+
+## Returns
+
+<ParamField body="refreshChangelogEntries" type="(entries: ChangelogEntry[], client: any) => Promise<void>">
+  Reloads the dashboards, reports, and schemas referenced by `entries`. Resolves
+  once all in-flight reloads have settled. Failures for individual entries are
+  logged with `console.warn` and do not reject the returned promise.
+</ParamField>
+
+### ChangelogEntry
+
+<Expandable title="ChangelogEntry">
+
+```ts
+export type ChangelogEntry = {
+  _id?: string;
+  entityId?: string;
+  entityType?: string; // "schema" | "dashboard" | "report"
+};
+```
+
+</Expandable>
