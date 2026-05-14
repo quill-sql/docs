@@ -1,0 +1,35 @@
+---
+title: "Changelog"
+description: "New features, updates, and fixes from the Quill team"
+---
+
+<Update label="May 14, 2026">
+
+## New features
+
+**AI agent chat panel in the BI Platform.** A persistent, resizable chat panel is now available alongside your dashboards and report builder. Use it to ask questions, get suggestions, and iterate on your reports without leaving the dashboard view. The panel can be split, hidden, or expanded to fit your workflow.
+
+**Sandbox environments with one‑click promote.** Changes you make through the agent now land in a sandbox first. Review the result, then use the new **Promote** button to push it to your live environment. See [Environments](/bi-platform/overview) for how environments work in Quill.
+
+**Environment switcher in the agent.** A new dropdown lets you switch the environment the agent is targeting without leaving the chat panel.
+
+**Markdown export for chat results.** Tabular and narrative responses from the agent can now be exported as Markdown.
+
+## Updates
+
+**Report builder state endpoint.** The [report builder](/react/report-builder) now syncs its state through a dedicated endpoint, making session handoff between the agent and the report builder more reliable.
+
+**Cleaner BI Platform header.** The top navigation has been reworked for a tighter, easier‑to‑scan layout.
+
+**Smarter sandbox handoff.** The platform now reuses your existing sandbox session when you open the agent, so you pick up where you left off instead of starting fresh.
+
+## Fixes
+
+- Tooltip positioning in charts no longer clips at panel edges.
+- Fixed flex sizing so the chat panel stays visible when the window is resized.
+- The "create new dashboard" modal now reliably opens on first click.
+- Dashboard reloading after promotion no longer races with the data fetch.
+- Resolved a session‑ID mismatch that prevented switched environments from showing the correct sandbox.
+- Fixed case‑sensitivity issues in the organization selector.
+
+</Update>
