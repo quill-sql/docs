@@ -31,6 +31,7 @@
               "bi-platform/virtual-table",
               "bi-platform/dashboard",
               "bi-platform/report",
+              "bi-platform/ai-agent",
               "bi-platform/self-host"
             ]
           }
