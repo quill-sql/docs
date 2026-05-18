@@ -1,0 +1,105 @@
+---
+title: "AI Agent and sandboxing"
+description: "Chat with the Quill BI Agent to build dashboards, reports, and virtual tables in an isolated sandbox before promoting changes."
+keywords: ["agent", "ai", "sandbox", "promote", "chat"]
+---
+
+The Quill BI Agent lets you create dashboards, reports, virtual tables, and other environment changes through natural-language chat. Every chat session runs against an **on-demand sandbox** — an isolated copy of your environment — so you can review the agent's work before any of it reaches production.
+
+## How sandboxing works
+
+When you start a conversation with the agent from any environment, Quill automatically:
+
+1. Creates a sandbox copy of the current environment on the first message that would modify state.
+2. Routes the rest of the chat session against the sandbox, so dashboards and reports you preview in the panel reflect sandbox state — not your live environment.
+3. Tracks the relationship between the source environment and the sandbox for the lifetime of the session.
+
+Your source environment is never mutated by the agent. You explicitly decide what happens to the sandbox at the end of the session.
+
+<Note>
+  Until the agent makes its first change, the chat runs read-only against your
+  source environment. The sandbox is only provisioned when it's actually needed,
+  which keeps quick exploratory questions fast.
+</Note>
+
+## When to use the agent
+
+Use the agent when you want to:
+
+- Spin up a new dashboard or report from a natural-language description.
+- Bulk-create or edit virtual tables.
+- Explore "what changed" across an environment before promoting.
+- Try a structural change (new filter, new pivot, new section) without risking your live dashboards.
+
+If you only need to view existing data, the standard dashboard UI is faster — the agent is designed for changes you'd otherwise make by hand in the admin.
+
+## Starting a session
+
+Open the agent panel from the global header in the admin. The panel shows:
+
+- A **status indicator** for the current sandbox (`active`, `promoted`, or idle).
+- The **source environment** name and the **sandbox environment** name once one has been created.
+- Suggested prompts to get started, for example:
+  - `Show me all my dashboards`
+  - `What virtual tables are available?`
+  - `Create a revenue chart on my Sales dashboard`
+  - `Show what changed in this sandbox`
+
+Type a message and submit. The agent streams its response and, where applicable, a list of tool calls it ran against the sandbox.
+
+## Promoting or discarding changes
+
+Every session ends with one of two actions, available as buttons in the agent panel:
+
+<CardGroup cols={2}>
+  <Card title="Promote Changes" icon="check">
+    Copies the sandbox's dashboards, reports, and virtual tables back into the
+    source environment, then exits the sandbox. Use this once you're happy with
+    everything the agent built.
+  </Card>
+  <Card title="Discard Session" icon="trash">
+    Clears the chat history and throws away the sandbox without touching your
+    source environment. Use this if the agent went the wrong direction or you
+    just want a clean slate.
+  </Card>
+</CardGroup>
+
+Both actions prompt for confirmation before running.
+
+<Warning>
+  Promoting overwrites any matching dashboards, reports, or virtual tables in
+  the source environment with the sandbox version. Review the agent's changes
+  before clicking **Promote**.
+</Warning>
+
+## Resuming a sandbox
+
+If you close the panel and reopen the same session, the agent reconnects to the existing sandbox so previews stay consistent. Starting a brand-new session creates a fresh sandbox the next time the agent needs to write.
+
+## Example flow
+
+A typical sandboxed change looks like this:
+
+<Steps>
+  <Step title="Ask the agent to make a change">
+    `Create a revenue chart grouped by month on my Sales dashboard.`
+  </Step>
+  <Step title="Review the preview">
+    The agent reports which dashboard, report, and virtual tables it touched.
+    Open the affected dashboard — you'll see the sandbox view, marked in the
+    panel header.
+  </Step>
+  <Step title="Iterate">
+    Ask follow-ups in the same chat. Every change stays scoped to the sandbox.
+  </Step>
+  <Step title="Promote or discard">
+    Click **Promote Changes** to apply the sandbox to your source environment,
+    or **Discard Session** to throw it away.
+  </Step>
+</Steps>
+
+## Related
+
+<Card title="Environments" icon="square-1" href="/bi-platform/overview">
+  Learn how Quill organizes environments, tenants, and promotion between them.
+</Card>
