@@ -1,0 +1,45 @@
+---
+title: "Changelog"
+description: "New features, improvements, and fixes shipped to Quill."
+---
+
+<Update label="May 2026" description="Week of May 18, 2026">
+
+## New features
+
+**On-demand sandboxing and in-app agent chat**
+
+The admin portal now includes a built-in agent chat panel that lets you describe changes to your dashboards in natural language. The agent spins up a sandbox environment on demand, applies your changes, and lets you preview them side-by-side before promoting to production with a single click.
+
+- Resizable, collapsible split-screen layout with the chat panel always available
+- Environment dropdown to switch between sandboxes
+- Promote button to roll a sandbox into your live environment
+- Per-session history with changelog lookup so you can revisit prior changes
+
+**New `Dashboard` component**
+
+A rewritten [`Dashboard`](/react/dashboard) component is now available in the React SDK. It ships with the same surface as the previous component while improving rendering performance, reducing flickering, and supporting `initialDimension`, a configurable `ThemeContext`, and cleaner section ordering. The previous component is still available as `DashboardLegacy` for migration.
+
+**In-memory caching for `useDashboard`**
+
+[`useDashboard`](/react/use-dashboard) now supports a client-side cache that keeps repeated dashboard queries instant. Configure it via the new `cacheType` (`'memory'` or `'idb'`) and `initialCacheRange` options. Reports are cached by query plus filter combination, with automatic dedupe and request hashing for long filter sets.
+
+## Updates
+
+- **React 19 support** across the React SDK.
+- **`useDashboard` improvements:** multi-dashboard refresh tracking, a refresh button, smarter handling of dashboard switching, and `ALL_TIME` date filter fixes.
+- **Chart legend** is now available on chart components.
+- **Pivot tables** support more aggregations (including percentage), single-row aggregations, column pivots on non-date fields, and full sort-field type coverage.
+- **Date filter error message** now surfaces when filters reference missing or invalid date fields.
+
+## Bug fixes
+
+- Fixed a `useLayoutEffect` warning during server rendering.
+- Fixed `ALL_TIME` cache always missing on dashboards using that range.
+- Fixed a previous-month date range calculation that crossed month boundaries incorrectly.
+- Fixed a Recharts comma-formatting bug for aggregated numeric values.
+- Fixed self-hosted dashboard loading edge cases.
+- Fixed empty-aggregation rows rendering as blank cells.
+- Fixed dashboard re-fetching when only the dashboard name changed.
+
+</Update>
