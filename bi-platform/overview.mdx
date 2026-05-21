@@ -129,6 +129,33 @@ A report is a SQL query based on the **virtual schema**. It supports the followi
 
 ---
 
+## 6. BI Agent
+
+### What is the BI Agent?
+
+The BI Agent is a conversational assistant in the BI Platform that can create dashboards, reports, and virtual tables, run queries, and manage environments through chat. You open it from the panel on the right side of the Dashboard and Virtual Schema views.
+
+### How the sandbox works
+
+Every Agent session runs against a **sandbox copy** of your environment, so your production environment is never touched until you choose to promote.
+
+- When you start chatting, the Agent creates a sandbox that mirrors your current environment.
+- The environment dropdown shows the parent environment name with a **Viewing Sandbox** indicator while the sandbox is active.
+- The sandbox session persists across page reloads, so refreshing the browser keeps you in the same session and on the same changes.
+
+### Promoting or discarding changes
+
+Once you're happy with the changes the Agent has made, use the buttons at the top of the chat panel:
+
+- **Promote** — applies every change from the sandbox to the parent environment and ends the sandbox session.
+- **Discard** — throws away the sandbox and any changes in it, returning you to the parent environment.
+
+Both actions show a confirmation modal and a loading state while they run; you can't dismiss the modal mid-action.
+
+> The Agent can't modify your production environment directly. To persist changes, you must promote them.
+
+---
+
 ## Summary
 
 The virtual table reporting model consists of:
