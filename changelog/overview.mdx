@@ -1,0 +1,25 @@
+---
+title: "Changelog"
+description: "New features, updates, and fixes shipped to Quill."
+---
+
+<Update label="June 2, 2026">
+
+## Updates
+
+**New onboarding flow for the Quill portal**
+
+Signing in to [app.quill.co](https://app.quill.co) no longer creates an organization for you automatically. Instead, you'll see a clearer landing screen when your account isn't tied to a Quill environment yet, with two paths forward:
+
+- **Accept a pending invite.** Any pending organization invites on your account are listed so you can switch into an existing team in one click.
+- **Create a new organization.** A "Create new" button takes you to [the onboard flow](https://app.quill.co/onboard) so you can set up an environment intentionally.
+
+This prevents accidental duplicate organizations when teammates sign up separately and makes it easier to join the right org the first time. See the [BI Platform quickstart](/bi-platform/quickstart) for the full onboarding walkthrough.
+
+## Fixes
+
+**Database-scoped tenants persist correctly**
+
+When connecting a schema with database-level tenant scope, the tenant field is now saved reliably even if the backend response omits it. This fixes cases where a tenant could appear misconfigured immediately after onboarding. See [Tenant](/bi-platform/tenant) for tenant scoping details.
+
+</Update>
