@@ -1,0 +1,21 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill"
+---
+
+Follow along here for the latest improvements to the Quill BI Platform and SDKs.
+
+<Update label="June 3, 2026" description="Weekly release">
+
+## New features
+
+**Streaming responses in the AI agent chat**
+
+The AI agent in the Quill admin portal now streams responses token-by-token instead of waiting for the full reply to render. Conversations feel faster and you can read along as the agent works, including while it runs tools.
+
+## Improvements
+
+- **More resilient report and export responses.** The [`useExport`](/react/use-export) hook and underlying report fetcher now accept a wider range of API response shapes, so dashboard exports and report data loads keep working as the server evolves.
+- **Cleaner cached dashboard data.** Internal cleanup to the dashboard data cache used by [`useDashboard`](/react/use-dashboard) and the [`Dashboard`](/react/dashboard) component. No action required — dashboards continue to load from cache as before.
+
+</Update>
