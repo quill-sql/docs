@@ -88,6 +88,12 @@ useful if the `/quill` endpoint is behind a preexisting auth middleware.
 <ParamField path="queryEndpoint" type="string">
   The url of your self-hosted server running the quill server SDK, if any.
 </ParamField>
+<ParamField path="streamEndpoint" type="string">
+  The url of the streaming endpoint on your self-hosted server. Used to stream
+  responses from the Quill agent chat token-by-token. If omitted, the agent
+  falls back to a single non-streamed response from `queryEndpoint`. Quill
+  Cloud users do not need to set this.
+</ParamField>
 <ParamField path="queryHeaders" type="object">
   Additional query headers passed along with all requests to the custom query
   endpoint, if any.
