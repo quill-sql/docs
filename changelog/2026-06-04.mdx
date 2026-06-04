@@ -1,0 +1,18 @@
+---
+title: "Week of June 4, 2026"
+description: "Streaming responses in the Quill agent chat."
+---
+
+## New
+
+### Streaming agent chat
+
+The Quill agent now streams its responses token-by-token in the embedded chat experience. You'll see answers, tool calls, and generated reports appear as they're produced instead of waiting for the full response.
+
+What this means for you:
+
+- Faster perceived response times when asking the agent to build or update reports.
+- Live progress as the agent runs tool calls against your data.
+- A graceful fallback to non-streaming responses if a connection drops mid-message.
+
+Streaming is enabled automatically — no SDK upgrade flags or configuration changes required. Make sure you're on the latest [`@quillsql/react`](/react/quickstart) to pick it up.
