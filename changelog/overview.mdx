@@ -1,0 +1,12 @@
+---
+title: "Changelog"
+description: "Updates and improvements to Quill."
+---
+
+<Update label="June 8, 2026">
+
+### Fixed
+
+- **Dashboard deletion now resets the active dashboard.** When a dashboard is deleted from the [Dashboard Manager](/react/dashboard), it's now removed from the list and the view automatically falls back to the environment's default dashboard instead of leaving a stale selection. This also flows through the [`useDashboard`](/react/use-dashboard) hook for headless implementations.
+
+</Update>
