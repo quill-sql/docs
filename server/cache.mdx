@@ -102,6 +102,7 @@ const quill = new Quill({
 		host: process.env.REDIS_HOST,
 		port: process.env.REDIS_PORT,
 		cacheType: "redis", // or 'rediss' if SSL encrypted
+		ttl: 3600, // optional: cache entry lifetime in seconds (default: 24h)
 	},
 });
 ```
@@ -119,6 +120,7 @@ quill = Quill(
     "host": os.environ.get("REDIS_HOST"),
     "port": os.environ.get("REDIS_PORT"),
     "cacheType": "redis", # or 'rediss' if SSL encrypted
+    "ttl": 3600, # optional: cache entry lifetime in seconds (default: 24h)
   }
 )
 ```
@@ -127,3 +129,10 @@ quill = Quill(
 
 Then you're done! When Quill detects a valid cache configuration it will start
 using the cache provided to speed up frequently used queries.
+
+## 4. Tune the cache lifetime (optional)
+
+By default, cached query results live for 24 hours before Quill refreshes them.
+Pass `ttl` (in seconds) to the cache config to override that window — use a
+shorter TTL for data that changes often, or a longer one for slow-moving
+reference data.
