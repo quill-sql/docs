@@ -207,3 +207,96 @@ function App() {
   See the `QuillProvider` [API docs](/react/quill-provider) for more
   information.
 </Tip>
+
+## 4. Add an admin endpoint (optional)
+
+If you use the admin-only `ReportBuilder` or `SQLEditor` components — or any workflow that sends `preQueries` in the metadata — your endpoint must opt in by passing `adminEnabled: true` to `quill.query`. Requests without this flag are rejected with `"preQueries requires adminEnabled."` to prevent end users from running arbitrary SQL against your database.
+
+Create a **separate** endpoint for admin traffic and protect it with your own admin authorization check. Never set `adminEnabled: true` on the endpoint your end users call.
+
+<CodeGroup>
+
+```js Node
+// "authenticateAdmin" is your own auth middleware that allows admin users only
+app.post("/admin-quill", authenticateAdmin, async (req, res) => {
+  const { metadata, tenants } = req.body;
+  const result = await quill.query({
+    tenants: tenants ?? ["QUILL_ALL_TENANTS"],
+    metadata,
+    adminEnabled: true,
+  });
+  res.send(result);
+});
+```
+
+```python Python
+@app.post("/admin-quill")
+async def admin_quill_post(data: Request, user: dict = Depends(authenticate_admin)):
+    body = await data.json()
+    metadata = body.get("metadata")
+    tenants = body.get("tenants") or ["QUILL_ALL_TENANTS"]
+    result = await quill.query(
+        tenants=tenants,
+        metadata=metadata,
+        admin_enabled=True,
+    )
+    return result
+```
+
+```go Go
+http.HandleFunc("/admin-quill", func(w http.ResponseWriter, r *http.Request) {
+    // Authorize the caller as an admin before continuing.
+    body := &quill.RequestBody{}
+    if err := json.NewDecoder(r.Body).Decode(body); err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+    adminEnabled := true
+    result, err := client.Query(quill.QueryParams{
+        Tenants:      []string{"QUILL_ALL_TENANTS"},
+        Metadata:     body.Metadata,
+        AdminEnabled: &adminEnabled,
+    })
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
+        return
+    }
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(result)
+})
+```
+
+```php PHP
+if ($requestMethod === 'POST' && $endpoint === '/admin-quill') {
+    // Authorize the caller as an admin before continuing.
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
+
+    $response = $quill->query([
+        'metadata' => $data['metadata'],
+        'orgId' => 'QUILL_ALL_TENANTS',
+        'adminEnabled' => true,
+    ]);
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+    exit;
+}
+```
+
+```ruby Ruby
+post "/admin-quill" do
+  # Authorize the caller as an admin before continuing.
+  metadata = JSON.parse(request.body.read)["metadata"]
+  result = quill.query(
+    tenants: ["QUILL_ALL_TENANTS"],
+    metadata: metadata,
+    admin_enabled: true
+  )
+  result.to_json
+end
+```
+
+</CodeGroup>
+
+On the frontend, point your admin UI at the admin endpoint by passing it as `queryEndpoint` to `AdminProvider` (or `QuillProvider` for admin-only views). Keep your end-user app pointed at the original `/quill` endpoint so admin-only features stay gated.
