@@ -1,0 +1,21 @@
+---
+title: "Changelog"
+description: "Updates and improvements to Quill"
+---
+
+<Update label="June 15, 2026">
+
+## Bug fixes
+
+**preQueries now require admin mode across all SDKs**
+
+To prevent end users from triggering arbitrary `preQueries` through standard query requests, all server SDKs (Node, Python, Go, .NET, PHP, Ruby) now reject requests that include `preQueries` unless the caller has admin mode enabled.
+
+What this means for you:
+
+- Regular tenant-facing endpoints continue to work unchanged.
+- Admin-only flows (for example, the Report Builder) must pass the admin flag when forwarding requests to Quill. See the [Report Builder reference](/react/report-builder) for the `isAdminEnabled` prop and the [Server Quickstart](/server/quickstart) for how to wire admin requests on the backend.
+
+If you have a non-admin code path that previously relied on `preQueries`, route it through an admin-gated endpoint to restore the behavior.
+
+</Update>
