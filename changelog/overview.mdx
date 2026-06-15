@@ -1,0 +1,23 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill"
+---
+
+<Update label="June 15, 2026">
+
+## New features
+
+**Python SDK is now async-first.** The Python SDK has been rewritten around `asyncio` for non-blocking I/O end to end. Initialize Quill with `await Quill.create(...)` and call `await quill.query(...)` from your async handlers. A new `await quill.aclose()` lifecycle hook lets you cleanly tear down connection pools on shutdown. See the [Server SDK quickstart](/server/quickstart) for an updated FastAPI example.
+
+## Updates
+
+- **Shared Redis connections in the Node SDK.** Multiple Quill instances pointing at the same Redis URL now share a single underlying client, reducing connection overhead and avoiding pool exhaustion in larger deployments. No code changes required.
+- **Python SDK install footprint.** Dependencies have been streamlined around `psycopg` and `psycopg-pool` for Postgres, with cleaner extras for BigQuery.
+
+## Bug fixes
+
+- Fixed Redis cache writes occasionally failing silently in the Node SDK under high concurrency.
+- Resolved a Python SDK issue where database connections could leak when a request was cancelled mid-query.
+- Hardened admin-only endpoints so pre-query hooks are gated to authenticated admin requests.
+
+</Update>
