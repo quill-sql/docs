@@ -1,0 +1,21 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill"
+mode: "center"
+---
+
+<Update label="June 16, 2026">
+
+## Updates
+
+**Agent Chat sandbox sessions now persist across tabs and reloads**
+
+Sandbox sessions started from Agent Chat are stored in your browser's local storage, so an in-progress session stays available if you refresh the page, switch tabs, or come back later. Sessions are scoped to your current organization, and legacy sessions from the previous session-storage format are migrated automatically the next time you open the admin app.
+
+## Fixes
+
+- The Agent Chat panel now renders in the correct position regardless of where it is mounted in your app.
+- Discarding a sandbox session correctly clears local state, and the unsaved-changes warning only appears when the virtual table name has actually changed.
+- Fixed an issue where switching environments could leave stale sandbox session data behind.
+
+</Update>
