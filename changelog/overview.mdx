@@ -1,0 +1,31 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill."
+---
+
+<Update label="May 21, 2026">
+
+## Always-on agent sandbox
+
+The Quill agent now runs every editing session inside a dedicated sandbox environment, so you can experiment freely without affecting production. When you're ready, promote your changes to push them to your live environment, or discard them to roll back.
+
+**New**
+
+- **Always-on sandbox sessions.** Every agent conversation now starts in a sandboxed copy of your environment. Changes stay isolated until you promote them.
+- **Promote and discard controls.** Confirm prompts with clear loading states let you commit the agent's changes to production or throw them away in one click. See [Dashboard](/bi-platform/dashboard) and [Virtual table](/bi-platform/virtual-table) for what you can edit.
+- **Persistent sandbox sessions.** Your active sandbox is preserved across page reloads, so refreshing the browser no longer loses in-progress work.
+- **Cleaner environment switcher.** The [environment selector](/bi-platform/overview#development) shows the parent environment name while you're sandboxed and surfaces an "Active" badge on the sandbox it's tied to.
+
+**Improvements**
+
+- Refreshed tooltip copy clarifies that promoting changes is what persists them to production.
+- Dashboard filters and report items refresh automatically after the agent applies changes.
+
+**Fixes**
+
+- Fixed an issue where discarding sandbox changes could leave the UI in an inconsistent state.
+- Fixed [virtual table](/bi-platform/virtual-table) create and edit flows inside the agent sandbox.
+- Fixed positional state tracking and provider initialization edge cases that could cause stale data after sandbox actions.
+- Fixed [dashboards](/bi-platform/dashboard), [reports](/bi-platform/report), and [virtual tables](/bi-platform/virtual-table) not refreshing after the agent deleted items in a sandbox.
+
+</Update>
