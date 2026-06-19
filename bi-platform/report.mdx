@@ -121,6 +121,13 @@ dashboard and the option will be hidden in this form.
 
 Editing queries with SQL gives you fine-grain control over your data, but you can also add a pivot to the result of the query to apply extra groupings or breakdowns to get exactly the information you want.
 
+When the row field of a pivot is a date column, you can choose how to bucket those dates with the **Date bucketing** dropdown:
+
+- **Automatic** &mdash; bucket size is inferred from the active date range filter (for example, a multi-year range buckets by year, a multi-month range buckets by month).
+- **Daily**, **Weekly**, **Monthly**, or **Yearly** &mdash; force every row to the selected interval, regardless of the filter range.
+
+Use a fixed bucket when you want consistent groupings across different date filters (for example, always show monthly revenue). Leave it on **Automatic** when you want the granularity to follow the user's selected range.
+
 ### Chart Axis
 
 You can update the axis information for each chart by selecting which columns to use for each axis, what labels to give those columns (defaults to the name of the column), and the formatting type that should be applied to values for that axis.
