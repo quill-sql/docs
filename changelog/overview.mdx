@@ -1,0 +1,13 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill."
+---
+
+<Update label="June 23, 2026">
+
+## Bug fixes
+
+- **More reliable dashboard and report refreshes.** Fixed an issue where dashboards and reports could refresh multiple times after a single change, and resolved a bug where a newly added dashboard would not load if a report was created in the same operation. Refreshes in the admin app are now faster and more predictable. See [Dashboard](/bi-platform/dashboard) and [Report](/bi-platform/report).
+- **Tighter SDK security defaults.** `preQueries` are now restricted to admin requests across the client SDKs, preventing them from running in end-user contexts. Review your [Server SDK quickstart](/server/quickstart) if you rely on `preQueries`.
+
+</Update>
