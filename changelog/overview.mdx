@@ -1,0 +1,18 @@
+---
+title: "Changelog"
+description: "Updates and improvements to Quill"
+mode: "center"
+---
+
+<Update label="June 30, 2026" tags={["SDK"]}>
+  ## Unified `id` field on the client object
+
+  **Updates**
+
+  - The Quill client object now exposes a single `id` field. Previous variants (`_id` and `clientId`) have been consolidated to keep the SDK surface consistent across the [React SDK](/react/quickstart) and [Server SDK](/server/quickstart).
+  - [`QuillProvider`](/react/quill-provider) continues to accept either `id` or `clientId` when configuring a client, so existing integrations keep working without changes.
+
+  **What this means for you**
+
+  If you read from the client object in your app, use `client.id` going forward. No action is required for existing `QuillProvider` configurations.
+</Update>
