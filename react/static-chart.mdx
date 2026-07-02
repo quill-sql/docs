@@ -81,6 +81,10 @@ function ChartCard({ reportId, name }) {
   Callback function triggered when a chart element is clicked
 </ParamField>
 
+<ParamField body="onClickLegendElement" type="(data: any) => void">
+  Callback function triggered when a legend item is clicked. Receives the legend entry (`{ value, color, payload, ... }`) so you can filter, toggle a series, or drill into the underlying data. Requires `showLegend` to be `true`.
+</ParamField>
+
 <ParamField body="containerStyle" type="React.CSSProperties">
   Custom CSS styles to apply to the chart container
 </ParamField>

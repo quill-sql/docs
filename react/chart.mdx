@@ -171,3 +171,28 @@ function App() {
 <ParamField path="containerStyle" type="React.CSSProperties">
   The CSS styles that wrap the chart.
 </ParamField>
+
+<ParamField path="onClickChartElement" type="(data: any) => void">
+  Callback triggered when a chart element (bar, point, slice, etc.) is clicked. Receives the underlying data point so you can drill into a detail view or update filters.
+</ParamField>
+
+<ParamField path="onClickLegendElement" type="(data: any) => void">
+  Callback triggered when a legend item is clicked. Receives the legend entry (`{ value, color, payload, ... }`) so you can toggle a series, filter by that dimension, or navigate to a detail page. Requires `showLegend` to be `true`.
+
+  ```tsx
+  <Chart
+    reportId={reportId}
+    showLegend
+    onClickLegendElement={(entry) => {
+      // entry.value is the series name, entry.color is its color
+      console.log("Legend clicked:", entry.value);
+    }}
+  />
+  ```
+
+  Supported on bar, line, pie, and radar charts.
+</ParamField>
+
+<ParamField path="showLegend" type="boolean" default={false}>
+  Whether to display the chart legend.
+</ParamField>
