@@ -1,0 +1,18 @@
+---
+title: "Legend click events for charts"
+description: "Week of July 2, 2026"
+---
+
+## New features
+
+**Legend click events on charts** — The [`Chart`](/react/chart) and [`StaticChart`](/react/static-chart) components now accept an `onClickLegendElement` callback that fires when a viewer clicks a legend entry. Use it to build custom drill-downs, filter dashboards, or toggle series visibility from the legend. Supported on bar, line, pie, and radar charts.
+
+```tsx
+<Chart
+  reportId="664283fb4db8ad000bfe54d7"
+  showLegend
+  onClickLegendElement={(data) => {
+    console.log("Legend clicked:", data);
+  }}
+/>
+```
