@@ -127,3 +127,16 @@ quill = Quill(
 
 Then you're done! When Quill detects a valid cache configuration it will start
 using the cache provided to speed up frequently used queries.
+
+### Connecting over TLS
+
+To connect to Redis over TLS, set `cacheType` to `rediss`. The Node SDK opens a
+TLS-encrypted connection but does not present a client certificate, so your
+Redis server must accept connections without one.
+
+<Warning>
+	If your Redis server requires client certificate authentication, configure it
+	with `tls-auth-clients no` (or `optional`) before enabling `rediss`.
+	Otherwise the connection will be rejected during the TLS handshake.
+</Warning>
+
