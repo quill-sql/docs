@@ -1,0 +1,20 @@
+---
+title: "Changelog"
+description: "New features, updates, and fixes across Quill."
+---
+
+Follow along with the latest changes to the Quill platform and SDKs.
+
+<Update label="July 7, 2026">
+
+## New features
+
+**Legend event handling for charts.** The [`Chart`](/react/chart) component now accepts an `onClickLegendElement` callback, so you can respond when a user clicks an entry in the chart legend — for example, to drill down, toggle a series, or navigate to a detail view. Available across bar, line, area, and pie chart types.
+
+## Updates
+
+**TLS support for Redis caching.** The Node SDK's cached connection now supports TLS-enabled Redis. Pass a `rediss://` URL as your cache credentials and the SDK will negotiate a TLS connection automatically. See the [Server SDK quickstart](/server/quickstart) for cache configuration.
+
+<Info>The client does not present a client certificate, so your Redis server must be configured with `tls-auth-clients no`.</Info>
+
+</Update>
