@@ -1,0 +1,8 @@
+---
+title: "Week of July 28, 2026"
+description: "Reliability improvements to database connection handling in the Node SDK."
+---
+
+## Bug fixes
+
+- **Node SDK: correct database close semantics.** Closing a database connection in the Node SDK now waits for the underlying connection to fully close before returning. This prevents lingering connections and race conditions during shutdown, particularly for long-running servers and serverless environments. Applies to Postgres, MySQL, MSSQL, ClickHouse, Databricks, and Snowflake. See the [Server SDK quickstart](/server/quickstart) to get started.
