@@ -1,0 +1,18 @@
+---
+title: "Changelog"
+description: "Product updates and improvements to Quill"
+---
+
+<Update label="August 5, 2026">
+
+## Chart improvements
+
+**Updates**
+
+- **Prettier axis and tooltip labels.** Field identifiers written as `camelCase`, `snake_case`, or `SCREAMING_SNAKE_CASE` now render as readable Title Case in [Chart](/react/chart) axes, legends, and tooltips (for example, `firstName` becomes `First Name` and `user_id` becomes `User ID`). No configuration change is needed.
+
+**Bug fixes**
+
+- **Zero values are hidden from tooltips.** Bar, area, pie, donut, radar, and map chart tooltips no longer list series whose value is `0` or `"0"`, so hovers stay focused on the segments that actually contributed to the point. Line charts still show zero values so gaps in a series are visible.
+
+</Update>
